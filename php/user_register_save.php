@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Registration Save</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         $user_password = $_POST['user_password'];
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
-        $user_phone = $_POST['user_phone'];
+        $user_phone = $_COOKIE['user_phone'];
         $user_address = $_POST['user_address'];
         $user_level = 3;
 

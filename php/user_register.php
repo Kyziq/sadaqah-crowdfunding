@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
     <title>Login Page</title>
 </head>
 
@@ -30,7 +36,7 @@
             </div>
             <div class="input-field">
                 <label>Phone Number: <span style="color: red;"> *</span></label>
-                <input type="text" placeholder="Enter your phone number" name="user_phone" required />
+                <input id="user_phone" type="tel" name="user_phone" required />
             </div>
             <div class="input-field">
                 <label>Address<span style="color: red;"> *</span></label>
@@ -42,9 +48,25 @@
                 <button type="Submit" name="registerButton" value="Submit">Register</button>
             </div>
 
+            <script>
+                setCookie("user_phone", phoneInput.getNumber(), "10");
+            </script>
         </div>
     </form>
+    <script>
+        const phoneInputField = document.querySelector("#user_phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            preferredCountries: ["my"],
+        });
 
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    </script>
 </body>
 
 </html>
