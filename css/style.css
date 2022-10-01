@@ -1,0 +1,222 @@
+body{
+    padding: 0%;
+    margin: 0%;
+}
+
+.navbar{
+    position: absolute;
+    width: 100%;
+    height: 72px;
+    left: 0px;
+    top: 0px;
+
+    background: #4E944F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.jumbotron{
+    position: absolute;
+    width: 100%;
+    height: 576px;
+    left: 0px;
+    top: 72px;
+    background: url(../images/people-holding-rubber-heart\ 1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.divider{
+    position: absolute;
+    width: 100%;
+    height: 72px;
+    left: 0px;
+    top: 648px;
+    text-align: center;
+    background: #4E944F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
+}
+
+.footer{
+    position: absolute;
+    width: 100%;
+    height: 308px;
+    left: 0px;
+    top: 1118px;
+    
+    background: #4E944F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
+}
+
+/* .d1{
+    border: 1px solid black;
+    position: absolute;
+    width: 146px;
+    height: 161.89px;
+    left: 343px;
+    top: 755.14px;  
+}
+
+.d2{
+    border: 1px solid black;
+    position: absolute;
+    width: 146px;
+    height: 164.11px;
+    left: 561px;
+    top: 754.03px;
+}
+
+.d3{
+    border: 1px solid black; 
+    position: absolute;
+    width: 146px;
+    height: 164.11px;
+    left: 784px;
+    top: 754.03px;
+    
+}
+
+.d4{
+    border: 1px solid black; 
+    position: absolute;
+    width: 146px;
+    height: 161.89px;
+    left: 1002px;
+    top: 754.03px;    
+}
+
+.d5{
+    border: 1px solid black; 
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 805px;
+    height: 155px;
+    left: 343px;
+    top: 943px;
+    
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 24px;
+} */
+
+.titleCompany{
+    position: absolute;
+    width: 245px;
+    height: 43px;
+    left: 26px;
+    top: 20px;
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    
+    color: #000000;
+}
+
+.sbar{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 383px;
+    height: 43.25px;
+    left: 304px;
+    top: 14.42px;
+    
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 24px;
+}
+
+.campaign{
+    position: absolute;
+    width: 130px;
+    height: 26px;
+    left: 734px;
+    top: 20px;
+    text-decoration: none;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    
+    color: #FFFFFF;
+     
+}
+
+.about{
+    position: absolute;
+    width: 100px;
+    height: 32px;
+    left: 871px;
+    top: 20px;
+    text-decoration: none;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    
+    color: #000000;    
+}
+
+.cu{
+    position: absolute;
+    width: 117px;
+    height: 32px;
+    left: 959px;
+    top: 20px;
+    text-decoration: none;   
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    
+    color: #000000;
+    
+}
+
+
+.register{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 115px;
+    height: 55px;
+    left: 1300px;
+    top: 8px;
+    
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.divider span{    
+    margin-top: 70px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 44px;
+    color: #FFFFFF;    
+}
+
+.login{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 115px;
+    height: 55px;
+    left: 1168px;
+    top: 8px;
+    
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    text-align: center;
+}
