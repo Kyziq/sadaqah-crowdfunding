@@ -8,6 +8,8 @@
     <title>Sadaqah Crowdfunding</title>
 </head>
 
-<body></body>
+<body>
+
+</body>
 
 </html>
