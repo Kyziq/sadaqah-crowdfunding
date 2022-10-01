@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <form action="user_register_save.php" method="post" class="registerForm">
+    <form action="user_register_save.php" method="post" class="register-form">
         <div class="input-registration">
             Registration Page
             <div class="input-field">
@@ -45,7 +45,7 @@
 
             <div class="button">
                 <button type="Reset">Reset</button>
-                <button type="Submit" name="registerButton" value="Submit">Register</button>
+                <button type="Submit" name="register-button" value="Submit">Register</button>
             </div>
 
             <script>
@@ -53,6 +53,10 @@
             </script>
         </div>
     </form>
+
+    <span class="text">Already a member?
+        <a href="user_login.php">Login Now</a>
+    </span>
     <script>
         const phoneInputField = document.querySelector("#user_phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
