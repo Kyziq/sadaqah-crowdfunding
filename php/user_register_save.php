@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    if (isset($_POST['registerButton'])) {
+    if (isset($_POST['register-button'])) {
         // Connect to database 
         include_once 'dbcon.php';
         // Get all the posted items
@@ -42,9 +42,8 @@
             mysqli_close($con);
             echo "Registration success!";
         }
-    } else {
+    } else
         header("Location: register.php");
-    }
     ?>
 </body>
 
