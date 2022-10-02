@@ -1,0 +1,25 @@
+*{margin: 0;padding: 0;
+box-sizing: border-box;}
+
+.navbar{
+    width: 100%;
+    background-color: #4E944F !important;
+}
+.section{
+    width: 100%;
+}
+.navbar-brand{
+    color: white !important;
+}
+
+.nav-link{
+    color: white !important;
+}
+
+#twobtn:hover{
+    background-color: rgb(200, 200, 200) !important;
+}
+
+#twobtn{
+    background-color: white;
+}
