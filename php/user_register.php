@@ -19,38 +19,34 @@
         <div class="input-registration">
             Registration Page
             <div class="input-field">
-                <label>Username<span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Username:</label>
                 <input type="text" placeholder="Enter your username" name="user_username" required />
             </div>
             <div class="input-field">
-                <label>Password<span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Password:</label>
                 <input type="password" placeholder="Enter your password" name="user_password" required />
             </div>
             <div class="input-field">
-                <label>Full Name:<span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Full Name:</label>
                 <input type="text" placeholder="Enter your full name" name="user_name" required />
             </div>
             <div class="input-field">
-                <label>Email<span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Email:</label>
                 <input type="text" placeholder="name@domainname" name="user_email" required />
             </div>
             <div class="input-field">
-                <label>Phone Number: <span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Phone Number:</label>
                 <input id="user_phone" type="tel" name="user_phone" required />
             </div>
             <div class="input-field">
-                <label>Address<span style="color: red;"> *</span></label>
+                <label><span style="color: red;">*</span>Address:</label>
                 <input type="text" placeholder="Enter your address" name="user_address" required />
             </div>
 
             <div class="button">
                 <button type="Reset">Reset</button>
-                <button type="Submit" name="register-button" value="Submit">Register</button>
+                <button type="Submit" id="register-button" name="register-button" value="Submit">Register</button>
             </div>
-
-            <script>
-                setCookie("user_phone", phoneInput.getNumber(), "10");
-            </script>
         </div>
     </form>
 
@@ -62,6 +58,7 @@
         const phoneInput = window.intlTelInput(phoneInputField, {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
             preferredCountries: ["my"],
+
         });
 
         function setCookie(cname, cvalue, exdays) {
@@ -70,6 +67,9 @@
             let expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+        document.getElementById("register-button").addEventListener("click", function() {
+            setCookie("user_phone", phoneInput.getNumber(), "10");
+        });
     </script>
 </body>
 

@@ -13,14 +13,13 @@
         <div class="input-login">
             Login Page
             <div class="input-field">
-                <label>Username<span style="color: red;"> *</span></label>
+                <label>Username:</span></label>
                 <input type="text" placeholder="Enter your username" name="user_username" required />
             </div>
             <div class="input-field">
-                <label>Password<span style="color: red;"> *</span></label>
+                <label>Password:</span></label>
                 <input type="password" placeholder="Enter your password" name="user_password" required />
             </div>
-
             <?php
             // Check for wrong password
             if (isset($_GET["msg"]) && $_GET["msg"] == 'failed')
