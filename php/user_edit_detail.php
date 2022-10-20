@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Detail</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,6 +36,7 @@
 
     echo $r['user_name'];
     ?>
+    <br>Account Settings:
     <form action="user_edit_action.php" method="POST">
         <table>
             <tr>
@@ -72,6 +74,34 @@
             </tr>
         </table>
     </form>
+
+    <div>
+        <form action="user_edit_action.php" method="POST">
+            New Password Settings: <br>
+
+            Old Password<br>
+            <input type="password" name="currentpassword"><br>
+
+            New Password<br>
+            <input type="password" id="newpassword" name="newpassword"><br>
+
+            Confirm New Password<br>
+            <input type="password" id="confirmnewpassword" name="confirmnewpassword"><br>
+            <span id='message'></span>
+            <br>
+            <button type="Submit" value="Submit" name="edit-password-button">Change Password</button>
+        </form>
+        <script>
+            $('#newpassword, #confirmnewpassword').on('keyup', function() {
+                if ($('#newpassword').val() == $('#confirmnewpassword').val()) {
+                    $('#message').html('New password matching').css('color', 'green');
+                } else
+                    $('#message').html('New password not matching').css('color', 'red');
+            });
+        </script>
+    </div>
+
+    <br>
     <?php
     if ($r['user_level'] == 1)
         echo "<a href='admin/admin.php'>Back to Admin Page</a>";
