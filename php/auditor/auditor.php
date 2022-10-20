@@ -11,25 +11,21 @@
 <body>
     <?php
     session_start();
-    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2)
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
         include_once '../dbcon.php'; // Connect to database 
-    else
+        $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result(); // Get the MySQLI result
+        $r = $result->fetch_assoc(); // Fetch data  
+    } else {
         header("Location: ../user_login.php");
+    }
     ?>
 
-    Welcome to auditor dashboard,
-    <?php
-    $user_id = $_SESSION['user_id'];
-    $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
-    $stmt = $con->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result(); // Get the MySQLI result
-    $r = $result->fetch_assoc(); // Fetch data  
-
-    echo $r['user_name'];
-    ?>
-
+    Welcome to auditor dashboard, <?php echo $r['user_name']; ?>
+    <br><a href="../user_edit_detail.php">Edit My Detail</a>
     <br><a href="../user_logout.php">Log Out</a>
 </body>
 

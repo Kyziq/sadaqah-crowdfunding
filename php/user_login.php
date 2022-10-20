@@ -9,33 +9,44 @@
 </head>
 
 <body>
+    Login Page
     <form action="user_login_progress.php" method="post" class="login-form">
-        <div class="input-login">
-            Login Page
-            <div class="input-field">
-                <label>Username:</span></label>
-                <input type="text" placeholder="Enter your username" name="user_username" required />
-            </div>
-            <div class="input-field">
-                <label>Password:</span></label>
-                <input type="password" placeholder="Enter your password" name="user_password" required />
-            </div>
-            <?php
-            // Check for wrong password
-            if (isset($_GET["msg"]) && $_GET["msg"] == 'failed')
-                echo '<span style="color: #ed2146; font-size: 15px;"><b>Wrong username or password!</b></span>';
-            ?>
-
-            <div class="button">
-                <button type="Reset">Reset</button>
-                <button type="Submit" name="login-button" value="Submit">Login</button>
-            </div>
-        </div>
-
-        <span class="text">Don't have an account?
-            <a href="user_register.php">Register Now</a>
-        </span>
+        <table>
+            <tr>
+                <td>
+                    <label>Username:</label>
+                </td>
+                <td>
+                    <input type="text" placeholder="Enter your username" name="user_username" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Password:</label>
+                </td>
+                <td>
+                    <input type="password" placeholder="Enter your password" name="user_password" required />
+                </td>
+                <td>
+                    <?php
+                    // Check for wrong password
+                    if (isset($_GET["msg"]) && $_GET["msg"] == 'failed')
+                        echo '<span style="color: #ed2146; font-size: 15px;"><b>Wrong username or password!</b></span>';
+                    ?>
+                </td>
+            </tr>
+        </table>
+        <button type="Reset">Reset</button>
+        <button type="Submit" name="login-button" value="Submit">Login</button>
     </form>
+
+    <div>
+        Don't have an account?
+        <a href="user_register.php">Register Now</a>
+        <a href="../index.php">Home</a>
+    </div>
+
+
 </body>
 
 </html>
