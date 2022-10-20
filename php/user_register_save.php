@@ -33,7 +33,9 @@
             $stmt->bind_param("ssssssi", $user_username, $user_password, $user_name, $user_email, $user_phone, $user_address, $user_level);
             $stmt->execute();
 
-            mysqli_close($con);
+            if (isset($result) && is_resource($result))
+                mysqli_free_result($result);  // Release returned data
+            mysqli_close($con); // Close connection
             echo "Registration success!";
         }
     } else
