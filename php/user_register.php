@@ -14,7 +14,7 @@
 
 <body>
     Registration Page
-    <form action="user_register_save.php" method="post" class="register-form">
+    <form action="user_register_save.php" method="post">
         <table>
             <tr>
                 <td>
