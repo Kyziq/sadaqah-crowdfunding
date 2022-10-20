@@ -35,40 +35,40 @@
 
     echo $r['user_name'];
     ?>
-    <form>
+    <form action="user_edit_action.php" method="POST">
         <table>
             <tr>
                 <td>
                     Username:
                 </td>
-                <td><input type="text" value="<?php echo $r['user_username'] ?>"></td>
+                <td><input type="text" name="username" value="<?php echo $r['user_username'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Name:
                 </td>
-                <td><input type="text" value="<?php echo $r['user_name'] ?>"></td>
+                <td><input type="text" name="name" value="<?php echo $r['user_name'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Email:
                 </td>
-                <td><input type="text" value="<?php echo $r['user_email'] ?>"></td>
+                <td><input type="text" name="email" value="<?php echo $r['user_email'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Phone Number:
                 </td>
-                <td><input type="text" value="<?php echo $r['user_phone'] ?>"></td>
+                <td><input type="text" name="phone" value="<?php echo $r['user_phone'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Address:
                 </td>
-                <td><input type="text" value="<?php echo $r['user_address'] ?>"></td>
+                <td><input type="text" name="address" value="<?php echo $r['user_address'] ?>"></td>
             </tr>
             <tr>
-                <td colspan="2" align="right"><button type="Submit">Submit</button></td>
+                <td colspan="2" align="right"><button type="Submit" value="Submit" name="edit-action-button">Save</button></td>
             </tr>
         </table>
     </form>
