@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 06:58 PM
+-- Generation Time: Oct 20, 2022 at 09:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -94,7 +94,7 @@ INSERT INTO `level` (`level_id`, `level_desc`) VALUES
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `user_username` varchar(50) NOT NULL,
-  `user_password` varchar(50) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
   `user_name` varchar(100) NOT NULL,
   `user_email` varchar(100) NOT NULL,
   `user_phone` varchar(20) NOT NULL,
@@ -107,12 +107,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `user_email`, `user_phone`, `user_address`, `user_level`) VALUES
-(1, 'haziq', 'haziq', 'Haziq Khairi', 'ihaziqkhairi@gmail.com', '+60164005754', '8, Jalan Dewan Bahasa, Taman Hartamas, 06394 Pendang, Kedah', 1),
-(2, 'sufiya', 'sufiya', 'Nur Sufiya binti Abu Bakar', 'nursufiya@gmail.com', '+60196251237', '71, Jalan Pudu 20Q, SS8, 59352 Taman Desa, WP Kuala Lumpur', 3),
-(3, 'shazwan', 'shazwan', 'Shazwan bin Faizal', 'shazwan@yahoo.com', '+60193024231', '52, Jalan Petaling, Bandar Flora, 01524 Simpang Empat, Perlis Indera Kayangan', 2),
-(4, 'imran', 'imran', 'Imran Taufek bin Syed Dini', 'imrantaufek@gmail.com', '+60129512664', 'No. F-57-54, Jln 4/1, Taman Desa Delima, 72824 Tiroi, Negeri Sembilan', 2),
-(5, 'nurafifah', 'nurafifah', 'Nurafifah binti Hazzam', 'nurafifahhaz@gmail.com', '+60195827301', 'No. 447, Lorong 3/7, Pandan Meru, 23750 Rantau Abang, Terengganu Darul Iman', 2),
-(6, 'gopi', 'gopi', 'Gopinathan a/l Pragash', 'gopinathan@yahoo.com', '+60179620124', 'No. 1, Jalan Ampang 8/4, SS64O, 62040 Precinct 5, Putrajaya', 3);
+(1, 'haziq', '$2y$10$ZcA6a5yZ01XDgScHGqGLXeTIlrHCe3TD1M596QZsovEAFn9D0SiQ6', 'Haziq Khairi', 'ihaziqkhairi@gmail.com', '+60164005754', '8, Jalan Dewan Bahasa, Taman Hartamas, 06394 Pendang, Kedah', 1),
+(2, 'gopi', '$2y$10$tHlRCmwoTLXVM4Av6gEdt.ntiCR9gudqKTQKgThgFZWq48qrKJL0O', 'Gopinathan a/l Pragash', 'gopinathan@yahoo.com', '+60179620124', 'No. 1, Jalan Ampang 8/4, SS64O, 62040 Precinct 5, Putrajaya', 3),
+(3, 'shazwan', '$2y$10$PcbMA9xHXDa.GUP2PHsi3.JypawKONQ3.K0v2A/wBwCoBOwrw.f/u', 'Muhammad Shazwan bin Ikmal', 'shazwannn@gmail.com', '+60198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 2),
+(4, 'natasha', '$2y$10$jEG37OkT.JoumBI/iDQfIuSGnqaoMU9Dn8FjPxeGEYjtqgIRtPsIS', 'Natasha Aliah binti Ahmad', 'natashaaliah@gmail.com', '+60129589912', 'No. 1G-90, Jln Cochrane 3P, Bandar Sri Rahman, 52746 Sungai Lembing, Pahang Darul Makmur', 2),
+(5, 'nurafifah', '$2y$10$khQhsOBGsxMFFVYxtmw8o.F1Sg8tNg3PpCBFQ2Ypg6yUokDoC4/EW', 'Nurafifah binti Hazzam', 'nurafifahhaz@gmail.com', '+60195827301', 'No. 447, Lorong 3/7, Pandan Meru, 23750 Rantau Abang, Terengganu Darul Iman', 2),
+(6, 'nik', '$2y$10$fRhMvaF/yW0jSYD1iuZZKuAExZg4qAecQdPRTcVC21gj2gHll4rz2', 'Nik Afiq bin Hakimi', 'nikafiq@yahoo.com', '+60168491023', '1-3, Lorong Lt. Adnan, PJS14, 79840 Mersing, Johor', 3),
+(7, 'chai', '$2y$10$0JCpGRtbT09bzK4UC4zFKOlcNOKPKa6uViWeH2dNFZHrNbX8W4rBq', 'Chai Key Teh', 'chaikeyteh@gmail.com', '+60176932012', '987, Jalan 9, SS87, 47143 Subang Jaya, Selangor', 3);
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `verification`
