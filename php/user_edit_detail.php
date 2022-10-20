@@ -72,6 +72,14 @@
             </tr>
         </table>
     </form>
+    <?php
+    if ($r['user_level'] == 1)
+        echo "<a href='admin/admin.php'>Back to Admin Page</a>";
+    else if ($r['user_level'] == 2)
+        echo "<a href='auditor/auditor.php'>Back to Auditor Page</a>";
+    else if ($r['user_level'] == 3)
+        echo "<a href='donator/donator.php'>Back to Donator Page</a>";
+    ?>
 </body>
 
 </html>
