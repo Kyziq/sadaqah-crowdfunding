@@ -28,6 +28,8 @@
 
         // If nothing matches (unique username)
         if (mysqli_num_rows($result) == 0) {
+            $user_password = password_hash($user_password, PASSWORD_DEFAULT);
+
             $query = "INSERT INTO user(user_username, user_password, user_name, user_email, user_phone, user_address, user_level) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $con->prepare($query);
             $stmt->bind_param("ssssssi", $user_username, $user_password, $user_name, $user_email, $user_phone, $user_address, $user_level);
