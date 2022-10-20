@@ -10,7 +10,7 @@
 
 <body>
     Login Page
-    <form action="user_login_progress.php" method="post" class="login-form">
+    <form action="user_login_action.php" method="post">
         <table>
             <tr>
                 <td>
@@ -45,8 +45,6 @@
         <a href="user_register.php">Register Now</a>
         <a href="../index.php">Home</a>
     </div>
-
-
 </body>
 
 </html>
