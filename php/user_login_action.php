@@ -8,15 +8,14 @@ if (isset($_POST['login-button'])) { // Submit login button
     $user_password = $_POST['user_password'];
 
     // Construct and run query to check for correct credentials (prepared statements)
-    $query = "SELECT * FROM user WHERE user_username=? AND user_password=?"; // SQL with parameters
+    $query = "SELECT * FROM user WHERE user_username=?"; // SQL with parameters
     $stmt = $con->prepare($query);
-    $stmt->bind_param("ss", $user_username, $user_password);
+    $stmt->bind_param("s", $user_username);
     $stmt->execute();
     $result = $stmt->get_result(); // Get the MySQLI result
-    $r = $result->fetch_assoc(); // Fetch data  
-    $rows = mysqli_num_rows($result);
+    $r = $result->fetch_assoc();
 
-    if ($rows == 1) { // If result matched $username and $password
+    if (password_verify($user_password, $r['user_password'])) {
         $_SESSION['user_id'] = $r['user_id'];
         $_SESSION['user_level'] = $r['user_level'];
 
@@ -30,10 +29,8 @@ if (isset($_POST['login-button'])) { // Submit login button
         header("Location:user_login.php?msg=failed");
     }
 
-    if (isset($result) && is_resource($result)) {
-        // Release returned data
-        mysqli_free_result($result);
-    }
+    if (isset($result) && is_resource($result))
+        mysqli_free_result($result);  // Release returned data
     mysqli_close($con); // Close connection
 } else {
     header("Location: user_login.php");
