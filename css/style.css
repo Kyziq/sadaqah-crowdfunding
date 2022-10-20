@@ -1,51 +1,103 @@
-body{
-    padding: 0%;
-    margin: 0%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.navbar{
-    position: absolute;
+.navbar {
     width: 100%;
-    height: 72px;
-    left: 0px;
-    top: 0px;
-
-    background: #4E944F;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
+    background-color: #4e944f !important;
 }
 
-.jumbotron{
-    position: absolute;
+.jumbotron {
+    background-image: url("../images/people-holding-rubber-heart\ 1.png") !important ;
+    background-size: cover !important;
+    height: 500px;
+}
+.section {
     width: 100%;
-    height: 576px;
-    left: 0px;
-    top: 72px;
-    background: url(../images/people-holding-rubber-heart\ 1.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+}
+.navbar-brand {
+    color: white !important;
 }
 
-.divider{
+.nav-link {
+    color: white !important;
+}
+
+#twobtn:hover {
+    background-color: rgb(200, 200, 200) !important;
+}
+
+#twobtn {
+    background-color: white;
+}
+
+.seperater {
+    text-align: center;
+    color: white;
+    background-color: #4e944f;
+    height: 55px;
+}
+
+main {
+    margin-left: 0%;
+}
+.container {
+    border: 1px solid yellow;
+    width: 900px !important;
+}
+
+.cat1,
+.cat2,
+.cat3,
+.cat4 {
+    border: 1px solid black;
+    border-radius: 17px;
+    height: 150px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cat1,
+.cat2,
+.cat3 {
+    margin-right: 60px;
+    width: 200px;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    border: 1px solid green;
+}
+
+.phpnumber {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 50px 100px 50px 100px;
+}
+
+.divider {
     position: absolute;
     width: 100%;
     height: 72px;
     left: 0px;
     top: 648px;
     text-align: center;
-    background: #4E944F;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
+    background: #4e944f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.footer{
+.footer {
     position: absolute;
     width: 100%;
     height: 308px;
     left: 0px;
     top: 1118px;
-    
-    background: #4E944F;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
+
+    background: #4e944f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* .d1{
@@ -100,23 +152,23 @@ body{
     border-radius: 24px;
 } */
 
-.titleCompany{
+.titleCompany {
     position: absolute;
     width: 245px;
     height: 43px;
     left: 26px;
     top: 20px;
-    
-    font-family: 'Open Sans';
+
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
-    
+
     color: #000000;
 }
 
-.sbar{
+.sbar {
     box-sizing: border-box;
 
     position: absolute;
@@ -124,64 +176,61 @@ body{
     height: 43.25px;
     left: 304px;
     top: 14.42px;
-    
-    background: #FFFFFF;
+
+    background: #ffffff;
     border: 1px solid #000000;
     border-radius: 24px;
 }
 
-.campaign{
+.campaign {
     position: absolute;
     width: 130px;
     height: 26px;
     left: 734px;
     top: 20px;
     text-decoration: none;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
-    
-    color: #FFFFFF;
-     
+
+    color: #ffffff;
 }
 
-.about{
+.about {
     position: absolute;
     width: 100px;
     height: 32px;
     left: 871px;
     top: 20px;
     text-decoration: none;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
-    
-    color: #000000;    
+
+    color: #000000;
 }
 
-.cu{
+.cu {
     position: absolute;
     width: 117px;
     height: 32px;
     left: 959px;
     top: 20px;
-    text-decoration: none;   
-    font-family: 'Open Sans';
+    text-decoration: none;
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 27px;
-    
+
     color: #000000;
-    
 }
 
-
-.register{
+.register {
     box-sizing: border-box;
 
     position: absolute;
@@ -189,24 +238,24 @@ body{
     height: 55px;
     left: 1300px;
     top: 8px;
-    
-    background: #FFFFFF;
+
+    background: #ffffff;
     border: 2px solid #000000;
     border-radius: 25px;
     text-align: center;
 }
 
-.divider span{    
+.divider span {
     margin-top: 70px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
     line-height: 44px;
-    color: #FFFFFF;    
+    color: #ffffff;
 }
 
-.login{
+.login {
     box-sizing: border-box;
 
     position: absolute;
@@ -214,8 +263,8 @@ body{
     height: 55px;
     left: 1168px;
     top: 8px;
-    
-    background: #FFFFFF;
+
+    background: #ffffff;
     border: 2px solid #000000;
     border-radius: 25px;
     text-align: center;
