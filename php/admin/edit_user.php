@@ -34,11 +34,11 @@
     if (isset($_GET["type"]) && ($_GET["type"] == 'Auditor' || $_GET["type"] == 'Donator')) {
         include_once '../dbcon.php'; // Connect to database 
 
-        $query = "SELECT * FROM user WHERE user_level=?"; // SQL with parameters
+        $query = "SELECT * FROM user WHERE user_level=?"; // SQL with parameter for level
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $user_level);
         $stmt->execute();
-        $result = $stmt->get_result(); // Get the MySQLI result
+        $result = $stmt->get_result();
 
     ?>
         <table>
@@ -62,41 +62,51 @@
                     <th>
                         Address
                     </th>
+                    <th>
+                        Action
+                    </th>
                 </tr>
             </thead>
-            <?php while ($r = $result->fetch_assoc()) {
-            ?>
-                <tbody>
-                    <tr>
-                        <td>
-                            <?php echo $r['user_id']; ?>
-                        </td>
-                        <td>
-                            <?php echo $r['user_username']; ?>
-                        </td>
-                        <td>
-                            <?php echo $r['user_name']; ?>
-                        </td>
-                        <td>
-                            <?php echo $r['user_email']; ?>
-                        </td>
-                        <td>
-                            <?php echo $r['user_phone']; ?>
-                        </td>
-                        <td>
-                            <?php echo $r['user_address']; ?>
-                        </td>
-                        <td>
-                            <a href="edit_user_action.php?user_id=<?php echo $r['user_id']; ?>">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            <?php
-            }
-            ?>
+
+            <tbody>
+
+                <?php while ($r = $result->fetch_assoc()) {
+                ?>
+                    <form action="edit_user_action.php" method="POST">
+                        <tr>
+                            <td>
+                                <!-- can put hidden input here if want-->
+                                <?php echo $r['user_id']; ?>
+                            </td>
+                            <td>
+                                <input type="text" name="username" value="<?php echo $r['user_username']; ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="name" value="<?php echo $r['user_name']; ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="email" value="<?php echo $r['user_email']; ?>">
+                            </td>
+                            <td>
+                                <input type="text" name="phone" value="<?php echo $r['user_phone']; ?>">
+                            </td>
+                            <td>
+                                <textarea type="text" name="address" rows="2" cols="60"><?php echo $r['user_address']; ?></textarea>
+                            </td>
+                            <td>
+                                <button type="submit" name="edit-user-button" value="<?php echo $r['user_id']; ?>">Save</button>
+                            </td>
+                        </tr>
+                    </form>
+                <?php
+                }
+                ?>
+            </tbody>
         </table>
+        </form>
     <?php
     }
+    if (isset($_GET["type"]) && $_GET["type"] == 'Auditor')
     ?>
     <a href="admin.php">Admin Dashboard</a>
 </body>
