@@ -5,11 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Auditor Dashboard</title>
 </head>
 
 <body>
-    Auditor
+    <?php
+    session_start();
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2)
+        include_once '../dbcon.php'; // Connect to database 
+    else
+        header("Location: ../user_login.php");
+    ?>
+
+    Welcome to auditor dashboard,
+    <?php
+    $user_id = $_SESSION['user_id'];
+    $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result(); // Get the MySQLI result
+    $r = $result->fetch_assoc(); // Fetch data  
+
+    echo $r['user_name'];
+    ?>
+
+    <br><a href="../user_logout.php">Log Out</a>
 </body>
 
 </html>
