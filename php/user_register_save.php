@@ -28,17 +28,11 @@
 
         // If nothing matches (unique username)
         if (mysqli_num_rows($result) == 0) {
-            // Construct and run query to store new user using prepared statements
-            $q =    "INSERT INTO user(user_username, user_password, user_name, user_email, user_phone, user_address, user_level)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_stmt_init($con);
-            if (!mysqli_stmt_prepare($stmt, $q))
-                echo "SQL statement failed";
-            else {
-                mysqli_stmt_bind_param($stmt, "ssssssi", $user_username, $user_password, $user_name, $user_email, $user_phone, $user_address, $user_level);
-                mysqli_stmt_execute($stmt);
-                $res = mysqli_stmt_get_result($stmt);
-            }
+            $query = "INSERT INTO user(user_username, user_password, user_name, user_email, user_phone, user_address, user_level) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ssssssi", $user_username, $user_password, $user_name, $user_email, $user_phone, $user_address, $user_level);
+            $stmt->execute();
+
             mysqli_close($con);
             echo "Registration success!";
         }
