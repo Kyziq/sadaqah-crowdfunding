@@ -30,12 +30,12 @@
     echo $r['user_name'];
     ?>
 
-    <a href="">Edit My Detail</a>
-    <a href="">Edit Donator</a>
-    <a href="">Edit Auditor</a>
-    <a href="">Edit Campaign</a>
-    <a href="">Verify Payment</a>
-    <a href="">Log Out</a>
+    <br><a href="">Edit My Detail</a>
+    <br><a href="">Edit Donator</a>
+    <br><a href="">Edit Auditor</a>
+    <br><a href="">Edit Campaign</a>
+    <br><a href="">Verify Payment</a>
+    <br><a href="../user_logout.php">Log Out</a>
 </body>
 
 </html>
