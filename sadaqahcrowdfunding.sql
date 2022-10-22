@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 03:55 PM
+-- Generation Time: Oct 22, 2022 at 04:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -30,11 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `campaign` (
   `campaign_id` int(11) NOT NULL,
   `campaign_amount` int(100) NOT NULL,
+  `campaign_name` varchar(100) NOT NULL,
   `campaign_description` varchar(200) NOT NULL,
   `campaign_start` datetime(6) NOT NULL,
   `campaign_end` datetime(6) NOT NULL,
   `campaign_raised` double NOT NULL,
-  `category_id` int(11) NOT NULL
+  `campaign_category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -47,6 +48,16 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Cash'),
+(2, 'School Necessity'),
+(3, 'Fasilitator'),
+(4, 'Service');
 
 -- --------------------------------------------------------
 
@@ -158,7 +169,7 @@ CREATE TABLE `verification` (
 --
 ALTER TABLE `campaign`
   ADD PRIMARY KEY (`campaign_id`),
-  ADD KEY `categoryID` (`category_id`);
+  ADD KEY `categoryID` (`campaign_category_id`);
 
 --
 -- Indexes for table `category`
@@ -217,7 +228,7 @@ ALTER TABLE `campaign`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `donate`
@@ -257,7 +268,7 @@ ALTER TABLE `verification`
 -- Constraints for table `campaign`
 --
 ALTER TABLE `campaign`
-  ADD CONSTRAINT `categoryID` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
+  ADD CONSTRAINT `categoryID` FOREIGN KEY (`campaign_category_id`) REFERENCES `category` (`category_id`);
 
 --
 -- Constraints for table `donate`
