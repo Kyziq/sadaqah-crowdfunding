@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Detail</title>
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <?php
+    /* Start session and validate user */
     session_start();
     if (isset($_SESSION['user_id']) && ($_SESSION['user_level'] == 3 || $_SESSION['user_level'] == 2 || $_SESSION['user_level'] == 1)) {
         include_once 'dbcon.php'; // Connect to database 
@@ -27,15 +29,17 @@
 
     Hello
     <?php
-    if ($r['user_level'] == 1)
+    if ($r['user_level'] == 1) {
         echo "Admin ";
-    else if ($r['user_level'] == 2)
+    } else if ($r['user_level'] == 2) {
         echo "Auditor ";
-    else if ($r['user_level'] == 3)
+    } else if ($r['user_level'] == 3) {
         echo "Donator ";
-
+    }
     echo $r['user_name'];
     ?>
+
+    <!-- User Account Settings Form -->
     <br>Account Settings:
     <form action="user_edit_action.php" method="POST">
         <table>
@@ -75,40 +79,46 @@
         </table>
     </form>
 
+    <!-- Password Change Form -->
     <div>
         <form action="user_edit_action.php" method="POST">
             New Password Settings: <br>
-
             Old Password<br>
             <input type="password" name="currentpassword"><br>
-
             New Password<br>
             <input type="password" id="newpassword" name="newpassword"><br>
-
             Confirm New Password<br>
             <input type="password" id="confirmnewpassword" name="confirmnewpassword"><br>
             <span id='message'></span>
             <br>
             <button type="Submit" value="Submit" name="edit-password-button">Change Password</button>
         </form>
+        <!-- Check if new password and confirm new password are the same -->
         <script>
             $('#newpassword, #confirmnewpassword').on('keyup', function() {
                 if ($('#newpassword').val() == $('#confirmnewpassword').val()) {
                     $('#message').html('New password matching').css('color', 'green');
-                } else
+                } else {
                     $('#message').html('New password not matching').css('color', 'red');
+                }
             });
         </script>
     </div>
 
     <br>
     <?php
-    if ($r['user_level'] == 1)
+    if ($r['user_level'] == 1) {
         echo "<a href='admin/admin.php'>Back to Admin Page</a>";
-    else if ($r['user_level'] == 2)
+    } else if ($r['user_level'] == 2) {
         echo "<a href='auditor/auditor.php'>Back to Auditor Page</a>";
-    else if ($r['user_level'] == 3)
+    } else if ($r['user_level'] == 3) {
         echo "<a href='donator/donator.php'>Back to Donator Page</a>";
+    }
+
+    if (isset($result) && is_resource($result)) {
+        mysqli_free_result($result);  // Release returned data
+    }
+    mysqli_close($con); // Close connection
     ?>
 </body>
 

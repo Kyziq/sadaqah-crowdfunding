@@ -13,6 +13,7 @@
     <form action="user_login_action.php" method="post">
         <table>
             <tr>
+                <!-- Username -->
                 <td>
                     <label>Username:</label>
                 </td>
@@ -21,6 +22,7 @@
                 </td>
             </tr>
             <tr>
+                <!-- Password -->
                 <td>
                     <label>Password:</label>
                 </td>
@@ -29,9 +31,10 @@
                 </td>
                 <td>
                     <?php
-                    // Check for wrong password
-                    if (isset($_GET["msg"]) && $_GET["msg"] == 'failed')
+                    /* Check for wrong password */
+                    if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
                         echo '<span style="color: #ed2146; font-size: 15px;"><b>Wrong username or password!</b></span>';
+                    }
                     ?>
                 </td>
             </tr>

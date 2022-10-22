@@ -1,6 +1,8 @@
 <?php
+/* Start session and validate admin */
 session_start();
 if (isset($_SESSION['user_id']) &&  $_SESSION['user_level'] == 1) {
+    /* Check if edit user button clicked */
     if (isset($_POST["edit-user-button"])) {
         include_once '../dbcon.php'; // Connect to database 
         $id = $_POST["edit-user-button"];
@@ -15,11 +17,14 @@ if (isset($_SESSION['user_id']) &&  $_SESSION['user_level'] == 1) {
         $stmt->bind_param("sssssi", $username, $name, $email, $phone, $address, $id);
         $stmt->execute();
 
-        if (isset($result) && is_resource($result))
+        if (isset($result) && is_resource($result)) {
             mysqli_free_result($result);  // Release returned data
+        }
         mysqli_close($con); // Close connection
         echo "Information for ID $id has been saved!";
-    } else
+    } else {
         header("Location: admin_edit_user.php");
-} else
+    }
+} else {
     header("Location: user_login.php");
+}

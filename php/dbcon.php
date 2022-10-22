@@ -1,8 +1,8 @@
 <?php
-/* php & mysqldb connection file */
+/* PHP & MySQL database connection file */
 $user = "root"; // mysqlusername
 $pass = ""; // mysqlpassword
-$host = "localhost"; // Server name/IP address
-$dbname = "sadaqahcrowdfunding"; // Database name
+$host = "localhost"; // server name/IP address
+$dbname = "sadaqahcrowdfunding"; // database name
 
 $con = mysqli_connect($host, $user, $pass, $dbname) or die(mysqli_error($con));

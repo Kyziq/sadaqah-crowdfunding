@@ -10,10 +10,10 @@
 
 <body>
     <?php
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         include_once '../dbcon.php'; // Connect to database 
-
     } else {
         header("Location: ../user_login.php");
     }
@@ -25,21 +25,21 @@
     </form>
 
     <?php
-    // Check for wrong password
-    if (isset($_GET["type"]) && $_GET["type"] == 'Auditor')
+    /* Check for wrong password */
+    if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
         $user_level = 2;
-    else if (isset($_GET["type"]) && $_GET["type"] == 'Donator')
+    } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
         $user_level = 3;
+    }
 
+    /* Display List of Auditor/Donator */
     if (isset($_GET["type"]) && ($_GET["type"] == 'Auditor' || $_GET["type"] == 'Donator')) {
         include_once '../dbcon.php'; // Connect to database 
-
         $query = "SELECT * FROM user WHERE user_level=?"; // SQL with parameter for level
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $user_level);
         $stmt->execute();
-        $result = $stmt->get_result();
-
+        $result = $stmt->get_result(); // Get the MySQLi result
     ?>
         <table>
             <thead>
@@ -67,9 +67,7 @@
                     </th>
                 </tr>
             </thead>
-
             <tbody>
-
                 <?php while ($r = $result->fetch_assoc()) {
                 ?>
                     <form action="admin_edit_user_action.php" method="POST">
@@ -106,9 +104,15 @@
         </form>
     <?php
     }
-    if (isset($_GET["type"]) && $_GET["type"] == 'Auditor')
     ?>
     <a href="admin.php">Admin Dashboard</a>
+
+    <?php
+    if (isset($result) && is_resource($result)) {
+        mysqli_free_result($result);  // Release returned data
+    }
+    mysqli_close($con); // Close connection
+    ?>
 </body>
 
 </html>
