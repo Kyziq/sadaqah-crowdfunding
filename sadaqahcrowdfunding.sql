@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 09:37 PM
+-- Generation Time: Oct 22, 2022 at 03:55 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -59,7 +59,7 @@ CREATE TABLE `donate` (
   `donate_amount` int(11) NOT NULL,
   `donate_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
   `donate_proof` varchar(100) NOT NULL,
-  `donate_status` varchar(100) NOT NULL,
+  `donate_status` int(11) NOT NULL,
   `donator_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `campaign_id` int(11) NOT NULL
@@ -84,6 +84,26 @@ INSERT INTO `level` (`level_id`, `level_desc`) VALUES
 (1, 'admin'),
 (2, 'auditor'),
 (3, 'donator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `donate_status_id` int(11) NOT NULL,
+  `donate_status_desc` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`donate_status_id`, `donate_status_desc`) VALUES
+(1, 'Accepted'),
+(2, 'Declined'),
+(3, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -153,13 +173,20 @@ ALTER TABLE `donate`
   ADD PRIMARY KEY (`donate_id`),
   ADD KEY `donatorId` (`donator_id`),
   ADD KEY `adminId` (`admin_id`),
-  ADD KEY `campaignId` (`campaign_id`);
+  ADD KEY `campaignId` (`campaign_id`),
+  ADD KEY `statusId` (`donate_status`);
 
 --
 -- Indexes for table `level`
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`level_id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`donate_status_id`);
 
 --
 -- Indexes for table `user`
@@ -205,6 +232,12 @@ ALTER TABLE `level`
   MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `donate_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -232,7 +265,8 @@ ALTER TABLE `campaign`
 ALTER TABLE `donate`
   ADD CONSTRAINT `adminId` FOREIGN KEY (`admin_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `campaignId` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`),
-  ADD CONSTRAINT `donatorId` FOREIGN KEY (`donator_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `donatorId` FOREIGN KEY (`donator_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `statusId` FOREIGN KEY (`donate_status`) REFERENCES `status` (`donate_status_id`);
 
 --
 -- Constraints for table `user`
