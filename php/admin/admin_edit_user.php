@@ -72,7 +72,7 @@
 
                 <?php while ($r = $result->fetch_assoc()) {
                 ?>
-                    <form action="edit_user_action.php" method="POST">
+                    <form action="admin_edit_user_action.php" method="POST">
                         <tr>
                             <td>
                                 <!-- can put hidden input here if want-->

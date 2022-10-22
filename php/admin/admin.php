@@ -26,7 +26,7 @@
 
     Welcome to admin dashboard, <?php echo $r['user_name']; ?>
     <br><a href="../user_edit_detail.php">Edit My Detail</a>
-    <br><a href="edit_user.php">Edit User</a>
+    <br><a href="admin_edit_user.php">Edit User</a>
     <br><a href="">Manage Campaign</a>
     <br><a href="">Verify Payment</a>
     <br><a href="../user_logout.php">Log Out</a>

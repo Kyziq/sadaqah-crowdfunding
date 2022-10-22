@@ -20,6 +20,6 @@ if (isset($_SESSION['user_id']) &&  $_SESSION['user_level'] == 1) {
         mysqli_close($con); // Close connection
         echo "Information for ID $id has been saved!";
     } else
-        header("Location: edit_user.php");
+        header("Location: admin_edit_user.php");
 } else
     header("Location: user_login.php");
