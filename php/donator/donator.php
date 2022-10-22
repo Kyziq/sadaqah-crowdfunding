@@ -26,7 +26,7 @@
     ?>
     Welcome to donator dashboard, <?php echo $r['user_name']; ?>
     <br><a href="../user_edit_detail.php">Edit My Detail</a>
-    <br><a href="../../index.php">Donate</a>
+    <br><a href="donator_donate.php">Donate</a>
     <br><a href="../user_logout.php">Log Out</a>
 
     <?php
