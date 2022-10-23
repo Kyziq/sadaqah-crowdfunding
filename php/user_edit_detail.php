@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Detail</title>
 
-    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Imports -->
+    <link rel="stylesheet" href="../css/style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -43,52 +44,51 @@
     ?>
 
     <!-- User Account Settings Form -->
-    <br>Account Settings:
+    <p class="h4">Account Settings:</p>
     <form action="user_edit_action.php" method="POST">
-        <table>
-            <tr>
-                <td>
-                    Username:
-                </td>
-                <td><input type="text" name="username" class="form-control" value="<?php echo $r['user_username'] ?>"></td>
-            </tr>
-            <tr>
-                <td>
-                    Name:
-                </td>
-                <td><input type="text" name="name" class="form-control" value="<?php echo $r['user_name'] ?>"></td>
-            </tr>
-            <tr>
-                <td>
-                    Email:
-                </td>
-                <td><input type="text" name="email" class="form-control" value="<?php echo $r['user_email'] ?>"></td>
-            </tr>
-            <tr>
-                <td>
-                    Phone Number:
-                </td>
-                <td><input type="text" name="phone" class="form-control" value="<?php echo $r['user_phone'] ?>"></td>
-            </tr>
-            <tr>
-                <td>
-                    Address:
-                </td>
-                <td><input type="text" name="address" class="form-control" value="<?php echo $r['user_address'] ?>"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="right"><button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button></td>
-            </tr>
-        </table>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text fw-bold">Username</span>
+                <input type="text" name="username" class="form-control" value="<?php echo $r['user_username'] ?>">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text fw-bold">Name</span>
+                <input type="text" name="name" class="form-control" value="<?php echo $r['user_name'] ?>">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text fw-bold">Email</span>
+                <input type="text" name="email" class="form-control" value="<?php echo $r['user_email'] ?>">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text fw-bold">Phone Number</span>
+                <input type="text" name="phone" class="form-control" value="<?php echo $r['user_phone'] ?>">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text fw-bold">Address</span>
+                <textarea type="text" name="address" class="form-control" rows="3"><?php echo $r['user_address'] ?></textarea>
+            </div>
+        </div>
+
+        <div>
+            <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button>
+        </div>
     </form>
 
     <!-- Password Change Form -->
-    New Password Settings:
+    <p class="h4">New Password Settings:</p>
     <form action="user_edit_action.php" method="POST">
         <div class="form-group">
+            <label for="currentPassword">Current Password</label>
             <div class="col-2">
-                <label for="currentPassword">Current Password</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 col-2">
                     <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
                     <span class="input-group-text">
                         <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
@@ -98,8 +98,8 @@
         </div>
 
         <div class="form-group">
+            <label for="newPassword">New Password</label>
             <div class="col-2">
-                <label for="newPassword">New Password</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
                     <span class="input-group-text">
@@ -110,8 +110,8 @@
         </div>
 
         <div class="form-group">
+            <label for="confirmNewPassword">Confirm New Password</label>
             <div class="col-2">
-                <label for="confirmNewPassword">Confirm New Password</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
                     <span class="input-group-text">
