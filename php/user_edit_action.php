@@ -26,13 +26,13 @@ if (isset($_SESSION['user_id']) && ($_SESSION['user_level'] == 3 || $_SESSION['u
         echo "Your information has been saved!";
     } else if (isset($_POST['edit-password-button'])) { /* Edit password button is clicked */
         /* Get all the posted items */
-        $currentpassword = $_POST['currentpassword'];
-        $newpassword = $_POST['newpassword'];
-        $confirmnewpassword = $_POST['confirmnewpassword'];
+        $currentPassword = $_POST['currentPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmNewPassword = $_POST['confirmNewPassword'];
 
-        if ($currentpassword == $newpassword) {
+        if ($currentPassword == $newPassword) {
             echo "Your new password cannot be the same as your current password!";
-        } else if ($newpassword != $confirmnewpassword) {
+        } else if ($newPassword != $confirmNewPassword) {
             echo "Your new password and confirm new password do not match!";
         } else {
             include_once 'dbcon.php'; // Connect to database 
@@ -45,11 +45,11 @@ if (isset($_SESSION['user_id']) && ($_SESSION['user_level'] == 3 || $_SESSION['u
             $r = $result->fetch_assoc(); // Fetch data
 
             /* Check if current password is correct */
-            if (password_verify($currentpassword, $r['user_password'])) {
-                $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+            if (password_verify($currentPassword, $r['user_password'])) {
+                $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                 $query = "UPDATE user SET user_password=? WHERE user_id=?"; // SQL with parameters
                 $stmt = $con->prepare($query);
-                $stmt->bind_param("si", $newpassword, $user_id);
+                $stmt->bind_param("si", $newPassword, $user_id);
                 $stmt->execute();
                 if (isset($result) && is_resource($result)) {
                     mysqli_free_result($result);  // Release returned data
