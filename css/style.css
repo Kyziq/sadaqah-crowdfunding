@@ -269,3 +269,7 @@ main {
     border-radius: 25px;
     text-align: center;
 }
+
+textarea {
+    resize: none !important;
+}
