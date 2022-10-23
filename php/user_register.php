@@ -37,7 +37,7 @@
                 <td>
                     <label><span style="color: red;">*</span>Email:</label>
                 </td>
-                <td> <input type="text" placeholder="name@domainname" name="user_email" required /></td>
+                <td> <input type="email" placeholder="name@domainname" name="user_email" required /></td>
             </tr>
             <tr>
                 <td>

@@ -52,7 +52,7 @@
         <div class="col-3">
             <div class="input-group mb-3">
                 <span class="input-group-text fw-bold">Email</span>
-                <input type="text" name="email" class="form-control" value="<?php echo $r['user_email'] ?>">
+                <input type="email" name="email" class="form-control" value="<?php echo $r['user_email'] ?>">
             </div>
         </div>
         <div class="col-3">
