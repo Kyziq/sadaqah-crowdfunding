@@ -6,54 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
-
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
     <title>Login Page</title>
 </head>
 
 <body>
     Registration Page
-    <form action="user_register_save.php" method="post">
-        <table>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Username:</label>
-                </td>
-                <td><input type="text" placeholder="Enter your username" name="user_username" required /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Password:</label>
-                </td>
-                <td> <input type="password" placeholder="Enter your password" name="user_password" required /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Full Name:</label>
-                </td>
-                <td> <input type="text" placeholder="Enter your full name" name="user_name" required /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Email:</label>
-                </td>
-                <td> <input type="email" placeholder="name@domainname" name="user_email" required /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Phone Number:</label>
-                </td>
-                <td> <input id="user_phone" type="tel" name="user_phone" required /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label><span style="color: red;">*</span>Address:</label>
-                </td>
-                <td> <input type="text" placeholder="Enter your address" name="user_address" required /></td>
-            </tr>
-        </table>
-        <button type="Reset">Reset</button>
-        <button type="Submit" id="register-button" name="register-button" value="Submit">Register</button>
+    <form name="registerForm" action="user_register_save.php" method="post">
+        <div class="form-group">
+            <label>Username:</label>
+            <div class="col-2">
+                <input type="text" class="form-control" name="user_username" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <div class="col-2">
+                <input type="password" class="form-control" name="user_password" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Full Name:</label>
+            <div class="col-2">
+                <input type="text" class="form-control" name="user_name" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <div class="col-2">
+                <input type="email" class="form-control" name="user_email" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <div class="col-2">
+                <input type="number" step=1 class="form-control" name="user_phone" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Address:</label>
+            <div class="col-2">
+                <textarea type="text" class="form-control" name="user_address" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <!-- <div class="g-recaptcha" data-sitekey="6LeHHUIgAAAAAEgwTJnckkfkbZ-0JlarQeLKsmg-"></div> -->
+        <br>
+        <button type="submit" class="btn btn-primary" id="register-button" name="register-button">Register</button>
     </form>
 
     <span class="text">

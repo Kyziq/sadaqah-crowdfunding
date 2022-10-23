@@ -18,7 +18,7 @@
         $user_password = $_POST['user_password'];
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
-        $user_phone = $_COOKIE['user_phone'];
+        $user_phone = $_POST['user_phone'];
         $user_address = $_POST['user_address'];
         $user_level = 3;
 
@@ -41,6 +41,8 @@
             }
             mysqli_close($con); // Close connection
             echo "Registration success!";
+        } else {
+            header("Location: register.php");
         }
     } else {
         header("Location: register.php");
