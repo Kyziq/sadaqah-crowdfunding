@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Detail</title>
 
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
@@ -47,63 +50,132 @@
                 <td>
                     Username:
                 </td>
-                <td><input type="text" name="username" value="<?php echo $r['user_username'] ?>"></td>
+                <td><input type="text" name="username" class="form-control" value="<?php echo $r['user_username'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Name:
                 </td>
-                <td><input type="text" name="name" value="<?php echo $r['user_name'] ?>"></td>
+                <td><input type="text" name="name" class="form-control" value="<?php echo $r['user_name'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Email:
                 </td>
-                <td><input type="text" name="email" value="<?php echo $r['user_email'] ?>"></td>
+                <td><input type="text" name="email" class="form-control" value="<?php echo $r['user_email'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Phone Number:
                 </td>
-                <td><input type="text" name="phone" value="<?php echo $r['user_phone'] ?>"></td>
+                <td><input type="text" name="phone" class="form-control" value="<?php echo $r['user_phone'] ?>"></td>
             </tr>
             <tr>
                 <td>
                     Address:
                 </td>
-                <td><input type="text" name="address" value="<?php echo $r['user_address'] ?>"></td>
+                <td><input type="text" name="address" class="form-control" value="<?php echo $r['user_address'] ?>"></td>
             </tr>
             <tr>
-                <td colspan="2" align="right"><button type="Submit" value="Submit" name="edit-action-button">Save</button></td>
+                <td colspan="2" align="right"><button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button></td>
             </tr>
         </table>
     </form>
 
     <!-- Password Change Form -->
-    <div>
-        <form action="user_edit_action.php" method="POST">
-            New Password Settings: <br>
-            Old Password<br>
-            <input type="password" name="currentpassword"><br>
-            New Password<br>
-            <input type="password" id="newpassword" name="newpassword"><br>
-            Confirm New Password<br>
-            <input type="password" id="confirmnewpassword" name="confirmnewpassword"><br>
-            <span id='message'></span>
-            <br>
-            <button type="Submit" value="Submit" name="edit-password-button">Change Password</button>
-        </form>
+    New Password Settings:
+    <form action="user_edit_action.php" method="POST">
+        <div class="form-group">
+            <div class="col-2">
+                <label for="currentPassword">Current Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
+                    <span class="input-group-text">
+                        <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-2">
+                <label for="newPassword">New Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
+                    <span class="input-group-text">
+                        <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-2">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
+                    <span class="input-group-text">
+                        <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
+                    </span>
+                </div>
+                <span id='passwordCheckMessage'></span>
+            </div>
+        </div>
+
+        <br>
+        <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Change Password</button>
+
         <!-- Check if new password and confirm new password are the same -->
         <script>
-            $('#newpassword, #confirmnewpassword').on('keyup', function() {
-                if ($('#newpassword').val() == $('#confirmnewpassword').val()) {
-                    $('#message').html('New password matching').css('color', 'green');
+            $('#newPassword, #confirmNewPassword').on('keyup', function() {
+                if ($('#newPassword').val() != '' && $('#confirmNewPassword').val() != '') {
+                    if ($('#newPassword').val() == $('#confirmNewPassword').val()) {
+                        $('#passwordCheckMessage').html('New password matching').css('color', 'green');
+                    } else {
+                        $('#passwordCheckMessage').html('New password not matching').css('color', 'red');
+                    }
                 } else {
-                    $('#message').html('New password not matching').css('color', 'red');
+                    $('#passwordCheckMessage').html('');
                 }
             });
+
+            //
+            !(function($) {
+                //eyeOpenClass: 'fa-eye',
+                //eyeCloseClass: 'fa-eye-slash',
+                "use strict";
+
+                $(function() {
+                    $('[data-toggle="password"]').each(function() {
+                        var input = $(this);
+                        var eye_btn = $(this).parent().find(".input-group-text");
+                        eye_btn.css("cursor", "pointer").addClass("input-password-hide");
+                        eye_btn.on("click", function() {
+                            if (eye_btn.hasClass("input-password-hide")) {
+                                eye_btn
+                                    .removeClass("input-password-hide")
+                                    .addClass("input-password-show");
+                                eye_btn
+                                    .find(".fa")
+                                    .removeClass("fa-eye")
+                                    .addClass("fa-eye-slash");
+                                input.attr("type", "text");
+                            } else {
+                                eye_btn
+                                    .removeClass("input-password-show")
+                                    .addClass("input-password-hide");
+                                eye_btn
+                                    .find(".fa")
+                                    .removeClass("fa-eye-slash")
+                                    .addClass("fa-eye");
+                                input.attr("type", "password");
+                            }
+                        });
+                    });
+                });
+            })(window.jQuery);
         </script>
-    </div>
+    </form>
 
     <br>
     <?php
@@ -120,6 +192,10 @@
     }
     mysqli_close($con); // Close connection
     ?>
+
+    <!-- Import -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 </body>
 
 </html>
