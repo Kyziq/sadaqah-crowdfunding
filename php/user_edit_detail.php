@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Detail</title>
+    <title>Account Settings</title>
 
-    <!-- Imports -->
+    <!-- *** Imports *** -->
     <link rel="stylesheet" href="../css/style.css" />
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
@@ -31,20 +34,8 @@
     }
     ?>
 
-    Hello
-    <?php
-    if ($r['user_level'] == 1) {
-        echo "Admin ";
-    } else if ($r['user_level'] == 2) {
-        echo "Auditor ";
-    } else if ($r['user_level'] == 3) {
-        echo "Donator ";
-    }
-    echo $r['user_name'];
-    ?>
-
     <!-- User Account Settings Form -->
-    <p class="h4">Account Settings:</p>
+    <p class="h4"><?php echo $r['user_name']; ?>'s Account Details:</p>
     <form action="user_edit_action.php" method="POST">
         <div class="col-3">
             <div class="input-group mb-3">
@@ -82,6 +73,7 @@
         </div>
     </form>
 
+    <br>
     <!-- Password Change Form -->
     <p class="h4">New Password Settings:</p>
     <form action="user_edit_action.php" method="POST">
@@ -180,11 +172,11 @@
     <br>
     <?php
     if ($r['user_level'] == 1) {
-        echo "<a href='admin/admin.php'>Back to Admin Page</a>";
+        echo "<a href='admin/admin.php' class='link-primary'>Back to Admin Dashboard</a>";
     } else if ($r['user_level'] == 2) {
-        echo "<a href='auditor/auditor.php'>Back to Auditor Page</a>";
+        echo "<a href='auditor/auditor.php' class='link-primary'>Back to Auditor Dashboard</a>";
     } else if ($r['user_level'] == 3) {
-        echo "<a href='donator/donator.php'>Back to Donator Page</a>";
+        echo "<a href='donator/donator.php' class='link-primary'>Back to User Dashboard</a>";
     }
 
     if (isset($result) && is_resource($result)) {
