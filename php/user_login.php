@@ -22,47 +22,55 @@
 </head>
 
 <body>
-    Login Page
-    <form action="user_login_action.php" method="post">
-        <table>
-            <tr>
-                <!-- Username -->
-                <td>
-                    <label>Username:</label>
-                </td>
-                <td>
-                    <input type="text" placeholder="Enter your username" name="user_username" required />
-                </td>
-            </tr>
-            <tr>
-                <!-- Password -->
-                <td>
-                    <label>Password:</label>
-                </td>
-                <td>
-                    <input type="password" placeholder="Enter your password" name="user_password" required />
-                </td>
-            </tr>
-        </table>
+    <div class="container">
+        <a href="../index.php">
+            <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:20%;" alt="Logo">
+        </a>
+        <!-- Login Form -->
+        <form action="user_login_action.php" method="post">
+            <div class="h5">Login Form</div>
+            <div class="form-group mb-3">
+                <label for="user_username" class="form-label">Username</label>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <input type="text" class="form-control" id="user_username" name="user_username" placeholder="Enter username">
+                </div>
 
-        <?php
-        /* Check for wrong password */
-        if (isset($_GET["login"]) && $_GET["login"] == 'failed') {
-            echo '<span style="color: red;">Account does not exist!</span>';
-        } else if (isset($_GET["passw"]) && $_GET["passw"] == 'failed') {
-            echo '<span style="color: red;">Wrong password!</span>';
-        }
-        ?>
+            </div>
 
-        <br>
-        <button type="Reset">Reset</button>
-        <button type="Submit" name="login-button" value="Submit">Login</button>
-    </form>
+            <div class="form-group mb-3">
+                <label for="user_password" class="form-label">Password</label>
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Enter your password" name="user_password" required />
+                </div>
+            </div>
 
-    <div>
-        Don't have an account?
-        <a href="user_register.php">Register Now</a>
-        <a href="../index.php">Home</a>
+            <div class="mb-3">
+                <?php
+                /* Check for wrong password */
+                if (isset($_GET["login"]) && $_GET["login"] == 'failed') {
+                    echo '<span style="color: red;">Account does not exist!</span>';
+                } else if (isset($_GET["passw"]) && $_GET["passw"] == 'failed') {
+                    echo '<span style="color: red;">Wrong password!</span>';
+                }
+                ?>
+            </div>
+
+            <!-- Button -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" name="login-button">Login</button>
+            </div>
+        </form>
+
+        <div class="mb-3">
+            Don't have an account?
+            <a href="user_register.php">Register Now</a>
+        </div>
     </div>
 </body>
 
