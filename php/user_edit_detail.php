@@ -41,7 +41,7 @@
 
     <!-- User Account Settings Form -->
     <div class="container">
-        <p class="h4"><?php echo $r['user_name']; ?>'s Account Details:</p>
+        <p class="h5"><?php echo $r['user_name']; ?>'s Account Details</p>
         <form action="user_edit_action.php" method="POST">
             <div class="form-floating mb-3">
                 <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
@@ -77,8 +77,7 @@
     <!-- Password Change Form -->
     <div class="container-sm">
         <form action="user_edit_action.php" method="POST">
-            <p class="h4">Password Settings:</p>
-
+            <p class="h5">Password Settings</p>
             <label for="currentPassword">Current Password</label>
             <div class="input-group mb-3">
                 <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>

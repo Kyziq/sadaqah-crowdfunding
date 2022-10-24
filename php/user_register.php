@@ -25,14 +25,8 @@
 <body>
     <!-- Registration Form -->
     <div class="container">
-        Registration Form
         <form action="user_register_save.php" method="post">
-
-            <!-- <div class="form-floating">
-                <input type="email" id="email" class="form-control" placeholder="Input email">
-                <label for="email" class="form-label">Email</label>
-            </div> -->
-
+            <p class="h5">Registration Form</p>
             <label for="username" class="form-label">Username:</label>
             <div class="mb-3">
                 <input type="text" class="form-control" id="username" name="username" required />
