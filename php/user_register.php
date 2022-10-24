@@ -27,6 +27,8 @@
     <div class="container">
         <form action="user_register_save.php" method="post">
             <p class="h5">Registration Form</p>
+
+            <!-- Input -->
             <label for="username" class="form-label">Username:</label>
             <div class="mb-3">
                 <input type="text" class="form-control" id="username" name="username" required />
@@ -60,13 +62,15 @@
                 <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="register-button">Register</button>
-
+            <!-- Button -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" name="register-button">Register</button>
+            </div>
         </form>
-        <span class="text">
+        <div class="mb-3">
             Already a member?
             <a href="user_login.php">Login Now</a>
-        </span>
+        </div>
     </div>
 
     <script>
