@@ -24,7 +24,7 @@
 
 <body>
     <!-- Registration Form -->
-    <div class="container">
+    <div class="container p-5 my-5">
         <form action="user_register_save.php" method="post">
             <p class="h5">Registration Form</p>
 
@@ -69,7 +69,9 @@
         </form>
         <div class="mb-3">
             Already a member?
-            <a href="user_login.php">Login Now</a>
+            <a href="user_login.php">
+                <button class="btn btn-outline-primary">Login Now</button>
+            </a>
         </div>
     </div>
 

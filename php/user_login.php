@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container p-5 my-5">
         <a href="../index.php">
             <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:20%;" alt="Logo">
         </a>
@@ -71,7 +71,7 @@
 
         <div class="mb-3">
             Don't have an account?
-            <a href="user_register.php">Register Now</a>
+            <a href="user_register.php"><button class="btn btn-outline-primary">Register Now</button></a>
         </div>
     </div>
 </body>
