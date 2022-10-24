@@ -27,7 +27,7 @@
             <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:20%;" alt="Logo">
         </a>
         <!-- Login Form -->
-        <form action="user_login_action.php" method="post">
+        <form action="user_login_action.php" method="post" class="row g-2">
             <div class="h5">Login Form</div>
 
             <!-- Input -->
@@ -39,7 +39,6 @@
                     </div>
                     <input type="text" class="form-control" id="user_username" name="user_username" placeholder="Enter username">
                 </div>
-
             </div>
 
             <div class="form-group mb-3">

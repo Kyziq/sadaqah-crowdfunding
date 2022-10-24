@@ -25,49 +25,52 @@
 <body>
     <!-- Registration Form -->
     <div class="container p-5 my-5">
-        <form action="user_register_save.php" method="post">
+        <form action="user_register_save.php" method="post" class="row g-2">
             <p class="h5">Registration Form</p>
 
             <!-- Input -->
-            <label for="username" class="form-label">Username:</label>
-            <div class="mb-3">
+            <div class="form-group mb-2">
+                <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required />
             </div>
 
-            <label for="password" class="form-label">Password:</label>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" id="password" name="password" data-toggle="password" required />
-                <div class="input-group-text">
-                    <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
+            <div class="form-group mb-2">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" data-toggle="password" required />
+                    <div class="input-group-text">
+                        <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
+                    </div>
                 </div>
             </div>
 
-            <label for="name" class="form-label">Full Name:</label>
-            <div class="mb-3">
+            <div class="form-group mb-2">
+                <label for="name" class="form-label">Full Name</label>
                 <input type="text" class="form-control" id="name" name="name" required />
             </div>
 
-            <label for="email" class="form-label">Email:</label>
-            <div class="mb-3">
+            <div class="form-group mb-2">
+                <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required />
             </div>
 
-            <label for="phone" class="form-label">Phone Number:</label>
-            <div class="mb-3">
+            <div class="form-group mb-2">
+                <label for="phone" class="form-label">Phone Number</label>
                 <input type="number" step=1 class="form-control" id="phone" name="phone" required />
             </div>
 
-            <label for="address" class="form-label">Address:</label>
-            <div class="mb-3">
+            <div class="form-group mb-2">
+                <label for="address" class="form-label">Address</label>
                 <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
             </div>
 
             <!-- Button -->
-            <div class="mb-3">
+            <div class="form-group mb-2">
                 <button type="submit" class="btn btn-primary" name="register-button">Register</button>
             </div>
         </form>
-        <div class="mb-3">
+
+        <div>
             Already a member?
             <a href="user_login.php">
                 <button class="btn btn-outline-primary">Login Now</button>
