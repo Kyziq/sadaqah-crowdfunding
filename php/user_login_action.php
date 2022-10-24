@@ -16,21 +16,26 @@ if (isset($_POST['login-button'])) { // Check click login button
     $result = $stmt->get_result(); // Get the MySQLi result
     $r = $result->fetch_assoc();
 
-    /* Check if password is correct with hashed password (DB) */
-    if (password_verify($user_password, $r['user_password'])) {
-        $_SESSION['user_id'] = $r['user_id'];
-        $_SESSION['user_level'] = $r['user_level'];
+    if ($r) {
+        /* Check if password is correct with hashed password (DB) */
+        if (password_verify($user_password, $r['user_password'])) {
+            $_SESSION['user_id'] = $r['user_id'];
+            $_SESSION['user_level'] = $r['user_level'];
 
-        if ($r['user_level'] == 1) {
-            header("Location: admin/admin.php");
-        } else if ($r['user_level'] == 2) {
-            header("Location: auditor/auditor.php");
-        } else if ($r['user_level'] == 3) {
-            header("Location: donator/donator.php");
+            if ($r['user_level'] == 1) {
+                header("Location: admin/admin.php");
+            } else if ($r['user_level'] == 2) {
+                header("Location: auditor/auditor.php");
+            } else if ($r['user_level'] == 3) {
+                header("Location: donator/donator.php");
+            }
+        } else {
+            header("Location:user_login.php?passw=failed"); // Failed login
         }
     } else {
-        header("Location:user_login.php?msg=failed"); // Failed login
+        header("Location:user_login.php?login=failed"); // Failed login
     }
+
     if (isset($result) && is_resource($result)) {
         mysqli_free_result($result);  // Release returned data
     }
