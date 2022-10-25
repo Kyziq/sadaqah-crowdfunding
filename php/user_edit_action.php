@@ -45,7 +45,7 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'Your account details has been saved.',
+                    title: 'Your new account details has been saved.',
                     text: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
