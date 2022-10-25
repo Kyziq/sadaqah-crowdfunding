@@ -70,7 +70,7 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <?php while ($r = $result->fetch_assoc()) {
                     ?>
                         <form action="admin_edit_user_action.php" method="POST">
