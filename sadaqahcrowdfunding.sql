@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 05:06 PM
+-- Generation Time: Oct 25, 2022 at 05:14 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -145,8 +145,9 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `u
 (5, 'nurafifah', '$2y$10$khQhsOBGsxMFFVYxtmw8o.F1Sg8tNg3PpCBFQ2Ypg6yUokDoC4/EW', 'Nurafifah binti Hazzam', 'nurafifahhaz@gmail.com', '0195827301', 'No. 447, Lorong 3/7, Pandan Meru, 23750 Rantau Abang, Terengganu Darul Iman', 2),
 (6, 'nik', '$2y$10$mScJv5719orWWZ1ChCPR.uKRBPRSJBZduAjom9oZQedvtaWhR5PxC', 'Nik Afiq bin Hakimi', 'nikafiq@yahoo.com', '0168491023', 'B-16-69, Lorong Sultan Azlan Shah 1/99, PJU5, 11950 Batu Kawan, Pulau Pinang', 3),
 (7, 'chai', '$2y$10$0JCpGRtbT09bzK4UC4zFKOlcNOKPKa6uViWeH2dNFZHrNbX8W4rBq', 'Chai Key Teh', 'chaikeyteh@gmail.com', '0176932012', '987, Jalan 9, SS87, 47143 Subang Jaya, Selangor', 3),
-(17, 'amran', '$2y$10$oduKRntTG6OCcWKDPHSNn.uqyANMDCH2DKaB9DSMoZL3pYqRB01v6', 'Muhammad Amran bin Ikmal', 'amranikmal@outlook.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 3),
-(18, 'raihan', '$2y$10$ZKBpL/tVjSpqZdZH6Vgw8eANey2iGmVoBXI/iYKvsteL3jy/kUlfy', 'Muhammad Raihan bin Azlan', 'raihanazlan@gmail.com', '0196862931', 'No. 50, Jalan 2/5, Taman Anggerik, 12159 George Town, Penang', 3);
+(8, 'amran', '$2y$10$oduKRntTG6OCcWKDPHSNn.uqyANMDCH2DKaB9DSMoZL3pYqRB01v6', 'Muhammad Amran bin Ikmal', 'amranikmal@outlook.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 3),
+(9, 'raihan', '$2y$10$ZKBpL/tVjSpqZdZH6Vgw8eANey2iGmVoBXI/iYKvsteL3jy/kUlfy', 'Muhammad Raihan bin Azlan', 'raihanazlan@gmail.com', '0196862931', 'No. 50, Jalan 2/5, Taman Anggerik, 12159 George Town, Penang', 3),
+(10, 'ain', '$2y$10$hD7PrLZsJ5/FjttRbzLwlelbl5jVFy5r3RZDK6nP3g00h.pZy79Xu', 'Ain Amni binti Kamarul', 'ainamni@gmail.com', '0129518232', '312, Lorong 2Y, Bandar Utara, 27454 Karak, Pahang Darul Makmur', 3);
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `verification`
