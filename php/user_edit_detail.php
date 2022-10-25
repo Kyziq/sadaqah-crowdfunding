@@ -40,91 +40,103 @@
     ?>
 
     <!-- User Account Settings Form -->
-    <div class="container">
-        <p class="h5"><?php echo $r['user_name']; ?>'s Account Details</p>
-        <form action="user_edit_action.php" method="POST">
-            <div class="form-floating mb-3">
-                <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
-                <label for="username" class="form-label">Username</label>
+    <div class="container my-3">
+        <?php
+        if ($r['user_level'] == 1) {
+            echo '<a href="admin/admin.php" class="link-primary">Back to Admin Dashboard</a>';
+        } else if ($r['user_level'] == 2) {
+            echo '<a href="auditor/auditor.php" class="link-primary">Back to Auditor Dashboard</a>';
+        } else if ($r['user_level'] == 3) {
+            echo '<a href="donator/donator.php" class="link-primary">Back to User Dashboard</a>';
+        }
+
+        if (isset($result) && is_resource($result)) {
+            mysqli_free_result($result);  // Release returned data
+        }
+        mysqli_close($con); // Close connection
+        ?>
+        <p class=" h5"><?php echo $r["user_name"]; ?>'s Account Details</p>
+        <form action="user_edit_action.php" method="POST" class="row g-2">
+            <!-- Input -->
+            <div class="form-group mb-2">
+                <div class="form-floating">
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
+                    <label for="username" class="form-label">Username</label>
+                </div>
             </div>
 
-            <div class="form-floating mb-3">
-                <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
-                <label for="name" class="form-label">Full name</label>
+            <div class="form-group mb-2">
+                <div class="form-floating">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
+                    <label for="name" class="form-label">Full name</label>
+                </div>
             </div>
 
-            <div class="form-floating mb-3">
-                <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
-                <label for="email" class="form-label">Email</label>
+            <div class="form-group mb-2">
+                <div class="form-floating">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
+                    <label for="email" class="form-label">Email</label>
+                </div>
             </div>
 
-            <div class="form-floating mb-3">
-                <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
-                <label for="phone" class="form-label">Phone</label>
+            <div class="form-group mb-2">
+                <div class="form-floating">
+                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
+                    <label for="phone" class="form-label">Phone</label>
+                </div>
             </div>
 
-            <div class="form-floating mb-3">
-                <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="2"><?php echo $r['user_address'] ?></textarea>
-                <label for="address" class="form-label">Address</label>
+            <div class="form-group mb-2">
+                <div class="form-floating">
+                    <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="2"><?php echo $r['user_address'] ?></textarea>
+                    <label for="address" class="form-label">Address</label>
+                </div>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group mb-4">
                 <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button>
             </div>
         </form>
-    </div>
 
-    <!-- Password Change Form -->
-    <div class="container-sm">
-        <form action="user_edit_action.php" method="POST">
-            <p class="h5">Password Settings</p>
-            <label for="currentPassword">Current Password</label>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
-                <div class="input-group-text">
-                    <i class="fa fa-eye" style="cursor: pointer"></i>
+        <!-- Password Change Form -->
+        <p class="h5">Password Settings</p>
+        <form action="user_edit_action.php" method="POST" class="row g-2">
+            <!-- Input -->
+            <div class="form-group mb-2">
+                <label for="currentPassword">Current Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
+                    <div class="input-group-text">
+                        <i class="fa fa-eye" style="cursor: pointer"></i>
+                    </div>
                 </div>
             </div>
 
-            <label for="newPassword">New Password</label>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
-                <div class="input-group-text">
-                    <i class="fa fa-eye" style="cursor: pointer"></i>
+            <div class="form-group mb-2">
+                <label for="newPassword">New Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
+                    <div class="input-group-text">
+                        <i class="fa fa-eye" style="cursor: pointer"></i>
+                    </div>
                 </div>
             </div>
 
-            <label for="confirmNewPassword">Confirm New Password</label>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
-                <div class="input-group-text">
-                    <i class="fa fa-eye" style="cursor: pointer"></i>
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
+                    <div class="input-group-text">
+                        <i class="fa fa-eye" style="cursor: pointer"></i>
+                    </div>
                 </div>
-
             </div>
-
-            <div class="mb-3">
+            <div class="form-group mb-2">
                 <span id='passwordCheckMessage'></span>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group mb-2">
                 <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Change Password</button>
-            </div>
-            <div>
-                <?php
-                if ($r['user_level'] == 1) {
-                    echo "<a href='admin/admin.php' class='link-primary'>Back to Admin Dashboard</a>";
-                } else if ($r['user_level'] == 2) {
-                    echo "<a href='auditor/auditor.php' class='link-primary'>Back to Auditor Dashboard</a>";
-                } else if ($r['user_level'] == 3) {
-                    echo "<a href='donator/donator.php' class='link-primary'>Back to User Dashboard</a>";
-                }
-
-                if (isset($result) && is_resource($result)) {
-                    mysqli_free_result($result);  // Release returned data
-                }
-                mysqli_close($con); // Close connection
-                ?>
             </div>
         </form>
     </div>
