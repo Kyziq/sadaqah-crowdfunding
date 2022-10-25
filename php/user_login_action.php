@@ -30,10 +30,10 @@ if (isset($_POST['login-button'])) { // Check click login button
                 header("Location: donator/donator.php");
             }
         } else {
-            header("Location:user_login.php?passw=failed"); // Failed login
+            header("Location:user_login_register.php?passw=failed"); // Failed login
         }
     } else {
-        header("Location:user_login.php?login=failed"); // Failed login
+        header("Location:user_login_register.php?login=failed"); // Failed login
     }
 
     if (isset($result) && is_resource($result)) {
@@ -41,5 +41,5 @@ if (isset($_POST['login-button'])) { // Check click login button
     }
     mysqli_close($con); // Close connection
 } else {
-    header("Location: user_login.php");
+    header("Location: user_login_register.php");
 }
