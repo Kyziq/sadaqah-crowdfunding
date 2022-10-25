@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration Save</title>
+
+    <!-- *** Imports *** -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- Sweet Alert 2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -35,12 +40,28 @@
             $stmt = $con->prepare($query);
             $stmt->bind_param("ssssssi", $username, $password, $name, $email, $phone, $address, $level);
             $stmt->execute();
-
+    ?>
+            <!-- Success Popup -->
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'A new account was successfully created.',
+                    text: '(Auto close in 5 seconds)',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Confirm',
+                    backdrop: `#192e59`,
+                    timer: 5000,
+                    willClose: () => {
+                        window.location.href = 'user_login_register.php';
+                    }
+                })
+            </script>
+    <?php
             if (isset($result) && is_resource($result)) {
                 mysqli_free_result($result);  // Release returned data
             }
             mysqli_close($con); // Close connection
-            echo "Registration success!";
+
         } else {
             header("Location: user_login_register.php");
         }
