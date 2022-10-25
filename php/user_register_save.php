@@ -45,7 +45,7 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'A new account was successfully created.',
+                    title: 'A new account has been successfully created.',
                     text: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
