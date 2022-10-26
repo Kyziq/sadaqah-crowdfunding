@@ -21,7 +21,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../user_login.php");
+        header("Location: ../user_login_register.php");
     }
     ?>
     Welcome to auditor dashboard, <?php echo $r['user_name']; ?>

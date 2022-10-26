@@ -28,7 +28,7 @@
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         include_once '../dbcon.php'; // Connect to database 
     } else {
-        header("Location: ../user_login.php");
+        header("Location: ../user_login_register.php");
     }
     ?>
     <div class="container p-5 my-5">

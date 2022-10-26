@@ -26,7 +26,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../user_login.php");
+        header("Location: ../user_login_register.php");
     }
     ?>
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -168,8 +168,7 @@
                                                 echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small pt-2 ps-1">Admins, Auditors,
-                                                Donators</span>
+                                            <span class="text-muted small">admins, auditors, donators</span>
                                         </div>
                                     </div>
                                 </div>
@@ -195,8 +194,8 @@
                                                 // echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small pt-2 ps-1">from</span>
-                                            <span class="text-success small pt-1 fw-bold">86</span>
+                                            <span class="text-muted small">from</span>
+                                            <span class="text-success small fw-bold">86</span>
                                             <span class="text-muted small">campaigns</span>
                                         </div>
                                     </div>
@@ -223,9 +222,8 @@
                                                 // echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">needs to be
-                                            </span>
-                                            <span class="text-danger small pt-1 fw-bold">verified</span>
+                                            <span class="text-muted small">needs to be</span>
+                                            <span class="text-danger small fw-bold">verified</span>
                                         </div>
                                     </div>
                                 </div>
@@ -404,6 +402,7 @@
     ?>
 
     <!-- Imports -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
