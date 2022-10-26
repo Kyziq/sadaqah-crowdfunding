@@ -155,7 +155,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $r["user_name"]; ?>'s Account Details</h5>
+                            <h5 class="card-title">Account Details</h5>
                             <form action="admin_edit_profile_save.php" method="POST" class="row g-2">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
