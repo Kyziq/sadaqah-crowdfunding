@@ -79,19 +79,32 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed" href="admin_edit_profile.php">
+                    <i class="bi bi-person"></i> <span>Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <!-- To Edit Auditor -->
                     <li>
-                        <a href="admin_edit_user.php">
-                            <i class="bi bi-circle"></i><span>Edit Auditor</span>
-                        </a>
+                        <form action="admin_edit_user.php" method="GET">
+                            <input type="hidden" name="type" value="Auditor" />
+                            <a onclick="this.parentNode.submit();">
+                                <i class="bi bi-circle"></i><span>Edit Auditor</span>
+                            </a>
+                        </form>
                     </li>
+                    <!-- To Edit Donator -->
                     <li>
-                        <a href="admin_edit_user.php">
-                            <i class="bi bi-circle"></i><span>Edit Donator</span>
-                        </a>
+                        <form action="admin_edit_user.php" method="GET">
+                            <input type="hidden" name="type" value="Donator" />
+                            <a onclick="this.parentNode.submit();">
+                                <i class="bi bi-circle"></i><span>Edit Donator</span>
+                            </a>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -118,17 +131,6 @@
                 <a class="nav-link collapsed" href="../admin_verify_payment">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Payment</span>
-                </a>
-            </li>
-            <li class="nav-heading">Pages</li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="admin_edit_profile.php">
-                    <i class="bi bi-person"></i> <span>Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../contact.php">
-                    <i class="bi bi-envelope"></i> <span>Contact</span>
                 </a>
             </li>
         </ul>
@@ -183,12 +185,6 @@
     </footer>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <?php
-    // Close connection
-    $stmt->close();
-    $con->close();
-    ?>
-
     <!-- Imports -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -196,6 +192,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../main.js"></script>
 
+    <?php
+    // Close connection
+    $stmt->close();
+    $con->close();
+    ?>
 </body>
 
 </html>

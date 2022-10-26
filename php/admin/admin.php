@@ -79,19 +79,32 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed" href="admin_edit_profile.php">
+                    <i class="bi bi-person"></i> <span>Profile</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <!-- To Edit Auditor -->
                     <li>
-                        <a href="admin_edit_user.php">
-                            <i class="bi bi-circle"></i><span>Edit Auditor</span>
-                        </a>
+                        <form action="admin_edit_user.php" method="GET">
+                            <input type="hidden" name="type" value="Auditor" />
+                            <a onclick="this.parentNode.submit();">
+                                <i class="bi bi-circle"></i><span>Edit Auditor</span>
+                            </a>
+                        </form>
                     </li>
+                    <!-- To Edit Donator -->
                     <li>
-                        <a href="admin_edit_user.php">
-                            <i class="bi bi-circle"></i><span>Edit Donator</span>
-                        </a>
+                        <form action="admin_edit_user.php" method="GET">
+                            <input type="hidden" name="type" value="Donator" />
+                            <a onclick="this.parentNode.submit();">
+                                <i class="bi bi-circle"></i><span>Edit Donator</span>
+                            </a>
+                        </form>
                     </li>
                 </ul>
             </li>
@@ -118,17 +131,6 @@
                 <a class="nav-link collapsed" href="../admin_verify_payment">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Payment</span>
-                </a>
-            </li>
-            <li class="nav-heading">Pages</li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="admin_edit_profile.php">
-                    <i class="bi bi-person"></i> <span>Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../contact.php">
-                    <i class="bi bi-envelope"></i> <span>Contact</span>
                 </a>
             </li>
         </ul>
