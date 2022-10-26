@@ -146,7 +146,7 @@
                     </li>
                     <li class="breadcrumb-item">User</li>
                     <?php
-                    $type = (isset($_GET["type"]) && $_GET["type"]) == 'Auditor' ? 'Auditor' : (isset($_GET["type"]) && $_GET["type"] == 'Donator' ? 'Donator' : '');
+                    $type = isset($_GET["type"]) && $_GET["type"] == 'Auditor' ? 'Auditor' : (isset($_GET["type"]) && $_GET["type"] == 'Donator' ? 'Donator' : '');
                     ?>
                     <li class="breadcrumb-item active">Edit <?php echo $type ?></li>
                 </ol>
