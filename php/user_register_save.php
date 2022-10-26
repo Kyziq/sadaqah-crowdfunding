@@ -58,11 +58,9 @@
                 })
             </script>
     <?php
-            if (isset($result) && is_resource($result)) {
-                mysqli_free_result($result);  // Release returned data
-            }
-            mysqli_close($con); // Close connection
-
+            // Close connection
+            $stmt->close();
+            $con->close();
         } else {
             header("Location: user_login_register.php");
         }

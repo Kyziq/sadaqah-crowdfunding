@@ -85,11 +85,10 @@
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("si", $newPassword, $user_id);
                     $stmt->execute();
-                    if (isset($result) && is_resource($result)) {
-                        mysqli_free_result($result);  // Release returned data
-                    }
-                    mysqli_close($con); // Close connection
 
+                    // Close connection
+                    $stmt->close();
+                    $con->close();
             ?>
                     <!-- Success Popup -->
                     <script>

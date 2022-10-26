@@ -50,10 +50,6 @@
             echo '<a href="donator/donator.php" class="link-primary">Back to User Dashboard</a>';
         }
 
-        if (isset($result) && is_resource($result)) {
-            mysqli_free_result($result);  // Release returned data
-        }
-        mysqli_close($con); // Close connection
         ?>
         <p class=" h5"><?php echo $r["user_name"]; ?>'s Account Details</p>
         <form action="user_edit_action.php" method="POST" class="row g-2">
@@ -190,6 +186,12 @@
             });
         })(window.jQuery);
     </script>
+
+    <?php
+    // Close connection
+    $stmt->close();
+    $con->close();
+    ?>
 </body>
 
 </html>

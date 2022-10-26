@@ -29,10 +29,9 @@
     <br><a href="../user_logout.php">Log Out</a>
 
     <?php
-    if (isset($result) && is_resource($result)) {
-        mysqli_free_result($result);  // Release returned data
-    }
-    mysqli_close($con); // Close connection
+    // Close connection
+    $stmt->close();
+    $con->close();
     ?>
 </body>
 

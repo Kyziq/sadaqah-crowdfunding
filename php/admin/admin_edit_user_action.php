@@ -50,10 +50,9 @@
                 })
             </script>
     <?php
-            if (isset($result) && is_resource($result)) {
-                mysqli_free_result($result);  // Release returned data
-            }
-            mysqli_close($con); // Close connection
+            // Close connection
+            $stmt->close();
+            $con->close();
         } else {
             header("Location: admin_edit_user.php");
         }
