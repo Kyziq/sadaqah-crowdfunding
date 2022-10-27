@@ -74,7 +74,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="admin.php">
                     <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
                 </a>
             </li>
@@ -116,19 +116,19 @@
                 </a>
                 <ul id="campaign-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="components-alerts.html">
+                        <a href="admin_create_campaign.php">
                             <i class="bi bi-circle"></i><span>Create Campaign</span>
                         </a>
                     </li>
                     <li>
-                        <a href="components-accordion.html">
+                        <a href="admin_edit_campaign.php">
                             <i class="bi bi-circle"></i><span>Edit Campaign</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="../admin_verify_payment">
+                <a class="nav-link collapsed" href="admin_verify_payment.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Payment</span>
                 </a>
@@ -234,8 +234,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Reports</h5>
-                                    <div id="reportsChart">Graph here</div>
+                                    <h5 class="card-title">Title <span> | Graph</span></h5>
+                                    <div id="reportsChart">(TODO: GRAPH)</div>
                                 </div>
                             </div>
                         </div>

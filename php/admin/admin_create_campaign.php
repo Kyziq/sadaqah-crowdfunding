@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin Dashboard</title>
+    <title>Admin Create Campaign</title>
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -73,7 +73,7 @@
     </header>
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
+            <li class="nav-item collapsed">
                 <a class="nav-link" href="admin.php">
                     <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
                 </a>
@@ -109,7 +109,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-clipboard"></i>
                     <span>Campaign</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
@@ -137,14 +137,13 @@
     </aside>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Blank Page</h1>
+            <h1>Create Campaign</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item">Pages</li>
-                    <li class="breadcrumb-item active">Blank</li>
+                    <li class="breadcrumb-item active">Create Campaign</li>
                 </ol>
             </nav>
         </div>
