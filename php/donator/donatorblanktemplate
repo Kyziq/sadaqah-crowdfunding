@@ -74,7 +74,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="donator.php">
+                <a class="nav-link" href="donator.php">
                     <i class="bi bi-grid"></i> <span>Donator Dashboard</span>
                 </a>
             </li>
@@ -85,7 +85,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="donator_donate.php">
+                <a class="nav-link collapsed" href="donator_donate.php">
                     <i class="bi bi-cash-coin"></i>
                     <span>Donate</span>
                 </a>
@@ -94,13 +94,14 @@
     </aside>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Donate</h1>
+            <h1>Blank Page</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item active">Donate</li>
+                    <li class="breadcrumb-item">Pages</li>
+                    <li class="breadcrumb-item active">Blank</li>
                 </ol>
             </nav>
         </div>
