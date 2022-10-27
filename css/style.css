@@ -1083,26 +1083,3 @@ h6 {
     font-size: 13px;
     color: #012970;
 }
-
-/* Remove resizeable textarea */
-textarea {
-    resize: none !important;
-}
-
-/* Remove Arrows in input type number */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    appearance: none;
-    margin: 0;
-}
-
-/* Firefox */
-input[type="number"] {
-    appearance: textfield;
-}
-
-/* Remove a href outline */
-a {
-    text-decoration: none;
-}
