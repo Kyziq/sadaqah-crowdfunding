@@ -78,12 +78,12 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link collapsed" href="auditor.php">
                     <i class="bi bi-grid"></i> <span>Auditor Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="auditor_edit_profile.php">
+                <a class="nav-link" href="auditor_edit_profile.php">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
                 </a>
