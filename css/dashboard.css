@@ -1,0 +1,15 @@
+.jumbotron {
+    background-image: url("../images/people-holding-rubber-heart\ 1.png") !important ;
+    background-size: cover !important;
+    filter:brightness(60%);
+    height: 500px;
+}
+
+.search{
+    width: 300px !important;
+    text-align: end;
+}
+
+.calculations{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
