@@ -30,15 +30,15 @@ if (isset($_POST['login-button'])) { // Check click login button
                 header("Location: donator/donator.php");
             }
         } else {
-            header("Location:user_login_register.php?passw=failed"); // Failed login
+            header("Location:../index.php?passw=failed"); // Failed login
         }
     } else {
-        header("Location:user_login_register.php?login=failed"); // Failed login
+        header("Location:u../index.php?login=failed"); // Failed login
     }
 
     // Close connection
     $stmt->close();
     $con->close();
 } else {
-    header("Location: user_login_register.php");
+    header("Location: ../index.php");
 }

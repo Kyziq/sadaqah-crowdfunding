@@ -53,7 +53,7 @@
                     backdrop: `#192e59`,
                     timer: 5000,
                     willClose: () => {
-                        window.location.href = 'user_login_register.php';
+                        window.location.href = '../index.php';
                     }
                 })
             </script>
@@ -65,7 +65,7 @@
             header("Location: user_login_register.php");
         }
     } else {
-        header("Location: user_login_register.php");
+        header("Location: ../index.php");
     }
     ?>
 </body>

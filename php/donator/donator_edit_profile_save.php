@@ -114,7 +114,7 @@
             header("Location: admin_edit_profile.php");
         }
     } else {
-        header("Location: ../user_login_register.php");
+        header("Location: ../../index.php");
     }
     ?>
 </body>

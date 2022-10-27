@@ -114,7 +114,7 @@
             header("Location: user_edit_detail.php");
         }
     } else {
-        header("Location: user_login_register.php");
+        header("Location: ../index.php");
     }
     ?>
 </body>

@@ -64,7 +64,7 @@
                 </ul>
                 <form class="d-flex " role="search">
                     <input class="search form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search">
-                    
+
                 </form>
                 <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
@@ -73,60 +73,60 @@
     </nav>
     <main>
         <!-- main content -->
-    <div class="jumbotron jumbo1"></div>
-    <!-- Php Numbers -->
-    <div class="calculations d-flex">
-        <div class="text me-auto pt-3 ms-4">
-            <h3><strong>You have the ability to make a difference.</strong></h3>
-            <p><strong>Every ringgit counts and has aided those in need</strong></p>
+        <div class="jumbotron jumbo1"></div>
+        <!-- Php Numbers -->
+        <div class="calculations d-flex">
+            <div class="text me-auto pt-3 ms-4">
+                <h3><strong>You have the ability to make a difference.</strong></h3>
+                <p><strong>Every ringgit counts and has aided those in need</strong></p>
+            </div>
+            <div class="money d-flex flex-row p-2">
+                <div class="raised border mx-2 px-5 rounded-3">
+                    <div class="cal"></div>
+                    <p>Raised</p>
+                </div>
+                <div class="givers border mx-2 px-5 rounded-3">
+                    <div class="cal"></div>
+                    <p>Givers</p>
+                </div>
+                <div class="campaigns border mx-2 px-5 rounded-3">
+                    <div class="cal"></div>
+                    <p>Campaigns</p>
+                </div>
+            </div>
         </div>
-        <div class="money d-flex flex-row p-2">
-            <div class="raised border mx-2 px-5 rounded-3">
-                <div class="cal"></div>
-                <p>Raised</p>
-            </div>
-            <div class="givers border mx-2 px-5 rounded-3">
-                <div class="cal"></div>
-                <p>Givers</p>
-            </div>
-            <div class="campaigns border mx-2 px-5 rounded-3">
-                <div class="cal"></div>
-                <p>Campaigns</p>
-            </div>
-        </div>
-    </div>
-    <!-- End of Php Numbers -->
-    <div class="aboutUs">
-        <h2 class="mt-5 mb-5 text-center">About Us</h2>
-        <div class="cards d-flex justify-content-center mb-4">
+        <!-- End of Php Numbers -->
+        <div class="aboutUs">
+            <h2 class="mt-5 mb-5 text-center">About Us</h2>
+            <div class="cards d-flex justify-content-center mb-4">
 
-                <div class="card mx-2" style="width: 18rem; height:20rem;
+                <div class="card mx-2" style="width: 18rem; height:20rem">
                     <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                 </div>
+                </div>
 
-                <div class="card mx-2" style="width: 18rem; height:20rem;
-                    <img src="" class="card-img-top" alt="...">
+                <div class="card mx-2" style="width: 18rem; height:20rem">
+                    <img src="" class=" card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                 </div>
+                </div>
 
-                <div class="card mx-2" style="width: 18rem; height:20rem;
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card mx-2" style="width: 18rem; height:20rem;">
+                    <img src=" ..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                 </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="jumbotron jumbo2 border mt-5">
-    </div>
+        <div class="jumbotron jumbo2 border mt-5">
+        </div>
     </main>
     <!-- Login Modal -->
     <div class="container p-5 my-5">
@@ -134,7 +134,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Form -->
-                    <form action="user_login_action.php" method="post">
+                    <form action="php/user_login_action.php" method="post">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5">Login Form</h1>
                             <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#loginModal"></a>
@@ -196,7 +196,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Form -->
-                    <form action="user_register_save.php" method="post">
+                    <form action="php/user_register_save.php" method="post">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5">Registration Form</h1>
                             <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#registerModal"></a>
@@ -254,8 +254,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <script>
         // Toggle password visibility
         !(function($) {
