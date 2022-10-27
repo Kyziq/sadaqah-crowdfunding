@@ -33,7 +33,7 @@ if (isset($_POST['login-button'])) { // Check click login button
             header("Location:../index.php?passw=failed"); // Failed login
         }
     } else {
-        header("Location:u../index.php?login=failed"); // Failed login
+        header("Location:../index.php?login=failed"); // Failed login
     }
 
     // Close connection
