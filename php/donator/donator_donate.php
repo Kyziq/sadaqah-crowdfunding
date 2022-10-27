@@ -26,7 +26,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../user_login_register.php");
+        header("Location: ../../index.php");
     }
     ?>
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -105,28 +105,47 @@
             </nav>
         </div>
         <section class="section">
-            <div class="row">
-                <div class="col-lg-6">
+            <div class="row align-items-top">
+                <div class="col-lg-3">
                     <div class="card">
+                        <img src="https://icf.newscdn.net/publisher-c1a3f893382d2b2f8a9aa22a654d9c97/2020/07/79649a8efc2797598e9444f65ad85016.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
+                            <h5 class="card-title">Sedekah Bantuan Sekolah</h5>
+                            <h6 class="card-subtitle mb-3 text-muted">School | Malaysia</h6>
+                            <div class="camp-progress my-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">
+                                        RM121,384
+                                    </div>
+                                    <div class="fw-light">
+                                        of RM150,000
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" style="width: 81%">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-btn d-flex justify-content-end" style="gap:10px">
+                                <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
+            </div>
+            <div class="modal fade" id="donate" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Donation</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Donate Now</button>
                         </div>
                     </div>
                 </div>
