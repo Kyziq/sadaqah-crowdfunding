@@ -33,9 +33,9 @@
     }
     ?>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-mainColour">
+    <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>Sadaqah <br>Crowd Funding</strong></a>
+            <a class="navbar-brand" href="#"><strong>Sadaqah Crowd Funding</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -73,12 +73,12 @@
     </nav>
     <main>
         <!-- main content -->
-    <div class="jumbotron"></div>
+    <div class="jumbotron jumbo1"></div>
     <!-- Php Numbers -->
     <div class="calculations d-flex">
-        <div class="text me-auto pt-3 ms-5">
-            <h3>You have the ability to make a difference.</h3>
-            <p>Every ringgit counts and has aided those in need</p>
+        <div class="text me-auto pt-3 ms-4">
+            <h3><strong>You have the ability to make a difference.</strong></h3>
+            <p><strong>Every ringgit counts and has aided those in need</strong></p>
         </div>
         <div class="money d-flex flex-row p-2">
             <div class="raised border mx-2 px-5 rounded-3">
@@ -98,37 +98,35 @@
     <!-- End of Php Numbers -->
     <div class="aboutUs">
         <h2 class="mt-5 mb-5 text-center">About Us</h2>
-        <div class="cards d-flex justify-content-center">
+        <div class="cards d-flex justify-content-center mb-4">
 
-                <div class="card mx-2" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card mx-2" style="width: 18rem; height:20rem;
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                  </div>
 
-                <div class="card mx-2" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card mx-2" style="width: 18rem; height:20rem;
+                    <img src="" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                  </div>
 
-                <div class="card mx-2" style="width: 18rem;">
+                <div class="card mx-2" style="width: 18rem; height:20rem;
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                  </div>
         </div>
     </div>
-
+    <div class="jumbotron jumbo2 border mt-5">
+    </div>
     </main>
     <!-- Login Modal -->
     <div class="container p-5 my-5">
