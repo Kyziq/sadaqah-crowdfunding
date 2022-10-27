@@ -114,7 +114,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Account Details</h5>
-                            <form action="donator_edit_profile_save.php" method="POST" class="row g-2">
+                            <form action="donator_edit_profile_save.php" method="POST">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
                                     <div class="form-floating">

@@ -20,7 +20,7 @@
     <?php
     /* Start session and validate user */
     session_start();
-    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
         include_once '../dbcon.php'; // Connect to database 
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
         $stmt = $con->prepare($query);
@@ -50,13 +50,13 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6><?php echo $r["user_username"]; ?></h6>
-                            <span>Admin</span>
+                            <span>Auditor</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="admin_edit_profile.php">
+                            <a class="dropdown-item d-flex align-items-center" href="auditor_edit_profile.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Account Settings</span>
                             </a>
@@ -78,63 +78,14 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="admin.php">
-                    <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
+                <a class="nav-link" href="">
+                    <i class="bi bi-grid"></i> <span>Auditor Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_edit_profile.php">
-                    <i class="bi bi-person"></i> <span>Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <!-- To Edit Auditor -->
-                    <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Auditor" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Auditor</span>
-                            </a>
-                        </form>
-                    </li>
-                    <!-- To Edit Donator -->
-                    <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Donator" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Donator</span>
-                            </a>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-clipboard"></i>
-                    <span>Campaign</span>
-                    <i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="campaign-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="components-alerts.html">
-                            <i class="bi bi-circle"></i><span>Create Campaign</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-accordion.html">
-                            <i class="bi bi-circle"></i><span>Edit Campaign</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../admin_verify_payment">
-                    <i class="bi bi-credit-card"></i>
-                    <span>Verify Payment</span>
+                <a class="nav-link collapsed" href="auditor_edit_profile.php">
+                    <i class="bi bi-person"></i>
+                    <span>Profile</span>
                 </a>
             </li>
         </ul>
@@ -145,7 +96,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="admin.php">Home</a>
+                        <a href="auditor.php">Home</a>
                     </li>
                     <li class="breadcrumb-item active">Profile</li>
                 </ol>
@@ -157,7 +108,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Account Details</h5>
-                            <form action="admin_edit_profile_save.php" method="POST" class="row g-2">
+                            <form action="auditor_edit_profile_save.php" method="POST">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
                                     <div class="form-floating">
@@ -201,7 +152,7 @@
 
                             <!-- Password Change Form -->
                             <p class="h5">Password Settings</p>
-                            <form action="user_edit_action.php" method="POST">
+                            <form action="user_edit_action.php" method="POST" class="row g-2">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
                                     <label for="currentPassword">Current Password</label>
