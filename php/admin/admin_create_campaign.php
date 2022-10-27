@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin Verify Payment</title>
+    <title>Admin Create Campaign</title>
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -109,7 +109,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-clipboard"></i>
                     <span>Campaign</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
@@ -128,7 +128,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_verify_payment.php">
+                <a class="nav-link collapsed" href="admin_verify_payment.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Payment</span>
                 </a>
@@ -137,13 +137,13 @@
     </aside>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Verify Payment</h1>
+            <h1>Create Campaign</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item active">Verify Payment</li>
+                    <li class="breadcrumb-item active">Create Campaign</li>
                 </ol>
             </nav>
         </div>

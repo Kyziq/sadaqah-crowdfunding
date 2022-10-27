@@ -17,7 +17,7 @@
     <?php
     /* Start session and validate user */
     session_start();
-    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         include_once '../dbcon.php'; // Connect to database 
         $user_id = $_SESSION['user_id'];
 

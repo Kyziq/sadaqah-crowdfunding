@@ -28,6 +28,7 @@
             $email = $_POST["email"];
             $phone = $_POST["phone"];
             $address = $_POST["address"];
+            $level = $_POST["level"];
 
             $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?"; // SQL with parameters
             $stmt = $con->prepare($query);
@@ -45,7 +46,10 @@
                     backdrop: `#192e59`,
                     timer: 5000,
                     willClose: () => {
-                        window.location.href = 'admin_edit_user.php';
+                        <?php
+                        $type = $level == 2 ? 'Auditor' : ($level == 3 ? 'Donator' : '');
+                        echo "window.location.href = 'admin_edit_user.php?type=" . $type . "';";
+                        ?>
                     }
                 })
             </script>
@@ -57,7 +61,7 @@
             header("Location: admin_edit_user.php");
         }
     } else {
-        header("Location: user_login.php");
+        header("Location: ../user_login_register.php");
     }
     ?>
 </body>
