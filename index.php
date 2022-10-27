@@ -33,15 +33,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><strong>Sadaqah Crowd Funding</strong></a>
+            <a class="navbar-brand" href="#"><strong>Sadaqah Crowdfunding</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Campaign
@@ -49,22 +46,27 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Cash</a></li>
                             <li><a class="dropdown-item" href="#">School</a></li>
-                            <li><a class="dropdown-item" href="#">Services</a></li>
+                            <li><a class="dropdown-item" href="#">Service</a></li>
                             <li><a class="dropdown-item" href="#">Facilitator</a></li>
                         </ul>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
                     </li>
                 </ul>
-                <form class="d-flex " role="search">
-                    <input class="search form-control me-2 w-100" type="search" placeholder="Search" aria-label="Search">
-
+                <form class="d-flex" role="search">
+                    <div class="input-group me-4">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
                 </form>
-                <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+
+                <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
             </div>
         </div>
