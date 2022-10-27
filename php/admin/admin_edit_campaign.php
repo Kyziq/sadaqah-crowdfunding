@@ -73,8 +73,8 @@
     </header>
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item collapsed">
-                <a class="nav-link" href="admin.php">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="admin.php">
                     <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
                 </a>
             </li>
