@@ -62,7 +62,7 @@
             $stmt->close();
             $con->close();
         } else {
-            header("Location: user_login_register.php");
+            header("Location: ../index.php?error=usernametaken");
         }
     } else {
         header("Location: ../index.php");
