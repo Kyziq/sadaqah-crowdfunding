@@ -187,10 +187,10 @@
                 </a>
             </div>
             </div>
-            <div class="d-flex flex-row mt-3 mb-3 ms-3"><h2 class="text-start me-3">Latest Campaigns</h2> <button class="btn btn-success">View More ></button></div>
+            <div class="d-flex flex-row mt-3 mb-3 ms-3"><h2 class="text-start me-3">Latest Campaigns</h2> <button class="btn btn-success">View More</button></div>
         </div>
-        <div class="donation mt-5">
-            <div class="cards d-flex justify-content-center mb-4">
+        <div class="donation pt-5">
+            <div class="cards d-flex justify-content-center pb-4">
                 <div class="card mx-2" style="width: 18rem; height:22rem">
                     <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -275,12 +275,7 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3 text-secondary"></i>Sadaqah Crowd
-          </h6>
-          <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+         <h3 class="text-black">Sadaqah <br> Crowdfunding</h3>
           </p>
         </div>
         <!-- Grid column -->
@@ -288,7 +283,7 @@
         <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
+          <h6 class="text-uppercase fw-bold mb-4 text-black">
             Categories
           </h6>
           <p>
@@ -309,7 +304,7 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
+          <h6 class="text-uppercase fw-bold mb-4 text-black">
             About
           </h6>
           <p>
@@ -324,14 +319,11 @@
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
-          <p>
-            <i class="fas fa-envelope me-3 text-secondary"></i>
-            info@example.com
-          </p>
-          <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+          <h6 class="text-uppercase fw-bold mb-4 text-black" >Contact</h6>
+          <p><i class="fab fa-facebook-f me-3 text-secondary"></i> Sadaqah Crowdfunding</p>
+          <p class="d-flex"><i class="fas fa-envelope me-3 text-secondary mt-2"></i>sadaqahcrowdfunding@gmail.com</p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> +6012-345-6789</p>
+          <p><i class="fa-sharp fa-solid fa-location-dot me-3 text-secondary"></i>Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah</p>
         </div>
         <!-- Grid column -->
       </div>
