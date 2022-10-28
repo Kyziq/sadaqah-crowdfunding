@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 05:14 PM
+-- Generation Time: Oct 28, 2022 at 06:05 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,13 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `campaign` (
   `campaign_id` int(11) NOT NULL,
-  `campaign_amount` int(100) NOT NULL,
   `campaign_name` varchar(100) NOT NULL,
   `campaign_description` varchar(200) NOT NULL,
+  `campaign_banner` varchar(200) NOT NULL,
+  `campaign_category_id` int(11) NOT NULL,
+  `campaign_amount` double NOT NULL,
   `campaign_start` datetime(6) NOT NULL,
   `campaign_end` datetime(6) NOT NULL,
   `campaign_raised` double NOT NULL,
-  `campaign_category_id` int(11) NOT NULL
+  `campaign_created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `campaign_admin_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -56,7 +59,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (1, 'Cash'),
 (2, 'School Necessity'),
-(3, 'Fasilitator'),
+(3, 'Facilitator'),
 (4, 'Service');
 
 -- --------------------------------------------------------
@@ -138,11 +141,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `user_email`, `user_phone`, `user_address`, `user_level`) VALUES
-(1, 'haziq', '$2y$10$SVvxcoKhCIIc33hrm62XWu5/ZKl6UbgiYDUo0XjB2Oyi/4cVRzalO', 'Haziq Khairi', 'ihaziqkhairi@gmail.com', '0164005754', '8, Jalan Dewan Bahasa, Taman Hartamas, 06394 Pendang, Kedah', 1),
-(2, 'gopi', '$2y$10$tHlRCmwoTLXVM4Av6gEdt.ntiCR9gudqKTQKgThgFZWq48qrKJL0O', 'Gopinathan a/l Pragash', 'gopinathan@yahoo.com', '0179620124', 'No. 1, Jalan Ampang 8/4, SS64O, 62040 Precinct 5, Putrajaya', 3),
-(3, 'shazwan', '$2y$10$PcbMA9xHXDa.GUP2PHsi3.JypawKONQ3.K0v2A/wBwCoBOwrw.f/u', 'Muhammad Shazwan bin Ikmal', 'shazwan@gmail.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 2),
+(1, 'haziq', '$2y$10$TJdaXkMIK.WU6j1n79ZCuuw/2bih9ILL8XDqwltzRMFpIszwSWT7C', 'Muhammad Khairul Haziq bin Mohamad Khairi', 'ihaziqkhairi@gmail.com', '0164005754', '28, Jln 2K, Bandar Tropika, 62209 Precinct 8, Putrajaya', 1),
+(2, 'gopi', '$2y$10$tHlRCmwoTLXVM4Av6gEdt.ntiCR9gudqKTQKgThgFZWq48qrKJL0O', 'Gopinathan a/l Pragash', 'gopinathan@yahoo.com', '0179620125', 'No. 1, Jalan Ampang 8/4, SS64O, 62040 Precinct 5, Putrajaya', 3),
+(3, 'shazwan', '$2y$10$PcbMA9xHXDa.GUP2PHsi3.JypawKONQ3.K0v2A/wBwCoBOwrw.f/u', 'Muhammad Shazwan bin Ikmal', 'shazwan@gmail.com', '0198662327', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 2),
 (4, 'natasha', '$2y$10$jEG37OkT.JoumBI/iDQfIuSGnqaoMU9Dn8FjPxeGEYjtqgIRtPsIS', 'Natasha Aliah binti Ahmad', 'natashaaliah@gmail.com', '0129589912', 'No. 1G-90, Jln Cochrane 3P, Bandar Sri Rahman, 52746 Sungai Lembing, Pahang Darul Makmur', 2),
-(5, 'nurafifah', '$2y$10$khQhsOBGsxMFFVYxtmw8o.F1Sg8tNg3PpCBFQ2Ypg6yUokDoC4/EW', 'Nurafifah binti Hazzam', 'nurafifahhaz@gmail.com', '0195827301', 'No. 447, Lorong 3/7, Pandan Meru, 23750 Rantau Abang, Terengganu Darul Iman', 2),
+(5, 'afifah', '$2y$10$rEi2gatQf592vnH1X5kzkupBGc46DrsKAMhS1HKittSENzBhhPeOW', 'Afifah binti Hazzam', 'Afifah@gmail.com', '0195827301', 'No. 447, Lorong 3/7, Pandan Meru, 23750 Rantau Abang, Terengganu Darul Iman', 2),
 (6, 'nik', '$2y$10$mScJv5719orWWZ1ChCPR.uKRBPRSJBZduAjom9oZQedvtaWhR5PxC', 'Nik Afiq bin Hakimi', 'nikafiq@yahoo.com', '0168491023', 'B-16-69, Lorong Sultan Azlan Shah 1/99, PJU5, 11950 Batu Kawan, Pulau Pinang', 3),
 (7, 'chai', '$2y$10$0JCpGRtbT09bzK4UC4zFKOlcNOKPKa6uViWeH2dNFZHrNbX8W4rBq', 'Chai Key Teh', 'chaikeyteh@gmail.com', '0176932012', '987, Jalan 9, SS87, 47143 Subang Jaya, Selangor', 3),
 (8, 'amran', '$2y$10$oduKRntTG6OCcWKDPHSNn.uqyANMDCH2DKaB9DSMoZL3pYqRB01v6', 'Muhammad Amran bin Ikmal', 'amranikmal@outlook.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 3),
@@ -172,7 +175,8 @@ CREATE TABLE `verification` (
 --
 ALTER TABLE `campaign`
   ADD PRIMARY KEY (`campaign_id`),
-  ADD KEY `categoryID` (`campaign_category_id`);
+  ADD KEY `categoryID` (`campaign_category_id`),
+  ADD KEY `campaignAdminId` (`campaign_admin_id`);
 
 --
 -- Indexes for table `category`
@@ -271,6 +275,7 @@ ALTER TABLE `verification`
 -- Constraints for table `campaign`
 --
 ALTER TABLE `campaign`
+  ADD CONSTRAINT `campaignAdminId` FOREIGN KEY (`campaign_admin_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `categoryID` FOREIGN KEY (`campaign_category_id`) REFERENCES `category` (`category_id`);
 
 --
