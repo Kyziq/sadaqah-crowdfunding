@@ -21,6 +21,7 @@
         /** Check if create campaign button is clicked **/
         if (isset($_POST['create-campaign-button'])) {
             include_once '../dbcon.php'; // Connect to database
+
             /* Get all the posted items */
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
@@ -30,32 +31,83 @@
             $endDate  = $_POST['endDate'];
             $campaignRaised = 0;
 
-            $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("ssidssd", $campaignName, $campaignDesc, $campaignType, $campaignAmount, $startDate, $endDate, $campaignRaised);
-            $stmt->execute();
+            /* File Upload */
+            date_default_timezone_set('Asia/Singapore');
+            $date = date('d-m-y');
 
+            // Upload image (where file name is campaignName-date.extension)
+            $extension  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
+            $target_dir = "../../images/campaign/";
+            $file_name = $campaignName . "-" . $date . "." . $extension;
+            $target_file = $target_dir . $file_name;
+            $source = $_FILES["campaignFileBanner"]["tmp_name"];
+
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // file type to lowercase
+
+            // Check if image file is a actual image or fake image
+            $check = getImageSize($source);
+            if ($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+            // Check file size (10000000 = 10MB)
+            if ($_FILES["campaignFileBanner"]["size"] > 10000000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if (
+                $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg"
+            ) {
+                echo "Sorry, only PNG, JPG, and JPEG files are allowed.";
+                $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+                header("Location: admin_create_campaign.php");
+            } else {
+                if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
+                    $campaignFileBanner = $target_file;
+
+                    $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_banner, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = $con->prepare($query);
+                    $stmt->bind_param("sssidssd", $campaignName, $campaignDesc, $campaignFileBanner, $campaignType, $campaignAmount, $startDate, $endDate, $campaignRaised);
+                    $stmt->execute();
     ?>
-            <!-- Success Popup -->
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'A new campaign has been successfully created.',
-                    text: '(Auto close in 5 seconds)',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Confirm',
-                    backdrop: `#192e59`,
-                    timer: 5000,
-                    willClose: () => {
-                        window.location.href = 'admin.php';
-                    }
-                })
-            </script>
+                    <!-- Success Popup -->
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'A new campaign has been successfully created.',
+                            text: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#192e59`,
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>
     <?php
-
-            // Close connection
-            $stmt->close();
-            $con->close();
+                    // Close connection
+                    $stmt->close();
+                    $con->close();
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
         }
     } else {
         header("Location: ../user_logout.php");

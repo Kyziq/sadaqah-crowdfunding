@@ -156,9 +156,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Campaign Form</h5>
 
-                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()">
+                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()" enctype="multipart/form-data">
                                 <div class="row g-3">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <label class="form-label">Campaign Name</label>
                                         <input type="text" class="form-control" name="campaignName" required>
                                     </div>
@@ -168,6 +168,13 @@
                                         <textarea class="form-control" rows="4" name="campaignDesc" required></textarea>
                                     </div>
 
+                                    <div class="col-lg-4">
+                                        <label class="form-label">Upload Campaign Banner</label>
+                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
+                                        <input class="form-control" type="file" id="campaignFileBanner" name="campaignFileBanner" required>
+                                    </div>
+
+                                    <div class="col-lg-8"></div>
                                     <div class="col-lg-2">
                                         <label class="form-label">Campaign Type</label>
                                         <select class="form-select" name="campaignType" required>
