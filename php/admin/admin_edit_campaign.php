@@ -149,27 +149,82 @@
         </div>
         <section class="section">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
+                            <h5 class="card-title">Edit Campaign</h5>
+                            <?php
+
+                            include_once '../dbcon.php';
+                            $query = "SELECT * FROM campaign";
+                            $stmt = $con->prepare($query);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            ?>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <!-- <th scope="col">Banner</th> -->
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Start</th>
+                                        <th scope="col">End</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($r = $result->fetch_assoc()) {
+                                    ?>
+                                        <form action="admin_edit_campaign_action.php" method="POST">
+                                            <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
+                                            <tr>
+                                                <th>
+                                                    <!-- can put hidden input here if want-->
+                                                    <?php echo $r['campaign_id']; ?>
+                                                </th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" value="<?php echo $r['campaign_name']; ?>">
+                                                </td>
+                                                <td>
+                                                    <textarea class="form-control" name="description" value="<?php echo $r['campaign_description']; ?>" rows="2"></textarea>
+                                                </td>
+                                                <!-- <td>
+                                                    <input type="text" class="form-control" name="banner" value="<?php  ?>">
+                                                </td> -->
+                                                <td>
+                                                    <input type="number" class="form-control" name="category" value="
+                                                    <?php
+                                                    if ($r['campaign_category_id'] == 1)
+                                                        echo "Cash";
+                                                    else if ($r['campaign_category_id'] == 2)
+                                                        echo "School Necessity";
+                                                    else if ($r['campaign_category_id'] == 3)
+                                                        echo "Facilitator";
+                                                    else if ($r['campaign_category_id'] == 4)
+                                                        echo "Service";
+                                                    ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="amount" value="<?php echo $r['campaign_amount']; ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="date" class="form-control" name="start" value="<?php echo $r['campaign_start']; ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="date" class="form-control" name="end" value="<?php echo $r['campaign_end']; ?>">
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="submit" name="edit-campaign-button">Save</button>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
