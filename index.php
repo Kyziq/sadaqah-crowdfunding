@@ -18,16 +18,28 @@
 </head>
 
 <body>
-    <!-- Relaunch modal if login failed -->
+    <!-- Relaunch modal -->
     <?php
-    if ((isset($_GET["login"]) && $_GET["login"] == 'failed') || (isset($_GET["passw"]) && $_GET["passw"] == 'failed')) {
-    ?>
+    /* Login modal */
+    if ((isset($_GET["error"]) && $_GET["error"] == 'username') || (isset($_GET["error"]) && $_GET["error"] == 'password')) {
+        echo '
         <script type="text/javascript">
             window.onload = () => {
                 $("#loginModal").modal("show");
             };
         </script>
-    <?php
+        ';
+    }
+
+    /* Register Modal */
+    if ((isset($_GET["error"]) && $_GET["error"] == 'usernametaken')) {
+        echo '
+        <script type="text/javascript">
+            window.onload = () => {
+                $("#registerModal").modal("show");
+            };
+        </script>
+        ';
     }
     ?>
     <!-- Navbar -->
@@ -597,9 +609,9 @@
                             <div class="mb-3">
                                 <?php
                                 /* Check for wrong password */
-                                if (isset($_GET["login"]) && $_GET["login"] == 'failed') {
-                                    echo '<span style="color: red;">Account does not exist!</span>';
-                                } else if (isset($_GET["passw"]) && $_GET["passw"] == 'failed') {
+                                if (isset($_GET["error"]) && $_GET["error"] == 'username') {
+                                    echo '<span style="color: red;">Username does not exist!</span>';
+                                } else if (isset($_GET["error"]) && $_GET["error"] == 'password') {
                                     echo '<span style="color: red;">Wrong password!</span>';
                                 }
                                 ?>
@@ -637,6 +649,15 @@
                             <div class="form-group mb-2">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required />
+                            </div>
+
+                            <div class="mb-2">
+                                <?php
+                                /* Check for wrong password */
+                                if (isset($_GET["error"]) && $_GET["error"] == 'usernametaken') {
+                                    echo '<span style="color: red;">Username has been taken!</span>';
+                                }
+                                ?>
                             </div>
 
                             <div class="form-group mb-2">

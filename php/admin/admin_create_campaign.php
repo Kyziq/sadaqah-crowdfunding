@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link href="../style.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -149,32 +151,83 @@
         </div>
         <section class="section">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
+                            <h5 class="card-title">Campaign Form</h5>
+
+                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()" enctype="multipart/form-data">
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                        <label class="form-label">Campaign Name</label>
+                                        <input type="text" class="form-control" name="campaignName" required>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label class="form-label">Campaign Description</label>
+                                        <textarea class="form-control" rows="4" name="campaignDesc" required></textarea>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="form-label">Upload Campaign Banner</label>
+                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
+                                        <input class="form-control" type="file" id="campaignFileBanner" name="campaignFileBanner" required>
+                                    </div>
+
+                                    <div class="col-lg-8"></div>
+                                    <div class="col-lg-2">
+                                        <label class="form-label">Campaign Type</label>
+                                        <select class="form-select" name="campaignType" required>
+                                            <option selected disabled></option>
+                                            <option value="1">Cash</option>
+                                            <option value="2">School Necessity</option>
+                                            <option value="3">Facilitator</option>
+                                            <option value="4">Service</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <label class="form-label">Campaign Amount Required</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">RM</span>
+                                            <input type="number" class="form-control" name="campaignAmount" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label class="form-label">Start Date</label>
+                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label class="form-label">End Date</label>
+                                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Example Card</h5>
-                            <p>
-                                This is an examle page with no contrnt. You
-                                can use it as a starter for your custom
-                                pages.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
+
+        <script>
+            function validateCreateCampaignForm() {
+                let startDate = new Date($('#startDate').val());
+                let endDate = new Date($('#endDate').val());
+
+                if (startDate > endDate) {
+                    alert("Start date must be before end date");
+                    return false;
+                }
+            }
+        </script>
+
     </main>
     <footer id="footer" class="footer">
         <div class="copyright">
@@ -185,7 +238,6 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Imports -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

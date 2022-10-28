@@ -9,19 +9,21 @@
 
     <!-- Imports -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php
-    /* Start session and validate user */
+    /** Start session and validate user **/
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        include_once '../dbcon.php'; // Connect to database 
-        $user_id = $_SESSION['user_id'];
+        include_once '../dbcon.php'; // Connect to database
 
-        if (isset($_POST['edit-action-button'])) { /* Edit my detail button is clicked */
+        /** Edit my detail button is clicked **/
+        if (isset($_POST['edit-action-button'])) {
+            $user_id = $_SESSION['user_id'];
             /* Get all the posted items */
             $user_username = $_POST['username'];
             $user_name = $_POST['name'];
@@ -36,11 +38,13 @@
             $stmt->execute();
 
             if (isset($result) && is_resource($result)) {
-                mysqli_free_result($result);  // Release returned data
+                // Release returned data
+                mysqli_free_result($result);
             }
-            mysqli_close($con); // Close connection
-
+            // Close connection
+            mysqli_close($con);
     ?>
+
             <!-- Success Popup -->
             <script>
                 Swal.fire({
@@ -57,29 +61,64 @@
                 })
             </script>
             <?php
+        }
 
-        } else if (isset($_POST['edit-password-button'])) { /* Edit password button is clicked */
+
+        /** Edit password button is clicked **/
+        elseif (isset($_POST['edit-password-button'])) {
             /* Get all the posted items */
             $currentPassword = $_POST['currentPassword'];
             $newPassword = $_POST['newPassword'];
             $confirmNewPassword = $_POST['confirmNewPassword'];
 
-            if ($currentPassword == $newPassword) {
-                echo "Your new password cannot be the same as your current password!";
-            } else if ($newPassword != $confirmNewPassword) {
-                echo "Your new password and confirm new password do not match!";
-            } else {
-                include_once 'dbcon.php'; // Connect to database 
-                /* Query */
-                $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
-                $stmt = $con->prepare($query);
-                $stmt->bind_param("i", $user_id);
-                $stmt->execute();
-                $result = $stmt->get_result(); // Get the MySQLI result
-                $r = $result->fetch_assoc(); // Fetch data
+            include_once '../dbcon.php'; // Connect to database
+            /* Query */
+            $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result(); // Get the MySQLI result
+            $r = $result->fetch_assoc(); // Fetch data
 
-                /* Check if current password is correct */
-                if (password_verify($currentPassword, $r['user_password'])) {
+            /* Check current password is correct */
+            if (password_verify($currentPassword, $r['user_password'])) {
+                /* Check current password same as new password */
+                if ($currentPassword == $newPassword) {
+            ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your new password cannot be the same as your current password.',
+                            text: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#192e59`,
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'admin_edit_profile.php';
+                            }
+                        })
+                    </script>
+                <?php
+                } elseif ($newPassword != $confirmNewPassword) {
+                ?>
+                    <!-- Fail Popup (new password and confirm new password do not match)-->
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your new password and confirm new password do not match.',
+                            text: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#192e59`,
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'admin_edit_profile.php';
+                            }
+                        })
+                    </script>
+                <?php
+                } else {
                     $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                     $query = "UPDATE user SET user_password=? WHERE user_id=?"; // SQL with parameters
                     $stmt = $con->prepare($query);
@@ -89,7 +128,7 @@
                     // Close connection
                     $stmt->close();
                     $con->close();
-            ?>
+                ?>
                     <!-- Success Popup -->
                     <script>
                         Swal.fire({
@@ -105,16 +144,32 @@
                             }
                         })
                     </script>
-    <?php
-                } else {
-                    echo "Your current password is incorrect!";
+                <?php
                 }
+            } else {
+                ?>
+                <!-- Fail Popup (new password cannot be the same as current password)-->
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Your current password is incorrect.',
+                        text: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#192e59`,
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'admin_edit_profile.php';
+                        }
+                    })
+                </script>
+    <?php
             }
         } else {
             header("Location: admin_edit_profile.php");
         }
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
 </body>

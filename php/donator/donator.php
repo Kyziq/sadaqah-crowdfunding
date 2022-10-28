@@ -26,7 +26,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -112,7 +112,7 @@
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Total User
+                                        Total Campaign
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -127,7 +127,8 @@
                                                 echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">admins, auditors, donators</span>
+                                            <span class="text-muted small">that you</span>
+                                            <span class="text-primary small fw-bold">participated</span>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +138,7 @@
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Total Donation Raised
+                                        Total Donation
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -153,9 +154,8 @@
                                                 // echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">from</span>
-                                            <span class="text-success small fw-bold">86</span>
-                                            <span class="text-muted small">campaigns</span>
+                                            <span class="text-muted small">you</span>
+                                            <span class="text-success small fw-bold">contributed</span>
                                         </div>
                                     </div>
                                 </div>
@@ -165,24 +165,16 @@
                             <div class="card info-card customers-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Pending Payment Verification
+                                        Total Donation Accepted
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-wallet"></i>
+                                            <i class="bi bi-check-lg"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <h6>
-                                                ????????
-                                                <?php
-                                                // $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                // echo $count;
-                                                ?>
-                                            </h6>
-                                            <span class="text-muted small">needs to be</span>
-                                            <span class="text-danger small fw-bold">verified</span>
+                                            <h6>?????</h6>
+                                            <span class="text-danger small fw-bold">accepted</span>
+                                            <span class="text-muted small">warm-heartedly</span>
                                         </div>
                                     </div>
                                 </div>
@@ -191,8 +183,41 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Reports</h5>
-                                    <div id="reportsChart">Graph here</div>
+                                    <h5 class="card-title">Donation History</h5>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Campaign</th>
+                                                <th scope="col">Amount Required</th>
+                                                <th scope="col">Amount Raised</th>
+                                                <th scope="col">Amount You Donated</th>
+                                                <th scope="col">Donation Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row"><a href="">(name)</a></th>
+                                                <td>(amount)</td>
+                                                <td>(raised)</td>
+                                                <td>(donated)</td>
+                                                <td class="text-danger">Declined</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a href="">(name)</a></th>
+                                                <td>(amount)</td>
+                                                <td>(raised)</td>
+                                                <td>(donated)</td>
+                                                <td class="text-success">Accepted</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><a href="">(name)</a></th>
+                                                <td>(amount)</td>
+                                                <td>(raised)</td>
+                                                <td>(donated)</td>
+                                                <td class="text-warning">Pending</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
