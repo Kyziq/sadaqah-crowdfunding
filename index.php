@@ -154,9 +154,6 @@
             </div>
         </div>
         <!-- Mission Vision End-->
-        <div class="contactUs mb-5">
-
-        </div>
         <!-- Categories -->
         <div class="jumbo3 ">
         <h3 class="mt-5"><strong class="mt-5">CATEGORIES</strong></h3>
