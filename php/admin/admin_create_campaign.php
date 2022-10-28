@@ -156,21 +156,21 @@
                         <div class="card-body">
                             <h5 class="card-title">Campaign Form</h5>
 
-                            <form action="" method="" onsubmit="validateCreateCampaignForm();">
+                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()">
                                 <div class="row g-3">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-4">
                                         <label class="form-label">Campaign Name</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="campaignName" required>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <label class="form-label">Campaign Description</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="4" name="campaignDesc" required></textarea>
                                     </div>
 
                                     <div class="col-lg-2">
                                         <label class="form-label">Campaign Type</label>
-                                        <select class="form-select" required>
+                                        <select class="form-select" name="campaignType" required>
                                             <option selected disabled></option>
                                             <option value="1">Cash</option>
                                             <option value="2">School Necessity</option>
@@ -179,27 +179,28 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-lg-4">
-                                        <label class="form-label">Amount Needed</label>
+                                    <div class="col-lg-2">
+                                        <label class="form-label">Campaign Amount Required</label>
                                         <div class="input-group">
                                             <span class="input-group-text">RM</span>
-                                            <input type="number" class="form-control">
+                                            <input type="number" class="form-control" name="campaignAmount" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12"></div>
+                                    <div class="col-lg-8">
+
+                                    </div>
                                     <div class="col-lg-2">
                                         <label class="form-label">Start Date</label>
-                                        <input type="date" class="form-control" id="startDate">
+                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
                                     </div>
-
                                     <div class="col-lg-2">
                                         <label class="form-label">End Date</label>
-                                        <input type="date" class="form-control" id="endDate">
+                                        <input type="date" class="form-control" id="endDate" name="endDate" required>
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <button type="Submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
                                     </div>
                                 </div>
                             </form>
@@ -210,11 +211,12 @@
 
         <script>
             function validateCreateCampaignForm() {
-                var startDate = new Date($('#startDate').val());
-                var endDate = new Date($('#endDate').val());
+                let startDate = new Date($('#startDate').val());
+                let endDate = new Date($('#endDate').val());
 
                 if (startDate > endDate) {
                     alert("Start date must be before end date");
+                    return false;
                 }
             }
         </script>
