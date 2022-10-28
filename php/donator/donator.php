@@ -298,8 +298,13 @@
                     </div>
                     <div class="card">
                         <div class="card-body pb-0">
+                            <?php
+                            $query = "SELECT COUNT(*) FROM campaign";
+                            $result = mysqli_query($con, $query);
+                            $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
+                            ?>
                             <h5 class="card-title">
-                                Total Campaign<span> | Graph</span>
+                                Total Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
                             </h5>
                             <div id="trafficChart" style="min-height: 400px" class="echart"></div>
                             <script>
@@ -342,20 +347,41 @@
                                                     labelLine: {
                                                         show: false,
                                                     },
-                                                    data: [{
-                                                            value: 10,
+
+                                                    data: [
+                                                        <?php
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=1";
+                                                        $result = mysqli_query($con, $query);
+                                                        $totalCategoryCash = mysqli_fetch_assoc($result)['COUNT(*)'];
+                                                        ?> {
+                                                            value: <?php echo $totalCategoryCash ?>,
                                                             name: "Cash",
                                                         },
-                                                        {
-                                                            value: 7,
+
+                                                        <?php
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=2";
+                                                        $result = mysqli_query($con, $query);
+                                                        $totalCategorySchool = mysqli_fetch_assoc($result)['COUNT(*)'];
+                                                        ?> {
+                                                            value: <?php echo $totalCategorySchool ?>,
                                                             name: "School Necessity",
                                                         },
-                                                        {
-                                                            value: 5,
+
+                                                        <?php
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=3";
+                                                        $result = mysqli_query($con, $query);
+                                                        $totalCategoryFaci = mysqli_fetch_assoc($result)['COUNT(*)'];
+                                                        ?> {
+                                                            value: <?php echo $totalCategoryFaci ?>,
                                                             name: "Facilitator",
                                                         },
-                                                        {
-                                                            value: 16,
+
+                                                        <?php
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=4";
+                                                        $result = mysqli_query($con, $query);
+                                                        $totalCategoryService = mysqli_fetch_assoc($result)['COUNT(*)'];
+                                                        ?> {
+                                                            value: <?php echo $totalCategoryService ?>,
                                                             name: "Service",
                                                         },
                                                     ],

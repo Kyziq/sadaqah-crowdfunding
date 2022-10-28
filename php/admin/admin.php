@@ -321,7 +321,7 @@
                             $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
                             ?>
                             <h5 class="card-title">
-                                Total Campaign (<?php echo $totalCamp ?>)<span> | Graph</span>
+                                Total Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
                             </h5>
                             <div id="trafficChart" style="min-height: 400px" class="echart"></div>
                             <script>
