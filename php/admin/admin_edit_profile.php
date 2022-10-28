@@ -201,7 +201,7 @@
 
                             <!-- Password Change Form -->
                             <p class="h5">Password Settings</p>
-                            <form action="user_edit_action.php" method="POST">
+                            <form action="admin_edit_profile_save.php" method="POST">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
                                     <label for="currentPassword">Current Password</label>
