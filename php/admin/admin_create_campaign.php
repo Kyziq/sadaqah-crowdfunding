@@ -154,7 +154,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Campaign Form</h5>
+                            <h5 class="card-title">Create Campaign Form</h5>
 
                             <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()" enctype="multipart/form-data">
                                 <div class="row g-3">
