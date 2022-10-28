@@ -50,11 +50,11 @@
                             <li><a class="dropdown-item" href="#">Facilitator</a></li>
                         </ul>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="#aboutUs">About Us</a>
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="#contactUs">Contact Us</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -65,8 +65,7 @@
                         </button>
                     </div>
                 </form>
-
-                <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 <button class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
             </div>
         </div>
@@ -80,23 +79,26 @@
                 <h3><strong>You have the ability to make a difference.</strong></h3>
                 <p><strong>Every ringgit counts and has aided those in need</strong></p>
             </div>
-            <div class="money d-flex flex-row p-2">
-                <div class="raised border mx-2 px-5 rounded-3">
-                    <div class="cal"></div>
-                    <p>Raised</p>
+            <div class="money d-flex py-2">
+                <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
+                    <!-- Insert Php here -->
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
+                    <div class="w-100"><p>Raised</p></div>
                 </div>
-                <div class="givers border mx-2 px-5 rounded-3">
-                    <div class="cal"></div>
-                    <p>Givers</p>
+                <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
+                    <!-- Insert Php here -->
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
+                    <div class="w-100"><p>Givers</p></div>
                 </div>
-                <div class="campaigns border mx-2 px-5 rounded-3">
-                    <div class="cal"></div>
-                    <p>Campaigns</p>
+                <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
+                    <!-- Insert Php here -->
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
+                    <div class="w-100"><p>Campaigns</p></div>
                 </div>
             </div>
         </div>
         <!-- End of Php Numbers -->
-        <div class="aboutUs">
+        <div class="aboutUs" id="aboutUs">
             <h2 class="mt-5 mb-5 text-center">About Us</h2>
             <div class="cards d-flex justify-content-center mb-4">
 
@@ -109,7 +111,7 @@
                 </div>
 
                 <div class="card mx-2" style="width: 18rem; height:20rem">
-                    <img src="" class=" card-img-top" alt="...">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class=" card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -117,7 +119,7 @@
                 </div>
 
                 <div class="card mx-2" style="width: 18rem; height:20rem;">
-                    <img src=" ..." class="card-img-top" alt="...">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -125,8 +127,435 @@
                 </div>
             </div>
         </div>
-        <div class="jumbotron jumbo2 border mt-5">
+        <!-- Mission Vision -->
+        <div class="jumbotron jumbo2 border mt-5 row" id="missionVision">
+            <div class="col bannerLeft"></div>
+            <div class="col  bannerRight">
+                <h3 class="mt-5 ms-3 text-white">Our Mission</h3>
+                <p class="ms-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, accusantium vitae! Cumque porro quos, ipsa, provident ullam quasi eum adipisci dicta, aliquid error excepturi! Totam veniam tempore corporis aspernatur odio excepturi ipsam omnis magni asperiores, exercitationem porro laboriosam debitis explicabo.</p>
+                <h3 class="mt-3 ms-3 text-white">Our Vision</h3>
+                <p class="ms-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, accusantium vitae! Cumque porro quos, ipsa, provident ullam quasi eum adipisci dicta, aliquid error excepturi! Totam veniam tempore corporis aspernatur odio excepturi ipsam omnis magni asperiores, exercitationem porro laboriosam debitis explicabo.</p>
+                <div class="d-flex flex-row-reverse mt-5">
+                    <button class="btn btn-outline-success ms-2 me-5 text-white btn1">Donate</button>
+                    <button class="btn btn-outline-success text-white btn2">Contact Us</button>
+                </div>
+            </div>
         </div>
+        <!-- Mission Vision End-->
+        <div class="contactUs mb-5">
+
+        </div>
+        <!-- Categories -->
+        <div class="jumbo3 ">
+        <h3 class="mt-5"><strong class="mt-5">CATEGORIES</strong></h3>
+            <p class="font-weight-light">Let us help you in creating a better tomorrow.</p>
+            <div class="choices d-flex justify-content-center ">
+            <div class="cash w-10 border border rounded alert alert-light me-4 cardDisplay">
+                <a href="#">
+                <i class="fa-solid fa-money-bill-wave"></i><br>
+                <span>Cash</span>
+                </a>
+            </div>
+            <div class="school w-10 border border rounded alert alert-light me-4 cardDisplay">
+                <a href="#">
+                <i class="fa-sharp fa-solid fa-school"></i>
+                <span>School</span>
+                </a>
+            </div>
+            <div class="faci w-10 border border rounded alert alert-light me-4 cardDisplay">
+                <a href="#">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Facilitator</span>
+                </a>
+            </div>
+            <div class="service w-10 border border rounded alert alert-light me-4 cardDisplay">
+                <a href="#">
+                <i class="fa-sharp fa-solid fa-gears"></i>
+                <span>Services</span>
+                </a>
+            </div>
+            </div>
+            <div class="d-flex flex-row mt-3 mb-3 ms-3"><h2 class="text-start me-3">Cash</h2> <button class="btn btn-success">View More ></button></div>
+        </div>
+        <div class="donation mt-5">
+            <div class="cards d-flex justify-content-center mb-4">
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class=" card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Of Cash Categories -->
+        <div class="calculations d-flex justify-content-end">
+            <div class="d-flex flex-row mt-3 mb-3 me-3"><h2 class="text-start me-3">School Necessity</h2> <button class="btn btn-success">View More ></button></div>
+        </div>
+        <!-- Start of School Categories -->
+        <div class="donation mt-5">
+            <div class="cards d-flex justify-content-center mb-4">
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class=" card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of School Categories -->
+        <!-- Start Of Facilitator -->
+        <div class="calculations d-flex">
+            <div class="d-flex flex-row mt-3 mb-3 ms-3"><h2 class="text-start me-3">Facilitator</h2> <button class="btn btn-success">View More ></button></div>
+        </div>
+        <div class="donation mt-5">
+            <div class="cards d-flex justify-content-center mb-4">
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class=" card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Of Facilitator -->
+        <!-- Service -->
+        <div class="calculations d-flex justify-content-end">
+            <div class="d-flex flex-row mt-3 mb-3 me-3"><h2 class="text-start me-3">School Necessity</h2> <button class="btn btn-success">View More ></button></div>
+        </div>
+        <div class="donation mt-5">
+            <div class="cards d-flex justify-content-center mb-4">
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class=" card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-2" style="width: 18rem; height:22rem;">
+                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <!--Insert PHP Donation title  -->
+                        <h5 class="card-title">Card title</h5>
+                        <!-- Insert Category Type and Country -->
+                        <p class="card-text">School | Malaysia</p>
+                        <div class="progress">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div>
+                        <div>
+                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Service -->
+        <!-- Contact Us -->
+        <div class="jumbotron jumbo4 mt-5 d-flex align-items-center justify-content-center" id="contactUs">
+            <div class="text-center">
+                <h3 class="d-flex align-items-center mb-3">Got Any Questions To Ask Us?</h3>
+                <button class="btn btn-success btn-lg btnContact">Contact Us</button>
+            </div>
+        </div>
+        <!-- End Of Contact Us -->
+        <!-- Footer -->
+<footer class="text-center text-lg-start bg-white text-muted">
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3 text-secondary"></i>Sadaqah Crowd
+          </h6>
+          <p>
+            Here you can use rows and columns to organize your footer content. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Categories
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Cash</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">School Necessity</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Services</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Facilitator</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            About
+          </h6>
+          <p>
+            <a href="#missionVision" class="text-reset">Our Mission</a>
+          </p>
+          <p>
+            <a href="#missionVision" class="text-reset">Our Vission</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope me-3 text-secondary"></i>
+            info@example.com
+          </p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+    </footer>
+<!-- Footer -->
     </main>
     <!-- Login Modal -->
     <div class="container p-5 my-5">

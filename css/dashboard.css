@@ -7,6 +7,7 @@
 
 .jumbo2 {
     background-color: #4e944f !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 500px;
 }
 
@@ -14,3 +15,53 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.bannerLeft{
+    background-image: url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80") !important ;
+    background-size: cover !important;
+}
+
+.btn1,.btn2{
+    border:1px white solid !important;
+}
+
+.btn1:hover,.btn2:hover{
+    background-color: white !important;
+    color: #4CAF50 !important;
+}
+
+.dropdown-item:hover{
+    background-color:#4CAF50 !important; 
+    color: white;
+}
+
+.jumbo3 {
+    padding-top: 0.5px;
+    height: 300px !important;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardDisplay{
+    text-align: center !important;
+    height: 5rem;
+    width: 6rem;
+}
+
+.jumbo4 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://images.unsplash.com/photo-1608982398895-28ae86b19ae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80") !important ;
+    background-size: cover !important;
+    height: 500px;
+}
+
+.jumbo4 h3{
+    color: white;
+}
+
+.btnContact{
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.phpButton{
+    width:200px;
+}
+
