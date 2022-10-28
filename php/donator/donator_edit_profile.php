@@ -117,38 +117,28 @@
                             <form action="donator_edit_profile_save.php" method="POST" class="row g-2 col-lg-12">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
-                                    <div class="form-floating">
-                                        <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
-                                        <label for="username" class="form-label">Username</label>
-                                    </div>
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <div class="form-floating">
-                                        <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
-                                        <label for="name" class="form-label">Full name</label>
-                                    </div>
+                                    <label for="name" class="form-label">Full name</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <div class="form-floating">
-                                        <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
-                                        <label for="email" class="form-label">Email</label>
-                                    </div>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <div class="form-floating">
-                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
-                                        <label for="phone" class="form-label">Phone</label>
-                                    </div>
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <div class="form-floating">
-                                        <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="2"><?php echo $r['user_address'] ?></textarea>
-                                        <label for="address" class="form-label">Address</label>
-                                    </div>
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3"><?php echo $r['user_address'] ?></textarea>
                                 </div>
 
                                 <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button>
