@@ -29,7 +29,7 @@
         $result = $stmt->get_result(); // Get the MySQLI result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
 

@@ -169,7 +169,7 @@
             header("Location: admin_edit_profile.php");
         }
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
 </body>

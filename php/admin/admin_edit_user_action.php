@@ -61,7 +61,7 @@
             header("Location: admin_edit_user.php");
         }
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
 </body>

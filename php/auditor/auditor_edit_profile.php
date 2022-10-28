@@ -29,7 +29,7 @@
         $result = $stmt->get_result(); // Get the MySQLI result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
 
@@ -152,7 +152,7 @@
 
                             <!-- Password Change Form -->
                             <p class="h5">Password Settings</p>
-                            <form action="user_edit_action.php" method="POST" class="row g-2">
+                            <form action="auditor_edit_profile_save.php" method="POST" class="row g-2">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
                                     <label for="currentPassword">Current Password</label>

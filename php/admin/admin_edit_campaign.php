@@ -26,7 +26,7 @@
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
     } else {
-        header("Location: ../../index.php");
+        header("Location: ../user_logout.php");
     }
     ?>
     <header id="header" class="header fixed-top d-flex align-items-center">
