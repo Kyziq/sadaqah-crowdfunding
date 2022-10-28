@@ -20,10 +20,10 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         include_once '../dbcon.php'; // Connect to database
-        $user_id = $_SESSION['user_id'];
 
         /** Edit my detail button is clicked **/
         if (isset($_POST['edit-action-button'])) {
+            $user_id = $_SESSION['user_id'];
             /* Get all the posted items */
             $user_username = $_POST['username'];
             $user_name = $_POST['name'];
