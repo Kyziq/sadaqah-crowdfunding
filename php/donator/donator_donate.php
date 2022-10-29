@@ -124,10 +124,12 @@
                     <!-- Donation Card -->
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
-                            <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
+                            <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="...">
+                            </a>
                             <div class="card-body">
-                                <h5 class="card-title h-20 mb-3" style="height:75px"><?php echo $camp['campaign_name']; ?></h5>
-                                <h6 class="card-subtitle mb-3 overflow-auto" style="height:100px"><?php echo $camp['campaign_description']; ?></h6>
+                                <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
+                                <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><b>Description: </b><br><?php echo $camp['campaign_description']; ?></h6>
                                 <h6 class="card-subtitle mb-3 text-muted">
                                     <div>
                                         <?php
@@ -146,7 +148,7 @@
                                         Days Left: <b><?php echo $daysLeft; ?></b>
                                     </div>
                                 </h6>
-                                <div class="camp-progress my-3">
+                                <div class="camp-progress">
                                     <div class="d-flex justify-content-between">
                                         <div class="fw-light">
                                             <?php echo 'RM' . $camp['campaign_raised']; ?>
@@ -160,9 +162,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px">
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px ">
                                     <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
                                     <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Click Image Modal -->
+                    <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Campaign Banner</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="display: flex;">
+                                    <img src=" <?php echo $camp['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
                                 </div>
                             </div>
                         </div>
