@@ -172,6 +172,7 @@
                                             <th scope="col">Description</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Category</th>
+                                            <th scope="col">Raised (RM)</th>
                                             <th scope="col">Amount (RM)</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
@@ -179,9 +180,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($r = $result->fetch_assoc()) {
+                                        <?php
+                                        $index = 0;
+                                        while ($r = $result->fetch_assoc()) {
                                             $startDate = date('Y-m-d', strtotime($r['campaign_start']));
                                             $endDate = date('Y-m-d', strtotime($r['campaign_end']));
+                                            $createdDate = date('Y-m-d', strtotime($r['campaign_created_date']));
                                         ?>
 
                                             <tr>
@@ -211,8 +215,10 @@
                                                     ?>
                                                 </td>
                                                 <td>
+                                                    <?php echo $r['campaign_raised']; ?>
+                                                </td>
+                                                <td>
                                                     <?php echo $r['campaign_amount']; ?>
-
                                                 </td>
                                                 <td>
                                                     <?php echo $startDate; ?>
@@ -221,11 +227,11 @@
                                                     <?php echo $endDate; ?>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign">Edit</button>
+                                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-<?php echo $index ?>">Edit</button>
                                                 </td>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="edit-campaign" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
+                                                <div class="modal fade" id="edit-campaign-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form action="admin_edit_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
@@ -234,23 +240,26 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="id" value="<?php echo $r['campaign_id']; ?>">
+                                                                    <!-- Form -->
+                                                                    <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                                                    <input type="hidden" name="campaignCreatedDate" value="<?php echo $r['campaign_created_date']; ?>">
 
                                                                     <div class="form-group mb-2">
                                                                         <label for="name" class="form-label">Campaign Name</label>
-                                                                        <input type="text" class="form-control" name="name" value="<?php echo $r['campaign_name']; ?>">
+                                                                        <input type="text" class="form-control" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
                                                                     </div>
                                                                     <div class="form-group mb-2">
                                                                         <label for="description" class="form-label">Campaign Description</label>
-                                                                        <textarea class="form-control" name="description" rows="4"><?php echo $r['campaign_description']; ?></textarea>
+                                                                        <textarea class="form-control" name="campaignDesc" rows="4"><?php echo $r['campaign_description']; ?></textarea>
                                                                     </div>
                                                                     <div class="form-group mb-2">
                                                                         <label for="banner" class="form-label">Campaign Banner</label>
-                                                                        <input type="file" class="form-control" accept="image/*" name="banner">
+                                                                        <input type="hidden" name="campaignBannerDir" value="<?php echo $r['campaign_banner']; ?>">
+                                                                        <input type="file" class="form-control" accept="image/*" name="campaignBanner">
                                                                     </div>
                                                                     <div class="form-group mb-2">
                                                                         <label for="category" class="form-label">Campaign Category</label>
-                                                                        <select class="form-select" name="category">
+                                                                        <select class="form-select" name="campaignCategory">
                                                                             <?php
                                                                             if ($r['campaign_category_id'] == 1) {
                                                                             ?>
@@ -297,10 +306,17 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mb-2">
+                                                                        <label for="raised" class="form-label">Campaign Raised</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text">RM</span>
+                                                                            <input type="number" class="form-control" name="campaignRaised" value="<?php echo $r['campaign_raised']; ?>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
                                                                         <label for="amount" class="form-label">Campaign Amount</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-text">RM</span>
-                                                                            <input type="number" class="form-control" name="amount" value="<?php echo $r['campaign_amount']; ?>">
+                                                                            <input type="number" class="form-control" name="campaignAmount" value="<?php echo $r['campaign_amount']; ?>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group mb-2">
@@ -311,9 +327,7 @@
                                                                         <label for="amount" class="form-label">End Date</label>
                                                                         <input type="date" class="form-control" id="endDate" name="endDate" value="<?php echo $endDate; ?>">
                                                                     </div>
-
                                                                 </div>
-
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-primary" name="edit-campaign-button">Save</button>
                                                                 </div>
@@ -321,10 +335,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </tr>
-
                                         <?php
+                                            $index++;
                                         }
                                         ?>
                                     </tbody>
