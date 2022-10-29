@@ -93,11 +93,12 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'Campaign ID (<?php echo $campaignId; ?>) has been successfully edited.',
-                    text: '(Auto close in 5 seconds)',
+                    title: '<?php echo $campaignName; ?>',
+                    text: 'Campaign ID (<?php echo $campaignId; ?>) has been successfully edited.',
+                    footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
-                    backdrop: `#192e59`,
+                    backdrop: `#1E976B`,
                     timer: 5000,
                     willClose: () => {
                         window.location.href = 'admin_edit_campaign.php';

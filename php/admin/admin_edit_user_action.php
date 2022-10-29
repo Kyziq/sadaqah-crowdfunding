@@ -39,11 +39,12 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'New account details for ID <?php echo "$id" ?> has been saved.',
-                    text: '(Auto close in 5 seconds)',
+                    title: '<?php echo $name . " (ID " . $id . ")"; ?>',
+                    text: 'New account details has been saved successfully.',
+                    footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
-                    backdrop: `#192e59`,
+                    backdrop: `#1E976B`,
                     timer: 5000,
                     willClose: () => {
                         <?php
