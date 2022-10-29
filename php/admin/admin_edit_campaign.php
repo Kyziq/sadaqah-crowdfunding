@@ -143,7 +143,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <a href="admin.php">Home</a>
                     </li>
                     <li class="breadcrumb-item active">Edit Campaign</li>
                 </ol>
@@ -199,7 +199,9 @@
                                                     <?php echo $r['campaign_description']; ?>
                                                 </td>
                                                 <td>
-                                                    <img src="<?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem;">
+                                                    <a href="#myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                                        <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem;">
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <?php
@@ -230,7 +232,22 @@
                                                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-<?php echo $index ?>">Edit</button>
                                                 </td>
 
-                                                <!-- Modal -->
+                                                <!-- Click Image Modal -->
+                                                <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
+                                                    <div class="modal-dialog" style="max-width: max-content !important">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Campaign Banner</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body" style="display: flex;">
+                                                                <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="object-fit: contain;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Edit Campaign Modal -->
                                                 <div class="modal fade" id="edit-campaign-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
