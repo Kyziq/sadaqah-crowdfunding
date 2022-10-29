@@ -25,7 +25,7 @@
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
         $result = $stmt->get_result(); // Get the MySQLi result
-        $r = $result->fetch_assoc(); // Fetch data  
+        $user = $result->fetch_assoc(); // Fetch data  
     } else {
         header("Location: ../user_logout.php");
     }
@@ -42,11 +42,11 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle" style="font-size: 36px"></i>
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $r["user_username"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $user['user_username']; ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?php echo $r["user_username"]; ?></h6>
+                            <h6><?php echo $user['user_username']; ?></h6>
                             <span>Donator</span>
                         </li>
                         <li>
@@ -114,32 +114,32 @@
                 $result = $stmt->get_result();
 
                 $index = 0;
-                while ($r = $result->fetch_assoc()) {
-                    if ($r['campaign_raised'] == 0) {
+                while ($camp = $result->fetch_assoc()) {
+                    if ($camp['campaign_raised'] == 0) {
                         $percentageBar = 0;
                     } else {
-                        $percentageBar = 100 - (($r['campaign_amount'] - $r['campaign_raised']) / 100);
+                        $percentageBar = 100 - (($camp['campaign_amount'] - $camp['campaign_raised']) / 100);
                     }
                 ?>
                     <!-- Donation Card -->
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
-                            <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
+                            <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title h-20 mb-3" style="height:75px"><?php echo $r['campaign_name']; ?></h5>
-                                <h6 class="card-subtitle mb-3 overflow-auto" style="height:100px"><?php echo $r['campaign_description']; ?></h6>
+                                <h5 class="card-title h-20 mb-3" style="height:75px"><?php echo $camp['campaign_name']; ?></h5>
+                                <h6 class="card-subtitle mb-3 overflow-auto" style="height:100px"><?php echo $camp['campaign_description']; ?></h6>
                                 <h6 class="card-subtitle mb-3 text-muted">
                                     <div>
                                         <?php
-                                        $startDate = date("d M Y", strtotime($r['campaign_start']));
-                                        $endDate = date("d M Y", strtotime($r['campaign_end']));
+                                        $startDate = date("d M Y", strtotime($camp['campaign_start']));
+                                        $endDate = date("d M Y", strtotime($camp['campaign_end']));
                                         ?>
                                         Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
                                     </div>
                                     <div>
                                         <?php
-                                        $date1 = new DateTime($r['campaign_start']);
-                                        $date2 = new DateTime($r['campaign_end']);
+                                        $date1 = new DateTime($camp['campaign_start']);
+                                        $date2 = new DateTime($camp['campaign_end']);
                                         $diff = $date2->diff($date1)->format("%a");  // Find difference
                                         $daysLeft = intval($diff);   // Rounding days
                                         ?>
@@ -149,10 +149,10 @@
                                 <div class="camp-progress my-3">
                                     <div class="d-flex justify-content-between">
                                         <div class="fw-light">
-                                            <?php echo 'RM' . $r['campaign_raised']; ?>
+                                            <?php echo 'RM' . $camp['campaign_raised']; ?>
                                         </div>
                                         <div class="fw-bold">
-                                            of RM<?php echo $r['campaign_amount']; ?>
+                                            of RM<?php echo $camp['campaign_amount']; ?>
                                         </div>
                                     </div>
                                     <div class="progress">
@@ -172,28 +172,30 @@
                     <div class="modal fade" id="donate-modal-<?php echo $index ?>" tabindex="-1">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="donator_donate_save.php" method="post">
+                                <form action="donator_donate_save.php" method="POST" enctype="multipart/form-data">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $r['campaign_id']; ?>)</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $camp['campaign_id']; ?>)</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <input type="hidden" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $r['campaign_id']; ?>" readonly>
+                                        <!-- Input -->
+                                        <input type="hidden" class="form-control" id="user_username" name="user_username" value="<?php echo $user['user_username']; ?>">
+                                        <input type="hidden" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $camp['campaign_id']; ?>">
 
                                         <div class="form-group mb-3">
-                                            <label for="campaignName">Campaign Name:</label>
-                                            <input type="text" class="form-control" id="campaignName" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                            <label class="form-label">Campaign Name</label>
+                                            <input type="text" class="form-control" name="campaign_name" value="<?php echo $camp['campaign_name']; ?>" readonly>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="campaignDonate">Donation Amount:</label>
+                                            <label class="form-label">Donation Amount</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">RM</span>
-                                                <input type="number" class="form-control" id="campaignDonate" name="donate_amount" required>
+                                                <input type="number" class="form-control" name="donate_amount" required>
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="campaignProof">Proof of Payment:</label>
-                                            <input type="file" class="form-control" id="campaignProof" name="donate_proof" required>
+                                            <label class="form-label">Proof of Payment</label>
+                                            <input type="file" class="form-control" name="donate_proof" accept="image/png,image/jpg,image/jpeg,application/pdf" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

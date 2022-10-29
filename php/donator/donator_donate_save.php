@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donation Saving</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- Sweet Alert 2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -16,27 +22,72 @@
         if (isset($_POST['donate-button'])) {
             include("../dbcon.php");
             /* Get all the posted items */
+            $campaign_name = $_POST['campaign_name'];
+            $user_username = $_POST['user_username'];
+
             $donate_amount = $_POST['donate_amount'];
-            $donator_proof;
             $donator_id = $_SESSION["user_id"];
             $donate_status = 3; // 3 = Pending
             $admin_id = 1; // 1 = Default admin (which admin verify later in verification)
             $campaign_id = $_POST['campaign_id'];
 
-            /* Construct and run query to insert donation data */
-            $query = "INSERT INTO donate(donate_amount, donate_status, donator_id, admin_id, campaign_id) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("diiii", $donate_amount, $donate_status, $donator_id, $admin_id, $campaign_id);
-            $stmt->execute();
+            /* File Upload */
+            date_default_timezone_set('Asia/Singapore');
+            $date = date('Y-m-d-H-i-s');
+
+            // Upload image (where file name is campaignName-date.extension)
+            $extension  = pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION);
+            $target_dir = "../../images/donation-proof/";
+            $file_name = $user_username . "-campaignID" . $campaign_id . "-(" . $date . ")." . $extension; // username-campaign_id-date.extension
+            $target_file = $target_dir . $file_name;
+            $source = $_FILES["donate_proof"]["tmp_name"];
+
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // file type to lowercase
+
+            if ($_FILES["donate_proof"]["size"] > 10000000) // Check file size (10000000 = 10MB)
+                $uploadOk = 0;
+            if ($imageFileType != "pdf" && $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg") // Allow certain file formats
+                $uploadOk = 0;
+
+            if ($uploadOk == 0) { // Check if $uploadOk is set to 0 by an error
+                header("Location: donator_donate.php");
+            } else {
+                if (move_uploaded_file($_FILES["donate_proof"]["tmp_name"], $target_file)) {
+                    $donate_proof = $target_file;
+
+                    /* Construct and run query to insert donation data */
+                    $query = "INSERT INTO donate(donate_amount, donate_proof, donate_status, donator_id, admin_id, campaign_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt = $con->prepare($query);
+                    $stmt->bind_param("dsiiii", $donate_amount, $donate_proof, $donate_status, $donator_id, $admin_id, $campaign_id);
+                    $stmt->execute();
+
     ?>
-            <script>
-                alert('Donation has been added, please wait for it to be verified.');
-                window.location.href = 'donator.php';
-            </script>
+                    <!-- Success Popup -->
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: '<?php echo $campaign_name; ?>',
+                            text: 'Your donation for  has been processed. Please wait for it to be verified.',
+                            footer: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#192e59`,
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'donator.php';
+                            }
+                        })
+                    </script>
     <?php
-            // Close connection
-            $stmt->close();
-            $con->close();
+
+                    // Close connection
+                    $stmt->close();
+                    $con->close();
+                } else {
+                    header("Location: donator_donate.php");
+                }
+            }
         }
     } else {
         header("Location: ../user_logout.php");
