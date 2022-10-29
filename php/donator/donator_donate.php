@@ -33,14 +33,14 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block">Sadaqah Crowdfunding</span>
+                <span class="d-none d-lg-block text-success">Sadaqah Crowdfunding</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <i class="bi bi-list toggle-sidebar-btn text-success"></i>
         </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
                 <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0 text-success" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle" style="font-size: 36px"></i>
                         <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $r["user_username"]; ?></span>
                     </a>
@@ -119,7 +119,7 @@
 
                 ?>
                 <!-- card -->
-                <div class="col-lg-3" style="">
+                <div class="col-lg-3 d-flex align-items-stretch" style="">
                     <div class="card">
                         <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="width:" alt="...">
                         <div class="card-body">
