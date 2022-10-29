@@ -122,11 +122,12 @@
                 <div class="col-lg-3 d-flex align-items-stretch" style="">
                     <div class="card">
                         <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="width:" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php ?></h5>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_name']; ?></h6>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
+                        <div class="card-body d-flex flex-column ">
+                            <div class=" d-flex flex-column ">
+                            <h5 class="card-title text-success h-20 " style="height:100px"><?php echo $row['campaign_name']; ?></h5>
+                            <h6 class="card-subtitle mb-3 text-muted overflow-auto" style="height:100px"><?php echo $row['campaign_description']; ?></h6>
                             <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
+                            </div>
                             <div class="camp-progress my-3">
                                 <div class="d-flex justify-content-between">
                                     <div class="fw-light">
@@ -141,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-btn d-flex justify-content-end" style="gap:10px">
+                            <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px">
                                 <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
                                 <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
