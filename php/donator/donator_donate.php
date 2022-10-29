@@ -109,90 +109,104 @@
             <div class="row align-items-top">
                 <?php
                 $query = "SELECT * FROM campaign ORDER BY campaign_id";
-                $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
-                $numrow = mysqli_num_rows($result);
-                ?>
-                <?php
-                for ($a = 0; $a < $numrow; $a++) {
-                    $row = mysqli_fetch_array($result);
-                    if ($row['campaign_raised'] == 0) {
+                $stmt = $con->prepare($query);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                $index = 0;
+                while ($r = $result->fetch_assoc()) {
+                    if ($r['campaign_raised'] == 0) {
                         $percentageBar = 0;
                     } else {
-                        $percentageBar = 100 - (($row['campaign_amount'] - $row['campaign_raised']) / 100);
+                        $percentageBar = 100 - (($r['campaign_amount'] - $r['campaign_raised']) / 100);
                     }
                 ?>
-                <!-- card -->
-                <div class="col-lg-3 d-flex align-items-stretch" style="">
-                    <div class="card">
-                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title h-20 mb-3" style="height:100px"><?php echo $row['campaign_name']; ?></h5>
-                            <h6 class="card-subtitle mb-3 text-muted overflow-auto" style="height:100px"><?php echo $row['campaign_description']; ?></h6>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
-                            <div class="camp-progress my-3">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-light">
-                                        <?php echo 'RM' . $row['campaign_raised']; ?>
+                    <!-- Donation Card -->
+                    <div class="col-lg-3 d-flex align-items-stretch">
+                        <div class="card">
+                            <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title h-20 mb-3" style="height:75px"><?php echo $r['campaign_name']; ?></h5>
+                                <h6 class="card-subtitle mb-3 overflow-auto" style="height:100px"><?php echo $r['campaign_description']; ?></h6>
+                                <h6 class="card-subtitle mb-3 text-muted">
+                                    <div>
+                                        <?php
+                                        $startDate = date("d M Y", strtotime($r['campaign_start']));
+                                        $endDate = date("d M Y", strtotime($r['campaign_end']));
+                                        ?>
+                                        Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
                                     </div>
-                                    <div class="fw-bold">
-                                        of RM<?php echo $row['campaign_amount']; ?>
+                                    <div>
+                                        <?php
+                                        $date1 = new DateTime($r['campaign_start']);
+                                        $date2 = new DateTime($r['campaign_end']);
+                                        $diff = $date2->diff($date1)->format("%a");  // Find difference
+                                        $daysLeft = intval($diff);   // Rounding days
+                                        ?>
+                                        Days Left: <b><?php echo $daysLeft; ?></b>
+                                    </div>
+                                </h6>
+                                <div class="camp-progress my-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-light">
+                                            <?php echo 'RM' . $r['campaign_raised']; ?>
+                                        </div>
+                                        <div class="fw-bold">
+                                            of RM<?php echo $r['campaign_amount']; ?>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar; ?>%">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar;?>%">
-                                    </div>
+                                <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px">
+                                    <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
+                                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
                                 </div>
-                            </div>
-                            <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px">
-                                <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
-                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Donate Modal -->
+                    <div class="modal fade" id="donate-modal-<?php echo $index ?>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="donator_donate_save.php" method="post">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $r['campaign_id']; ?>)</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $r['campaign_id']; ?>" readonly>
+
+                                        <div class="form-group mb-3">
+                                            <label for="campaignName">Campaign Name:</label>
+                                            <input type="text" class="form-control" id="campaignName" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="campaignDonate">Donation Amount:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">RM</span>
+                                                <input type="number" class="form-control" id="campaignDonate" name="donate_amount" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="campaignProof">Proof of Payment:</label>
+                                            <input type="file" class="form-control" id="campaignProof" name="donate_proof" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" name="donate-button">Donate Now</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 <?php
+                    $index++;
                 }
                 ?>
-            </div>
-
-            <!-- Donate Modal -->
-            <div class="modal fade" id="donate" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Donation</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="donator_donation.php" method="post">
-                                <div class="form-group mb-3">
-                                    <label for="campaignId">Campaign Id:</label>
-                                    <input type="text" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $row['campaign_id']; ?>" readonly> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignName">Campaign Name:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignDonate">Donate Amount RM:</label>
-                                    <input type="number" class="form-control" id="campaignDonate" name="donate_amount" placeholder="Insert Amount..." required> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignProof">Donate Date:</label>
-                                    <input type="date" class="form-control" id="campaignDate" name="donate_date" required> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignProof">Donate Proof:</label>
-                                    <input type="file" class="form-control" id="campaignProof" name="donate_proof" required> 
-                                </div>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" name="donate-button">Donate Now</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
