@@ -25,7 +25,7 @@
             /* Get all the posted items */
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
-            $campaignType = $_POST['campaignType'];
+            $campaignCategory = $_POST['campaignCategory'];
             $campaignAmount = $_POST['campaignAmount'];
             $startDate = $_POST['startDate'];
             $endDate  = $_POST['endDate'];
@@ -34,7 +34,7 @@
 
             /* File Upload */
             date_default_timezone_set('Asia/Singapore');
-            $date = date('d-m-y');
+            $date = date('Y-m-d');
 
             // Upload image (where file name is campaignName-date.extension)
             $extension  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
@@ -83,7 +83,7 @@
 
                     $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_banner, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised, campaign_admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($query);
-                    $stmt->bind_param("sssidssdi", $campaignName, $campaignDesc, $campaignFileBanner, $campaignType, $campaignAmount, $startDate, $endDate, $campaignRaised, $campaignAdminId);
+                    $stmt->bind_param("sssidssdi", $campaignName, $campaignDesc, $campaignFileBanner, $campaignCategory, $campaignAmount, $startDate, $endDate, $campaignRaised, $campaignAdminId);
                     $stmt->execute();
     ?>
                     <!-- Success Popup -->

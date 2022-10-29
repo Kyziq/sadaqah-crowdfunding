@@ -177,7 +177,7 @@
                                     <div class="col-lg-8"></div>
                                     <div class="col-lg-2">
                                         <label class="form-label">Campaign Type</label>
-                                        <select class="form-select" name="campaignType" required>
+                                        <select class="form-select" name="campaignCategory" required>
                                             <option selected disabled></option>
                                             <option value="1">Cash</option>
                                             <option value="2">School Necessity</option>
