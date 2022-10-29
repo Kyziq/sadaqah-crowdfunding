@@ -37,14 +37,7 @@
             $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
             $stmt->execute();
 
-            if (isset($result) && is_resource($result)) {
-                // Release returned data
-                mysqli_free_result($result);
-            }
-            // Close connection
-            mysqli_close($con);
     ?>
-
             <!-- Success Popup -->
             <script>
                 Swal.fire({
@@ -61,8 +54,10 @@
                 })
             </script>
             <?php
+            // Close connection
+            $stmt->close();
+            $con->close();
         }
-
 
         /** Edit password button is clicked **/
         elseif (isset($_POST['edit-password-button'])) {
@@ -100,7 +95,7 @@
                         })
                     </script>
                 <?php
-                } elseif ($newPassword != $confirmNewPassword) {
+                } else if ($newPassword != $confirmNewPassword) {
                 ?>
                     <!-- Fail Popup (new password and confirm new password do not match)-->
                     <script>
@@ -124,10 +119,6 @@
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("si", $newPassword, $user_id);
                     $stmt->execute();
-
-                    // Close connection
-                    $stmt->close();
-                    $con->close();
                 ?>
                     <!-- Success Popup -->
                     <script>
@@ -165,6 +156,9 @@
                 </script>
     <?php
             }
+            // Close connection
+            $stmt->close();
+            $con->close();
         } else {
             header("Location: admin_edit_profile.php");
         }
