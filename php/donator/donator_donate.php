@@ -33,14 +33,14 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block text-success">Sadaqah Crowdfunding</span>
+                <span class="d-none d-lg-block">Sadaqah Crowdfunding</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn text-success"></i>
         </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
                 <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0 text-success" href="#" data-bs-toggle="dropdown">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle" style="font-size: 36px"></i>
                         <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $r["user_username"]; ?></span>
                     </a>
@@ -107,51 +107,62 @@
         </div>
         <section class="section">
             <div class="row align-items-top">
-            <?php
-                $query = "SELECT * FROM campaign  ORDER BY campaign_id";
+                <?php
+                $query = "SELECT * FROM campaign ORDER BY campaign_id";
                 $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
                 $numrow = mysqli_num_rows($result);
-            ?>
-             <?php
+                ?>
+                <?php
                 for ($a = 0; $a < $numrow; $a++) {
                     $row = mysqli_fetch_array($result);
-                    $percentageBar = 100-(($row['campaign_amount'] - $row['campaign_raised'])/100);
 
+                    if ($row['campaign_raised'] == 0) {
+                        $percentageBar = 0;
+                    } else {
+                        $percentageBar = 100 - (($row['campaign_amount'] - $row['campaign_raised']) / 100);
+                    }
                 ?>
-                <!-- card -->
-                <div class="col-lg-3 d-flex align-items-stretch" style="">
-                    <div class="card">
-                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="width:" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php ?></h5>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_name']; ?></h6>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
-                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
-                            <div class="camp-progress my-3">
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-light">
-                                        <?php echo 'RM' . $row['campaign_raised']; ?>
+                    <!-- Donate Card -->
+                    <div class="col-lg-3 d-flex align-items-stretch">
+                        <div class="card">
+                            <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="height: 300px;" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $row['campaign_name']; ?></h5>
+                                <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
+
+                                <h6 class="card-subtitle mb-3 text-muted">
+                                    Start Date:
+                                    <?php echo $row['campaign_start']; ?>
+                                </h6>
+
+                                <div class="camp-progress my-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-light">
+                                            <?php echo 'RM' . $row['campaign_raised']; ?>
+                                        </div>
+                                        <div class="fw-bold">
+                                            of RM<?php echo $row['campaign_amount']; ?>
+                                        </div>
                                     </div>
-                                    <div class="fw-bold">
-                                        of RM<?php echo $row['campaign_amount']; ?>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar; ?>%">
+                                            <?php echo $percentageBar . "%"; ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar;?>%">
-                                    </div>
+                                <div class="card-btn d-flex justify-content-end" style="gap:10px">
+                                    <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
+                                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                                 </div>
-                            </div>
-                            <div class="card-btn d-flex justify-content-end" style="gap:10px">
-                                <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
-                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php
                 }
                 ?>
             </div>
+
+            <!-- Donate Modal -->
             <div class="modal fade" id="donate" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
