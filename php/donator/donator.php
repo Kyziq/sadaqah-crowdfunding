@@ -121,9 +121,14 @@
                                         <div class="ps-3">
                                             <h6>
                                                 <?php
-                                                $query = "SELECT COUNT(*) FROM user";
-                                                $result = mysqli_query($con, $query);
-                                                $count = mysqli_fetch_assoc($result)['COUNT(*)'];
+                                                $user_id = $_SESSION['user_id'];
+                                                $query = "SELECT COUNT(c.campaign_id) FROM user u, donate d, campaign c WHERE u.user_id = d.donator_id AND d.campaign_id = c.campaign_id AND u.user_id = ?";
+                                                $stmt = $con->prepare($query);
+                                                $stmt->bind_param("i", $user_id);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result(); // Get the MySQLI result
+
+                                                $count = mysqli_fetch_assoc($result)['COUNT(c.campaign_id)'];
                                                 echo $count;
                                                 ?>
                                             </h6>
@@ -146,13 +151,18 @@
                                         </div>
                                         <div class="ps-3">
                                             <h6>
-                                                RM?????
                                                 <?php
-                                                // $query = "SELECT SUM(campaign_amount) FROM campaign";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                // echo $count;
+                                                $user_id = $_SESSION['user_id'];
+                                                $donate_status = 1; // 1 = Accepted
+                                                $query = "SELECT SUM(d.donate_amount) FROM user u, donate d WHERE u.user_id = d.donator_id AND u.user_id = ? AND d.donate_status = ?";
+                                                $stmt = $con->prepare($query);
+                                                $stmt->bind_param("ii", $user_id, $donate_status);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result(); // Get the MySQLI result
+
+                                                $count = mysqli_fetch_assoc($result)['SUM(d.donate_amount)'];
                                                 ?>
+                                                RM<?php echo $count; ?>
                                             </h6>
                                             <span class="text-muted small">you</span>
                                             <span class="text-success small fw-bold">contributed</span>
@@ -172,7 +182,20 @@
                                             <i class="bi bi-check-lg"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <h6>?????</h6>
+                                            <h6>
+                                                <?php
+                                                $user_id = $_SESSION['user_id'];
+                                                $donate_status = 1; // 1 = Accepted
+                                                $query = "SELECT COUNT(d.donate_id) FROM user u, donate d WHERE u.user_id = d.donator_id AND u.user_id = ? AND donate_status=?";
+                                                $stmt = $con->prepare($query);
+                                                $stmt->bind_param("ii", $user_id, $donate_status);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result(); // Get the MySQLI result
+
+                                                $count = mysqli_fetch_assoc($result)['COUNT(d.donate_id)'];
+                                                echo $count;
+                                                ?>
+                                            </h6>
                                             <span class="text-danger small fw-bold">accepted</span>
                                             <span class="text-muted small">warm-heartedly</span>
                                         </div>
