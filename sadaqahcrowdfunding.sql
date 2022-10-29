@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1-dev+20221028.64e273f305
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 29, 2022 at 09:14 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.5
+-- Host: 127.0.0.1
+-- Generation Time: Oct 29, 2022 at 11:50 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,26 +46,12 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`) VALUES
-(1, 'dsdaads', 'adsdadad', '../../images/campaign/dsdaads-29-10-22.png', 2, 12313, '2022-10-22 00:00:00.000000', '2022-10-29 00:00:00.000000', 0, '2022-10-28 16:40:04', 1),
-(2, 'Satu Murid Satu AlQuran', 'alquran', '../../images/campaign/Satu Murid Satu AlQuran-2022-10-29.jpg', 2, 15000, '2022-10-29 00:00:00.000000', '2022-10-31 00:00:00.000000', 0, '2022-10-29 06:37:03', 1),
-(3, 'Satu laptop', 'laptop', '../../images/campaign/Satu laptop-2022-10-29.jpeg', 2, 11111111, '2022-10-29 00:00:00.000000', '2022-10-31 00:00:00.000000', 0, '2022-10-29 06:38:13', 1),
-(4, 'Tables', 'table', '../../images/campaign/Tables-2022-10-29.jpg', 2, 150800, '2022-10-29 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:39:02', 1),
-(5, 'Kerusi ', 'kerusi', '../../images/campaign/Kerusi -2022-10-29.jpg', 2, 150000, '2022-11-04 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:41:52', 1),
-(6, 'Mangsa Banjir', 'banjir', '../../images/campaign/Mangsa Banjir-2022-10-29.jpg', 1, 500000, '2022-11-05 00:00:00.000000', '2022-12-08 00:00:00.000000', 0, '2022-10-29 06:43:17', 1),
-(7, 'ubat', 'ubatan', '../../images/campaign/ubat-2022-10-29.jpeg', 3, 600000, '2022-10-29 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:47:35', 1),
-(8, 'pusat tuisyen', 'buka', '../../images/campaign/pusat tuisyen-2022-10-29.jpg', 4, 777777777, '2022-11-04 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:48:28', 1),
-(9, 'dana pendidikan', '2', '../../images/campaign/dana pendidikan-2022-10-29.png', 1, 900000, '2022-10-29 00:00:00.000000', '2022-10-31 00:00:00.000000', 0, '2022-10-29 06:49:11', 1),
-(10, 'bantuan kewangan', 'kewangan dibantu', '../../images/campaign/bantuan kewangan-2022-10-29.jpg', 1, 900222, '2022-11-02 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:51:12', 1),
-(11, 'fasiliti masjid', 'masjid', '../../images/campaign/fasiliti masjid-2022-10-29.jpg', 3, 90000, '2022-10-29 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:52:14', 1),
-(12, 'sumbangan dana menjalani perubatan ', 'sumbngn', '../../images/campaign/sumbangan dana menjalani perubatan -2022-10-29.jpg', 1, 922330, '2022-11-05 00:00:00.000000', '2022-12-08 00:00:00.000000', 0, '2022-10-29 06:53:47', 1),
-(13, 'dana membaiki rumah terbakar', 'dana', '../../images/campaign/dana membaiki rumah terbakar-2022-10-29.jpg', 1, 222222, '2022-11-04 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:55:06', 1),
-(14, 'bengkel kereta', 'kereta', '../../images/campaign/bengkel kereta-2022-10-29.jpeg', 4, 223344, '2022-11-04 00:00:00.000000', '2022-11-05 00:00:00.000000', 0, '2022-10-29 06:56:44', 1),
-(15, 'services 4', 'sds', '../../images/campaign/services 4-2022-10-29.jpeg', 4, 12333333, '2022-11-03 00:00:00.000000', '2022-11-04 00:00:00.000000', 0, '2022-10-29 06:57:38', 1),
-(16, 'service campaign', 'ss', '../../images/campaign/service campaign-2022-10-29.jpg', 4, 23333, '2022-11-01 00:00:00.000000', '2022-11-02 00:00:00.000000', 0, '2022-10-29 06:58:17', 1),
-(17, 'service 5', 's', '../../images/campaign/service 5-2022-10-29.jpg', 4, 8000, '2022-10-31 00:00:00.000000', '2022-11-01 00:00:00.000000', 0, '2022-10-29 06:58:55', 1),
-(18, 'facilitator 3', 'sdd', '../../images/campaign/facilitator 3-2022-10-29.jpeg', 3, 76888, '2022-11-03 00:00:00.000000', '2022-11-04 00:00:00.000000', 0, '2022-10-29 06:59:43', 1),
-(19, 'faci4', 'ssss', '../../images/campaign/faci4-2022-10-29.jpeg', 3, 709900, '2022-11-03 00:00:00.000000', '2022-11-04 00:00:00.000000', 0, '2022-10-29 07:00:29', 1),
-(20, 'faci 5', 'dddd', '../../images/campaign/faci 5-2022-10-29.jpeg', 3, 80990, '2022-11-02 00:00:00.000000', '2022-11-03 00:00:00.000000', 0, '2022-10-29 07:01:15', 1);
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Anak anda mungkin memerlukan dialisis apabila mendapat kegagalan buah pinggang di peringkat akhir (end stage ', '../../images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah-2022-10-29.jpg', 1, 10000, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 1),
+(2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', '../../images/campaign/(Misi Banjir Baling) Baik Pulih Rumah-2022-10-29.png', 4, 20000, '2022-10-29 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:27:54', 1),
+(3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in bot', '../../images/campaign/MERCY Mission Malaysia-2022-10-29.jpg', 3, 24000, '2022-10-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:29:43', 1),
+(4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas', '../../images/campaign/Ringankan Beban Golongan Terjejas-2022-10-29.jpg', 1, 5000, '2022-11-05 00:00:00.000000', '2022-11-20 00:00:00.000000', 0, '2022-10-29 09:33:40', 1),
+(5, 'Yayasan Institut Jantung Negara', 'Memberi bantuan kepada pesakit-pesakit di Yayasan Institut Jantung Negara ', '../../images/campaign/Yayasan Institut Jantung Negara-2022-10-29.jpg', 3, 200000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:36:06', 1),
+(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Marilah kita meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan.', '../../images/campaign/Bantuan Sekolah-Sekolah Malaysia-2022-10-29.jpg', 2, 8000, '2022-11-10 00:00:00.000000', '2022-12-10 00:00:00.000000', 0, '2022-10-29 09:40:37', 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +241,7 @@ ALTER TABLE `verification`
 -- AUTO_INCREMENT for table `campaign`
 --
 ALTER TABLE `campaign`
-  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `campaign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `category`
