@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 11:50 AM
+-- Generation Time: Oct 29, 2022 at 12:51 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `campaign` (
   `campaign_id` int(11) NOT NULL,
   `campaign_name` varchar(100) NOT NULL,
-  `campaign_description` varchar(200) NOT NULL,
+  `campaign_description` varchar(1000) NOT NULL,
   `campaign_banner` varchar(200) NOT NULL,
   `campaign_category_id` int(11) NOT NULL,
   `campaign_amount` double NOT NULL,
@@ -46,12 +46,12 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`) VALUES
-(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Anak anda mungkin memerlukan dialisis apabila mendapat kegagalan buah pinggang di peringkat akhir (end stage ', '../../images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah-2022-10-29.jpg', 1, 10000, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 1),
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', '../../images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah-2022-10-29.jpg', 1, 10000, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 1),
 (2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', '../../images/campaign/(Misi Banjir Baling) Baik Pulih Rumah-2022-10-29.png', 4, 20000, '2022-10-29 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:27:54', 1),
-(3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in bot', '../../images/campaign/MERCY Mission Malaysia-2022-10-29.jpg', 3, 24000, '2022-10-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:29:43', 1),
-(4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas', '../../images/campaign/Ringankan Beban Golongan Terjejas-2022-10-29.jpg', 1, 5000, '2022-11-05 00:00:00.000000', '2022-11-20 00:00:00.000000', 0, '2022-10-29 09:33:40', 1),
-(5, 'Yayasan Institut Jantung Negara', 'Memberi bantuan kepada pesakit-pesakit di Yayasan Institut Jantung Negara ', '../../images/campaign/Yayasan Institut Jantung Negara-2022-10-29.jpg', 3, 200000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:36:06', 1),
-(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Marilah kita meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan.', '../../images/campaign/Bantuan Sekolah-Sekolah Malaysia-2022-10-29.jpg', 2, 8000, '2022-11-10 00:00:00.000000', '2022-12-10 00:00:00.000000', 0, '2022-10-29 09:40:37', 1);
+(3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation.', '../../images/campaign/MERCY Mission Malaysia-2022-10-29.jpg', 3, 24000, '2022-10-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:29:43', 1),
+(4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', '../../images/campaign/Ringankan Beban Golongan Terjejas-2022-10-29.jpg', 1, 5000, '2022-11-05 00:00:00.000000', '2022-11-20 00:00:00.000000', 0, '2022-10-29 09:33:40', 1),
+(5, 'Yayasan Institut Jantung Negara', 'Memberi bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara.', '../../images/campaign/Yayasan Institut Jantung Negara-2022-10-29.jpg', 3, 200000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:36:06', 1),
+(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', '../../images/campaign/Bantuan Sekolah-Sekolah Malaysia-2022-10-29.jpg', 2, 8000, '2022-11-10 00:00:00.000000', '2022-12-10 00:00:00.000000', 0, '2022-10-29 09:40:37', 1);
 
 -- --------------------------------------------------------
 
