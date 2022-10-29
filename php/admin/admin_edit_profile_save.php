@@ -16,7 +16,7 @@
 
 <body>
     <?php
-    /** Start session and validate user **/
+    /** Start session and validate admin **/
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         include_once '../dbcon.php'; // Connect to database
@@ -62,7 +62,8 @@
         }
 
         /** Edit password button is clicked **/
-        elseif (isset($_POST['edit-password-button'])) {
+        else if (isset($_POST['edit-password-button'])) {
+            $user_id = $_SESSION['user_id'];
             /* Get all the posted items */
             $currentPassword = $_POST['currentPassword'];
             $newPassword = $_POST['newPassword'];
@@ -85,11 +86,12 @@
                     <script>
                         Swal.fire({
                             icon: 'error',
-                            title: 'Your new password cannot be the same as your current password.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Oops...',
+                            text: 'Your new password cannot be the same as your current password.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'admin_edit_profile.php';
@@ -103,11 +105,12 @@
                     <script>
                         Swal.fire({
                             icon: 'error',
-                            title: 'Your new password and confirm new password do not match.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Oops...',
+                            text: 'Your new password and confirm new password do not match.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'admin_edit_profile.php';
@@ -126,11 +129,12 @@
                     <script>
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your password has been changed.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Success!',
+                            text: 'Your password has been changed.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'admin_edit_profile.php';
@@ -145,11 +149,12 @@
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Your current password is incorrect.',
-                        text: '(Auto close in 5 seconds)',
+                        title: 'Oops...',
+                        text: 'Your current password is incorrect.',
+                        footer: '(Auto close in 5 seconds)',
                         showConfirmButton: true,
                         confirmButtonText: 'Confirm',
-                        backdrop: `#192e59`,
+                        backdrop: `#1E976B`,
                         timer: 5000,
                         willClose: () => {
                             window.location.href = 'admin_edit_profile.php';
@@ -161,8 +166,6 @@
             // Close connection
             $stmt->close();
             $con->close();
-        } else {
-            header("Location: admin_edit_profile.php");
         }
     } else {
         header("Location: ../user_logout.php");
