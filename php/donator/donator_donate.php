@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Donate Page</title>
+    <title>Donator Dashboard</title>
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -35,7 +35,7 @@
             <a href="" class="logo d-flex align-items-center">
                 <span class="d-none d-lg-block">Sadaqah Crowdfunding</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn text-success"></i>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -122,41 +122,35 @@
                         $percentageBar = 100 - (($row['campaign_amount'] - $row['campaign_raised']) / 100);
                     }
                 ?>
-                    <!-- Donate Card -->
-                    <div class="col-lg-3 d-flex align-items-stretch">
-                        <div class="card">
-                            <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="height: 300px;" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $row['campaign_name']; ?></h5>
-                                <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
-
-                                <h6 class="card-subtitle mb-3 text-muted">
-                                    Start Date:
-                                    <?php echo $row['campaign_start']; ?>
-                                </h6>
-
-                                <div class="camp-progress my-3">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="fw-light">
-                                            <?php echo 'RM' . $row['campaign_raised']; ?>
-                                        </div>
-                                        <div class="fw-bold">
-                                            of RM<?php echo $row['campaign_amount']; ?>
-                                        </div>
+                <!-- card -->
+                <div class="col-lg-3 d-flex align-items-stretch" style="">
+                    <div class="card">
+                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:90%" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title h-20 mb-3" style="height:100px"><?php echo $row['campaign_name']; ?></h5>
+                            <h6 class="card-subtitle mb-3 text-muted overflow-auto" style="height:100px"><?php echo $row['campaign_description']; ?></h6>
+                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
+                            <div class="camp-progress my-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-light">
+                                        <?php echo 'RM' . $row['campaign_raised']; ?>
                                     </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar; ?>%">
-                                            <?php echo $percentageBar . "%"; ?>
-                                        </div>
+                                    <div class="fw-bold">
+                                        of RM<?php echo $row['campaign_amount']; ?>
                                     </div>
                                 </div>
-                                <div class="card-btn d-flex justify-content-end" style="gap:10px">
-                                    <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
-                                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar;?>%">
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px">
+                                <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
                         </div>
                     </div>
+                </div>
                 <?php
                 }
                 ?>
