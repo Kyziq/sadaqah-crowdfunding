@@ -54,9 +54,10 @@
             } else {
                 unlink($campaignBannerDir); // Delete File
                 // Upload image (where file name is campaignName-date.extension)
-                $extension  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
+                $fileExt  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
                 $target_dir = "../../images/campaign/";
-                $file_name = $campaignName . "-" . $campaignCreatedDate  . "." . $extension;
+                $campaignNewBanner = $target_dir . $campaignName . "-"  . $campaignCreatedDate . "." . $fileExt;
+                $file_name = $campaignName . "-" . $campaignCreatedDate  . "." . $fileExt;
                 $target_file = $target_dir . $file_name;
                 $source = $_FILES["campaignFileBanner"]["tmp_name"];
 
@@ -70,9 +71,6 @@
                 else
                     $uploadOk = 0;
 
-                if (file_exists($target_file)) // Check if file already exists
-                    $uploadOk = 0;
-
                 if ($_FILES["campaignFileBanner"]["size"] > 10000000) // Check file size (10000000 = 10MB)
                     $uploadOk = 0;
 
@@ -80,12 +78,12 @@
                     $uploadOk = 0;
 
                 if ($uploadOk == 0) {
-                    header("Location: admin_create_campaign.php");
+                    header("Location: admin_edit_campaign.php");
                 } else {
                     if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
                         $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
                         $stmt = $con->prepare($query);
-                        $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignBannerDir, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
+                        $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
                         $stmt->execute();
                     }
                 }

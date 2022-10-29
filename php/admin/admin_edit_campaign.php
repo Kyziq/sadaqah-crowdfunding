@@ -167,9 +167,9 @@
                                 <table class="table table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
+                                            <th scope="col" class="col-lg">ID</th>
+                                            <th scope="col" class="col-lg-2">Name</th>
+                                            <th scope="col" class="col-lg-3">Description</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Raised (RM)</th>
@@ -211,7 +211,7 @@
                                                         echo "School Necessity";
                                                     } else if ($r['campaign_category_id'] == 3) {
                                                         echo "Facilitator";
-                                                    } else if ($r['campaign_category_id'] == 3) {
+                                                    } else if ($r['campaign_category_id'] == 4) {
                                                         echo "Service";
                                                     }
                                                     ?>
@@ -234,14 +234,14 @@
 
                                                 <!-- Click Image Modal -->
                                                 <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
-                                                    <div class="modal-dialog" style="max-width: max-content !important">
+                                                    <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Campaign Banner</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body" style="display: flex;">
-                                                                <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="object-fit: contain;">
+                                                                <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
                                                             </div>
                                                         </div>
                                                     </div>
