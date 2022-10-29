@@ -124,6 +124,7 @@
                         <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="width:" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><?php ?></h5>
+                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_name']; ?></h6>
                             <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
                             <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
                             <div class="camp-progress my-3">
@@ -136,7 +137,7 @@
                                     </div>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar;?>%">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar;?>%">
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +176,7 @@
         </div>
         <div class="credits"></div>
     </footer>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center bg-success"><i class="bi bi-arrow-up-short"></i></a>
 
     <?php
     // Close connection
