@@ -93,25 +93,50 @@
             </div>
             <div class="money d-flex py-2">
                 <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
-                    <!-- Insert Php here -->
-                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
-                    <div class="w-100"><p>Raised</p></div>
+                    <?php
+                    include_once(__DIR__ . '/php/dbcon.php');
+                    $query = "SELECT SUM(campaign_raised) FROM campaign";
+                    $result = mysqli_query($con, $query);
+                    $count = mysqli_fetch_assoc($result)['SUM(campaign_raised)'];
+                    ?>
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center">
+                        <p><strong><?php echo "RM" . $count; ?></strong> </p>
+                    </div>
+                    <div>
+                        <p>Raised</p>
+                    </div>
                 </div>
                 <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
-                    <!-- Insert Php here -->
-                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
-                    <div class="w-100"><p>Givers</p></div>
+                    <?php
+                    $query = "SELECT COUNT(user_id) FROM user";
+                    $result = mysqli_query($con, $query);
+                    $count = mysqli_fetch_assoc($result)['COUNT(user_id)'];
+                    ?>
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center">
+                        <p><strong><?php echo $count ?></strong> </p>
+                    </div>
+                    <div class="w-100">
+                        <p>Givers</p>
+                    </div>
                 </div>
                 <div class="raised border mx-2 rounded-3 d-flex flex-column text-center">
-                    <!-- Insert Php here -->
-                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center"><p><strong>RM1000</strong> </p></div>
-                    <div class="w-100"><p>Campaigns</p></div>
+                    <?php
+                    $query = "SELECT COUNT(campaign_id) FROM campaign";
+                    $result = mysqli_query($con, $query);
+                    $count = mysqli_fetch_assoc($result)['COUNT(campaign_id)'];
+                    ?>
+                    <div class="cal bg-success text-white rounded phpButton w-80 mx-3 align-self-center">
+                        <p><strong><?php echo $count ?></strong> </p>
+                    </div>
+                    <div class="w-100">
+                        <p>Campaigns</p>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- End of Php Numbers -->
         <div class="aboutUs" id="aboutUs">
-            <h2 class="mt-5 mb-5 text-center">About Us</h2>
+            <h2 class="mt-5 mb-5 text-center">ABOUT US</h2>
             <div class="cards d-flex justify-content-center mb-4">
 
                 <div class="card mx-2" style="width: 18rem; height:20rem">
@@ -156,35 +181,39 @@
         <!-- Mission Vision End-->
         <!-- Categories -->
         <div class="jumbo3 ">
-        <h3 class="mt-5"><strong class="mt-5">CATEGORIES</strong></h3>
+            <h3 class="mt-5"><strong class="mt-5">CATEGORIES</strong></h3>
             <p class="font-weight-light">Let us help you in creating a better tomorrow.</p>
+
             <div class="choices d-flex justify-content-center ">
-            <div class="cash w-10 border border rounded alert alert-light me-4 cardDisplay">
-                <a href="#">
-                <i class="fa-solid fa-money-bill-wave"></i><br>
-                <span>Cash</span>
-                </a>
+
+                <div class="cash w-10 border border rounded alert alert-light me-4 cardDisplay">
+                    <a href="#">
+                        <img src="images/category-cash.png" style="height: 30px;">
+                        <span>Cash</span>
+                    </a>
+                </div>
+                <div class="school w-10 border border rounded alert alert-light me-4 cardDisplay">
+                    <a href="#">
+                        <img src="images/category-school.png" style="height: 30px;">
+                        <span>School</span>
+                    </a>
+                </div>
+                <div class="faci w-10 border border rounded alert alert-light me-4 cardDisplay">
+                    <a href="#">
+                        <img src="images/category-facilitator.png" style="height: 30px;">
+                        <span>Facilitator</span>
+                    </a>
+                </div>
+                <div class="service w-10 border border rounded alert alert-light me-4 cardDisplay">
+                    <a href="#">
+                        <img src="images/category-service.png" style="height: 30px;">
+                        <span>Service</span>
+                    </a>
+                </div>
             </div>
-            <div class="school w-10 border border rounded alert alert-light me-4 cardDisplay">
-                <a href="#">
-                <i class="fa-sharp fa-solid fa-school"></i>
-                <span>School</span>
-                </a>
+            <div class="d-flex flex-row mt-3 mb-3 ms-3">
+                <h2 class="text-start me-3">Latest Campaigns</h2> <button class="btn btn-success">View More</button>
             </div>
-            <div class="faci w-10 border border rounded alert alert-light me-4 cardDisplay">
-                <a href="#">
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <span>Facilitator</span>
-                </a>
-            </div>
-            <div class="service w-10 border border rounded alert alert-light me-4 cardDisplay">
-                <a href="#">
-                <i class="fa-sharp fa-solid fa-gears"></i>
-                <span>Services</span>
-                </a>
-            </div>
-            </div>
-            <div class="d-flex flex-row mt-3 mb-3 ms-3"><h2 class="text-start me-3">Latest Campaigns</h2> <button class="btn btn-success">View More</button></div>
         </div>
         <div class="donation pt-5">
             <div class="cards d-flex justify-content-center pb-4">
@@ -196,11 +225,11 @@
                         <!-- Insert Category Type and Country -->
                         <p class="card-text">School | Malaysia</p>
                         <div class="progress">
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                         </div>
                         <div>
-                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
-                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                            <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                            <a href="#" class="btn btn-outline-success mt-3">Donate</a>
                         </div>
                     </div>
                 </div>
@@ -212,11 +241,11 @@
                         <!-- Insert Category Type and Country -->
                         <p class="card-text">School | Malaysia</p>
                         <div class="progress">
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                         </div>
                         <div>
-                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
-                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                            <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                            <a href="#" class="btn btn-outline-success mt-3">Donate</a>
                         </div>
                     </div>
                 </div>
@@ -228,11 +257,11 @@
                         <!-- Insert Category Type and Country -->
                         <p class="card-text">School | Malaysia</p>
                         <div class="progress">
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                         </div>
                         <div>
-                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
-                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                            <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                            <a href="#" class="btn btn-outline-success mt-3">Donate</a>
                         </div>
                     </div>
                 </div>
@@ -244,11 +273,11 @@
                         <!-- Insert Category Type and Country -->
                         <p class="card-text">School | Malaysia</p>
                         <div class="progress">
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                         </div>
                         <div>
-                        <a href="#" class="btn btn-outline-success mt-3">More Info</a>
-                        <a href="#" class="btn btn-outline-success mt-3">Donate</a>
+                            <a href="#" class="btn btn-outline-success mt-3">More Info</a>
+                            <a href="#" class="btn btn-outline-success mt-3">Donate</a>
                         </div>
                     </div>
                 </div>
@@ -263,215 +292,214 @@
         </div>
         <!-- End Of Contact Us -->
         <!-- Footer -->
-<footer class="text-center text-lg-start bg-white text-muted">
-  <!-- Section: Links  -->
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <!-- Grid row -->
-      <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <!-- Content -->
-         <h3 class="text-black">Sadaqah <br> Crowdfunding</h3>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4 text-black">
-            Categories
-          </h6>
-          <p>
-            <a href="#!" class="text-reset">Cash</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">School Necessity</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Services</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Facilitator</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4 text-black">
-            About
-          </h6>
-          <p>
-            <a href="#missionVision" class="text-reset">Our Mission</a>
-          </p>
-          <p>
-            <a href="#missionVision" class="text-reset">Our Vission</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4 text-black" >Contact</h6>
-          <p><i class="fab fa-facebook-f me-3 text-secondary"></i> Sadaqah Crowdfunding</p>
-          <p class="d-flex"><i class="fas fa-envelope me-3 text-secondary mt-2"></i>sadaqahcrowdfunding@gmail.com</p>
-          <p><i class="fas fa-phone me-3 text-secondary"></i> +6012-345-6789</p>
-          <p><i class="fa-sharp fa-solid fa-location-dot me-3 text-secondary"></i>Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah</p>
-        </div>
-        <!-- Grid column -->
-      </div>
-      <!-- Grid row -->
-    </div>
-  </section>
-  <!-- Section: Links  -->
-
-  <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-    </footer>
-<!-- Footer -->
-    </main>
-    <!-- Login Modal -->
-    <div class="container p-5 my-5">
-        <div class="modal fade" id="loginModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Form -->
-                    <form action="php/user_login_action.php" method="POST" id="loginForm">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">Login Form</h1>
-                            <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#loginModal"></a>
+        <footer class="text-center text-lg-start bg-white text-muted">
+            <!-- Section: Links  -->
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h3 class="text-black">Sadaqah <br> Crowdfunding</h3>
+                            </p>
                         </div>
-                        <div class="modal-body">
-                            <a href="../index.php">
-                                <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
-                            </a>
+                        <!-- Grid column -->
 
-                            <!-- Input -->
-                            <div class="form-group mb-3">
-                                <label for="user_username" class="form-label">Username</label>
-                                <div class="input-group">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="user_username" name="user_username" placeholder="Enter username" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="user_password" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-lock"></i>
-                                    </div>
-                                    <input type="password" class="form-control" placeholder="Enter your password" name="user_password" required />
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <?php
-                                /* Check for wrong password */
-                                if (isset($_GET["error"]) && $_GET["error"] == 'username') {
-                                    echo '<span style="color: red;">Username does not exist!</span>';
-                                } else if (isset($_GET["error"]) && $_GET["error"] == 'password') {
-                                    echo '<span style="color: red;">Wrong password!</span>';
-                                }
-                                ?>
-                            </div>
-                            Don't have an account?
-                            <a href="#registerModal" data-target="#registerModal" data-bs-toggle="modal" title="Go to Register Form">
-                                Register Now
-                            </a>
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4 text-black">
+                                Categories
+                            </h6>
+                            <p>
+                                <a href="#!" class="text-reset">Cash</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">School Necessity</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Services</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Facilitator</a>
+                            </p>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name="login-button">Login</button>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4 text-black">
+                                About
+                            </h6>
+                            <p>
+                                <a href="#missionVision" class="text-reset">Our Mission</a>
+                            </p>
+                            <p>
+                                <a href="#missionVision" class="text-reset">Our Vission</a>
+                            </p>
                         </div>
-                    </form>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4 text-black">Contact</h6>
+                            <p><i class="fab fa-facebook-f me-3 text-secondary"></i> Sadaqah Crowdfunding</p>
+                            <p class="d-flex"><i class="fas fa-envelope me-3 text-secondary mt-2"></i>sadaqahcrowdfunding@gmail.com</p>
+                            <p><i class="fas fa-phone me-3 text-secondary"></i> +6012-345-6789</p>
+                            <p><i class="fa-sharp fa-solid fa-location-dot me-3 text-secondary"></i>Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah</p>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
                 </div>
+            </section>
+            <!-- Section: Links  -->
+
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+                © 2022 Copyright:
+                <a class="text-reset fw-bold" href="#">Lembaga Zakat Negeri Kedah</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </main>
+    <!-- End of Main -->
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Form -->
+                <form action="php/user_login_action.php" method="POST" id="loginForm">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Login Form</h1>
+                        <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#loginModal"></a>
+                    </div>
+                    <div class="modal-body">
+                        <a href="../index.php">
+                            <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
+                        </a>
+
+                        <!-- Input -->
+                        <div class="form-group mb-3">
+                            <label for="user_username" class="form-label">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <input type="text" class="form-control" id="user_username" name="user_username" placeholder="Enter username" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="user_password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <input type="password" class="form-control" placeholder="Enter your password" name="user_password" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <?php
+                            /* Check for wrong password */
+                            if (isset($_GET["error"]) && $_GET["error"] == 'username') {
+                                echo '<span style="color: red;">Username does not exist!</span>';
+                            } else if (isset($_GET["error"]) && $_GET["error"] == 'password') {
+                                echo '<span style="color: red;">Wrong password!</span>';
+                            }
+                            ?>
+                        </div>
+                        Don't have an account?
+                        <a href="#registerModal" data-target="#registerModal" data-bs-toggle="modal" title="Go to Register Form">
+                            Register Now
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="login-button">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Register Modal -->
-    <div class="container p-5 my-5">
-        <div class="modal fade registerModal" id="registerModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Form -->
-                    <form action="php/user_register_save.php" method="POST" id="registerForm">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">Registration Form</h1>
-                            <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#registerModal"></a>
+    <div class="modal fade registerModal" id="registerModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Form -->
+                <form action="php/user_register_save.php" method="POST" id="registerForm">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Registration Form</h1>
+                        <a class="btn-close" data-bs-dismiss="modal" data-bs-target="#registerModal"></a>
+                    </div>
+                    <div class="modal-body">
+                        <a href="../index.php">
+                            <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
+                        </a>
+                        <!-- Input -->
+                        <div class="form-group mb-2">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required />
                         </div>
-                        <div class="modal-body">
-                            <a href="../index.php">
-                                <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
-                            </a>
-                            <!-- Input -->
-                            <div class="form-group mb-2">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required />
-                            </div>
 
-                            <div class="mb-2">
-                                <?php
-                                /* Check for wrong password */
-                                if (isset($_GET["error"]) && $_GET["error"] == 'usernametaken') {
-                                    echo '<span style="color: red;">Username has been taken!</span>';
-                                }
-                                ?>
-                            </div>
+                        <div class="mb-2">
+                            <?php
+                            /* Check for wrong password */
+                            if (isset($_GET["error"]) && $_GET["error"] == 'usernametaken') {
+                                echo '<span style="color: red;">Username has been taken!</span>';
+                            }
+                            ?>
+                        </div>
 
-                            <div class="form-group mb-2">
-                                <label for="password" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" data-toggle="password" required />
-                                    <div class="input-group-text">
-                                        <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
-                                    </div>
+                        <div class="form-group mb-2">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" data-toggle="password" required />
+                                <div class="input-group-text">
+                                    <i class="fa fa-eye" id="toggleNewPassword" style="cursor: pointer"></i>
                                 </div>
                             </div>
-
-                            <div class="form-group mb-2">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required />
-                            </div>
-
-                            <div class="form-group mb-2">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required />
-                            </div>
-
-                            <div class="form-group mb-2">
-                                <label for="phone" class="form-label">Phone Number</label>
-                                <input type="number" step=1 class="form-control" id="phone" name="phone" required />
-                            </div>
-
-                            <div class="form-group mb-2">
-                                <label for="address" class="form-label">Address</label>
-                                <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
-                            </div>
-
-                            Already a member?
-                            <a href="#loginModal" data-target="#loginModal" data-bs-toggle="modal" title="Go to Login Form">
-                                Login Now
-                            </a>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name="register-button">Register</button>
+
+                        <div class="form-group mb-2">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required />
                         </div>
-                    </form>
-                </div>
+
+                        <div class="form-group mb-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required />
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" step=1 class="form-control" id="phone" name="phone" required />
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
+                        </div>
+
+                        Already a member?
+                        <a href="#loginModal" data-target="#loginModal" data-bs-toggle="modal" title="Go to Login Form">
+                            Login Now
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="register-button">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 
 
     <script>
