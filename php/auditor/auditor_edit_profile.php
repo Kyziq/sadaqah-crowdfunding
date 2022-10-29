@@ -83,12 +83,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="auditor_edit_profile.php">
+                <a class="nav-link" href="auditor_edit_profile.php">
                     <i class="bi bi-person"></i> <span>Profile</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="auditor_verify_payment.php">
+                <a class="nav-link collapsed" href="auditor_verify_payment.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Donation</span>
                 </a>

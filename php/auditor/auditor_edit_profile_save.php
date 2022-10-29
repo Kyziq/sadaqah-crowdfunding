@@ -49,11 +49,12 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'Your new account details has been saved.',
-                    text: '(Auto close in 5 seconds)',
+                    title: '<?php echo $user_name; ?>',
+                    text: 'Your new account details has been saved.',
+                    footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
-                    backdrop: `#192e59`,
+                    backdrop: `#1E976B`,
                     timer: 5000,
                     willClose: () => {
                         window.location.href = 'auditor_edit_profile.php';
@@ -65,7 +66,7 @@
 
 
         /** Edit password button is clicked **/
-        elseif (isset($_POST['edit-password-button'])) {
+        else if (isset($_POST['edit-password-button'])) {
             /* Get all the posted items */
             $currentPassword = $_POST['currentPassword'];
             $newPassword = $_POST['newPassword'];
@@ -88,11 +89,12 @@
                     <script>
                         Swal.fire({
                             icon: 'error',
-                            title: 'Your new password cannot be the same as your current password.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Oops...',
+                            text: 'Your new password cannot be the same as your current password.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'auditor_edit_profile.php';
@@ -106,11 +108,12 @@
                     <script>
                         Swal.fire({
                             icon: 'error',
-                            title: 'Your new password and confirm new password do not match.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Oops...',
+                            text: 'Your new password and confirm new password do not match.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'auditor_edit_profile.php';
@@ -133,11 +136,12 @@
                     <script>
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your password has been changed.',
-                            text: '(Auto close in 5 seconds)',
+                            title: 'Success!',
+                            text: 'Your password has been changed.',
+                            footer: '(Auto close in 5 seconds)',
                             showConfirmButton: true,
                             confirmButtonText: 'Confirm',
-                            backdrop: `#192e59`,
+                            backdrop: `#1E976B`,
                             timer: 5000,
                             willClose: () => {
                                 window.location.href = 'auditor_edit_profile.php';
@@ -152,11 +156,12 @@
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Your current password is incorrect.',
-                        text: '(Auto close in 5 seconds)',
+                        title: 'Oops...',
+                        text: 'Your current password is incorrect.',
+                        footer: '(Auto close in 5 seconds)',
                         showConfirmButton: true,
                         confirmButtonText: 'Confirm',
-                        backdrop: `#192e59`,
+                        backdrop: `#1E976B`,
                         timer: 5000,
                         willClose: () => {
                             window.location.href = 'auditor_edit_profile.php';
