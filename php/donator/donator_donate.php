@@ -125,7 +125,7 @@
                 <!-- card -->
                 <div class="col-lg-3 d-flex align-items-stretch" style="">
                     <div class="card">
-                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:90%" alt="...">
+                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top mx-auto mt-2 rounded" style="width:95%" alt="...">
                         <div class="card-body">
                             <h5 class="card-title h-20 mb-3" style="height:100px"><?php echo $row['campaign_name']; ?></h5>
                             <h6 class="card-subtitle mb-3 text-muted overflow-auto" style="height:100px"><?php echo $row['campaign_description']; ?></h6>
