@@ -187,14 +187,13 @@
                                             <i class="bi bi-currency-dollar"></i>
                                         </div>
                                         <div class="ps-3">
+                                            <?php
+                                            $query = "SELECT SUM(campaign_raised) FROM campaign";
+                                            $result = mysqli_query($con, $query);
+                                            $count = mysqli_fetch_assoc($result)['SUM(campaign_raised)'];
+                                            ?>
                                             <h6>
-                                                RM?????
-                                                <?php
-                                                // $query = "SELECT SUM(campaign_amount) FROM campaign";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                // echo $count;
-                                                ?>
+                                                RM<?php echo $count ?>
                                             </h6>
                                             <span class="text-muted small">from</span>
                                             <span class="text-success small fw-bold">all campaigns</span>
@@ -214,14 +213,13 @@
                                             <i class="bi bi-wallet"></i>
                                         </div>
                                         <div class="ps-3">
+                                            <?php
+                                            // $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
+                                            // $result = mysqli_query($con, $query);
+                                            // $count = mysqli_fetch_assoc($result)['COUNT(donate_id)'];
+                                            ?>
                                             <h6>
-                                                ????????
-                                                <?php
-                                                // $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                 // echo $count;
-                                                ?>
                                             </h6>
                                             <span class="text-muted small">needs to be</span>
                                             <span class="text-danger small fw-bold">verified</span>
