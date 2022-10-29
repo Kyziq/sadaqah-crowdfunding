@@ -115,7 +115,6 @@
                 <?php
                 for ($a = 0; $a < $numrow; $a++) {
                     $row = mysqli_fetch_array($result);
-
                     if ($row['campaign_raised'] == 0) {
                         $percentageBar = 0;
                     } else {
@@ -165,11 +164,33 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <form action="donator_donation.php" method="post">
+                                <div class="form-group mb-3">
+                                    <label for="campaignId">Campaign Id:</label>
+                                    <input type="text" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $row['campaign_id']; ?>" readonly> 
+                                </div>
+                                <div class="form-group mb-3">
+                                <label for="campaignName">Campaign Name:</label>
+                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
+                                </div>
+                                <div class="form-group mb-3">
+                                <label for="campaignDonate">Donate Amount RM:</label>
+                                    <input type="number" class="form-control" id="campaignDonate" name="donate_amount" placeholder="Insert Amount..." required> 
+                                </div>
+                                <div class="form-group mb-3">
+                                <label for="campaignProof">Donate Date:</label>
+                                    <input type="date" class="form-control" id="campaignDate" name="donate_date" required> 
+                                </div>
+                                <div class="form-group mb-3">
+                                <label for="campaignProof">Donate Proof:</label>
+                                    <input type="file" class="form-control" id="campaignProof" name="donate_proof" required> 
+                                </div>
+                            
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Donate Now</button>
+                            <button type="submit" class="btn btn-success" name="donate-button">Donate Now</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
