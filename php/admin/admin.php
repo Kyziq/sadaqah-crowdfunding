@@ -214,12 +214,12 @@
                                         </div>
                                         <div class="ps-3">
                                             <?php
-                                            // $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
-                                            // $result = mysqli_query($con, $query);
-                                            // $count = mysqli_fetch_assoc($result)['COUNT(donate_id)'];
+                                            $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
+                                            $result = mysqli_query($con, $query);
+                                            $count = mysqli_fetch_assoc($result)['COUNT(donate_id)'];
                                             ?>
                                             <h6>
-                                                // echo $count;
+                                                <?php echo $count; ?>
                                             </h6>
                                             <span class="text-muted small">needs to be</span>
                                             <span class="text-danger small fw-bold">verified</span>
