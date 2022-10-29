@@ -211,34 +211,47 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Campaign</th>
-                                                <th scope="col">Amount Required</th>
-                                                <th scope="col">Amount Raised</th>
-                                                <th scope="col">Amount You Donated</th>
+                                                <th scope="col">Amount Required (RM)</th>
+                                                <th scope="col">Amount Raised (RM)</th>
+                                                <th scope="col">Amount You Donated (RM)</th>
                                                 <th scope="col">Donation Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row"><a href="">(name)</a></th>
-                                                <td>(amount)</td>
-                                                <td>(raised)</td>
-                                                <td>(donated)</td>
-                                                <td class="text-danger">Declined</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="">(name)</a></th>
-                                                <td>(amount)</td>
-                                                <td>(raised)</td>
-                                                <td>(donated)</td>
-                                                <td class="text-success">Accepted</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="">(name)</a></th>
-                                                <td>(amount)</td>
-                                                <td>(raised)</td>
-                                                <td>(donated)</td>
-                                                <td class="text-warning">Pending</td>
-                                            </tr>
+                                            <?php
+                                            $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ?";
+                                            $stmt = $con->prepare($query);
+                                            $stmt->bind_param("i", $user_id);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result(); // Get the MySQLI result
+
+                                            $index = 0;
+                                            while ($camp = $result->fetch_assoc()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $camp['campaign_name'] ?></td>
+                                                    <td><?php echo $camp['campaign_amount'] ?></td>
+                                                    <td><?php echo $camp['campaign_raised'] ?></td>
+                                                    <td>
+                                                        <?php echo $camp['donate_amount'] ?>
+                                                    </td>
+                                                    <?php
+                                                    if ($camp['donate_status'] == 1) {
+                                                        echo '<td class="text-success">';
+                                                        echo 'Accepted';
+                                                    } else if ($camp['donate_status'] == 2) {
+                                                        echo '<td class="text-success">';
+                                                        echo 'Declined';
+                                                    } else if ($camp['donate_status'] == 3) {
+                                                        echo '<td class="text-warning">';
+                                                        echo 'Pending';
+                                                    }
+                                                    ?>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
