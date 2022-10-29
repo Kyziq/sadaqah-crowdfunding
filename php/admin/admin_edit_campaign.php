@@ -255,7 +255,7 @@
                                                                     <div class="form-group mb-2">
                                                                         <label for="banner" class="form-label">Campaign Banner</label>
                                                                         <input type="hidden" name="campaignBannerDir" value="<?php echo $r['campaign_banner']; ?>">
-                                                                        <input type="file" class="form-control" accept="image/*" name="campaignBanner">
+                                                                        <input type="file" class="form-control" accept="image/*" name="campaignFileBanner">
                                                                     </div>
                                                                     <div class="form-group mb-2">
                                                                         <label for="category" class="form-label">Campaign Category</label>
