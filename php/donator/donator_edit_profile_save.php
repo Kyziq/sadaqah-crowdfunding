@@ -101,7 +101,7 @@
                         })
                     </script>
                 <?php
-                } elseif ($newPassword != $confirmNewPassword) {
+                } else if ($newPassword != $confirmNewPassword) {
                 ?>
                     <!-- Fail Popup (new password and confirm new password do not match)-->
                     <script>
