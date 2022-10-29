@@ -16,6 +16,7 @@
 <body>
     <?php
     /* Start session and validate donator login */
+    include("../dbcon.php");
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         include_once '../dbcon.php'; // Connect to database 
@@ -106,33 +107,49 @@
         </div>
         <section class="section">
             <div class="row align-items-top">
-                <div class="col-lg-3">
+            <?php
+                $query = "SELECT * FROM campaign  ORDER BY campaign_id";
+                $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
+                $numrow = mysqli_num_rows($result);
+            ?>
+             <?php
+                for ($a = 0; $a < $numrow; $a++) {
+                    $row = mysqli_fetch_array($result);
+                    $percentageBar = 100-(($row['campaign_amount'] - $row['campaign_raised'])/100);
+
+                ?>
+                <!-- card -->
+                <div class="col-lg-3" style="">
                     <div class="card">
-                        <img src="https://icf.newscdn.net/publisher-c1a3f893382d2b2f8a9aa22a654d9c97/2020/07/79649a8efc2797598e9444f65ad85016.jpg" class="card-img-top" alt="...">
+                        <img src="<?php echo $row['campaign_banner']; ?>" class="card-img-top" style="width:" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Sedekah Bantuan Sekolah</h5>
-                            <h6 class="card-subtitle mb-3 text-muted">School | Malaysia</h6>
+                            <h5 class="card-title"><?php ?></h5>
+                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_description']; ?></h6>
+                            <h6 class="card-subtitle mb-3 text-muted"><?php echo $row['campaign_start']; ?></h6>
                             <div class="camp-progress my-3">
                                 <div class="d-flex justify-content-between">
-                                    <div class="fw-bold">
-                                        RM121,384
-                                    </div>
                                     <div class="fw-light">
-                                        of RM150,000
+                                        <?php echo 'RM' . $row['campaign_raised']; ?>
+                                    </div>
+                                    <div class="fw-bold">
+                                        of RM<?php echo $row['campaign_amount']; ?>
                                     </div>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" style="width: 81%">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar;?>%">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-btn d-flex justify-content-end" style="gap:10px">
-                                <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a>
-                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
+                                <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
+                                <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="modal fade" id="donate" tabindex="-1">
                 <div class="modal-dialog">

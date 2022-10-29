@@ -1106,3 +1106,7 @@ input[type="number"] {
 a {
     text-decoration: none;
 }
+
+.card-img-top{
+    height: 222.71px !important;
+}
