@@ -17,7 +17,7 @@
     <?php
     /* Start session and validate admin login */
     session_start();
-    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
         include_once '../dbcon.php'; // Connect to database 
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
@@ -74,58 +74,14 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="admin.php">
-                    <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
+                <a class="nav-link collapsed" href="auditor.php">
+                    <i class="bi bi-grid"></i> <span>Auditor Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="admin_edit_profile.php">
+                <a class="nav-link collapsed" href="auditor_edit_profile.php">
                     <i class="bi bi-person"></i> <span>Profile</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <!-- To Edit Auditor -->
-                    <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Auditor" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Auditor</span>
-                            </a>
-                        </form>
-                    </li>
-                    <!-- To Edit Donator -->
-                    <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Donator" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Donator</span>
-                            </a>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-clipboard"></i>
-                    <span>Campaign</span>
-                    <i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="campaign-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="admin_create_campaign.php">
-                            <i class="bi bi-circle"></i><span>Create Campaign</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="admin_edit_campaign.php">
-                            <i class="bi bi-circle"></i><span>Edit Campaign</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="admin_verify_payment.php">

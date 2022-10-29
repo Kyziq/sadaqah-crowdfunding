@@ -84,6 +84,12 @@
                     <span>Profile</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="auditor_verify_payment.php">
+                    <i class="bi bi-credit-card"></i>
+                    <span>Verify Donation</span>
+                </a>
+            </li>
         </ul>
     </aside>
     <main id="main" class="main">
