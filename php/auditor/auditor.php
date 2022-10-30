@@ -149,9 +149,8 @@
 
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">from</span>
-                                            <span class="text-success small fw-bold">86</span>
-                                            <span class="text-muted small">campaigns</span>
+                                            <span class="text-muted small">?</span>
+                                            <span class="text-success small fw-bold">?</span>
                                         </div>
                                     </div>
                                 </div>
