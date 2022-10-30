@@ -86,8 +86,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="auditor_verify_payment.php">
-                    <i class="bi bi-credit-card"></i>
+                <a class="nav-link collapsed" href="auditor_verify_donation.php">
+                    <i class="bi bi-cash-coin"></i>
                     <span>Verify Donation</span>
                 </a>
             </li>
@@ -113,7 +113,7 @@
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Total User
+                                        ?
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -121,14 +121,12 @@
                                         </div>
                                         <div class="ps-3">
                                             <h6>
+                                                ?
                                                 <?php
-                                                $query = "SELECT COUNT(*) FROM user";
-                                                $result = mysqli_query($con, $query);
-                                                $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                echo $count;
+
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">admins, auditors, donators</span>
+                                            <span class="text-muted small">?</span>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +136,7 @@
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Total Donation Raised
+                                        ?
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -146,12 +144,9 @@
                                         </div>
                                         <div class="ps-3">
                                             <h6>
-                                                RM?????
+                                                ?
                                                 <?php
-                                                // $query = "SELECT SUM(campaign_amount) FROM campaign";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                // echo $count;
+
                                                 ?>
                                             </h6>
                                             <span class="text-muted small">from</span>
@@ -166,20 +161,24 @@
                             <div class="card info-card customers-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Pending Payment Verification
+                                        Pending Donation Verification
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-wallet"></i>
+                                            <i class="bi bi-exclamation-lg"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6>
-                                                ????????
                                                 <?php
-                                                // $query = "SELECT COUNT(donate_id) FROM donate WHERE donate_status=3";
-                                                // $result = mysqli_query($con, $query);
-                                                // $count = mysqli_fetch_assoc($result)['COUNT(*)'];
-                                                // echo $count;
+                                                $campaign_status = 3; // Pending
+                                                $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status=?";
+                                                $stmt = $con->prepare($query);
+                                                $stmt->bind_param("i", $campaign_status);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result(); // Get the MySQLI result
+
+                                                $count = mysqli_fetch_assoc($result)['COUNT(campaign_id)'];
+                                                echo $count;
                                                 ?>
                                             </h6>
                                             <span class="text-muted small">needs to be</span>

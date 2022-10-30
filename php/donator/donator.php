@@ -160,10 +160,11 @@
                                                 $stmt->bind_param("ii", $user_id, $donate_status);
                                                 $stmt->execute();
                                                 $result = $stmt->get_result(); // Get the MySQLI result
-
                                                 $count = mysqli_fetch_assoc($result)['SUM(d.donate_amount)'];
+
+                                                $result = $count == 0 ? 0 : $count;
+                                                echo 'RM' . $result;
                                                 ?>
-                                                RM<?php echo $count; ?>
                                             </h6>
                                             <span class="text-muted small">you</span>
                                             <span class="text-success small fw-bold">contributed</span>
