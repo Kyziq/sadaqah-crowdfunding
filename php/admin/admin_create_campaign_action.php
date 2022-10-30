@@ -32,6 +32,7 @@
             $endDate  = $_POST['endDate'];
             $campaignRaised = 0;
             $campaignAdminId = $_SESSION['user_id'];
+            $campaignStatus = 3; // 3 = Pending
 
             /* File Upload */
             date_default_timezone_set('Asia/Singapore');
@@ -82,9 +83,9 @@
                 if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
                     $campaignFileBanner = $target_file;
 
-                    $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_banner, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised, campaign_admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_banner, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised, campaign_admin_id, campaign_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($query);
-                    $stmt->bind_param("sssidssdi", $campaignName, $campaignDesc, $campaignFileBanner, $campaignCategory, $campaignAmount, $startDate, $endDate, $campaignRaised, $campaignAdminId);
+                    $stmt->bind_param("sssidssdii", $campaignName, $campaignDesc, $campaignFileBanner, $campaignCategory, $campaignAmount, $startDate, $endDate, $campaignRaised, $campaignAdminId, $campaignStatus);
                     $stmt->execute();
     ?>
                     <!-- Success Popup -->
