@@ -213,9 +213,10 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Campaign</th>
-                                                <th scope="col">Amount Required (RM)</th>
-                                                <th scope="col">Amount Raised (RM)</th>
-                                                <th scope="col">Amount You Donated (RM)</th>
+                                                <th scope="col">Donate Date</th>
+                                                <th scope="col">Required (RM)</th>
+                                                <th scope="col">Raised (RM)</th>
+                                                <th scope="col">Donated (RM)</th>
                                                 <th scope="col">Donation Status</th>
                                             </tr>
                                         </thead>
@@ -232,11 +233,15 @@
                                             ?>
                                                 <tr>
                                                     <td><?php echo $camp['campaign_name'] ?></td>
+                                                    <td>
+                                                        <?php
+                                                        $date = date('d-m-Y', strtotime($camp['donate_date']));
+                                                        echo $date;
+                                                        ?>
+                                                    </td>
                                                     <td><?php echo $camp['campaign_amount'] ?></td>
                                                     <td><?php echo $camp['campaign_raised'] ?></td>
-                                                    <td>
-                                                        <?php echo $camp['donate_amount'] ?>
-                                                    </td>
+                                                    <td><?php echo $camp['donate_amount'] ?></td>
                                                     <?php
                                                     if ($camp['donate_status'] == 1) {
                                                         echo '<td class="text-success">';
@@ -259,27 +264,58 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card top-selling overflow-auto">
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Today</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">This Month</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">This Year</a>
-                                        </li>
-                                    </ul>
+
+                        <!-- Accepted Donation Table -->
+                        <?php
+                        $donation_status = 1; // 1 = Accepted
+                        $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? AND d.donate_status = ?";
+                        $stmt = $con->prepare($query);
+                        $stmt->bind_param("ii", $user_id, $donate_status);
+                        $stmt->execute();
+                        $result = $stmt->get_result(); // Get the MySQLI result
+
+                        while ($camp = $result->fetch_assoc()) {
+                            if ($camp > 0) { // Must at least have 1 donation accepted
+                        ?>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Receipt for Accepted Donation</h5>
+
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Campaign</th>
+                                                        <th scope="col">Donate Date</th>
+                                                        <th scope="col">Donated (RM)</th>
+                                                        <th scope="col">Receipt</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td><?php echo $camp['campaign_name'] ?></td>
+                                                        <td>
+                                                            <?php
+                                                            $date = date('d-m-Y', strtotime($camp['donate_date']));
+                                                            echo $date;
+                                                            ?>
+                                                        </td>
+                                                        <td><?php echo $camp['donate_amount']; ?></td>
+                                                        <td>
+                                                            <button class="btn btn-primary">Print</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-4">
