@@ -188,14 +188,12 @@
                                             <i class="bi bi-currency-dollar"></i>
                                         </div>
                                         <div class="ps-3">
-
                                             <h6>
-                                                RM
                                                 <?php
                                                 $query = "SELECT SUM(campaign_raised) FROM campaign";
                                                 $result = mysqli_query($con, $query);
                                                 $count = mysqli_fetch_assoc($result)['SUM(campaign_raised)'];
-                                                echo $count;
+                                                echo "RM" . $count;
                                                 ?>
                                             </h6>
                                             <span class="text-muted small">from</span>
