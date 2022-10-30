@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2022 at 12:51 PM
+-- Generation Time: Oct 30, 2022 at 04:54 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -46,11 +46,11 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`) VALUES
-(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', '../../images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah-2022-10-29.jpg', 1, 10000, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 1),
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', '../../images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah-2022-10-29.jpg', 1, 10000, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:20:07', 1),
 (2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', '../../images/campaign/(Misi Banjir Baling) Baik Pulih Rumah-2022-10-29.png', 4, 20000, '2022-10-29 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:27:54', 1),
 (3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation.', '../../images/campaign/MERCY Mission Malaysia-2022-10-29.jpg', 3, 24000, '2022-10-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:29:43', 1),
 (4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', '../../images/campaign/Ringankan Beban Golongan Terjejas-2022-10-29.jpg', 1, 5000, '2022-11-05 00:00:00.000000', '2022-11-20 00:00:00.000000', 0, '2022-10-29 09:33:40', 1),
-(5, 'Yayasan Institut Jantung Negara', 'Memberi bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara.', '../../images/campaign/Yayasan Institut Jantung Negara-2022-10-29.jpg', 3, 200000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:36:06', 1),
+(5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', '../../images/campaign/Yayasan Institut Jantung Negara-2022-10-29.jpg', 3, 200000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:36:06', 1),
 (6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', '../../images/campaign/Bantuan Sekolah-Sekolah Malaysia-2022-10-29.jpg', 2, 8000, '2022-11-10 00:00:00.000000', '2022-12-10 00:00:00.000000', 0, '2022-10-29 09:40:37', 1);
 
 -- --------------------------------------------------------
@@ -82,9 +82,9 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 
 CREATE TABLE `donate` (
   `donate_id` int(11) NOT NULL,
-  `donate_amount` int(11) NOT NULL,
+  `donate_amount` double NOT NULL,
   `donate_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
-  `donate_proof` varchar(100) NOT NULL,
+  `donate_proof` varchar(200) NOT NULL,
   `donate_status` int(11) NOT NULL,
   `donator_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `user_email`, `user_phone`, `user_address`, `user_level`) VALUES
-(1, 'haziq', '$2y$10$TJdaXkMIK.WU6j1n79ZCuuw/2bih9ILL8XDqwltzRMFpIszwSWT7C', 'Muhammad Khairul Haziq bin Mohamad Khairi', 'ihaziqkhairi@gmail.com', '0164005754', '28, Jln 2K, Bandar Tropika, 62209 Precinct 8, Putrajaya', 1),
+(1, 'haziq', '$2y$10$zSiPHRket9McR8nGFnueXu6imkY97sySIKUSMy687jCwAGAc9G1k.', 'Muhammad Khairul Haziq bin Mohamad Khairi', 'ihaziqkhairi@gmail.com', '0164005754', '28, Jln 2K, Bandar Tropika, 62209 Precinct 8, Putrajaya', 1),
 (2, 'gopi', '$2y$10$tHlRCmwoTLXVM4Av6gEdt.ntiCR9gudqKTQKgThgFZWq48qrKJL0O', 'Gopinathan a/l Pragash', 'gopinathan@yahoo.com', '0179620125', 'No. 1, Jalan Ampang 8/4, SS64O, 62040 Precinct 5, Putrajaya', 3),
 (3, 'shazwan', '$2y$10$PcbMA9xHXDa.GUP2PHsi3.JypawKONQ3.K0v2A/wBwCoBOwrw.f/u', 'Muhammad Shazwan bin Ikmal', 'shazwan@gmail.com', '0198662327', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 2),
 (4, 'natasha', '$2y$10$jEG37OkT.JoumBI/iDQfIuSGnqaoMU9Dn8FjPxeGEYjtqgIRtPsIS', 'Natasha Aliah binti Ahmad', 'natashaaliah@gmail.com', '0129589912', 'No. 1G-90, Jln Cochrane 3P, Bandar Sri Rahman, 52746 Sungai Lembing, Pahang Darul Makmur', 2),
@@ -172,8 +172,9 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `u
 
 CREATE TABLE `verification` (
   `verification_id` int(11) NOT NULL,
-  `verification_comment` varchar(200) NOT NULL,
   `verification_status` varchar(100) NOT NULL,
+  `verification_comment` varchar(300) NOT NULL,
+  `verification_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `campaign_id` int(11) NOT NULL,
   `auditor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
