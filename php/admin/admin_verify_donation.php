@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin Verify Payment</title>
+    <title>Donation Verification</title>
+    <link rel="icon" href="../../images/logo-LZNK.ico">
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -24,7 +25,7 @@
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
         $result = $stmt->get_result(); // Get the MySQLi result
-        $r = $result->fetch_assoc(); // Fetch data  
+        $user = $result->fetch_assoc(); // Fetch data  
     } else {
         header("Location: ../user_logout.php");
     }
@@ -41,11 +42,11 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle" style="font-size: 36px"></i>
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $r["user_username"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $user['user_username']; ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?php echo $r["user_username"]; ?></h6>
+                            <h6><?php echo $user["user_username"]; ?></h6>
                             <span>Admin</span>
                         </li>
                         <li>
@@ -148,62 +149,83 @@
             </nav>
         </div>
         <?php
-                $query = "SELECT * FROM donate ORDER BY donate_id";
-                $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
-                $numrow = mysqli_num_rows($result);
-                ?>
+        $donate_status = 3; // 3 = Pending
+        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id=u.user_id AND c.campaign_id=d.campaign_id AND donate_status=?"; // SQL
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $donate_status);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        ?>
+        <section class="section">
+            <div class="row align-items-top">
+                <h5 class="card-title">Pending Donation Verification List</h5>
                 <?php
-                for ($a = 0; $a < $numrow; $a++) {
-                    $row = mysqli_fetch_array($result);
+                $index = 0;
+                while ($r = $result->fetch_assoc()) {
                 ?>
-                <section class="section">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Pending Donation</h5>
-                            <form action="verify_payment_save.php" method="post">
-                                <div class="form-group mb-3">
-                                <label for="campaignName">Campaign Name:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
                                 </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignName">Donator ID:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donator_id']; ?>" readonly> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignName">Donator Name:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
-                                </div>
-                                <div class="form-group mb-3">
-                                <label for="campaignName">Donated Date:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donate_date']; ?>" readonly> 
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="exampleFormControlSelect1">Verify Donation</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                    <option selected>Please Select</option>
-                                    <option value="1">Approved</option>
-                                    <option value="2">Declined</option>
-                                    </select>
-                                </div>                                
-                                <div class="form-group mb-3">
-                                <label for="verifier">verifier ID:</label>
-                                    <input type="text" class="form-control" id="verifier" name="admin_id" placeholder="Your ID.."> 
-                                </div>
-                                <div class="d-flex mt-auto justify-content-center" style="gap:10px">
-                                <button class="btn btn-success d-flex flex-row-reverse" type="submit">Submit</button>
-                                </div>
-                            </form>
+                                <!-- Verify Donation Form -->
+                                <form action="verify_payment_save.php" method="post">
+                                    <input type="hidden" name="admin_id" value="<?php echo $user['user_id']; ?>">
+                                    <input type="hidden" name="donator_id" value="<?php echo $r['donator_id']; ?>">
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                        <label for="floatingInput">Campaign Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" name="donator_name" value="<?php echo $r['user_name']; ?>" readonly>
+                                        <label for="floatingInput">Donator Name</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select">
+                                            <option selected disabled>Please Select</option>
+                                            <option value="1">Approve</option>
+                                            <option value="2">Decline</option>
+                                        </select>
+                                        <label class="form-label">Action</label>
+                                    </div>
+                                    <div class="d-flex mt-auto justify-content-center" style="gap:10px">
+                                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
+                                        <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    
                     </div>
-                </div>
+
+                    <!-- Modal Proof of Payment -->
+                    <div class="modal fade" id="proof-modal-<?php echo $index ?>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        Proof of Payment
+                                        (<?php echo $r['user_name']; ?>)
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="display: flex;">
+                                    <img src=" <?php echo $r['donate_proof'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                    $index++;
+                }
+                ?>
             </div>
         </section>
-        <?php
-          }
-        ?>
+
     </main>
+
     <footer id="footer" class="footer">
         <div class="copyright">
             &copy; Copyright <strong><span>Lembaga Zakat Negeri Kedah Darul Aman</span></strong>. All Rights Reserved
