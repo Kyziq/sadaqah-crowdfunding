@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Sadaqah Crowdfunding</title>
+    <link rel="icon" href="images/logo-LZNK.ico">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -217,7 +218,7 @@
         </div>
         <div class="donation pt-5">
             <div class="cards d-flex justify-content-center pb-4">
-            <?php
+                <?php
                 $query = "SELECT * FROM campaign ORDER BY campaign_id limit 5";
                 $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
                 $numrow = mysqli_num_rows($result);
@@ -231,24 +232,24 @@
                         $percentageBar = 100 - (($row['campaign_amount'] - $row['campaign_raised']) / 100);
                     }
                 ?>
-                <!-- card -->
-                <div class="card mx-2" style="width: 18rem; height:22rem">
-                    <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <!--Insert PHP Donation title  -->
-                        <h5 class="card-title overflow-auto" style="height:60px;"><?php echo $row['campaign_name']; ?></h5>
-                        <p class="card-text overflow-auto style="height:60px;">test</p> 
-                        <!-- Insert Category Type and Country -->
-                        <div class="position-absolute bottom-0 end-0 mb-2 me-2" style="gap:10px">
+                    <!-- card -->
+                    <div class="card mx-2" style="width: 18rem; height:22rem">
+                        <img src="https://9tailedkitsune.com/wp-content/uploads/2021/12/nezukoowo.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <!--Insert PHP Donation title  -->
+                            <h5 class="card-title overflow-auto" style="height:60px;"><?php echo $row['campaign_name']; ?></h5>
+                            <p class="card-text overflow-auto style=" height:60px;">test</p>
+                            <!-- Insert Category Type and Country -->
+                            <div class="position-absolute bottom-0 end-0 mb-2 me-2" style="gap:10px">
                                 <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
                                 <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate">Donate</button>
                             </div>
+                        </div>
                     </div>
-                </div>
                 <?php
                 }
                 ?>
-                
+
             </div>
         </div>
         <!-- Contact Us -->

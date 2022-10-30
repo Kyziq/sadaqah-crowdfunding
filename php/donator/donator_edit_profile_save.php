@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Details Saved</title>
+    <title>Account Details</title>
+    <link rel="icon" href="../../images/logo-LZNK.ico">
 
     <!-- Imports -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -18,7 +19,7 @@
     <?php
     /** Start session and validate user **/
     session_start();
-    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
+    if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         include_once '../dbcon.php'; // Connect to database
         $user_id = $_SESSION['user_id'];
 

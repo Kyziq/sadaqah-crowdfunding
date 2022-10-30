@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Admin Dashboard</title>
+    <link rel="icon" href="../../images/logo-LZNK.ico">
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -128,7 +129,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="admin_verify_payment.php">
+                <a class="nav-link collapsed" href="admin_verify_donation.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Payment</span>
                 </a>

@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Donator Dashboard</title>
+    <title>Donation Page</title>
+    <link rel="icon" href="../../images/logo-LZNK.ico">
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -125,7 +126,7 @@
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
                             <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="...">
+                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>

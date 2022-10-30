@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin Verify Payment</title>
+    <title>Payment Verification</title>
+    <link rel="icon" href="../../images/logo-LZNK.ico">
 
     <!-- Imports -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
@@ -104,60 +105,60 @@
             </nav>
         </div>
         <?php
-                $query = "SELECT * FROM donate ORDER BY donate_id";
-                $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
-                $numrow = mysqli_num_rows($result);
-                ?>
-                <?php
-                for ($a = 0; $a < $numrow; $a++) {
-                    $row = mysqli_fetch_array($result);
-                ?>
-                <section class="section">
+        $query = "SELECT * FROM donate ORDER BY donate_id";
+        $result = mysqli_query($con, $query) or die("Error: " . mysqli_error($con));
+        $numrow = mysqli_num_rows($result);
+        ?>
+        <?php
+        for ($a = 0; $a < $numrow; $a++) {
+            $row = mysqli_fetch_array($result);
+        ?>
+            <section class="section">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Pending Donation</h5>
                             <form action="verify_payment_save.php" method="post">
                                 <div class="form-group mb-3">
-                                <label for="campaignName">Campaign Name:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
+                                    <label for="campaignName">Campaign Name:</label>
+                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly>
                                 </div>
                                 <div class="form-group mb-3">
-                                <label for="campaignName">Donator ID:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donator_id']; ?>" readonly> 
+                                    <label for="campaignName">Donator ID:</label>
+                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donator_id']; ?>" readonly>
                                 </div>
                                 <div class="form-group mb-3">
-                                <label for="campaignName">Donator Name:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly> 
+                                    <label for="campaignName">Donator Name:</label>
+                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['campaign_name']; ?>" readonly>
                                 </div>
                                 <div class="form-group mb-3">
-                                <label for="campaignName">Donated Date:</label>
-                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donate_date']; ?>" readonly> 
+                                    <label for="campaignName">Donated Date:</label>
+                                    <input type="text" class="form-control" id="campaignName" value="<?php echo $row['donate_date']; ?>" readonly>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="exampleFormControlSelect1">Verify Donation</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
-                                    <option selected>Please Select</option>
-                                    <option value="1">Approved</option>
-                                    <option value="2">Declined</option>
+                                        <option selected>Please Select</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Declined</option>
                                     </select>
-                                </div>                                
+                                </div>
                                 <div class="form-group mb-3">
-                                <label for="verifier">verifier ID:</label>
-                                    <input type="text" class="form-control" id="verifier" name="admin_id" placeholder="Your ID.."> 
+                                    <label for="verifier">verifier ID:</label>
+                                    <input type="text" class="form-control" id="verifier" name="admin_id" placeholder="Your ID..">
                                 </div>
                                 <div class="d-flex mt-auto justify-content-center" style="gap:10px">
-                                <button class="btn btn-success d-flex flex-row-reverse" type="submit">Submit</button>
+                                    <button class="btn btn-success d-flex flex-row-reverse" type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>
-                    
+
                     </div>
                 </div>
-            </div>
-        </section>
+                </div>
+            </section>
         <?php
-          }
+        }
         ?>
     </main>
     <footer id="footer" class="footer">
