@@ -129,7 +129,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin_verify_payment.php">
+                <a class="nav-link" href="admin_verify_donation.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Donation</span>
                 </a>
@@ -170,7 +170,7 @@
                                     <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
                                 </div>
                                 <!-- Verify Donation Form -->
-                                <form action="verify_payment_save.php" method="post">
+                                <form action="admin_verify_doantion_action.php" method="post">
                                     <input type="hidden" name="admin_id" value="<?php echo $user['user_id']; ?>">
                                     <input type="hidden" name="donator_id" value="<?php echo $r['donator_id']; ?>">
 
