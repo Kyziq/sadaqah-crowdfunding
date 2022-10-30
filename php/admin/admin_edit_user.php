@@ -190,8 +190,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($r = $result->fetch_assoc()) {
-                                        ?>
+                                        <?php while ($r = $result->fetch_assoc()) { ?>
                                             <form action="admin_edit_user_action.php" method="POST">
                                                 <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
                                                 <tr>
