@@ -214,7 +214,7 @@
                                             <tr>
                                                 <th scope="col">Campaign</th>
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Donated (RM)</th>
+                                                <th scope="col">Donation Amount (RM)</th>
                                                 <th scope="col">Donation Status</th>
                                             </tr>
                                         </thead>
@@ -276,14 +276,14 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">Receipt for Accepted Donation</h5>
+                                            <h5 class="card-title"> Accepted Donation History</h5>
 
                                             <table class="table">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Campaign</th>
-                                                        <th scope="col">Donate Date</th>
-                                                        <th scope="col">Donated (RM)</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Donation Amount (RM)</th>
                                                         <th scope="col">Receipt</th>
                                                     </tr>
                                                 </thead>
@@ -293,7 +293,7 @@
                                                         <td><?php echo $camp['campaign_name'] ?></td>
                                                         <td>
                                                             <?php
-                                                            $date = date('d-m-Y', strtotime($camp['donate_date']));
+                                                            $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
                                                             echo $date;
                                                             ?>
                                                         </td>
@@ -369,7 +369,7 @@
                     <div class="card">
                         <div class="card-body pb-0">
                             <?php
-                            $query = "SELECT COUNT(*) FROM campaign";
+                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = 1";
                             $result = mysqli_query($con, $query);
                             $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
                             ?>
