@@ -273,7 +273,7 @@
                     <div class="card">
                         <div class="card-body pb-0">
                             <?php
-                            $query = "SELECT COUNT(*) FROM campaign";
+                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = 1";
                             $result = mysqli_query($con, $query);
                             $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
                             ?>
