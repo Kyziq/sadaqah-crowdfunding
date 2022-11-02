@@ -168,8 +168,8 @@
                             </div>
                             <div class="card-footer">
                                 <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px ">
-                                    <a class="btn btn-outline-success" href="#" target="_blank" role="button">More Info</a>
-                                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
+                                    <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" name="donate-button">Donate Now</button>
+                                        <button type="submit" class="btn btn-primary" name="donate-button">Donate Now</button>
                                     </div>
                                 </form>
                             </div>
@@ -240,7 +240,7 @@
         </div>
         <div class="credits"></div>
     </footer>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center bg-success"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center bg-primary"><i class="bi bi-arrow-up-short"></i></a>
 
     <?php
     // Close connection
