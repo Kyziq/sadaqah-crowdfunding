@@ -213,16 +213,14 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Campaign</th>
-                                                <th scope="col">Donate Date</th>
-                                                <th scope="col">Required (RM)</th>
-                                                <th scope="col">Raised (RM)</th>
+                                                <th scope="col">Date</th>
                                                 <th scope="col">Donated (RM)</th>
                                                 <th scope="col">Donation Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ?";
+                                            $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
                                             $stmt = $con->prepare($query);
                                             $stmt->bind_param("i", $user_id);
                                             $stmt->execute();
@@ -235,12 +233,10 @@
                                                     <td><?php echo $camp['campaign_name'] ?></td>
                                                     <td>
                                                         <?php
-                                                        $date = date('d-m-Y', strtotime($camp['donate_date']));
+                                                        $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
                                                         echo $date;
                                                         ?>
                                                     </td>
-                                                    <td><?php echo $camp['campaign_amount'] ?></td>
-                                                    <td><?php echo $camp['campaign_raised'] ?></td>
                                                     <td><?php echo $camp['donate_amount'] ?></td>
                                                     <?php
                                                     if ($camp['donate_status'] == 1) {
@@ -477,7 +473,7 @@
         </div>
         <div class="credits"></div>
     </footer>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center bg-success"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center bg-primary"><i class="bi bi-arrow-up-short"></i></a>
 
     <?php
     // Close connection
