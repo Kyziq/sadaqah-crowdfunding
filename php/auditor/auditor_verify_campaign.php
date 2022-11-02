@@ -123,9 +123,11 @@
                 while ($r = $result->fetch_assoc()) {
                     $startDate = date("d M Y", strtotime($r["campaign_start"]));
                     $endDate = date("d M Y", strtotime($r["campaign_end"]));
+                    $createdCampaignDate = date("d M Y", strtotime($r["campaign_created_date"]));
                 ?>
                     <div class="col-lg-3">
                         <div class="card">
+                            <div class="card-header">Created on <?php echo $createdCampaignDate ?></div>
                             <div class="card-body">
                                 <div class="mb-3">
                                     <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
@@ -133,40 +135,45 @@
                                 <!-- Verify Donation Form -->
                                 <form action="auditor_verify_campaign_action.php" method="POST">
                                     <!-- Input Values -->
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
                                         <label for="campaign_name">Campaign Name</label>
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="campaign_description" name="campaign_description" value="<?php echo $r['campaign_description']; ?>" readonly>
+                                    <div class="form-floating">
+                                        <textarea class="form-control-plaintext" id="campaign_description" name="campaign_description" style="height: 100px"><?php echo $r['campaign_description']; ?></textarea>
                                         <label for="campaign_description">Campaign Description</label>
                                     </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="campaign_amount" name="campaign_amount" value="<?php echo $r['campaign_amount']; ?>" readonly>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control-plaintext" id="campaign_amount" name="campaign_amount" value="<?php echo $r['campaign_amount']; ?>" readonly>
                                         <label for="campaign_amount">Campaign Amount (RM)</label>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <div class="col-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="campaign_start" name="campaign_start" value="<?php echo $startDate; ?>" readonly>
+                                                <input type="text" class="form-control-plaintext" id="campaign_start" name="campaign_start" value="<?php echo $startDate; ?>" readonly>
                                                 <label for="campaign_start">Campaign Start</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="campaign_end" name="campaign_end" value="<?php echo $endDate ?>" readonly>
+                                                <input type="text" class="form-control-plaintext" id="campaign_end" name="campaign_end" value="<?php echo $endDate ?>" readonly>
                                                 <label for="campaign_end">Campaign End</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <select class="form-select">
-                                            <option selected disabled>Please Select</option>
+                                        <select class="form-select" id="campaign_status" name="campaign_status">
+                                            <option selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
-                                        <label class="form-label">Action</label>
+                                        <label for="campaign_status">Action</label>
                                     </div>
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="auditor_comment" name="auditor_comment" placeholder="Leave a comment" style="height: 100px"></textarea>
+                                        <label for="auditor_comment">Comment</label>
+                                    </div>
+
                                     <div class="d-flex mt-auto justify-content-center" style="gap:10px">
                                         <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
                                     </div>
@@ -180,7 +187,6 @@
                 ?>
             </div>
         </section>
-
     </main>
     <footer id="footer" class="footer">
         <div class="copyright">
