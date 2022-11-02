@@ -109,8 +109,10 @@
         <section class="section">
             <div class="row align-items-top">
                 <?php
-                $query = "SELECT * FROM campaign ORDER BY campaign_id";
+                $campaign_status = 1; // Accepted campaign
+                $query = "SELECT * FROM campaign WHERE campaign_status=? ORDER BY campaign_id";
                 $stmt = $con->prepare($query);
+                $stmt->bind_param("i", $campaign_status);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
