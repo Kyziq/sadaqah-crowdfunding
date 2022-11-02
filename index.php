@@ -386,11 +386,11 @@
                         </div>
                         Don't have an account?
                         <a href="#registerModal" data-target="#registerModal" data-bs-toggle="modal" title="Go to Register Form">
-                            Register Now
+                            <span class="text-success">Register Now</span>
                         </a>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" name="login-button">Login</button>
+                        <button type="submit" class="btn btn-success" name="login-button">Login</button>
                     </div>
                 </form>
             </div>
@@ -458,11 +458,11 @@
 
                         Already a member?
                         <a href="#loginModal" data-target="#loginModal" data-bs-toggle="modal" title="Go to Login Form">
-                            Login Now
+                            <span class="text-success">Login Now</span>
                         </a>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" name="register-button">Register</button>
+                        <button type="submit" class="btn btn-success" name="register-button">Register</button>
                     </div>
                 </form>
             </div>
