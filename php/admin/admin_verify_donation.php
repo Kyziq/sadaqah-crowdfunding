@@ -170,32 +170,34 @@
                                     <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
                                 </div>
                                 <!-- Verify Donation Form -->
-                                <form action="admin_verify_doantion_action.php" method="post">
+                                <form action="admin_verify_donation_action.php" method="POST">
+                                    <!-- Hidden Values -->
                                     <input type="hidden" name="admin_id" value="<?php echo $user['user_id']; ?>">
                                     <input type="hidden" name="donator_id" value="<?php echo $r['donator_id']; ?>">
 
+                                    <!-- Input Values -->
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
-                                        <label for="floatingInput">Campaign Name</label>
+                                        <input type="text" class="form-control" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                        <label for="campaign_name">Campaign Name</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="donator_name" value="<?php echo $r['user_name']; ?>" readonly>
-                                        <label for="floatingInput">Donator Name</label>
+                                        <input type="text" class="form-control" id="donator_name" name="donator_name" value="<?php echo $r['user_name']; ?>" readonly>
+                                        <label for="donator_name">Donator Name</label>
                                     </div>
-
                                     <div class="form-floating mb-3">
-                                        <select class="form-select">
+                                        <select class="form-select" id="campaign_status" name="campaign_status">
                                             <option selected disabled>Please Select</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
-                                        <label class="form-label">Action</label>
+                                        <label for="campaign_status">Action</label>
                                     </div>
                                     <div class="d-flex mt-auto justify-content-center" style="gap:10px">
                                         <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
                                         <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
                                     </div>
                                 </form>
+                                <!-- End Of Verify Donation Form -->
                             </div>
                         </div>
                     </div>
