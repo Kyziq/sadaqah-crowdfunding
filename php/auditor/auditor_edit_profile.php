@@ -89,7 +89,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="auditor_verify_Campaign.php">
+                <a class="nav-link collapsed" href="auditor_verify_campaign.php">
                     <i class="bi bi-credit-card"></i>
                     <span>Verify Campaign</span>
                 </a>
