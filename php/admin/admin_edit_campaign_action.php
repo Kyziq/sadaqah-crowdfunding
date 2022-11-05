@@ -99,7 +99,8 @@
                     footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
-                    backdrop: `#1E976B`,
+                    backdrop: `#2871f9`,
+                    confirmButtonColor: '#0d6efd',
                     timer: 5000,
                     willClose: () => {
                         window.location.href = 'admin_edit_campaign.php';
