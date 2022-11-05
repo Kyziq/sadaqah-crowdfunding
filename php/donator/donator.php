@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
-    <link href="../style.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -205,115 +205,216 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Donation History</h5>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Campaign</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Donation Amount (RM)</th>
-                                                <th scope="col">Donation Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
-                                            $stmt = $con->prepare($query);
-                                            $stmt->bind_param("i", $user_id);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result(); // Get the MySQLI result
+                                    <?php
+                                    $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
+                                    $stmt = $con->prepare($query);
+                                    $stmt->bind_param("i", $user_id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result(); // Get the MySQLI result
+                                    $count_rows = $result->num_rows;
 
-                                            $index = 0;
-                                            while ($camp = $result->fetch_assoc()) {
-                                            ?>
+                                    // At least 1 donation
+                                    if ($count_rows >= 1) {
+                                    ?>
+                                        <table class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td><?php echo $camp['campaign_name'] ?></td>
-                                                    <td>
-                                                        <?php
-                                                        $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
-                                                        echo $date;
-                                                        ?>
-                                                    </td>
-                                                    <td><?php echo $camp['donate_amount'] ?></td>
-                                                    <?php
-                                                    if ($camp['donate_status'] == 1) {
-                                                        echo '<td class="text-success">';
-                                                        echo 'Accepted';
-                                                    } else if ($camp['donate_status'] == 2) {
-                                                        echo '<td class="text-success">';
-                                                        echo 'Declined';
-                                                    } else if ($camp['donate_status'] == 3) {
-                                                        echo '<td class="text-warning">';
-                                                        echo 'Pending';
-                                                    }
-                                                    ?>
-                                                    </td>
+                                                    <th scope="col">Campaign</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Donation Amount</th>
+                                                    <th scope="col">Donation Status</th>
                                                 </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $index = 0;
+                                                if ($count_rows >= 1) {
+                                                    while ($camp = $result->fetch_assoc()) {
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $camp['campaign_name'] ?></td>
+                                                            <td>
+                                                                <?php
+                                                                $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
+                                                                echo $date;
+                                                                ?>
+                                                            </td>
+                                                            <td>RM<?php echo $camp['donate_amount'] ?></td>
+                                                            <?php
+                                                            if ($camp['donate_status'] == 1) {
+                                                                echo '<td class="text-success">';
+                                                                echo 'Accepted';
+                                                            } else if ($camp['donate_status'] == 2) {
+                                                                echo '<td class="text-success">';
+                                                                echo 'Declined';
+                                                            } else if ($camp['donate_status'] == 3) {
+                                                                echo '<td class="text-warning">';
+                                                                echo 'Pending';
+                                                            }
+                                                            ?>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Accepted Donation Table -->
                         <?php
-                        $donation_status = 1; // 1 = Accepted
-                        $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? AND d.donate_status = ?";
+                        $donate_status = 1; // Accepted donation
+
+                        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id = u.user_id && d.campaign_id = c.campaign_id && d.donate_status = ? && u.user_id=?";
                         $stmt = $con->prepare($query);
-                        $stmt->bind_param("ii", $user_id, $donate_status);
+                        $stmt->bind_param("ii", $donate_status, $_SESSION['user_id']);
                         $stmt->execute();
-                        $result = $stmt->get_result(); // Get the MySQLI result
+                        $result = $stmt->get_result(); // Get the MySQLi result
+                        $count_rows = $result->num_rows;
 
-                        while ($camp = $result->fetch_assoc()) {
-                            if ($camp > 0) { // Must at least have 1 donation accepted
+                        $index = 1;
+                        // Must at least have 1 donation accepted
+                        if ($count_rows >= 1) {
                         ?>
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title"> Accepted Donation History</h5>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Accepted Donation History</h5>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Campaign</th>
+                                                    <th scope="col">Donation Date</th>
+                                                    <th scope="col">Donation Amount</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <?php
 
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Campaign</th>
-                                                        <th scope="col">Date</th>
-                                                        <th scope="col">Donation Amount (RM)</th>
-                                                        <th scope="col">Receipt</th>
-                                                    </tr>
-                                                </thead>
+                                            while ($receipt = $result->fetch_assoc()) {
+                                                $campaign_start = date('d M Y', strtotime($receipt['campaign_start']));
+                                                $campaign_end = date('d M Y', strtotime($receipt['campaign_end']));
+                                                $donate_date = date('d M Y h:i A', strtotime($receipt['donate_date']));
+                                            ?>
                                                 <tbody>
-
                                                     <tr>
-                                                        <td><?php echo $camp['campaign_name'] ?></td>
+                                                        <td><?php echo $receipt['campaign_name'] ?></td>
                                                         <td>
                                                             <?php
-                                                            $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
-                                                            echo $date;
+                                                            $donate_date = date('d M Y h:i A', strtotime($receipt['donate_date']));
+                                                            echo $donate_date;
                                                             ?>
                                                         </td>
-                                                        <td><?php echo $camp['donate_amount']; ?></td>
+                                                        <td>RM<?php echo $receipt['donate_amount']; ?></td>
                                                         <td>
-                                                            <button class="btn btn-primary">Print</button>
+                                                            <button type="button" class="btn btn-primary" onclick="toggleTable();" data-bs-toggle="modal" data-bs-target="#receipt-modal-<?php echo $index ?>">
+                                                                Receipt
+                                                            </button>
                                                         </td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
 
-                                        </div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="receipt-modal-<?php echo $index; ?>" tabindex="-1" aria-labelledby="receipt-modal-label-<?php echo $index; ?>" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="receipt-modal-label-<?php echo $index; ?>">Receipt</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div id="printableArea-<?php echo $index; ?>">
+                                                                        <div class="container">
+                                                                            <div class="text-center">
+                                                                                <img src="../../images/logo-LZNK-big.png" alt="test" style="height: 70px" class="mb-3">
+                                                                                <h5>Sadaqah Crowdfunding Receipt</h5>
+                                                                                <p class="fw-light">Invoice No #<?php echo $receipt['donate_id']; ?></p>
+                                                                            </div>
+
+                                                                            <hr class="border-success border-2 border-top">
+
+                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3  border-opacity-25">
+                                                                                <div class="row mb-3 justify-content-between">
+                                                                                    <div class="col-4">
+                                                                                        <div class="fw-bold">Billed To:</div>
+                                                                                        <div class="fw-light">Lembaga Zakat Negeri Kedah.</div>
+                                                                                        <div class="fw-light">Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah.</div>
+                                                                                        <div class="fw-light">1-800-88-1740.</div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="fw-bold">Donator Details:</div>
+                                                                                        <div class="fw-light"><?php echo $receipt['user_name']; ?>.</div>
+                                                                                        <div class="fw-light"><?php echo $receipt['user_address']; ?>.</div>
+                                                                                        <div class="fw-light">+6<?php echo $receipt['user_phone']; ?>.</div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row justify-content-between">
+                                                                                    <div class="col-4">
+                                                                                        <div class="fw-bold">Payment Method:</div>
+                                                                                        <div class="fw-light">Online</div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="fw-bold">Donate Date:</div>
+                                                                                        <div class="fw-light"><?php echo $donate_date; ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3  border-opacity-25">
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col">
+                                                                                        <div class="fw-bold">Campaign Name</div>
+                                                                                        <div class="fw-light"><?php echo $receipt['campaign_name']; ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col">
+                                                                                        <div class="fw-bold">Campaign Duration</div>
+                                                                                        <div class="fw-light"><?php echo $campaign_start; ?> - <?php echo $campaign_end; ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="fw-bold">Donation Amount</div>
+                                                                                        <div class="fw-light">RM<?php echo $receipt['donate_amount']; ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-primary" onclick="printReceipt('printableArea-<?php echo $index; ?>');">Print</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tbody>
+                                            <?php
+                                                $index++;
+                                            }
+                                            ?>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
                         <?php
-                            }
                         }
                         ?>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
@@ -486,8 +587,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="../main.js"></script>
-
+    <script src="../../js/main.js"></script>
 </body>
 
 </html>
