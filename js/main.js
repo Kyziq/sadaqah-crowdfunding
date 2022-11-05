@@ -337,3 +337,19 @@
         }, 200);
     }
 })();
+
+// Print Receipt on Donator Dashboard
+function printReceipt(receiptDivName) {
+    var printContents = document.getElementById(receiptDivName).innerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+
+    document.title = "Receipt";
+    window.print();
+    document.title = "Donator Dashboard";
+
+    document.body.innerHTML = originalContents;
+    setTimeout(function () {
+        location.reload();
+    });
+}
