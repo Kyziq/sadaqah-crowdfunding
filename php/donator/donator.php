@@ -338,7 +338,7 @@
                                                                         <div class="container">
                                                                             <div class="text-center">
                                                                                 <img src="../../images/logo-LZNK-big.png" alt="test" style="height: 70px" class="mb-3">
-                                                                                <h5>Sadaqah Crowdfunding Receipt</h5>
+                                                                                <h4>Sadaqah Crowdfunding Receipt</h4>
                                                                                 <p class="fw-light">Invoice No #<?php echo $receipt['donate_id']; ?></p>
                                                                             </div>
 
@@ -348,26 +348,26 @@
                                                                                 <div class="row mb-3 justify-content-between">
                                                                                     <div class="col-4">
                                                                                         <div class="fw-bold">Billed To:</div>
-                                                                                        <div class="fw-light">Lembaga Zakat Negeri Kedah.</div>
-                                                                                        <div class="fw-light">Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah.</div>
-                                                                                        <div class="fw-light">1-800-88-1740.</div>
+                                                                                        <div class="fw-regular">Lembaga Zakat Negeri Kedah.</div>
+                                                                                        <div class="fw-regular">Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah.</div>
+                                                                                        <div class="fw-regular">1-800-88-1740.</div>
                                                                                     </div>
                                                                                     <div class="col-4">
                                                                                         <div class="fw-bold">Donator Details:</div>
-                                                                                        <div class="fw-light"><?php echo $receipt['user_name']; ?>.</div>
-                                                                                        <div class="fw-light"><?php echo $receipt['user_address']; ?>.</div>
-                                                                                        <div class="fw-light">+6<?php echo $receipt['user_phone']; ?>.</div>
+                                                                                        <div class="fw-regular"><?php echo $receipt['user_name']; ?>.</div>
+                                                                                        <div class="fw-regular"><?php echo $receipt['user_address']; ?>.</div>
+                                                                                        <div class="fw-regular">+6<?php echo $receipt['user_phone']; ?>.</div>
                                                                                     </div>
                                                                                 </div>
 
                                                                                 <div class="row justify-content-between">
                                                                                     <div class="col-4">
                                                                                         <div class="fw-bold">Payment Method:</div>
-                                                                                        <div class="fw-light">Online</div>
+                                                                                        <div class="fw-regular">Online</div>
                                                                                     </div>
                                                                                     <div class="col-4">
                                                                                         <div class="fw-bold">Donate Date:</div>
-                                                                                        <div class="fw-light"><?php echo $donate_date; ?></div>
+                                                                                        <div class="fw-regular"><?php echo $donate_date; ?></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -376,19 +376,19 @@
                                                                                 <div class="row mb-3">
                                                                                     <div class="col">
                                                                                         <div class="fw-bold">Campaign Name</div>
-                                                                                        <div class="fw-light"><?php echo $receipt['campaign_name']; ?></div>
+                                                                                        <div class="fw-regular"><?php echo $receipt['campaign_name']; ?></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row mb-3">
                                                                                     <div class="col">
                                                                                         <div class="fw-bold">Campaign Duration</div>
-                                                                                        <div class="fw-light"><?php echo $campaign_start; ?> - <?php echo $campaign_end; ?></div>
+                                                                                        <div class="fw-regular"><?php echo $campaign_start; ?> - <?php echo $campaign_end; ?></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row">
                                                                                     <div class="col">
                                                                                         <div class="fw-bold">Donation Amount</div>
-                                                                                        <div class="fw-light">RM<?php echo $receipt['donate_amount']; ?></div>
+                                                                                        <div class="fw-regular">RM<?php echo $receipt['donate_amount']; ?></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
