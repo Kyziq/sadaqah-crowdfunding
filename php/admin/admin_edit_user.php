@@ -75,41 +75,56 @@
     </header>
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin.php">
                     <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin_edit_profile.php">
                     <i class="bi bi-person"></i> <span>Profile</span>
                 </a>
             </li>
+
+            <!-- User Management -->
             <li class="nav-item">
                 <a class="nav-link" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <!-- To Edit Auditor -->
+                <ul id="user-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                     <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Auditor" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Auditor</span>
-                            </a>
-                        </form>
+                        <a href="admin_create_auditor.php">
+                            <i class="bi bi-circle"></i><span>Create Auditor</span>
+                        </a>
                     </li>
-                    <!-- To Edit Donator -->
                     <li>
-                        <form action="admin_edit_user.php" method="GET">
-                            <input type="hidden" name="type" value="Donator" />
-                            <a onclick="this.parentNode.submit();">
-                                <i class="bi bi-circle"></i><span>Edit Donator</span>
-                            </a>
-                        </form>
+                        <a href=<?php
+                                if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
+                                    echo '"admin_edit_user.php?type=Auditor" class="active"';
+                                } else {
+                                    echo '"admin_edit_user.php?type=Auditor"';
+                                }
+                                ?>>
+                            <i class=" bi bi-circle"></i><span>Edit Auditor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=<?php
+                                if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
+                                    echo '"admin_edit_user.php?type=Donator" class="active"';
+                                } else {
+                                    echo '"admin_edit_user.php?type=Donator"';
+                                }
+                                ?>>
+                            <i class=" bi bi-circle"></i><span>Edit Donator</span>
+                        </a>
                     </li>
                 </ul>
             </li>
+
+            <!-- Campaign Management -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-clipboard"></i>
@@ -129,10 +144,12 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Donation Management -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin_verify_donation.php">
                     <i class="bi bi-credit-card"></i>
-                    <span>Verify Payment</span>
+                    <span>Verify Donation</span>
                 </a>
             </li>
         </ul>
@@ -164,10 +181,10 @@
                                     /* Check for type of user to proceed query */
                                     if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
                                         $user_level = 2;
-                                        echo '<h5 class="card-title">Edit Auditor</h5>';
+                                        echo '<h5 class="card-title">Edit Auditor Table</h5>';
                                     } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
                                         $user_level = 3;
-                                        echo '<h5 class="card-title">Edit Donator</h5>';
+                                        echo '<h5 class="card-title">Edit Donator Table</h5>';
                                     }
 
                                     /* Display list of auditors/donators */

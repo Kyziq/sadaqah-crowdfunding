@@ -76,22 +76,30 @@
     </header>
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin.php">
                     <i class="bi bi-grid"></i> <span>Admin Dashboard</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin_edit_profile.php">
                     <i class="bi bi-person"></i> <span>Profile</span>
                 </a>
             </li>
+
+            <!-- User Management -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <!-- To Edit Auditor -->
+                    <li>
+                        <a href="admin_create_auditor.php">
+                            <i class="bi bi-circle"></i><span>Create Auditor</span>
+                        </a>
+                    </li>
                     <li>
                         <form action="admin_edit_user.php" method="GET">
                             <input type="hidden" name="type" value="Auditor" />
@@ -100,7 +108,6 @@
                             </a>
                         </form>
                     </li>
-                    <!-- To Edit Donator -->
                     <li>
                         <form action="admin_edit_user.php" method="GET">
                             <input type="hidden" name="type" value="Donator" />
@@ -111,29 +118,33 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Campaign Management -->
             <li class="nav-item">
                 <a class="nav-link" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-clipboard"></i>
                     <span>Campaign</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="campaign-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <ul id="campaign-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="admin_create_campaign.php">
                             <i class="bi bi-circle"></i><span>Create Campaign</span>
                         </a>
                     </li>
                     <li>
-                        <a href="admin_edit_campaign.php">
+                        <a href="admin_edit_campaign.php" class="active">
                             <i class="bi bi-circle"></i><span>Edit Campaign</span>
                         </a>
                     </li>
                 </ul>
             </li>
+
+            <!-- Donation Management -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="admin_verify_donation.php">
                     <i class="bi bi-credit-card"></i>
-                    <span>Verify Payment</span>
+                    <span>Verify Donation</span>
                 </a>
             </li>
         </ul>
@@ -155,7 +166,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Edit Campaign</h5>
+                            <h5 class="card-title">Edit Campaign Table</h5>
                             <?php
                             include_once '../dbcon.php';
                             $query = "SELECT * FROM campaign";

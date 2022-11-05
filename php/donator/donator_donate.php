@@ -108,6 +108,7 @@
         </div>
         <section class="section">
             <div class="row align-items-top">
+                <h5 class="card-title">Available Campaign(s) List</h5>
                 <?php
                 $campaign_status = 1; // Accepted campaign
                 $query = "SELECT * FROM campaign WHERE campaign_status=? ORDER BY campaign_id";
