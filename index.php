@@ -350,7 +350,7 @@
                     </div>
                     <div class="modal-body">
                         <a href="../index.php">
-                            <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
+                            <img src="./images/logo-LZNK-big.png" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
                         </a>
 
                         <!-- Input -->
@@ -409,7 +409,7 @@
                     </div>
                     <div class="modal-body">
                         <a href="../index.php">
-                            <img src="https://i0.wp.com/www.zakatkedah.com.my/wp-content/uploads/2021/05/Logo-Zakat-Kedah-Baru-2021.png?w=696&ssl=1" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
+                            <img src="./images/logo-LZNK-big.png" class="mx-auto d-block" style="max-width:40%;" alt="Logo">
                         </a>
                         <!-- Input -->
                         <div class="form-group mb-2">
