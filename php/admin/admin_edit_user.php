@@ -158,75 +158,80 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">
+                                    <?php
+                                    /* Check for type of user to proceed query */
+                                    if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
+                                        $user_level = 2;
+                                        echo '<h5 class="card-title">Edit Auditor</h5>';
+                                    } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
+                                        $user_level = 3;
+                                        echo '<h5 class="card-title">Edit Donator</h5>';
+                                    }
 
-                            <?php
-                            /* Check for type of user to proceed query */
-                            if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
-                                $user_level = 2;
-                                echo '<h5 class="card-title">Edit Auditor</h5>';
-                            } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
-                                $user_level = 3;
-                                echo '<h5 class="card-title">Edit Donator</h5>';
-                            }
+                                    /* Display list of auditors/donators */
+                                    if (isset($_GET["type"]) && ($_GET["type"] == 'Auditor' || $_GET["type"] == 'Donator')) {
+                                        include_once '../dbcon.php'; // Connect to database 
+                                        $query = "SELECT * FROM user WHERE user_level=?"; // SQL with parameter for level
+                                        $stmt = $con->prepare($query);
+                                        $stmt->bind_param("i", $user_level);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result(); // Get the MySQLi result
 
-                            /* Display list of auditors/donators */
-                            if (isset($_GET["type"]) && ($_GET["type"] == 'Auditor' || $_GET["type"] == 'Donator')) {
-                                include_once '../dbcon.php'; // Connect to database 
-                                $query = "SELECT * FROM user WHERE user_level=?"; // SQL with parameter for level
-                                $stmt = $con->prepare($query);
-                                $stmt->bind_param("i", $user_level);
-                                $stmt->execute();
-                                $result = $stmt->get_result(); // Get the MySQLi result
-                            ?>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Phone</th>
-                                            <th scope="col">Address</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php while ($r = $result->fetch_assoc()) { ?>
-                                            <form action="admin_edit_user_action.php" method="POST">
-                                                <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
-                                                <tr>
-                                                    <th>
-                                                        <!-- can put hidden input here if want-->
-                                                        <?php echo $r['user_id']; ?>
-                                                    </th>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="username" value="<?php echo $r['user_username']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="name" value="<?php echo $r['user_name']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="email" value="<?php echo $r['user_email']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="phone" value="<?php echo $r['user_phone']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <textarea type="text" class="form-control" name="address" rows="2" cols="60"><?php echo $r['user_address']; ?></textarea>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-primary" type="submit" name="edit-user-button" value="<?php echo $r['user_id']; ?>">Save</button>
-                                                    </td>
-                                                </tr>
-                                            </form>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tbody>
+                                        $index = 1;
+                                    ?>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php while ($r = $result->fetch_assoc()) { ?>
+                                                <form action="admin_edit_user_action.php" method="POST">
+                                                    <!-- Hidden Input -->
+                                                    <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <?php echo $index; ?>
+                                                        </th>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="username" value="<?php echo $r['user_username']; ?>">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="name" value="<?php echo $r['user_name']; ?>">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="email" value="<?php echo $r['user_email']; ?>">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" name="phone" value="<?php echo $r['user_phone']; ?>">
+                                                        </td>
+                                                        <td>
+                                                            <textarea type="text" class="form-control" name="address" rows="2" cols="60"><?php echo $r['user_address']; ?></textarea>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-primary" type="submit" name="edit-user-button" value="<?php echo $r['user_id']; ?>">Save</button>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            <?php
+                                                $index++;
+                                            }
+                                            ?>
+                                        </tbody>
+                                    <?php
+                                    }
+                                    ?>
                                 </table>
-                            <?php
-                            }
-                            ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>

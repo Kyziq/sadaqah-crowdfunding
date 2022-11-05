@@ -176,17 +176,17 @@
                                     <input type="hidden" name="donator_id" value="<?php echo $r['donator_id']; ?>">
 
                                     <!-- Input Values -->
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating">
                                         <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
                                         <label for="campaign_name">Campaign Name</label>
                                     </div>
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating">
                                         <input type="text" class="form-control-plaintext" id="donator_name" name="donator_name" value="<?php echo $r['user_name']; ?>" readonly>
                                         <label for="donator_name">Donator Name</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="campaign_status" name="campaign_status">
-                                            <option selected disabled>Select Action</option>
+                                        <select class="form-select" id="campaign_status" name="campaign_status" required>
+                                            <option value="" selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>

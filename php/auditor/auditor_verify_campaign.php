@@ -127,7 +127,7 @@
                 ?>
                     <div class="col-lg-3">
                         <div class="card">
-                            <div class="card-header">Created on <?php echo $createdCampaignDate ?></div>
+                            <div class="card-header">Requested on <?php echo $createdCampaignDate ?></div>
                             <div class="card-body">
                                 <div class="mb-3">
                                     <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
@@ -162,15 +162,15 @@
                                         </div>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="campaign_status" name="campaign_status">
-                                            <option selected disabled>Select Action</option>
+                                        <select class="form-select" id="campaign_status" name="campaign_status" required>
+                                            <option value="" selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
                                         <label for="campaign_status">Action</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="auditor_comment" name="auditor_comment" placeholder="Leave a comment" style="height: 100px"></textarea>
+                                        <textarea class="form-control" id="auditor_comment" name="auditor_comment" placeholder="Leave a comment" style="height: 100px" required></textarea>
                                         <label for="auditor_comment">Comment</label>
                                     </div>
 

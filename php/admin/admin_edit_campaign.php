@@ -157,7 +157,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Edit Campaign</h5>
                             <?php
-
                             include_once '../dbcon.php';
                             $query = "SELECT * FROM campaign";
                             $stmt = $con->prepare($query);
@@ -168,9 +167,9 @@
                                 <table class="table table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="col-lg">ID</th>
-                                            <th scope="col" class="col-lg-2">Name</th>
-                                            <th scope="col" class="col-lg-3">Description</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Raised (RM)</th>
@@ -182,16 +181,15 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $index = 0;
+                                        $index = 1;
                                         while ($r = $result->fetch_assoc()) {
                                             $startDate = date('Y-m-d', strtotime($r['campaign_start']));
                                             $endDate = date('Y-m-d', strtotime($r['campaign_end']));
                                             $createdDate = date('Y-m-d', strtotime($r['campaign_created_date']));
                                         ?>
-
                                             <tr>
                                                 <th scope="row">
-                                                    <?php echo $r['campaign_id']; ?>
+                                                    <?php echo $index; ?>
                                                 </th>
                                                 <td>
                                                     <?php echo $r['campaign_name']; ?>
