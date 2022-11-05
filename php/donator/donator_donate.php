@@ -129,7 +129,7 @@
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
                             <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
+                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px ">
-                                    <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a>
+                                    <!-- <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a> -->
                                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Campaign Banner</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $camp['campaign_name']; ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="display: flex;">
