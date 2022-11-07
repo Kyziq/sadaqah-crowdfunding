@@ -207,19 +207,20 @@
                                         <input type="hidden" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $camp['campaign_id']; ?>">
 
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Campaign Name</label>
-                                            <input type="text" class="form-control" name="campaign_name" value="<?php echo $camp['campaign_name']; ?>" readonly>
+                                            <label for="campaign_name" class="form-label fw-semibold">Campaign Name</label>
+                                            <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $camp['campaign_name']; ?>" readonly>
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Donation Amount</label>
+                                        <div class="form-group mb-3 col-5">
+                                            <label for="donate_amount" class="form-label fw-semibold">Donation Amount</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">RM</span>
-                                                <input type="number" class="form-control" name="donate_amount" required>
+                                                <input type="number" class="form-control" id="donate_amount" name="donate_amount" required>
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Proof of Payment</label>
-                                            <input type="file" class="form-control" name="donate_proof" accept="image/png,image/jpg,image/jpeg,application/pdf" required>
+                                            <label for="donate_proof" class="form-label fw-semibold">Proof of Payment</label>
+                                            <span class="text-muted small">(.png/.jpg/.jpeg/.pdf)</span>
+                                            <input type="file" class="form-control" id="donate_proof" name="donate_proof" accept="image/png,image/jpg,image/jpeg,application/pdf" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

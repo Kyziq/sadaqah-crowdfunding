@@ -206,7 +206,7 @@
 
                                     <div class="col-lg-12">
                                         <label for="campaignFileBanner" class="form-label fw-semibold">Upload Campaign Banner</label>
-                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
+                                        <span class="text-muted small">(.png/.jpg/.jpeg/.pdf)</span>
                                         <input class="form-control" type="file" accept="image/*" id="campaignFileBanner" name="campaignFileBanner" required>
                                     </div>
 
