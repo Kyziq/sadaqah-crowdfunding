@@ -14,20 +14,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <?php
-    /* Start session and validate admin login */
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        include_once '../dbcon.php'; // Connect to database 
-        $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
+        include_once '../dbcon.php';
+        $query = "SELECT * FROM user WHERE user_id=?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
-        $result = $stmt->get_result(); // Get the MySQLi result
-        $r = $result->fetch_assoc(); // Fetch data  
+        $result = $stmt->get_result();
+        $r = $result->fetch_assoc();
     } else {
         header("Location: ../user_logout.php");
     }
@@ -92,7 +94,7 @@
             <!-- User Management -->
             <li class="nav-item">
                 <a class="nav-link" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-people"></i></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="user-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                     <li>
@@ -123,7 +125,7 @@
             <!-- Campaign Management -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#campaign-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-clipboard"></i>
+                    <i class="bi bi-calendar-event"></i>
                     <span>Campaign</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
@@ -162,6 +164,98 @@
             </nav>
         </div>
 
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Auditor Form</h5>
+
+                            <form action="admin_create_auditor_action.php" method="POST">
+                                <div class="row g-3">
+                                    <!-- Input -->
+                                    <div class="col-lg-12">
+                                        <label for="username" class="form-label fw-semibold">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" required />
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label for="password" class="form-label fw-semibold">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" name="password" data-toggle="password" required>
+                                            <div class="input-group-text">
+                                                <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label for="name" class="form-label fw-semibold">Full Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" required />
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label for="email" class="form-label fw-semibold">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required />
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label for="phone" class="form-label fw-semibold">Phone Number</label>
+                                        <input type="number" step=1 class="form-control" id="phone" name="phone" required />
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label for="address" class="form-label fw-semibold">Address</label>
+                                        <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-primary" name="create-auditor-button">Create</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                /* Toggle password visibility */ !(function($) {
+                    //eyeOpenClass: 'fa-eye',
+                    //eyeCloseClass: 'fa-eye-slash',
+                    "use strict";
+
+                    $(function() {
+                        $('[data-toggle="password"]').each(function() {
+                            var input = $(this);
+                            var eye_btn = $(this).parent().find(".input-group-text");
+                            eye_btn.css("cursor", "pointer").addClass("input-password-hide");
+                            eye_btn.on("click", function() {
+                                if (eye_btn.hasClass("input-password-hide")) {
+                                    eye_btn
+                                        .removeClass("input-password-hide")
+                                        .addClass("input-password-show");
+                                    eye_btn
+                                        .find(".fa")
+                                        .removeClass("fa-eye")
+                                        .addClass("fa-eye-slash");
+                                    input.attr("type", "text");
+                                } else {
+                                    eye_btn
+                                        .removeClass("input-password-show")
+                                        .addClass("input-password-hide");
+                                    eye_btn
+                                        .find(".fa")
+                                        .removeClass("fa-eye-slash")
+                                        .addClass("fa-eye");
+                                    input.attr("type", "password");
+                                }
+                            });
+                        });
+                    });
+                })(window.jQuery);
+            </script>
+        </section>
+
     </main>
     <footer id="footer" class="footer">
         <div class="copyright">
@@ -172,7 +266,6 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Imports -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
