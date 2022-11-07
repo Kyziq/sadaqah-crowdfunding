@@ -167,33 +167,35 @@
         </div>
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Create Campaign Form</h5>
 
                             <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()" enctype="multipart/form-data">
                                 <div class="row g-3">
-                                    <div class="col-lg-6">
-                                        <label class="form-label">Campaign Name</label>
-                                        <input type="text" class="form-control" name="campaignName" required>
+                                    <!-- Input -->
+                                    <div class="col-lg-12">
+                                        <label for="campaignName" class="form-label fw-semibold">Campaign Name</label>
+                                        <input type="text" class="form-control" id="campaignName" name="campaignName" required>
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <label class="form-label">Campaign Description</label>
-                                        <textarea class="form-control" rows="4" name="campaignDesc" required></textarea>
+                                        <label for="campaignDesc" class="form-label fw-semibold">Campaign Description</label>
+                                        <textarea class="form-control" rows="4" id="campaignDesc" name="campaignDesc" required></textarea>
                                     </div>
 
-                                    <div class="col-lg-4">
-                                        <label class="form-label">Upload Campaign Banner</label>
-                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
-                                        <input class="form-control" type="file" accept="image/*" id="campaignFileBanner" name="campaignFileBanner" required>
+                                    <div class="col-lg-6">
+                                        <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount Required</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">RM</span>
+                                            <input type="number" step="0.01" class="form-control" id="campaignAmount" name="campaignAmount" required>
+                                        </div>
                                     </div>
 
-                                    <div class="col-lg-8"></div>
-                                    <div class="col-lg-2">
-                                        <label class="form-label">Campaign Type</label>
-                                        <select class="form-select" name="campaignCategory" required>
+                                    <div class="col-lg-6">
+                                        <label for="campaignCategory" class="form-label fw-semibold">Campaign Type</label>
+                                        <select class="form-select" id="campaignCategory" name="campaignCategory" required>
                                             <option selected disabled></option>
                                             <option value="1">Cash</option>
                                             <option value="2">School Necessity</option>
@@ -202,23 +204,19 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-lg-2">
-                                        <label class="form-label">Campaign Amount Required</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">RM</span>
-                                            <input type="number" class="form-control" name="campaignAmount" required>
-                                        </div>
+                                    <div class="col-lg-12">
+                                        <label for="campaignFileBanner" class="form-label fw-semibold">Upload Campaign Banner</label>
+                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
+                                        <input class="form-control" type="file" accept="image/*" id="campaignFileBanner" name="campaignFileBanner" required>
                                     </div>
 
-                                    <div class="col-lg-8">
-
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label class="form-label">Start Date</label>
+                                    <div class="col-lg-6">
+                                        <label for="startDate" class="form-label fw-semibold">Start Date</label>
                                         <input type="date" class="form-control" id="startDate" name="startDate" required>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <label class="form-label">End Date</label>
+
+                                    <div class="col-lg-6">
+                                        <label for="endDate" class="form-label fw-semibold">End Date</label>
                                         <input type="date" class="form-control" id="endDate" name="endDate" required>
                                     </div>
 
