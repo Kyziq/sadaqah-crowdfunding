@@ -226,9 +226,9 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Campaign</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Donation Amount</th>
-                                                    <th scope="col">Donation Status</th>
+                                                    <th scope="col" class="col-3">Date</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -241,7 +241,7 @@
                                                             <td><?php echo $camp['campaign_name'] ?></td>
                                                             <td>
                                                                 <?php
-                                                                $date = date('d-m-Y h:m:s', strtotime($camp['donate_date']));
+                                                                $date = date('d M Y (h:m A)', strtotime($camp['donate_date']));
                                                                 echo $date;
                                                                 ?>
                                                             </td>
@@ -296,8 +296,8 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Campaign</th>
-                                                    <th scope="col">Donation Date</th>
-                                                    <th scope="col">Donation Amount</th>
+                                                    <th scope="col" class="col-3">Date</th>
+                                                    <th scope="col">Amount</th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
@@ -306,7 +306,7 @@
                                             while ($receipt = $result->fetch_assoc()) {
                                                 $campaign_start = date('d M Y', strtotime($receipt['campaign_start']));
                                                 $campaign_end = date('d M Y', strtotime($receipt['campaign_end']));
-                                                $donate_date = date('d M Y h:i A', strtotime($receipt['donate_date']));
+                                                $donate_date = date('d M Y (h:i A)', strtotime($receipt['donate_date']));
                                             ?>
                                                 <tbody>
                                                     <tr>
