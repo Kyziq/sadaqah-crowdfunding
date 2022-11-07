@@ -240,7 +240,7 @@
                                     // PDF (Proof of Payment)
                                     else if (in_array($ext, $allowedFileExt)) {
                                     ?>
-                                        <embed src="<?php echo $r['donate_proof'] ?>" frameborder="0" width="100%" height="400px">
+                                        <embed src="<?php echo $r['donate_proof'] ?>" frameborder="0" width="100%" height="700px">
                                     <?php
                                     }
                                     ?>
