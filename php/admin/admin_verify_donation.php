@@ -179,7 +179,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
+                                    <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
                                 </div>
                                 <!-- Verify Donation Form -->
                                 <form action="admin_verify_donation_action.php" method="POST">
@@ -219,14 +219,31 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
+                                    <h5 class="modal-title" id="proof-modal-label">
                                         Proof of Payment
                                         (<?php echo $r['user_name']; ?>)
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="display: flex;">
-                                    <img src=" <?php echo $r['donate_proof'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                    <?php
+                                    $allowedImageExt =  array('png', 'jpg', 'jpeg');
+                                    $allowedFileExt =  array('pdf');
+                                    $ext = pathinfo($r['donate_proof'], PATHINFO_EXTENSION);
+
+                                    // Image (Proof of Payment)
+                                    if (in_array($ext, $allowedImageExt)) {
+                                    ?>
+                                        <img src="<?php echo $r['donate_proof'] ?>" alt="Proof of Payment" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                    <?php
+                                    }
+                                    // PDF (Proof of Payment)
+                                    else if (in_array($ext, $allowedFileExt)) {
+                                    ?>
+                                        <embed src="<?php echo $r['donate_proof'] ?>" frameborder="0" width="100%" height="400px">
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
