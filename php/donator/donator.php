@@ -311,12 +311,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><?php echo $receipt['campaign_name'] ?></td>
-                                                        <td>
-                                                            <?php
-                                                            $donate_date = date('d M Y h:i A', strtotime($receipt['donate_date']));
-                                                            echo $donate_date;
-                                                            ?>
-                                                        </td>
+                                                        <td><?php echo $donate_date; ?></td>
                                                         <td>RM<?php echo $receipt['donate_amount']; ?></td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary" onclick="toggleTable();" data-bs-toggle="modal" data-bs-target="#receipt-modal-<?php echo $index ?>">
