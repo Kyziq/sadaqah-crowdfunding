@@ -173,27 +173,27 @@
                             <form action="admin_edit_profile_save.php" method="POST" class="row g-2 col-lg-12">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
-                                    <label for="username" class="form-label">Username</label>
+                                    <label for="username" class="form-label fw-semibold">Username</label>
                                     <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="name" class="form-label">Full name</label>
+                                    <label for="name" class="form-label fw-semibold">Full name</label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label fw-semibold">Email</label>
                                     <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="phone" class="form-label">Phone</label>
+                                    <label for="phone" class="form-label fw-semibold">Phone</label>
                                     <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="address" class="form-label">Address</label>
+                                    <label for="address" class="form-label fw-semibold">Address</label>
                                     <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3"><?php echo $r['user_address'] ?></textarea>
                                 </div>
 
@@ -210,7 +210,7 @@
                             <form action="admin_edit_profile_save.php" method="POST" class="row g-2 col-lg-12">
                                 <!-- Input -->
                                 <div class="form-group mb-2">
-                                    <label for="currentPassword">Current Password</label>
+                                    <label for="currentPassword" class="form-label fw-semibold">Current Password</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
                                         <div class="input-group-text">
@@ -220,7 +220,7 @@
                                 </div>
 
                                 <div class="form-group mb-2">
-                                    <label for="newPassword">New Password</label>
+                                    <label for="newPassword" class="form-label fw-semibold">New Password</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
                                         <div class="input-group-text">
@@ -230,7 +230,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="confirmNewPassword">Confirm New Password</label>
+                                    <label for="confirmNewPassword" class="form-label fw-semibold">Confirm New Password</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
                                         <div class="input-group-text">
