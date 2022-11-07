@@ -44,7 +44,7 @@
             $stmt->execute();
 
             if (($_FILES['campaignFileBanner']['name'] == "")) {
-                $fileExt = pathinfo($campaignBannerDir, PATHINFO_EXTENSION);
+                $fileExt = strtolower(pathinfo($campaignBannerDir, PATHINFO_EXTENSION));
                 $campaignNewBanner = "../../images/campaign/" . $campaignName . "-"  . $campaignCreatedDate . "." . $fileExt;
                 rename($campaignBannerDir, $campaignNewBanner);
 
@@ -55,7 +55,7 @@
             } else {
                 unlink($campaignBannerDir); // Delete File
                 // Upload image (where file name is campaignName-date.extension)
-                $fileExt  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
+                $fileExt  = strtolower(pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION));
                 $target_dir = "../../images/campaign/";
                 $campaignNewBanner = $target_dir . $campaignName . "-"  . $campaignCreatedDate . "." . $fileExt;
                 $file_name = $campaignName . "-" . $campaignCreatedDate  . "." . $fileExt;

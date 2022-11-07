@@ -37,7 +37,7 @@
             $date = date('Y-m-d-H-i-s');
 
             // Upload image (where file name is campaignName-date.extension)
-            $extension  = pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION);
+            $extension  = strtolower(pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION));
             $target_dir = "../../images/donation-proof/";
             $file_name = $user_username . "-campaignID" . $campaign_id . "-(" . $date . ")." . $extension; // username-campaign_id-date.extension
             $target_file = $target_dir . $file_name;
