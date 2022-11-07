@@ -194,9 +194,9 @@
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="campaignCategory" class="form-label fw-semibold">Campaign Type</label>
+                                        <label for="campaignCategory" class="form-label fw-semibold">Campaign Category</label>
                                         <select class="form-select" id="campaignCategory" name="campaignCategory" required>
-                                            <option selected disabled></option>
+                                            <option value="" selected disabled>Select Category</option>
                                             <option value="1">Cash</option>
                                             <option value="2">School Necessity</option>
                                             <option value="3">Facilitator</option>
