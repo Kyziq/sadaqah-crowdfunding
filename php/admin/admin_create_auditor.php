@@ -174,12 +174,12 @@
                             <form action="admin_create_auditor_action.php" method="POST">
                                 <div class="row g-3">
                                     <!-- Input -->
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <label for="username" class="form-label fw-semibold">Username</label>
                                         <input type="text" class="form-control" id="username" name="username" required />
                                     </div>
 
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <label for="password" class="form-label fw-semibold">Password</label>
                                         <div class="input-group">
                                             <input type="password" class="form-control" id="password" name="password" data-toggle="password" required>
