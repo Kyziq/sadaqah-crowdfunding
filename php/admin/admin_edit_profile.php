@@ -170,79 +170,102 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Account Details</h5>
-                            <form action="admin_edit_profile_save.php" method="POST" class="row g-2 col-lg-12">
+                            <form action="admin_edit_profile_save.php" method="POST">
                                 <!-- Input -->
-                                <div class="form-group mb-2">
-                                    <label for="username" class="form-label fw-semibold">Username</label>
-                                    <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="username" class="form-label fw-semibold">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-2">
-                                    <label for="name" class="form-label fw-semibold">Full name</label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
+                                <div class="col-lg-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label fw-semibold">Full Name</label>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-2">
-                                    <label for="email" class="form-label fw-semibold">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
+                                <div class="row">
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="email" class="form-label fw-semibold">Email</label>
+                                            <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label fw-semibold">Phone Number</label>
+                                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-2">
-                                    <label for="phone" class="form-label fw-semibold">Phone</label>
-                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
+                                <div class="col-lg-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="address" class="form-label fw-semibold">Address</label>
+                                        <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3"><?php echo $r['user_address'] ?></textarea>
+                                    </div>
                                 </div>
 
-                                <div class="form-group mb-2">
-                                    <label for="address" class="form-label fw-semibold">Address</label>
-                                    <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3"><?php echo $r['user_address'] ?></textarea>
+                                <div class="col-lg-12 text-end">
+                                    <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save Detail</button>
                                 </div>
-
-                                <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Password Settings</h5>
                             <!-- Password Change Form -->
-                            <form action="admin_edit_profile_save.php" method="POST" class="row g-2 col-lg-12">
+                            <form action="admin_edit_profile_save.php" method="POST">
                                 <!-- Input -->
-                                <div class="form-group mb-2">
-                                    <label for="currentPassword" class="form-label fw-semibold">Current Password</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
-                                        <div class="input-group-text">
-                                            <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                <div class="mb-3 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="currentPassword" class="form-label fw-semibold">Current Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" data-toggle="password" required>
+                                            <div class="input-group-text">
+                                                <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group mb-2">
-                                    <label for="newPassword" class="form-label fw-semibold">New Password</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
-                                        <div class="input-group-text">
-                                            <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                <div class="mb-3 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="newPassword" class="form-label fw-semibold">New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="newPassword" name="newPassword" data-toggle="password" required>
+                                            <div class="input-group-text">
+                                                <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="confirmNewPassword" class="form-label fw-semibold">Confirm New Password</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
-                                        <div class="input-group-text">
-                                            <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                <div class="mb-3 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="confirmNewPassword" class="form-label fw-semibold">Confirm New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" data-toggle="password" required>
+                                            <div class="input-group-text">
+                                                <i class="bi bi-eye-fill" style="cursor: pointer"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <span id='passwordCheckMessage'></span>
+
+                                <!-- Message check for same password -->
+                                <div class="mb-3">
+                                    <span id='checkSamePasswordMessage'></span>
                                 </div>
 
-                                <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Change Password</button>
+                                <div class="col-lg-12 text-end">
+                                    <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Save Password</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -263,12 +286,12 @@
         $('#newPassword, #confirmNewPassword').on('keyup', function() {
             if ($('#newPassword').val() != '' && $('#confirmNewPassword').val() != '') {
                 if ($('#newPassword').val() == $('#confirmNewPassword').val()) {
-                    $('#passwordCheckMessage').html('New password matching').css('color', 'green');
+                    $('#checkSamePasswordMessage').html('<div class="alert alert-success" role="alert">New passsword matching</div>');
                 } else {
-                    $('#passwordCheckMessage').html('New password not matching').css('color', 'red');
+                    $('#checkSamePasswordMessage').html('<div class="alert alert-danger" role="alert">New passsword not matching</div>');
                 }
             } else {
-                $('#passwordCheckMessage').html('');
+                $('#checkSamePasswordMessage').html('');
             }
         });
         // Toggle password visibility
