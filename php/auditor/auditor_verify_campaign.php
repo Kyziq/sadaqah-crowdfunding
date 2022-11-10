@@ -138,9 +138,10 @@
             </nav>
         </div>
         <?php
+
         $campaign_status = 3; // 3 = Pending
         $index = 0;
-        $query = "SELECT * FROM campaign WHERE campaign_status=?"; // SQL
+        $query = "SELECT * FROM campaign camp, category cat WHERE cat.category_id=camp.campaign_category_id AND camp.campaign_status=?"; // SQL
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $campaign_status);
         $stmt->execute();
@@ -168,42 +169,48 @@
                             <div class="card-body">
                                 <!-- Verify Campaign Form -->
                                 <form action="auditor_verify_campaign_action.php" method="POST">
-                                    <input type="hidden" name="campaign_start" value="<?php echo $startDate; ?>">
-                                    <input type="hidden" name="campaign_end" value="<?php echo $endDate; ?>">
-                                    <input type="hidden" name="campaign_amount" value="<?php echo $r['campaign_amount']; ?>">
+                                    <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                    <input type="hidden" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
+
                                     <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                        <input type="text" class="form-control-plaintext" id="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
                                         <label for="campaign_name">Campaign Name</label>
                                     </div>
                                     <div class="fix-floating-label">
                                         <div class="form-floating">
-                                            <textarea class="form-control-plaintext" id="campaign_description" name="campaign_description" style="height: 90px" readonly><?php echo $r['campaign_description']; ?></textarea>
+                                            <textarea class="form-control-plaintext" id="campaign_description" style="height: 90px" readonly><?php echo $r['campaign_description']; ?></textarea>
                                             <label for="campaign_description">Campaign Description</label>
                                         </div>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control-plaintext" id="campaignCategory" value="<?php echo $r['category_name']; ?>" readonly>
+                                        <label for="campaignCategory">Campaign Category</label>
                                     </div>
                                     <div class="form-floating">
                                         <input type="text" class="form-control-plaintext" id="campaign_amount" value="RM<?php echo $r['campaign_amount']; ?>" readonly>
                                         <label for="campaign_amount">Campaign Amount</label>
                                     </div>
                                     <div class="form-floating col-6 mb-1">
-                                        <input type="text" class="form-control-plaintext" id="campaign_start" value="<?php echo $startDate; ?> - <?php echo $endDate; ?>" readonly>
-                                        <label for="campaign_start">Campaign Duration</label>
+                                        <input type="text" class="form-control-plaintext" id="campaign_duration" value="<?php echo $startDate; ?> - <?php echo $endDate; ?>" readonly>
+                                        <label for="campaign_duration">Campaign Duration</label>
                                     </div>
+
+                                    <!-- Input -->
                                     <div class="form-floating mb-3 col-3">
-                                        <select class="form-select" id="campaign_status" name="campaign_status" required>
+                                        <select class="form-select" id="verificationStatus" name="verificationStatus" required>
                                             <option value="" selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
-                                        <label for="campaign_status">Action</label>
+                                        <label for="verificationStatus">Action</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="auditor_comment" name="auditor_comment" placeholder="Leave a comment" style="height: 100px" required></textarea>
-                                        <label for="auditor_comment">Comment</label>
+                                        <textarea class="form-control" id="verificationComment" name="verificationComment" placeholder="Leave a comment" style="height: 100px" required></textarea>
+                                        <label for="verificationComment">Comment</label>
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                        <button class="btn btn-primary" type="submit" name="verifyCampaignButton">Submit</button>
                                     </div>
                                 </form>
                                 <!-- End Of Verify Campaign Form -->
