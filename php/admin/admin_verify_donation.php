@@ -183,30 +183,34 @@
                                 </div>
                                 <!-- Verify Donation Form -->
                                 <form action="admin_verify_donation_action.php" method="POST">
-                                    <!-- Hidden Values -->
-                                    <input type="hidden" name="admin_id" value="<?php echo $user['user_id']; ?>">
-                                    <input type="hidden" name="donator_id" value="<?php echo $r['donator_id']; ?>">
+                                    <input type="hidden" name="donateId" value="<?php echo $r['donate_id']; ?>">
+                                    <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                    <input type="hidden" name="donateAmount" value="<?php echo $r['donate_amount']; ?>">
 
                                     <!-- Input Values -->
                                     <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
-                                        <label for="campaign_name">Campaign Name</label>
+                                        <input type="text" class="form-control-plaintext" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                        <label for="campaignName" class="form-label">Campaign Name</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="donator_name" name="donator_name" value="<?php echo $r['user_name']; ?>" readonly>
-                                        <label for="donator_name">Donator Name</label>
+                                        <input type="text" class="form-control-plaintext" id="donatorName" name="donatorName" value="<?php echo $r['user_name']; ?>" readonly>
+                                        <label for="donatorName" class="form-label">Donator Name</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control-plaintext" id="donateAmount" value="RM<?php echo $r['donate_amount']; ?>" readonly>
+                                        <label for="donateAmount" class="form-label">Donate Amount</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <select class="form-select" id="campaign_status" name="campaign_status" required>
+                                        <select class="form-select" id="donateStatus" name="donateStatus" required>
                                             <option value="" selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
-                                        <label for="campaign_status">Action</label>
+                                        <label for="donateStatus" class="form-label">Action</label>
                                     </div>
                                     <div class="d-flex justify-content-end" style="gap:10px">
                                         <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
-                                        <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
+                                        <button class="btn btn-primary d-flex flex-row-reverse" type="submit" name="verifyDonationButton">Verify</button>
                                     </div>
                                 </form>
                                 <!-- End Of Verify Donation Form -->
