@@ -120,17 +120,13 @@
 
                 $index = 0;
                 while ($camp = $result->fetch_assoc()) {
-                    if ($camp['campaign_raised'] == 0) {
-                        $percentageBar = 0;
-                    } else {
-                        $percentageBar = 100 - (($camp['campaign_amount'] - $camp['campaign_raised']) / 100);
-                    }
+                    $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
                 ?>
                     <!-- Donation Card -->
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
                             <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
+                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
@@ -163,8 +159,7 @@
                                         </div>
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $percentageBar; ?>%">
-                                        </div>
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-4 justify-content-end">
