@@ -16,6 +16,34 @@
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <style>
+        /* Fix bootstrap floating label + textarea */
+        .fix-floating-label .form-floating {
+            position: relative;
+        }
+
+        .fix-floating-label .form-floating:before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            /* border-width (default by BS) */
+            left: 1px;
+            /* border-width (default by BS) */
+            width: calc(100% - 14px);
+            /* to show scrollbar */
+            height: 28px;
+            border-radius: 4px;
+            width: 97%;
+            /* (default by BS) */
+            background-color: #ffffff;
+        }
+
+        .fix-floating-label .form-floating textarea.form-control {
+            padding-top: 32px;
+            /* height of pseudo element */
+        }
+    </style>
 </head>
 
 <body>
@@ -111,6 +139,7 @@
         </div>
         <?php
         $campaign_status = 3; // 3 = Pending
+        $index = 0;
         $query = "SELECT * FROM campaign WHERE campaign_status=?"; // SQL
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $campaign_status);
@@ -126,43 +155,41 @@
                     $endDate = date("d M Y", strtotime($r["campaign_end"]));
                     $createdCampaignDate = date("d M Y", strtotime($r["campaign_created_date"]));
                 ?>
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <div class="card">
-                            <div class="card-header">Requested on <?php echo $createdCampaignDate ?></div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%;" alt="Campaign Banner">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                        <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top rounded" style="height:70px; width:70px;" alt="Campaign Banner">
+                                    </a>
+                                    Requested on <?php echo $createdCampaignDate ?>
                                 </div>
-                                <!-- Verify Donation Form -->
+                            </div>
+                            <div class="card-body">
+                                <!-- Verify Campaign Form -->
                                 <form action="auditor_verify_campaign_action.php" method="POST">
-                                    <!-- Input Values -->
+                                    <input type="hidden" name="campaign_start" value="<?php echo $startDate; ?>">
+                                    <input type="hidden" name="campaign_end" value="<?php echo $endDate; ?>">
+                                    <input type="hidden" name="campaign_amount" value="<?php echo $r['campaign_amount']; ?>">
                                     <div class="form-floating">
                                         <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
                                         <label for="campaign_name">Campaign Name</label>
                                     </div>
-                                    <div class="form-floating">
-                                        <textarea class="form-control-plaintext" id="campaign_description" name="campaign_description" style="height: 100px"><?php echo $r['campaign_description']; ?></textarea>
-                                        <label for="campaign_description">Campaign Description</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaign_amount" name="campaign_amount" value="<?php echo $r['campaign_amount']; ?>" readonly>
-                                        <label for="campaign_amount">Campaign Amount (RM)</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control-plaintext" id="campaign_start" name="campaign_start" value="<?php echo $startDate; ?>" readonly>
-                                                <label for="campaign_start">Campaign Start</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control-plaintext" id="campaign_end" name="campaign_end" value="<?php echo $endDate ?>" readonly>
-                                                <label for="campaign_end">Campaign End</label>
-                                            </div>
+                                    <div class="fix-floating-label">
+                                        <div class="form-floating">
+                                            <textarea class="form-control-plaintext" id="campaign_description" name="campaign_description" style="height: 90px" readonly><?php echo $r['campaign_description']; ?></textarea>
+                                            <label for="campaign_description">Campaign Description</label>
                                         </div>
                                     </div>
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control-plaintext" id="campaign_amount" value="RM<?php echo $r['campaign_amount']; ?>" readonly>
+                                        <label for="campaign_amount">Campaign Amount</label>
+                                    </div>
+                                    <div class="form-floating col-6 mb-1">
+                                        <input type="text" class="form-control-plaintext" id="campaign_start" value="<?php echo $startDate; ?> - <?php echo $endDate; ?>" readonly>
+                                        <label for="campaign_start">Campaign Duration</label>
+                                    </div>
+                                    <div class="form-floating mb-3 col-3">
                                         <select class="form-select" id="campaign_status" name="campaign_status" required>
                                             <option value="" selected disabled>Select Action</option>
                                             <option value="1">Approve</option>
@@ -175,15 +202,31 @@
                                         <label for="auditor_comment">Comment</label>
                                     </div>
 
-                                    <div class="d-flex mt-auto justify-content-center" style="gap:10px">
-                                        <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary" type="submit">Submit</button>
                                     </div>
                                 </form>
-                                <!-- End Of Verify Donation Form -->
+                                <!-- End Of Verify Campaign Form -->
                             </div>
                         </div>
                     </div>
+                    <!-- Campaign Banner Modal -->
+                    <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $r['campaign_name']; ?></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="display: flex;">
+                                    <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php
+                    $index++;
                 }
                 ?>
             </div>
@@ -199,8 +242,6 @@
 
     <!-- Imports -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../js/main.js"></script>
 
     <?php
