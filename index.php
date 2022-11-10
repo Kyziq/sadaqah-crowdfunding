@@ -355,7 +355,7 @@
 
                         <!-- Input -->
                         <div class="form-group mb-3">
-                            <label for="user_username" class="form-label">Username</label>
+                            <label for="user_username" class="form-label fw-semibold">Username</label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class="fas fa-user"></i>
@@ -365,7 +365,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="user_password" class="form-label">Password</label>
+                            <label for="user_password" class="form-label fw-semibold">Password</label>
                             <div class="input-group">
                                 <div class="input-group-text">
                                     <i class="fas fa-lock"></i>
@@ -413,7 +413,7 @@
                         </a>
                         <!-- Input -->
                         <div class="form-group mb-2">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label fw-semibold">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required />
                         </div>
 
@@ -427,7 +427,7 @@
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label fw-semibold">Password</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password" name="password" data-toggle="password" required />
                                 <div class="input-group-text">
@@ -437,22 +437,22 @@
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="name" class="form-label">Full Name</label>
+                            <label for="name" class="form-label fw-semibold">Full Name</label>
                             <input type="text" class="form-control" id="name" name="name" required />
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label fw-semibold">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required />
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="phone" class="form-label">Phone Number</label>
+                            <label for="phone" class="form-label fw-semibold">Phone Number</label>
                             <input type="number" step=1 class="form-control" id="phone" name="phone" required />
                         </div>
 
                         <div class="form-group mb-2">
-                            <label for="address" class="form-label">Address</label>
+                            <label for="address" class="form-label fw-semibold">Address</label>
                             <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
                         </div>
 

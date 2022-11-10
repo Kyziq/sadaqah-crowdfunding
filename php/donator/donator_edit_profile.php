@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 text-end">
+                                <div class="d-flex justify-content-end">
                                     <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save Detail</button>
                                 </div>
                             </form>
@@ -209,7 +209,7 @@
                                     <span id='checkSamePasswordMessage'></span>
                                 </div>
 
-                                <div class="col-lg-12 text-end">
+                                <div class="d-flex justify-content-end">
                                     <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Save Password</button>
                                 </div>
                             </form>

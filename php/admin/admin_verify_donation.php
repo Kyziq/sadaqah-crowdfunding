@@ -204,7 +204,7 @@
                                         </select>
                                         <label for="campaign_status">Action</label>
                                     </div>
-                                    <div class="d-flex mt-auto justify-content-center" style="gap:10px">
+                                    <div class="d-flex justify-content-end" style="gap:10px">
                                         <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
                                         <button class="btn btn-primary d-flex flex-row-reverse" type="submit">Verify</button>
                                     </div>

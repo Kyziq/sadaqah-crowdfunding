@@ -167,9 +167,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="card-btn d-flex mt-auto justify-content-end" style="gap:10px ">
+                                <div class="d-flex mt-4 justify-content-end">
                                     <!-- <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a> -->
                                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#donate-modal-<?php echo $index ?>">Donate</button>
                                 </div>

@@ -220,7 +220,7 @@
                                         <input type="date" class="form-control" id="endDate" name="endDate" required>
                                     </div>
 
-                                    <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
                                     </div>
                                 </div>

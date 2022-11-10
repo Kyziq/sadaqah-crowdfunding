@@ -209,7 +209,7 @@
                                         <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
                                     </div>
 
-                                    <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary" name="create-auditor-button">Create</button>
                                     </div>
                                 </div>
