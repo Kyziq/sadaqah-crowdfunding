@@ -161,7 +161,7 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                        <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top rounded" style="height:70px; width:70px;" alt="Campaign Banner">
+                                        <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded" style="height:70px; width:70px;" alt="Campaign Banner">
                                     </a>
                                     Requested on <?php echo $createdCampaignDate ?>
                                 </div>
