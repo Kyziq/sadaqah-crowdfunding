@@ -212,7 +212,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Donation History</h5>
                                     <?php
-                                    $query = "SELECT * FROM campaign c, donate d WHERE c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
+                                    $query = "SELECT * FROM campaign c, donate d, status sta WHERE d.donate_status = sta.status_id AND c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
                                     $stmt = $con->prepare($query);
                                     $stmt->bind_param("i", $user_id);
                                     $stmt->execute();
@@ -246,18 +246,16 @@
                                                                 ?>
                                                             </td>
                                                             <td>RM<?php echo $camp['donate_amount'] ?></td>
-                                                            <?php
-                                                            if ($camp['donate_status'] == 1) {
-                                                                echo '<td class="text-success">';
-                                                                echo 'Accepted';
-                                                            } else if ($camp['donate_status'] == 2) {
-                                                                echo '<td class="text-success">';
-                                                                echo 'Declined';
-                                                            } else if ($camp['donate_status'] == 3) {
-                                                                echo '<td class="text-warning">';
-                                                                echo 'Pending';
-                                                            }
-                                                            ?>
+                                                            <td>
+                                                                <?php
+                                                                if ($camp['donate_status'] == 1) {
+                                                                    echo '<span class="badge bg-success">' . $camp['status_desc'] . '</span>';
+                                                                } else if ($camp['donate_status'] == 2) {
+                                                                    echo '<span class="badge bg-danger">' . $camp['status_desc'] . '</span>';
+                                                                } else if ($camp['donate_status'] == 3) {
+                                                                    echo '<span class="badge bg-warning">' . $camp['status_desc'] . '</span>';
+                                                                }
+                                                                ?>
                                                             </td>
                                                         </tr>
                                                 <?php
