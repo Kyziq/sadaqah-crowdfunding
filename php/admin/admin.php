@@ -219,7 +219,7 @@
                             <div class="card info-card customers-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Pending Payment Verification
+                                        Pending Donation Verification
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">

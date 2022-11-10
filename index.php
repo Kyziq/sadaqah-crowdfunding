@@ -378,9 +378,9 @@
                             <?php
                             /* Check for wrong password */
                             if (isset($_GET["error"]) && $_GET["error"] == 'username') {
-                                echo '<span style="color: red;">Username does not exist!</span>';
+                                echo '<div class="alert alert-danger" role="alert">Username does not exist!</div>';
                             } else if (isset($_GET["error"]) && $_GET["error"] == 'password') {
-                                echo '<span style="color: red;">Wrong password!</span>';
+                                echo '<div class="alert alert-danger" role="alert">Wrong password!</div>';
                             }
                             ?>
                         </div>
