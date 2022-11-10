@@ -170,7 +170,7 @@
                             <h5 class="card-title">Edit Campaign Table</h5>
                             <?php
                             include_once '../dbcon.php';
-                            $query = "SELECT * FROM campaign";
+                            $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
                             $stmt = $con->prepare($query);
                             $stmt->execute();
                             $result = $stmt->get_result();
@@ -180,12 +180,13 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
+                                            <th scope="col" class="col-2">Name</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" class="col-3">Description</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Category</th>
-                                            <th scope="col">Raised (RM)</th>
-                                            <th scope="col">Amount (RM)</th>
+                                            <th scope="col">Raised</th>
+                                            <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
                                             <th scope="col">Action</th>
@@ -203,17 +204,34 @@
                                             if ($startDate < $endDate) {
                                         ?>
                                                 <tr>
-                                                    <th scope="row">
-                                                        <?php echo $index; ?>
-                                                    </th>
-                                                    <td>
-                                                        <?php echo $r['campaign_name']; ?>
+                                                    <th scope="row"><?php echo $index; ?></th>
+
+                                                    <td class="lh-sm">
+                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px;">
+                                                            <?php echo $r['campaign_name']; ?>
+                                                        </div>
                                                     </td>
+
                                                     <td>
-                                                        <?php echo $r['campaign_description']; ?>
+                                                        <?php
+                                                        if ($r['status_id'] == 1) {
+                                                            echo '<span class="badge bg-success">' . $r['status_desc'] . '</span>';
+                                                        } else if ($r['status_id'] == 2) {
+                                                            echo '<span class="badge bg-danger">' . $r['status_desc'] . '</span>';
+                                                        } else if ($r['status_id'] == 3) {
+                                                            echo '<span class="badge bg-warning">' . $r['status_desc'] . '</span>';
+                                                        }
+                                                        ?>
                                                     </td>
+
                                                     <td>
-                                                        <a href="#myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px;">
+                                                            <?php echo $r['campaign_description']; ?>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href=" #myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
                                                             <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem;">
                                                         </a>
                                                     </td>
@@ -231,10 +249,10 @@
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $r['campaign_raised']; ?>
+                                                        RM<?php echo $r['campaign_raised']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $r['campaign_amount']; ?>
+                                                        RM<?php echo $r['campaign_amount']; ?>
                                                     </td>
                                                     <td>
                                                         <?php echo $startDate; ?>
