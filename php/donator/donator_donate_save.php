@@ -40,7 +40,7 @@
             /* Upload File */
             $extension  = strtolower(pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION));
             $target_dir = "../../images/donation-proof/";
-            $file_name = $user_username . "-campaignID" . $campaign_id . $date . "." . $extension; // username-campaignid-date.extension
+            $file_name = $user_username . "--campaignID" . $campaign_id . $date . "." . $extension; // username--campaignid--date.extension
             $target_file = $target_dir . $file_name;
             $source = $_FILES["donate_proof"]["tmp_name"];
 

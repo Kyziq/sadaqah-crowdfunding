@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2022 at 08:58 PM
+-- Generation Time: Nov 12, 2022 at 09:45 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -97,8 +97,10 @@ CREATE TABLE `donate` (
 --
 
 INSERT INTO `donate` (`donate_id`, `donate_amount`, `donate_date`, `donate_proof`, `donate_status`, `donator_id`, `admin_id`, `campaign_id`) VALUES
-(1, 500, '2022-11-12 17:44:13.809653', 'images/donation-proof/nik-campaignID1--2022-11-13--01-34-33.png', 1, 6, 1, 1),
-(2, 20000, '2022-11-12 18:07:53.943770', 'images/donation-proof/amran-campaignID5--2022-11-13--02-07-23.pdf', 1, 8, 1, 5);
+(1, 500, '2022-11-12 20:44:12.835978', 'images/donation-proof/nik--campaignID1--2022-11-13--01-34-33.png', 1, 6, 1, 1),
+(2, 20000, '2022-11-12 20:44:12.839078', 'images/donation-proof/amran--campaignID5--2022-11-13--02-07-23.pdf', 1, 8, 1, 5),
+(3, 1000, '2022-11-12 20:44:12.841885', 'images/donation-proof/chai--campaignID6--2022-11-13--04-39-35.jpg', 3, 7, 1, 6),
+(4, 3000, '2022-11-12 20:44:12.844638', 'images/donation-proof/chai--campaignID5--2022-11-13--04-39-51.pdf', 3, 7, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -193,11 +195,11 @@ CREATE TABLE `verification` (
 --
 
 INSERT INTO `verification` (`verification_id`, `verification_status`, `verification_comment`, `verification_date`, `campaign_id`, `auditor_id`) VALUES
-(1, 1, 'Mantap', '2022-11-12 17:22:55', 1, 5),
-(2, 1, 'Mantap!', '2022-11-12 17:32:24', 2, 5),
-(3, 1, 'Mantap', '2022-11-12 17:32:38', 3, 5),
-(4, 1, 'Mantap', '2022-11-12 17:32:52', 6, 5),
-(5, 1, 'Mantap', '2022-11-12 17:32:55', 5, 5);
+(1, 1, 'Verified by afifah.', '2022-11-12 17:22:55', 1, 5),
+(2, 1, 'Verified by afifah.', '2022-11-12 17:32:24', 2, 5),
+(3, 1, 'Verified by afifah.', '2022-11-12 17:32:38', 3, 5),
+(4, 1, 'Verified by afifah.', '2022-11-12 17:32:52', 6, 5),
+(5, 1, 'Verified by afifah.', '2022-11-12 17:32:55', 5, 5);
 
 --
 -- Indexes for dumped tables
@@ -276,7 +278,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `donate`
 --
 ALTER TABLE `donate`
-  MODIFY `donate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `donate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `level`
