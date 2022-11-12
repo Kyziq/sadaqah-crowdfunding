@@ -15,6 +15,34 @@
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <style>
+        /* Fix bootstrap floating label + textarea */
+        .fix-floating-label .form-floating {
+            position: relative;
+        }
+
+        .fix-floating-label .form-floating:before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            /* border-width (default by BS) */
+            left: 1px;
+            /* border-width (default by BS) */
+            width: calc(100% - 14px);
+            /* to show scrollbar */
+            height: 28px;
+            border-radius: 4px;
+            width: 97%;
+            /* (default by BS) */
+            background-color: #ffffff;
+        }
+
+        .fix-floating-label .form-floating textarea.form-control {
+            padding-top: 32px;
+            /* height of pseudo element */
+        }
+    </style>
 </head>
 
 <body>
@@ -23,6 +51,8 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         include_once '../dbcon.php'; // Connect to database 
+        date_default_timezone_set('Asia/Singapore');
+
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -167,9 +197,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Edit Campaign Table</h5>
+                            <h5 class="card-title">Edit Campaign List</h5>
                             <?php
-                            include_once '../dbcon.php';
                             $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
                             $stmt = $con->prepare($query);
                             $stmt->execute();
@@ -194,20 +223,21 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $index = 1;
+                                        static $index = 1;
                                         while ($r = $result->fetch_assoc()) {
+                                            $currentDate = date('Y-m-d');
                                             $startDate = date('Y-m-d', strtotime($r['campaign_start']));
                                             $endDate = date('Y-m-d', strtotime($r['campaign_end']));
                                             $createdDate = date('Y-m-d', strtotime($r['campaign_created_date']));
 
-                                            // Not yet completed
-                                            if ($startDate < $endDate) {
+                                            // Make sure ongoing campaign
+                                            if (date('Y-m-d', strtotime($r['campaign_end'])) > date('Y-m-d')) {
                                         ?>
                                                 <tr>
                                                     <th scope="row"><?php echo $index; ?></th>
 
                                                     <td class="lh-sm">
-                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px;">
+                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px; ">
                                                             <?php echo $r['campaign_name']; ?>
                                                         </div>
                                                     </td>
@@ -225,14 +255,14 @@
                                                     </td>
 
                                                     <td>
-                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px;">
+                                                        <div class="overflow-auto lh-sm text-justify" style="height: 105px; max-height: 105px; text-align: justify;">
                                                             <?php echo $r['campaign_description']; ?>
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <a href=" #myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                                            <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem;">
+                                                        <a href=" #myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-1-<?php echo $index ?>">
+                                                            <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem; width: 5rem;">
                                                         </a>
                                                     </td>
                                                     <td>
@@ -261,54 +291,56 @@
                                                         <?php echo $endDate; ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-<?php echo $index ?>">Edit</button>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>">Edit</button>
                                                     </td>
+                                                </tr>
 
-                                                    <!-- Click Image Modal -->
-                                                    <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Campaign Banner</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body" style="display: flex;">
-                                                                    <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
-                                                                </div>
+                                                <!-- Click Image Modal -->
+                                                <div class="modal fade" id="banner-modal-1-<?php echo $index ?>" tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Campaign Banner</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body" style="display: flex;">
+                                                                <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <!-- Edit Campaign Modal -->
-                                                    <div class="modal fade" id="edit-campaign-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <form action="admin_edit_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Campaign Form</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
+                                                <!-- Edit Campaign Modal -->
+                                                <div class="modal fade" id="edit-campaign-1-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <form action="admin_edit_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5 fw-bold" id="editCampaignLabel">Edit Campaign Form</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
                                                                         <!-- Form -->
                                                                         <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
                                                                         <input type="hidden" name="campaignCreatedDate" value="<?php echo $r['campaign_created_date']; ?>">
+                                                                        <input type="hidden" name="campaignBannerDir" value="<?php echo $r['campaign_banner']; ?>">
 
                                                                         <div class="form-group mb-2">
-                                                                            <label for="name" class="form-label">Campaign Name</label>
-                                                                            <input type="text" class="form-control" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
+                                                                            <label for="campaignName" class="form-label fw-semibold">Campaign Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
                                                                         </div>
                                                                         <div class="form-group mb-2">
-                                                                            <label for="description" class="form-label">Campaign Description</label>
-                                                                            <textarea class="form-control" name="campaignDesc" rows="4"><?php echo $r['campaign_description']; ?></textarea>
+                                                                            <label for="campaignDesc" class="form-label fw-semibold">Campaign Description <span class="text-danger">*</span></label>
+                                                                            <textarea class="form-control" id="campaignDesc" name="campaignDesc" rows="4"><?php echo $r['campaign_description']; ?></textarea>
                                                                         </div>
                                                                         <div class="form-group mb-2">
-                                                                            <label for="banner" class="form-label">Campaign Banner</label>
-                                                                            <input type="hidden" name="campaignBannerDir" value="<?php echo $r['campaign_banner']; ?>">
-                                                                            <input type="file" class="form-control" accept="image/*" name="campaignFileBanner">
+                                                                            <label for="campaignFileBanner" class="form-label fw-semibold">Campaign Banner <span class="text-danger">*</span></label>
+                                                                            <input type="file" class="form-control" id="campaignFileBanner" name="campaignFileBanner" accept="image/*">
                                                                         </div>
-                                                                        <div class="form-group mb-2">
-                                                                            <label for="category" class="form-label">Campaign Category</label>
-                                                                            <select class="form-select" name="campaignCategory">
+                                                                        <div class="form-group col-md-4 mb-2">
+                                                                            <label for="campaignCategory" class="form-label fw-semibold">Campaign Category <span class="text-danger">*</span></label>
+                                                                            <select class="form-select" id="campaignCategory" name="campaignCategory">
                                                                                 <?php
                                                                                 if ($r['campaign_category_id'] == 1) {
                                                                                 ?>
@@ -354,40 +386,38 @@
                                                                                 ?>
                                                                             </select>
                                                                         </div>
-                                                                        <div class="form-group mb-2">
-                                                                            <label for="raised" class="form-label">Campaign Raised</label>
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text">RM</span>
-                                                                                <input type="number" class="form-control" name="campaignRaised" value="<?php echo $r['campaign_raised']; ?>">
-                                                                            </div>
+
+                                                                        <div class="form-group col-md-4 mb-2">
+                                                                            <label for="campaignRaised" class="form-label fw-semibold">Campaign Raised (RM) <span class="text-danger">*</span></label>
+                                                                            <input type="number" class="form-control" id="campaignRaised" name="campaignRaised" value="<?php echo $r['campaign_raised']; ?>">
                                                                         </div>
-                                                                        <div class="form-group mb-2">
-                                                                            <label for="amount" class="form-label">Campaign Amount</label>
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text">RM</span>
-                                                                                <input type="number" class="form-control" name="campaignAmount" value="<?php echo $r['campaign_amount']; ?>">
-                                                                            </div>
+
+                                                                        <div class="form-group col-md-4 mb-2">
+                                                                            <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount (RM) <span class="text-danger">*</span></label>
+                                                                            <input type="number" class="form-control" id="campaignAmount" name="campaignAmount" value="<?php echo $r['campaign_amount']; ?>">
                                                                         </div>
-                                                                        <div class="form-group mb-2">
-                                                                            <label for="amount" class="form-label">Start Date</label>
+
+                                                                        <div class="form-group mb-2 col-md-6">
+                                                                            <label for="startDate" class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
                                                                             <input type="date" class="form-control" id="startDate" name="startDate" value="<?php echo $startDate; ?>">
                                                                         </div>
-                                                                        <div class="form-group mb-2">
-                                                                            <label for="amount" class="form-label">End Date</label>
-                                                                            <input type="date" class="form-control" id="endDate" name="endDate" value="<?php echo $endDate; ?>">
+
+                                                                        <div class="form-group mb-2 col-md-6">
+                                                                            <label for="endDate" class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
+                                                                            <input type="date" class="form-control" id="endDate" name="endDate" value="<?php echo $endDate; ?>" requi>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary" name="edit-campaign-button">Save</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary" name="edit-campaign-1-button">Save</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                </tr>
+                                                </div>
                                         <?php
+                                                $index++;
                                             }
-                                            $index++;
                                         }
                                         ?>
                                     </tbody>
@@ -396,30 +426,235 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Ended Campaign(s)</h5>
+                            <h5 class="card-title">Ended Campaign List</h5>
+                            <?php
+                            $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
+                            $stmt = $con->prepare($query);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            ?>
                             <div class="table-responsive">
                                 <table class="table table-hover table-sm">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
+                                            <th scope="col" class="col-2">Name</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" class="col-3">Description</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Category</th>
-                                            <th scope="col">Raised (RM)</th>
-                                            <th scope="col">Amount (RM)</th>
+                                            <th scope="col">Raised</th>
+                                            <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
-                                            <th scope="col">Action (New Campaign)</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>test</td>
-                                        </tr>
+                                        <?php
+                                        static $index = 1;
+                                        while ($r = $result->fetch_assoc()) {
+                                            $currentDate = date('Y-m-d');
+                                            $startDate = date('Y-m-d', strtotime($r['campaign_start']));
+                                            $endDate = date('Y-m-d', strtotime($r['campaign_end']));
+                                            $createdDate = date('Y-m-d', strtotime($r['campaign_created_date']));
+
+                                            // Make sure ended campaign
+                                            if ($currentDate > $endDate) {
+                                        ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $index; ?></th>
+
+                                                    <td class="lh-sm">
+                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px;">
+                                                            <?php echo $r['campaign_name']; ?>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($r['status_id'] == 1) {
+                                                            echo '<span class="badge bg-success">' . $r['status_desc'] . '</span>';
+                                                        } else if ($r['status_id'] == 2) {
+                                                            echo '<span class="badge bg-danger">' . $r['status_desc'] . '</span>';
+                                                        } else if ($r['status_id'] == 3) {
+                                                            echo '<span class="badge bg-warning">' . $r['status_desc'] . '</span>';
+                                                        }
+                                                        ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="overflow-auto lh-sm" style="height: 105px; max-height: 105px; text-align: justify;">
+                                                            <?php echo $r['campaign_description']; ?>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="#myModal" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-2-<?php echo $index ?>">
+                                                            <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem; width: 5rem;">
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($r['campaign_category_id'] == 1) {
+                                                            echo "Cash";
+                                                        } else if ($r['campaign_category_id'] == 2) {
+                                                            echo "School Necessity";
+                                                        } else if ($r['campaign_category_id'] == 3) {
+                                                            echo "Facilitator";
+                                                        } else if ($r['campaign_category_id'] == 4) {
+                                                            echo "Service";
+                                                        }
+                                                        ?>
+                                                    </td>
+
+                                                    <td>
+                                                        RM<?php echo $r['campaign_raised']; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        RM<?php echo $r['campaign_amount']; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php echo $startDate; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php echo $endDate; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-2-<?php echo $index ?>">New</button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Click Image Modal -->
+                                                <div class="modal fade" id="banner-modal-2-<?php echo $index ?>" tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Campaign Banner</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body" style="display: flex;">
+                                                                <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Edit Campaign Modal -->
+                                                <div class="modal fade" id="edit-campaign-2-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5 fw-bold" id="editCampaignLabel">New Campaign Form</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <!-- Form -->
+                                                                        <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                                                        <input type="hidden" name="campaignCreatedDate" value="<?php echo $r['campaign_created_date']; ?>">
+                                                                        <input type="hidden" class="form-control" id="campaignRaised" name="campaignRaised" value="0">
+
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="campaignName" class="form-label fw-semibold">Campaign Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>" required>
+                                                                        </div>
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="campaignDesc" class="form-label fw-semibold">Campaign Description <span class="text-danger">*</span></label>
+                                                                            <textarea class="form-control" id="campaignDesc" name="campaignDesc" rows="4" required><?php echo $r['campaign_description']; ?></textarea>
+                                                                        </div>
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="campaignFileBanner" class="form-label fw-semibold">Campaign Banner <span class="text-danger">*</span></label>
+                                                                            <input type="file" class="form-control" id="campaignFileBanner" name="campaignFileBanner" accept="image/*" required>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6 mb-2">
+                                                                            <label for="campaignCategory" class="form-label fw-semibold">Campaign Category <span class="text-danger">*</span></label>
+                                                                            <select class="form-select" id="campaignCategory" name="campaignCategory" required>
+                                                                                <?php
+                                                                                if ($r['campaign_category_id'] == 1) {
+                                                                                ?>
+                                                                                    <option value="1" selected>Cash</option>
+                                                                                    <option value="2">School Necessity</option>
+                                                                                    <option value="3">Facilitator</option>
+                                                                                    <option value="4">Service</option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+
+                                                                                <?php
+                                                                                if ($r['campaign_category_id'] == 2) {
+                                                                                ?>
+                                                                                    <option value="1">Cash</option>
+                                                                                    <option value="2" selected>School Necessity</option>
+                                                                                    <option value="3">Facilitator</option>
+                                                                                    <option value="4">Service</option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+
+                                                                                <?php
+                                                                                if ($r['campaign_category_id'] == 3) {
+                                                                                ?>
+                                                                                    <option value="1">Cash</option>
+                                                                                    <option value="2">School Necessity</option>
+                                                                                    <option value="3" selected>Facilitator</option>
+                                                                                    <option value="4">Service</option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+
+                                                                                <?php
+                                                                                if ($r['campaign_category_id'] == 4) {
+                                                                                ?>
+                                                                                    <option value="1">Cash</option>
+                                                                                    <option value="2">School Necessity</option>
+                                                                                    <option value="3">Facilitator</option>
+                                                                                    <option value="4" selected>Service</option>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="form-group col-md-6 mb-2">
+                                                                            <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount (RM) <span class="text-danger">*</span></label>
+                                                                            <input type="number" class="form-control" id="campaignAmount" name="campaignAmount" required>
+                                                                        </div>
+
+
+                                                                        <div class="form-group mb-2 col-md-6">
+                                                                            <label for="startDate" class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
+                                                                            <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                                                        </div>
+
+                                                                        <div class="form-group mb-2 col-md-6">
+                                                                            <label for="endDate" class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
+                                                                            <input type="date" class="form-control" id="endDate" name="endDate" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            }
+                                            $index = 1;
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

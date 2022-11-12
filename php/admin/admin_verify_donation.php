@@ -179,7 +179,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
+                                    <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
                                 </div>
                                 <!-- Verify Donation Form -->
                                 <form action="admin_verify_donation_action.php" method="POST">
@@ -206,7 +206,7 @@
                                             <option value="1">Approve</option>
                                             <option value="2">Decline</option>
                                         </select>
-                                        <label for="donateStatus" class="form-label">Action</label>
+                                        <label for="donateStatus" class="form-label">Action <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="d-flex justify-content-end" style="gap:10px">
                                         <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
@@ -223,7 +223,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="proof-modal-label">
+                                    <h5 class="modal-title">
                                         Proof of Payment
                                         (<?php echo $r['user_name']; ?>)
                                     </h5>
@@ -238,13 +238,13 @@
                                     // Image (Proof of Payment)
                                     if (in_array($ext, $allowedImageExt)) {
                                     ?>
-                                        <img src="<?php echo $r['donate_proof'] ?>" alt="Proof of Payment" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                        <img src="<?php echo "../../" . $r['donate_proof'] ?>" alt="Proof of Payment" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
                                     <?php
                                     }
                                     // PDF (Proof of Payment)
                                     else if (in_array($ext, $allowedFileExt)) {
                                     ?>
-                                        <embed src="<?php echo $r['donate_proof'] ?>" frameborder="0" width="100%" height="700px">
+                                        <embed src="<?php echo "../../" . $r['donate_proof'] ?>" frameborder="0" width="100%" height="700px">
                                     <?php
                                     }
                                     ?>

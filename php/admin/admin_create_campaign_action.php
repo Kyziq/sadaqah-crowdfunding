@@ -22,6 +22,7 @@
         /** Check if create campaign button is clicked **/
         if (isset($_POST['create-campaign-button'])) {
             include_once '../dbcon.php'; // Connect to database
+            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
             $campaignName = $_POST['campaignName'];
@@ -35,53 +36,46 @@
             $campaignStatus = 3; // 3 = Pending
 
             /* File Upload */
-            date_default_timezone_set('Asia/Singapore');
-            $date = date('Y-m-d');
+            $date = date('--Y-m-d--H-i-s');
 
-            // Upload image (where file name is campaignName-date.extension)
+            /* Upload file (where file name is campaignName-date.extension) */
             $extension  = pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION);
             $target_dir = "../../images/campaign/";
-            $file_name = $campaignName . "-" . $date . "." . $extension;
+            $file_name = $campaignName . $date . "." . $extension;
             $target_file = $target_dir . $file_name;
             $source = $_FILES["campaignFileBanner"]["tmp_name"];
 
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // file type to lowercase
 
-            // Check if image file is a actual image or fake image
-            $check = getImageSize($source);
-            if ($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
+            /* File Conditions */
+            if (getImageSize($source) !== false) { // Check if image file is a actual image or fake image
                 $uploadOk = 1;
             } else {
-                echo "File is not an image.";
                 $uploadOk = 0;
             }
-            // Check if file already exists
-            if (file_exists($target_file)) {
+            if (file_exists($target_file)) { // Check if file already exists
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            // Check file size (10000000 = 10MB)
-            if ($_FILES["campaignFileBanner"]["size"] > 10000000) {
+            if ($_FILES["campaignFileBanner"]["size"] > 10000000) { // Check file size (10000000 = 10MB)
                 echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
-            // Allow certain file formats
             if (
                 $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg"
-            ) {
+            ) { // Allow certain file formats
                 echo "Sorry, only PNG, JPG, and JPEG files are allowed.";
                 $uploadOk = 0;
             }
+            /* */
 
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
+            if ($uploadOk == 0) { // Check if $uploadOk is set to 0 by an error
                 echo "Sorry, your file was not uploaded.";
-                header("Location: admin_create_campaign.php");
+                header("Location: admin.php");
             } else {
                 if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
-                    $campaignFileBanner = $target_file;
+                    $campaignFileBanner = str_replace("../", "", $target_file); // Remove "../" from the path 
 
                     $query = "INSERT INTO campaign(campaign_name, campaign_description, campaign_banner, campaign_category_id, campaign_amount, campaign_start, campaign_end, campaign_raised, campaign_admin_id, campaign_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($query);

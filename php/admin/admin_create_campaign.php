@@ -176,17 +176,17 @@
                                 <div class="row g-3">
                                     <!-- Input -->
                                     <div class="col-lg-12">
-                                        <label for="campaignName" class="form-label fw-semibold">Campaign Name</label>
+                                        <label for="campaignName" class="form-label fw-semibold">Campaign Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="campaignName" name="campaignName" required>
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <label for="campaignDesc" class="form-label fw-semibold">Campaign Description</label>
+                                        <label for="campaignDesc" class="form-label fw-semibold">Campaign Description <span class="text-danger">*</span></label>
                                         <textarea class="form-control" rows="4" id="campaignDesc" name="campaignDesc" required></textarea>
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount Required</label>
+                                        <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text">RM</span>
                                             <input type="number" step="0.01" class="form-control" id="campaignAmount" name="campaignAmount" required>
@@ -194,7 +194,7 @@
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="campaignCategory" class="form-label fw-semibold">Campaign Category</label>
+                                        <label for="campaignCategory" class="form-label fw-semibold">Campaign Category <span class="text-danger">*</span></label>
                                         <select class="form-select" id="campaignCategory" name="campaignCategory" required>
                                             <option value="" selected disabled>Select Category</option>
                                             <option value="1">Cash</option>
@@ -205,18 +205,18 @@
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <label for="campaignFileBanner" class="form-label fw-semibold">Upload Campaign Banner</label>
-                                        <span class="text-muted small">(.png/.jpg/.jpeg/.pdf)</span>
-                                        <input class="form-control" type="file" accept="image/*" id="campaignFileBanner" name="campaignFileBanner" required>
+                                        <label for="campaignFileBanner" class="form-label fw-semibold">Campaign Banner <span class="text-danger">*</span></label>
+                                        <span class="text-muted small">(.png/.jpg/.jpeg)</span>
+                                        <input class="form-control" type="file" id="campaignFileBanner" name="campaignFileBanner" accept="image/*" required>
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="startDate" class="form-label fw-semibold">Start Date</label>
+                                        <label for="startDate" class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="startDate" name="startDate" required>
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <label for="endDate" class="form-label fw-semibold">End Date</label>
+                                        <label for="endDate" class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" id="endDate" name="endDate" required>
                                     </div>
 

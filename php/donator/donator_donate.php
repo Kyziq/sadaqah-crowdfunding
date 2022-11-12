@@ -18,10 +18,11 @@
 <body>
     <?php
     /* Start session and validate donator login */
-    include("../dbcon.php");
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         include_once '../dbcon.php'; // Connect to database 
+        date_default_timezone_set('Asia/Singapore');
+
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -121,12 +122,13 @@
                 $index = 0;
                 while ($camp = $result->fetch_assoc()) {
                     $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
+                    $percentageBar = round($percentageBar);
                 ?>
                     <!-- Donation Card -->
                     <div class="col-lg-3 d-flex align-items-stretch">
                         <div class="card">
                             <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
+                                <img src="<?php echo '../../' . $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
@@ -141,7 +143,7 @@
                                     </div>
                                     <div>
                                         <?php
-                                        $date1 = new DateTime($camp['campaign_start']);
+                                        $date1 = new DateTime(date("Y-m-d"));
                                         $date2 = new DateTime($camp['campaign_end']);
                                         $diff = $date2->diff($date1)->format("%a");  // Find difference
                                         $daysLeft = intval($diff);   // Rounding days
@@ -159,7 +161,7 @@
                                         </div>
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
+                                        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated fw-bold" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-4 justify-content-end">
@@ -179,7 +181,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="display: flex;">
-                                    <img src=" <?php echo $camp['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                    <img src=" <?php echo '../../' . $camp['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
                                 </div>
                             </div>
                         </div>
@@ -191,7 +193,7 @@
                             <div class="modal-content">
                                 <form action="donator_donate_save.php" method="POST" enctype="multipart/form-data">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $camp['campaign_id']; ?>)</h1>
+                                        <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $camp['campaign_id']; ?>)</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

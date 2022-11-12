@@ -251,7 +251,7 @@ h6 {
 
 /* Close Button */
 .btn-close {
-    background-size: 25%;
+    background-size: 40%;
 }
 .btn-close:focus {
     outline: 0;

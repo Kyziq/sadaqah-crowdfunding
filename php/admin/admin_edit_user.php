@@ -182,10 +182,10 @@
                                     /* Check for type of user to proceed query */
                                     if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
                                         $user_level = 2;
-                                        echo '<h5 class="card-title">Edit Auditor Table</h5>';
+                                        echo '<h5 class="card-title">Edit Auditor List</h5>';
                                     } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
                                         $user_level = 3;
-                                        echo '<h5 class="card-title">Edit Donator Table</h5>';
+                                        echo '<h5 class="card-title">Edit Donator List</h5>';
                                     }
 
                                     /* Display list of auditors/donators */

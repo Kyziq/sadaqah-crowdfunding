@@ -20,11 +20,12 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         /** Check if create campaign button is clicked **/
-        if (isset($_POST['edit-campaign-button'])) {
+        if (isset($_POST['edit-campaign-1-button'])) {
             include_once '../dbcon.php'; // Connect to database
+            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
-            $campaignCreatedDate = date('Y-m-d', strtotime($_POST['campaignCreatedDate']));
+            $campaignCreatedDate = date('--Y-m-d--H-i-s', strtotime($_POST['campaignCreatedDate']));
             $campaignId = $_POST['campaignId'];
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
@@ -43,40 +44,59 @@
             $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
             $stmt->execute();
 
+            // If no input file, just rename current file
             if (($_FILES['campaignFileBanner']['name'] == "")) {
                 $fileExt = strtolower(pathinfo($campaignBannerDir, PATHINFO_EXTENSION));
-                $campaignNewBanner = "../../images/campaign/" . $campaignName . "-"  . $campaignCreatedDate . "." . $fileExt;
-                rename($campaignBannerDir, $campaignNewBanner);
+                $campaignNewBanner = "../../images/campaign/" . $campaignName  . $campaignCreatedDate . "." . $fileExt;
+
+                rename("../../" . $campaignBannerDir, $campaignNewBanner);
+
+                $campaignNewBanner = str_replace("../", "", $campaignNewBanner); // Remove "../" from the path 
 
                 $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
                 $stmt->execute();
-            } else {
-                unlink($campaignBannerDir); // Delete File
-                // Upload image (where file name is campaignName-date.extension)
+            }
+            // If input file
+            else {
+                unlink("../../" . $campaignBannerDir); // Delete file
+
                 $fileExt  = strtolower(pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION));
-                $target_dir = "../../images/campaign/";
-                $campaignNewBanner = $target_dir . $campaignName . "-"  . $campaignCreatedDate . "." . $fileExt;
-                $file_name = $campaignName . "-" . $campaignCreatedDate  . "." . $fileExt;
-                $target_file = $target_dir . $file_name;
+                $target_dir = "../../images/campaign/"; // Target directory
+
+                $campaignNewBanner = $campaignName . $campaignCreatedDate  . "." . $fileExt; // Upload image (where file name is campaignName-date.ext)
+
+                $campaignNewBannerDir = $target_dir . $campaignName  . $campaignCreatedDate . "." . $fileExt;
+                $campaignNewBannerDir = str_replace("../", "", $campaignNewBannerDir); // Remove "../" from the path 
+
+                $target_file = $target_dir . $campaignNewBanner;
                 $source = $_FILES["campaignFileBanner"]["tmp_name"];
 
                 $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // file type to lowercase
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-                // Check if image file is a actual image or fake image
-                $check = getImageSize($source);
-                if ($check !== false) // Check if file is an image
+                /* File Conditions */
+                if (getImageSize($source) !== false) { // Check if image file is a actual image or fake image
                     $uploadOk = 1;
-                else
+                } else {
                     $uploadOk = 0;
-
-                if ($_FILES["campaignFileBanner"]["size"] > 10000000) // Check file size (10000000 = 10MB)
+                }
+                if (file_exists($target_file)) { // Check if file already exists
+                    echo "Sorry, file already exists.";
                     $uploadOk = 0;
-
-                if ($imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg") // Allow certain file formats
+                }
+                if ($_FILES["campaignFileBanner"]["size"] > 10000000) { // Check file size (10000000 = 10MB)
+                    echo "Sorry, your file is too large.";
                     $uploadOk = 0;
+                }
+                if (
+                    $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg"
+                ) { // Allow certain file formats
+                    echo "Sorry, only PNG, JPG, and JPEG files are allowed.";
+                    $uploadOk = 0;
+                }
+                /* */
 
                 if ($uploadOk == 0) {
                     header("Location: admin_edit_campaign.php");
@@ -84,7 +104,7 @@
                     if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
                         $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
                         $stmt = $con->prepare($query);
-                        $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
+                        $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBannerDir, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
                         $stmt->execute();
                     }
                 }

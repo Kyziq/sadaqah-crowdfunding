@@ -1,0 +1,88 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+:root {
+    scroll-behavior: smooth;
+
+    --green: #1e976b;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background: var(--white);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nunito", sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Main
+--------------------------------------------------------------*/
+
+/* Navbar */
+.navbar .navbar-nav .nav-link {
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: var(--green);
+}
+
+.navbar .navbar-nav .nav-link:active {
+    color: var(--green);
+}
+
+.logo {
+    line-height: 1;
+}
+@media (min-width: 1200px) {
+    .logo {
+        width: 220px;
+    }
+}
+.logo span {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Counter Jumbo */
+.jumbo1 {
+    background-size: cover !important;
+    filter: brightness(70%);
+    height: 710px;
+    width: 100%;
+}
+
+/* Close Button */
+.btn-close {
+    background-size: 40%;
+}
+.btn-close:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Footer */
+.footer .footer-link {
+    color: var(--black);
+}
+
+.footer .footer-link:hover {
+    color: var(--green);
+}
+
+.footer .footer-link:active {
+    color: var(--green);
+}

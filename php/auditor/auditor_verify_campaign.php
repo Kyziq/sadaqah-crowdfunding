@@ -34,7 +34,7 @@
             /* to show scrollbar */
             height: 28px;
             border-radius: 4px;
-            width: 97%;
+            width: 96%;
             /* (default by BS) */
             background-color: #ffffff;
         }
@@ -52,6 +52,8 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
         include_once '../dbcon.php'; // Connect to database 
+        date_default_timezone_set('Asia/Singapore');
+
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -152,88 +154,92 @@
                 <h5 class="card-title">Pending Campaign Verification List</h5>
                 <?php
                 while ($r = $result->fetch_assoc()) {
+                    $currentDate = date("d M Y");
                     $startDate = date("d M Y", strtotime($r["campaign_start"]));
                     $endDate = date("d M Y", strtotime($r["campaign_end"]));
                     $createdCampaignDate = date("d M Y", strtotime($r["campaign_created_date"]));
+
+                    // Make sure ongoing campaign
+                    if (date('Y-m-d', strtotime($r['campaign_end'])) > date('Y-m-d')) {
                 ?>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                        <img src="<?php echo $r['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded" style="height:70px; width:70px;" alt="Campaign Banner">
-                                    </a>
-                                    Requested on <?php echo $createdCampaignDate ?>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <!-- Verify Campaign Form -->
-                                <form action="auditor_verify_campaign_action.php" method="POST">
-                                    <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
-                                    <input type="hidden" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
-
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
-                                        <label for="campaign_name">Campaign Name</label>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between">
+                                        <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                            <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded" style="height:70px; width:70px;" alt="Campaign Banner">
+                                        </a>
+                                        Requested on <?php echo $createdCampaignDate ?>
                                     </div>
-                                    <div class="fix-floating-label">
+                                </div>
+                                <div class="card-body">
+                                    <!-- Verify Campaign Form -->
+                                    <form action="auditor_verify_campaign_action.php" method="POST">
+                                        <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                        <input type="hidden" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
+
                                         <div class="form-floating">
-                                            <textarea class="form-control-plaintext" id="campaign_description" style="height: 90px" readonly><?php echo $r['campaign_description']; ?></textarea>
-                                            <label for="campaign_description">Campaign Description</label>
+                                            <input type="text" class="form-control-plaintext" id="campaign_name" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                            <label for="campaign_name">Campaign Name</label>
                                         </div>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaignCategory" value="<?php echo $r['category_name']; ?>" readonly>
-                                        <label for="campaignCategory">Campaign Category</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaign_amount" value="RM<?php echo $r['campaign_amount']; ?>" readonly>
-                                        <label for="campaign_amount">Campaign Amount</label>
-                                    </div>
-                                    <div class="form-floating col-6 mb-1">
-                                        <input type="text" class="form-control-plaintext" id="campaign_duration" value="<?php echo $startDate; ?> - <?php echo $endDate; ?>" readonly>
-                                        <label for="campaign_duration">Campaign Duration</label>
-                                    </div>
+                                        <div class="fix-floating-label">
+                                            <div class="form-floating">
+                                                <textarea class="form-control-plaintext" id="campaign_description" style="height: 90px" readonly><?php echo $r['campaign_description']; ?></textarea>
+                                                <label for="campaign_description">Campaign Description</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control-plaintext" id="campaignCategory" value="<?php echo $r['category_name']; ?>" readonly>
+                                            <label for="campaignCategory">Campaign Category</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control-plaintext" id="campaign_amount" value="RM<?php echo $r['campaign_amount']; ?>" readonly>
+                                            <label for="campaign_amount">Campaign Amount</label>
+                                        </div>
+                                        <div class="form-floating col-6 mb-1">
+                                            <input type="text" class="form-control-plaintext" id="campaign_duration" value="<?php echo $startDate; ?> - <?php echo $endDate; ?>" readonly>
+                                            <label for="campaign_duration">Campaign Duration</label>
+                                        </div>
 
-                                    <!-- Input -->
-                                    <div class="form-floating mb-3 col-3">
-                                        <select class="form-select" id="verificationStatus" name="verificationStatus" required>
-                                            <option value="" selected disabled>Select Action</option>
-                                            <option value="1">Approve</option>
-                                            <option value="2">Decline</option>
-                                        </select>
-                                        <label for="verificationStatus">Action</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="verificationComment" name="verificationComment" placeholder="Leave a comment" style="height: 100px" required></textarea>
-                                        <label for="verificationComment">Comment</label>
-                                    </div>
+                                        <!-- Input -->
+                                        <div class="form-floating mb-3 col-3">
+                                            <select class="form-select" id="verificationStatus" name="verificationStatus" required>
+                                                <option value="" selected disabled>Select Action</option>
+                                                <option value="1">Approve</option>
+                                                <option value="2">Decline</option>
+                                            </select>
+                                            <label for="verificationStatus">Action</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="verificationComment" name="verificationComment" placeholder="Leave a comment" style="height: 100px" required></textarea>
+                                            <label for="verificationComment">Comment</label>
+                                        </div>
 
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary" type="submit" name="verifyCampaignButton">Submit</button>
-                                    </div>
-                                </form>
-                                <!-- End Of Verify Campaign Form -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Campaign Banner Modal -->
-                    <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $r['campaign_name']; ?></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" style="display: flex;">
-                                    <img src=" <?php echo $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-primary" type="submit" name="verifyCampaignButton">Submit</button>
+                                        </div>
+                                    </form>
+                                    <!-- End Of Verify Campaign Form -->
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                        <!-- Campaign Banner Modal -->
+                        <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><?php echo $r['campaign_name']; ?></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="display: flex;">
+                                        <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 <?php
-                    $index++;
+                        $index++;
+                    }
                 }
                 ?>
             </div>

@@ -21,6 +21,8 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         include_once '../dbcon.php'; // Connect to database 
+        date_default_timezone_set('Asia/Singapore');
+
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);

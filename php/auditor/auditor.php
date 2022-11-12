@@ -21,6 +21,9 @@
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
         include_once '../dbcon.php'; // Connect to database 
+        date_default_timezone_set('Asia/Singapore');
+
+        // Query
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -110,58 +113,42 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
-                        <div class="col-xxl-4 col-md-6">
+                        <div class="col-xxl-6 col-md-6">
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        ?
+                                        Total Campaign Accepted
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
+                                            <i class="bi bi-calendar-event"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6>
-                                                ?
                                                 <?php
+                                                $campaign_status = 1; // Accepted
+                                                $query = "SELECT COUNT(c.campaign_id) FROM campaign c, verification v WHERE c.campaign_id = v.campaign_id AND v.auditor_id = ? AND c.campaign_status=?";
+                                                $stmt = $con->prepare($query);
+                                                $stmt->bind_param("ii", $_SESSION['user_id'], $campaign_status);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result(); // Get the MySQLI result
 
+                                                $count = mysqli_fetch_assoc($result)['COUNT(c.campaign_id)'];
+                                                echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">?</span>
+                                            <span class="text-muted small">by <span class="text-primary">you</span></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-md-6">
-                            <div class="card info-card revenue-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        ?
-                                    </h5>
-                                    <div class="d-flex align-items-center">
-                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-currency-dollar"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>
-                                                ?
-                                                <?php
 
-                                                ?>
-                                            </h6>
-                                            <span class="text-muted small">?</span>
-                                            <span class="text-success small fw-bold">?</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-4 col-xl-12">
+                        <div class="col-xxl-6 col-xl-12">
                             <div class="card info-card customers-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">
-                                        Pending Donation Verification
+                                    <h5 class="card-title text-small">
+                                        Pending Campaign Verify
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -170,8 +157,10 @@
                                         <div class="ps-3">
                                             <h6>
                                                 <?php
+                                                $currentDate = date("Y-m-d");
+
                                                 $campaign_status = 3; // Pending
-                                                $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status=?";
+                                                $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status=? AND campaign_start < $currentDate";
                                                 $stmt = $con->prepare($query);
                                                 $stmt->bind_param("i", $campaign_status);
                                                 $stmt->execute();
