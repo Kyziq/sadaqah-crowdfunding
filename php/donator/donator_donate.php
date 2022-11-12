@@ -113,7 +113,7 @@
                 <h5 class="card-title">Available Campaign(s) List</h5>
                 <?php
                 $campaign_status = 1; // Accepted campaign
-                $query = "SELECT * FROM campaign WHERE campaign_status=? ORDER BY campaign_id";
+                $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id";
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("i", $campaign_status);
                 $stmt->execute();
@@ -132,6 +132,7 @@
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
+                                <h6 class="card-subtitle mb-2"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
                                 <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><b>Description: </b><br><?php echo $camp['campaign_description']; ?></h6>
                                 <h6 class="card-subtitle mb-3 text-muted">
                                     <div>
@@ -177,7 +178,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $camp['campaign_name']; ?></h5>
+                                    <h5 class="modal-title"><?php echo $camp['campaign_name']; ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="display: flex;">
@@ -193,7 +194,7 @@
                             <div class="modal-content">
                                 <form action="donator_donate_save.php" method="POST" enctype="multipart/form-data">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Donation Form (Campaign ID <?php echo $camp['campaign_id']; ?>)</h1>
+                                        <h1 class="modal-title fs-5 fw-bold">Donation Form (Campaign ID <?php echo $camp['campaign_id']; ?>)</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

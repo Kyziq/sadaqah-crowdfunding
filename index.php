@@ -59,6 +59,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- 
                 <form class="d-flex" role="search">
                     <div class="input-group me-4">
                         <input type="text" class="form-control" placeholder="Search">
@@ -66,7 +67,8 @@
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> 
+                -->
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -203,7 +205,7 @@
                 <div class="cards d-flex justify-content-center pb-4">
                     <?php
                     $campaign_status = 1; // Accepted campaign
-                    $query = "SELECT * FROM campaign WHERE campaign_status=? ORDER BY campaign_id desc limit 3";
+                    $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id DESC limit 3";
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("i", $campaign_status);
                     $stmt->execute();
@@ -223,7 +225,8 @@
                                     <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                                 </a>
                                 <div class="card-body">
-                                    <h5 class="card-title h-20 mb-3" style="min-height: 2rem;"><?php echo $camp['campaign_name']; ?></h5>
+                                    <h5 class="card-title h-20 mb-3 fw-bold" style="min-height: 2rem;"><?php echo $camp['campaign_name']; ?></h5>
+                                    <h6 class="card-subtitle mb-2"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
                                     <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><b>Description: </b><br><?php echo $camp['campaign_description']; ?></h6>
                                     <h6 class="card-subtitle mb-3 text-muted">
                                         <div>
@@ -269,7 +272,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"><?php echo $camp['campaign_name']; ?></h5>
+                                        <h5 class="modal-title fw-bold"><?php echo $camp['campaign_name']; ?></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="display: flex;">
