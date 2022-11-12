@@ -225,7 +225,7 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title">
                                         Proof of Payment
-                                        (<?php echo $r['user_name']; ?>)
+                                        (<?php echo $r['user_name'] . ' - RM' . $r['donate_amount']; ?>)
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
