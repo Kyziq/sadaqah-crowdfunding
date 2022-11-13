@@ -117,7 +117,7 @@
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Total Campaign Accepted
+                                        Total Campaign
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -137,7 +137,8 @@
                                                 echo $count;
                                                 ?>
                                             </h6>
-                                            <span class="text-muted small">by <span class="text-primary">you</span></span>
+                                            <span class="text-primary small">accepted</span>
+                                            <span class="text-muted small">by you</span>
                                         </div>
                                     </div>
                                 </div>
@@ -157,10 +158,8 @@
                                         <div class="ps-3">
                                             <h6>
                                                 <?php
-                                                $currentDate = date("Y-m-d");
-
                                                 $campaign_status = 3; // Pending
-                                                $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status=? AND campaign_start < $currentDate";
+                                                $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status=? AND campaign_end < curdate()";
                                                 $stmt = $con->prepare($query);
                                                 $stmt->bind_param("i", $campaign_status);
                                                 $stmt->execute();
