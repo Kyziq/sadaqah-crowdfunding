@@ -12,14 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.4/swiper-bundle.min.css" integrity="sha512-pJrGHWDVOeiy4UkMtHu0fpD8oLLssFcaW0fsVXUkA1/jDLopa554Z1AZo5SKtekHnnmyat0ipiP0snKDrt0GNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/homepage.css">
-    <link rel="stylesheet" href="./css/custom-css.css">
-
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.4/swiper-bundle.min.js" integrity="sha512-k2o1KZdvUi59PUXirfThShW9Gdwtk+jVYum6t7RmyCNAVyF9ozijFpvLEWmpgqkHuqSWpflsLf5+PEW6Lxy/wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/custom-css.css">
 </head>
 
 <body>
@@ -27,27 +21,28 @@
     include_once(__DIR__ . '/php/dbcon.php');
     date_default_timezone_set('Asia/Singapore');
 
-    /*** Relaunch modal ***/
-    // Login modal
+    // Relaunch login modal if no username entered and wrong password
     if ((isset($_GET["error"]) && $_GET["error"] == 'username') || (isset($_GET["error"]) && $_GET["error"] == 'password')) {
-        echo '
-        <script type="text/javascript">
+        echo "
+        <script>
             window.onload = () => {
-                $("#loginModal").modal("show");
+                $(document).ready(function(){
+                    $('#loginModal').modal('show');
+                });
             };
-        </script>
-        ';
+        </script>";
     }
 
-    // Register Modal
+    // Relaunch register modal if username already exists
     if ((isset($_GET["error"]) && $_GET["error"] == 'usernametaken')) {
-        echo '
-        <script type="text/javascript">
+        echo "
+        <script>
             window.onload = () => {
-                $("#registerModal").modal("show");
+                $(document).ready(function(){
+                    $('#registerModal').modal('show');
+                });
             };
-        </script>
-        ';
+        </script>";
     }
     ?>
 
@@ -91,27 +86,22 @@
     </nav>
     <!-- End Navbar -->
 
+    <!-- Banner -->
+    <div class="jumbotron jumbo1">
+        <img class="jumbo1" src="images/homepage-banner.png" alt="Banner">
+    </div>
+    <!-- End Banner -->
+
     <!-- Start Main -->
     <main>
-        <!-- Start Banner -->
-        <div class="jumbotron jumbo1">
-            <img class="jumbo1" src="images/homepage-banner.png" alt="Banner">
-        </div>
-        <!-- End Banner -->
-
-        <!-- Start Info 1 -->
+        <!-- Start Counter -->
         <div class="p-3">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- Text -->
                     <div class="col-md-4">
-                        <div class="">
-                            <h2 class="fw-bolder">You have the ability to make a difference.</h2>
-                            <p class="fw-regular">"Alone we can do so little; together we can do so much. – Helen Keller"</p>
-                        </div>
+                        <h2 class="fw-bolder">You have the ability to make a difference.</h2>
+                        <p class="fw-regular">"Alone we can do so little; together we can do so much." - Helen Keller</p>
                     </div>
-
-                    <!-- Counter -->
                     <div class="col-md-2 offset-md-4">
                         <div class="text-center">
                             <div class="border rounded-3 bg-success text-white">
@@ -120,7 +110,6 @@
                                     $query = "SELECT SUM(campaign_raised) FROM campaign";
                                     $result = mysqli_query($con, $query);
                                     $count = mysqli_fetch_assoc($result)['SUM(campaign_raised)'];
-
                                     echo "RM" . number_format($count, 2);
                                     ?>
                                 </h3>
@@ -136,7 +125,6 @@
                                     $query = "SELECT COUNT(user_id) FROM user";
                                     $result = mysqli_query($con, $query);
                                     $count = mysqli_fetch_assoc($result)['COUNT(user_id)'];
-
                                     echo $count;
                                     ?>
                                 </h3>
@@ -152,7 +140,6 @@
                                     $query = "SELECT COUNT(campaign_id) FROM campaign";
                                     $result = mysqli_query($con, $query);
                                     $count = mysqli_fetch_assoc($result)['COUNT(campaign_id)'];
-
                                     echo $count;
                                     ?>
                                 </h3>
@@ -160,49 +147,17 @@
                             <h5 class="fw-light">available campaigns</h5>
                         </div>
                     </div>
-                    <!-- End of Counter -->
                 </div>
             </div>
-            <script>
-                const counterUp = window.counterUp.default
-
-                const callback = entries => {
-                    entries.forEach(entry => {
-                        const el = entry.target
-                        if (entry.isIntersecting && !el.classList.contains('is-visible')) {
-                            counterUp(el, {
-                                duration: 2000,
-                                delay: 16,
-                            })
-                            el.classList.add('is-visible')
-                        }
-                    })
-                }
-
-                const IO = new IntersectionObserver(callback, {
-                    threshold: 1
-                })
-
-                const el = document.querySelector('.counter')
-                IO.observe(el)
-
-                const counters = document.querySelectorAll('.counter');
-                for (const el of counters) {
-                    counterUp(el, {
-                        duration: 1000,
-                        delay: 16,
-                    })
-                }
-            </script>
         </div>
-        <!-- End Info 1 -->
+        <!-- End Counter -->
 
-        <!-- Campaign -->
+        <!-- Start Campaign -->
         <section id="campaign">
             <div class="bg-success">
                 <div class="container pt-5 py-5 text-center">
-                    <h3 class="fw-bold text-white">Campaigns</h3>
-                    <h5 class="text-white">The following are the most recent campaigns that are currently accepting donations. Login to see more.</h5>
+                    <h3 class="fw-bold text-white">Campaign</h3>
+                    <h5 class="text-white">The following are the most recent campaigns that are currently accepting donations. Login to see more!</h5>
                 </div>
                 <div class="cards d-flex justify-content-center pb-4">
                     <?php
@@ -262,7 +217,6 @@
                                         </div>
                                     </div>
                                     <div class="d-flex mt-4 justify-content-end">
-                                        <!-- <a class="btn btn-outline-primary" href="#" target="_blank" role="button">More Info</a> -->
                                         <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login to Donate</button>
                                     </div>
                                 </div>
@@ -287,7 +241,6 @@
                         $index++;
                     }
                     ?>
-
                 </div>
             </div>
         </section>
@@ -299,11 +252,10 @@
                 <div class="container pt-5 my-3 d-flex align-items-center justify-content-center">
                     <div class="box border rounded p-2 text-center bg-success text-white">
                         <div class="box-title">
-                            <h3 class="fw-bold">Categories</h3>
+                            <h3 class="fw-bold">Campaign Categories</h3>
                         </div>
                     </div>
                 </div>
-
                 <div class="row justify-content-center py-2">
                     <div class="card col-md-3 my-2 me-4" style="width: 18rem;">
                         <div class="card-body">
@@ -334,7 +286,7 @@
         </section>
         <!-- End Categories -->
 
-        <!-- Mission Vision -->
+        <!-- Start Mission Vision -->
         <div class="container text-center mb-5">
             <div class="container pt-5 my-3 d-flex align-items-center justify-content-center">
                 <div class="box border rounded p-2 text-center bg-success text-white">
@@ -368,8 +320,9 @@
                 </div>
             </div>
         </div>
+        <!-- End Mission Vission -->
 
-        <!-- -->
+        <!-- Start Steps -->
         <section>
             <div class="bg-success">
                 <div class="container pt-5">
@@ -401,7 +354,7 @@
                 </div>
             </div>
         </section>
-        <!-- -->
+        <!-- End Steps -->
 
         <!-- Footer -->
         <footer class="footer">
@@ -442,9 +395,6 @@
         <!-- End Footer -->
     </main>
     <!-- End Main -->
-
-
-
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
@@ -534,7 +484,7 @@
                             <?php
                             /* Check for wrong password */
                             if (isset($_GET["error"]) && $_GET["error"] == 'usernametaken') {
-                                echo '<span style="color: red;">Username has been taken!</span>';
+                                echo '<div class="alert alert-danger" role="alert">Username has been taken</div>';
                             }
                             ?>
                         </div>
@@ -601,87 +551,11 @@
         </div>
     </div>
 
-    <script>
-        const forms = document.querySelectorAll('.needs-validation');
-        Array.prototype.slice.call(forms).forEach((form) => {
-            form.addEventListener('submit', (event) => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-
-            const loginModal = document.getElementById('loginModal')
-            loginModal.addEventListener('hidden.bs.modal', event => {
-                form.classList.remove('was-validated');
-            })
-
-            const registerModal = document.getElementById('registerModal')
-            registerModal.addEventListener('hidden.bs.modal', event => {
-                form.classList.remove('was-validated');
-            })
-        });
-
-
-        // var email = document.getElementById('email');
-        // email.oninput = () => {
-        //     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        //     if (!re.test(email.value)) {
-        //         email.setCustomValidity("Invalid field.");
-        //         email.classList.add('is-invalid');
-        //     } else {
-        //         email.classList.remove('is-invalid');
-        //         email.setCustomValidity("")
-        //     }
-        // }
-    </script>
-
-    <script>
-        /* Reset input in login and register form when click */
-        $('#loginModal').on('hidden.bs.modal', function(e) {
-            $(this).find('#loginForm')[0].reset();
-        });
-        $('#registerModal').on('hidden.bs.modal', function(e) {
-            $(this).find('#registerForm')[0].reset();
-        });
-
-        /* Toggle password visibility */
-        !(function($) {
-            //eyeOpenClass: 'bi bi-eye-fill',
-            //eyeCloseClass: 'bi bi-eye-slash-fill',
-            "use strict";
-
-            $(function() {
-                $('[data-toggle="password"]').each(function() {
-                    var input = $(this);
-                    var eye_btn = $(this).parent().find(".input-group-text");
-                    eye_btn.css("cursor", "pointer").addClass("input-password-hide");
-                    eye_btn.on("click", function() {
-                        if (eye_btn.hasClass("input-password-hide")) {
-                            eye_btn
-                                .removeClass("input-password-hide")
-                                .addClass("input-password-show");
-                            eye_btn
-                                .find(".bi")
-                                .removeClass("bi-eye-fill")
-                                .addClass("bi-eye-slash-fill");
-                            input.attr("type", "text");
-                        } else {
-                            eye_btn
-                                .removeClass("input-password-show")
-                                .addClass("input-password-hide");
-                            eye_btn
-                                .find(".bi")
-                                .removeClass("bi-eye-slash-fill")
-                                .addClass("bi-eye-fill");
-                            input.attr("type", "password");
-                        }
-                    });
-                });
-            });
-        })(window.jQuery);
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.4/swiper-bundle.min.js" integrity="sha512-k2o1KZdvUi59PUXirfThShW9Gdwtk+jVYum6t7RmyCNAVyF9ozijFpvLEWmpgqkHuqSWpflsLf5+PEW6Lxy/wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

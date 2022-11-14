@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -281,57 +279,8 @@
     </footer>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <script>
-        // Check if new password and confirm new password are the same
-        $('#newPassword, #confirmNewPassword').on('keyup', function() {
-            if ($('#newPassword').val() != '' && $('#confirmNewPassword').val() != '') {
-                if ($('#newPassword').val() == $('#confirmNewPassword').val()) {
-                    $('#checkSamePasswordMessage').html('<div class="alert alert-success" role="alert">New passsword matching</div>');
-                } else {
-                    $('#checkSamePasswordMessage').html('<div class="alert alert-danger" role="alert">New passsword not matching</div>');
-                }
-            } else {
-                $('#checkSamePasswordMessage').html('');
-            }
-        });
-        // Toggle password visibility
-        !(function($) {
-            //eyeOpenClass: 'bi-eye-fill',
-            //eyeCloseClass: 'bi-eye-slash-fill',
-            "use strict";
-
-            $(function() {
-                $('[data-toggle="password"]').each(function() {
-                    var input = $(this);
-                    var eye_btn = $(this).parent().find(".input-group-text");
-                    eye_btn.css("cursor", "pointer").addClass("input-password-hide");
-                    eye_btn.on("click", function() {
-                        if (eye_btn.hasClass("input-password-hide")) {
-                            eye_btn
-                                .removeClass("input-password-hide")
-                                .addClass("input-password-show");
-                            eye_btn
-                                .find(".bi")
-                                .removeClass("bi-eye-fill")
-                                .addClass("bi-eye-slash-fill");
-                            input.attr("type", "text");
-                        } else {
-                            eye_btn
-                                .removeClass("input-password-show")
-                                .addClass("input-password-hide");
-                            eye_btn
-                                .find(".bi")
-                                .removeClass("bi-eye-slash-fill")
-                                .addClass("bi-eye-fill");
-                            input.attr("type", "password");
-                        }
-                    });
-                });
-            });
-        })(window.jQuery);
-    </script>
-
     <!-- Imports -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

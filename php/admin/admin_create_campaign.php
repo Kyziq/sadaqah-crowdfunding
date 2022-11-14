@@ -172,7 +172,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Create Campaign Form</h5>
 
-                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateCreateCampaignForm()" enctype="multipart/form-data">
+                            <form action="admin_create_campaign_action.php" method="POST" enctype="multipart/form-data">
                                 <div class="row g-3">
                                     <!-- Input -->
                                     <div class="col-lg-12">
@@ -220,6 +220,15 @@
                                         <input type="date" class="form-control" id="endDate" name="endDate" required>
                                     </div>
 
+                                    <div class="col-lg-12">
+                                        <?php
+                                        /* Check for wrong password */
+                                        if (isset($_GET["error"]) && $_GET["error"] == 'date') {
+                                            echo '<div class="alert alert-danger" role="alert">Start date must be before end date</div>';
+                                        }
+                                        ?>
+                                    </div>
+
                                     <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
                                     </div>
@@ -229,31 +238,6 @@
                     </div>
                 </div>
         </section>
-
-        <script>
-            function validateCreateCampaignForm() {
-                let startDate = new Date($('#startDate').val());
-                let endDate = new Date($('#endDate').val());
-
-                if (startDate > endDate) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Start date must be before end date!',
-                        footer: '(Auto close in 5 seconds)',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Confirm',
-                        backdrop: `#2871f9`,
-                        confirmButtonColor: '#0d6efd',
-                        timer: 5000,
-                        willClose: () => {
-                            window.location.href = 'admin_create_campaign.php';
-                        }
-                    })
-                    return false;
-                }
-            }
-        </script>
     </main>
     <footer id="footer" class="footer">
         <div class="copyright">

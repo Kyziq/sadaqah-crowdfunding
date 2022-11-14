@@ -339,7 +339,7 @@
 
                                                                             <hr class="border-success border-2 border-top">
 
-                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3  border-opacity-25">
+                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3 border-opacity-25">
                                                                                 <div class="row mb-3 justify-content-between">
                                                                                     <div class="col-4">
                                                                                         <div class="fw-bold">Billed To:</div>
@@ -367,7 +367,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3  border-opacity-25">
+                                                                            <div class="border border-dark border-1 p-3 mb-3 rounded-3 border-opacity-25">
                                                                                 <div class="row mb-3">
                                                                                     <div class="col">
                                                                                         <div class="fw-bold">Campaign Name</div>
@@ -386,6 +386,9 @@
                                                                                         <div class="fw-regular">RM<?php echo $receipt['donate_amount']; ?></div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
+                                                                            <div class="row justify-content-md-center mb-3 text-muted">
+                                                                                Note: This is computer generated and no signature is required.
                                                                             </div>
                                                                         </div>
                                                                     </div>
