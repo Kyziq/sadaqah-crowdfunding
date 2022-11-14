@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 04:30 PM
+-- Generation Time: Nov 14, 2022 at 05:42 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -48,11 +48,11 @@ CREATE TABLE `campaign` (
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`, `campaign_status`) VALUES
 (1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 3500, '2022-11-01 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 1, 1),
-(2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', 'images/campaign/(Misi Banjir Baling) Baik Pulih Rumah--2022-10-29--17-27-54.png', 4, 13000, '2022-10-29 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:27:54', 1, 1),
-(3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation.', 'images/campaign/MERCY Mission Malaysia--2022-10-29--17-29-43.jpg', 3, 24000, '2022-10-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:29:43', 1, 1),
+(2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', 'images/campaign/(Misi Banjir Baling) Baik Pulih Rumah--2022-10-29--17-27-54.png', 4, 13000, '2022-10-22 00:00:00.000000', '2022-11-16 00:00:00.000000', 0, '2022-10-29 09:27:54', 11, 1),
+(3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation. The organisation is a registered society according to the Societies Act 1966 in Malaysia, and the headquarters is in the capital city of Kuala Lumpur.', 'images/campaign/MERCY Mission Malaysia--2022-10-29--17-29-43.jpg', 3, 24000, '2022-10-13 00:00:00.000000', '2022-12-16 00:00:00.000000', 0, '2022-10-29 09:29:43', 11, 3),
 (4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', 'images/campaign/Ringankan Beban Golongan Terjejas--2022-10-29--17-33-40.jpg', 1, 1000, '2022-11-01 00:00:00.000000', '2022-11-08 00:00:00.000000', 0, '2022-10-29 09:33:40', 1, 3),
 (5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', 'images/campaign/Yayasan Institut Jantung Negara--2022-10-29--17-36-06.jpg', 3, 50000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 20000, '2022-10-29 09:36:06', 1, 1),
-(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', 'images/campaign/Bantuan Sekolah-Sekolah Malaysia--2022-10-29--17-40-37.jpg', 2, 8000, '2022-11-10 00:00:00.000000', '2022-12-10 00:00:00.000000', 0, '2022-10-29 09:40:37', 1, 1);
+(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', 'images/campaign/Bantuan Sekolah-Sekolah Malaysia--2022-10-29--17-40-37.jpg', 2, 8000, '2022-11-02 00:00:00.000000', '2022-12-27 00:00:00.000000', 0, '2022-10-29 09:40:37', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,6 @@ CREATE TABLE `verification` (
 INSERT INTO `verification` (`verification_id`, `verification_status`, `verification_comment`, `verification_date`, `campaign_id`, `auditor_id`) VALUES
 (1, 1, 'Verified by afifah.', '2022-11-12 17:22:55', 1, 5),
 (2, 1, 'Verified by afifah.', '2022-11-12 17:32:24', 2, 5),
-(3, 1, 'Verified by afifah.', '2022-11-12 17:32:38', 3, 5),
 (4, 1, 'Verified by afifah.', '2022-11-12 17:32:52', 6, 5),
 (5, 1, 'Verified by afifah.', '2022-11-12 17:32:55', 5, 5);
 

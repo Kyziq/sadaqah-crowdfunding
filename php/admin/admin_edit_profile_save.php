@@ -10,20 +10,21 @@
 
     <!-- Imports -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php
-    /** Start session and validate admin **/
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        include_once '../dbcon.php'; // Connect to database
+        /* DB Connect and Setting */
+        include_once '../dbcon.php';
+        date_default_timezone_set('Asia/Singapore');
         $user_id = $_SESSION['user_id'];
 
-        /** Edit my detail button is clicked **/
+        /* Edit my detail button is clicked */
         if (isset($_POST['edit-action-button'])) {
             /* Get all the posted items */
             $user_username = $_POST['username'];
@@ -32,7 +33,7 @@
             $user_phone = $_POST['phone'];
             $user_address = $_POST['address'];
 
-            /* Query */
+            /* UPDATE Query */
             $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?"; // SQL with parameters
             $stmt = $con->prepare($query);
             $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
@@ -56,11 +57,7 @@
                     }
                 })
             </script>
-
             <?php
-            // Close connection
-            $stmt->close();
-            $con->close();
         }
 
         /** Edit password button is clicked **/
@@ -168,10 +165,10 @@
                 </script>
     <?php
             }
-            // Close connection
-            $stmt->close();
-            $con->close();
         }
+        /* Close connection */
+        $stmt->close();
+        $con->close();
     } else {
         header("Location: ../user_logout.php");
     }

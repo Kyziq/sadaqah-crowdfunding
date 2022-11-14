@@ -18,16 +18,20 @@
 
 <body>
     <?php
-    /* Start session and validate user */
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        include_once '../dbcon.php'; // Connect to database 
-        $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
+        /* DB Connect and Setting */
+        include_once '../dbcon.php';
+        date_default_timezone_set('Asia/Singapore');
+
+        /* SELECT Query */
+        $query = "SELECT * FROM user WHERE user_id=?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
-        $result = $stmt->get_result(); // Get the MySQLI result
-        $r = $result->fetch_assoc(); // Fetch data  
+        $result = $stmt->get_result();
+        $r = $result->fetch_assoc();
     } else {
         header("Location: ../user_logout.php");
     }
@@ -282,8 +286,6 @@
     <!-- Imports -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../js/main.js"></script>
 
     <?php

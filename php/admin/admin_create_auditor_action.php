@@ -8,20 +8,22 @@
     <title>Create Auditor</title>
     <link rel="icon" href="../images/logo-LZNK.ico">
 
-    <!-- Bootstrap -->
+    <!-- Imports -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <!-- Sweet Alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         /* Check if create auditor button clicked */
         if (isset($_POST['create-auditor-button'])) {
+            /* DB Connect and Setting */
             include_once '../dbcon.php';
+            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
             $username = $_POST['username'];
@@ -40,7 +42,7 @@
             if (mysqli_num_rows($result) == 0) {
                 $password = password_hash($password, PASSWORD_DEFAULT);
 
-                /* Query */
+                /* INSERT Query */
                 $query = "INSERT INTO user(user_username, user_password, user_name, user_email, user_phone, user_address , user_level) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("ssssssi", $username, $password, $name, $email, $phone, $address, $level);
@@ -64,7 +66,7 @@
                     })
                 </script>
             <?php
-                // Close connection
+                /* Close connection */
                 $stmt->close();
                 $con->close();
             } else {

@@ -14,36 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-    <style>
-        /* Fix bootstrap floating label + textarea */
-        .fix-floating-label .form-floating {
-            position: relative;
-        }
-
-        .fix-floating-label .form-floating:before {
-            content: '';
-            position: absolute;
-            top: 1px;
-            /* border-width (default by BS) */
-            left: 1px;
-            /* border-width (default by BS) */
-            width: calc(100% - 14px);
-            /* to show scrollbar */
-            height: 28px;
-            border-radius: 4px;
-            width: 96%;
-            /* (default by BS) */
-            background-color: #ffffff;
-        }
-
-        .fix-floating-label .form-floating textarea.form-control {
-            padding-top: 32px;
-            /* height of pseudo element */
-        }
-    </style>
 </head>
 
 <body>

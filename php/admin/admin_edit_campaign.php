@@ -14,45 +14,19 @@
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-    <style>
-        /* Fix bootstrap floating label + textarea */
-        .fix-floating-label .form-floating {
-            position: relative;
-        }
-
-        .fix-floating-label .form-floating:before {
-            content: '';
-            position: absolute;
-            top: 1px;
-            /* border-width (default by BS) */
-            left: 1px;
-            /* border-width (default by BS) */
-            width: calc(100% - 14px);
-            /* to show scrollbar */
-            height: 28px;
-            border-radius: 4px;
-            width: 97%;
-            /* (default by BS) */
-            background-color: #ffffff;
-        }
-
-        .fix-floating-label .form-floating textarea.form-control {
-            padding-top: 32px;
-            /* height of pseudo element */
-        }
-    </style>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php
-    /* Start session and validate admin login */
+    /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        include_once '../dbcon.php'; // Connect to database 
+        /* DB Connect */
+        include_once '../dbcon.php';
         date_default_timezone_set('Asia/Singapore');
 
+        /* SELECT Query */
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
@@ -199,6 +173,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Edit Campaign List</h5>
                             <?php
+                            /* SELECT Query */
                             $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
                             $stmt = $con->prepare($query);
                             $stmt->execute();
@@ -223,7 +198,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        static $index = 1;
+                                        $index = 1;
                                         while ($r = $result->fetch_assoc()) {
                                             $currentDate = date('Y-m-d');
                                             $startDate = date('Y-m-d', strtotime($r['campaign_start']));
@@ -295,7 +270,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <!-- Click Image Modal -->
+                                                <!-- Campaign Banner Modal -->
                                                 <div class="modal fade" id="banner-modal-1-<?php echo $index ?>" tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -314,7 +289,7 @@
                                                 <div class="modal fade" id="edit-campaign-1-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content">
-                                                            <form action="admin_edit_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
+                                                            <form action="admin_edit_campaign_action.php" method="POST" enctype="multipart/form-data">
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5 fw-bold" id="editCampaignLabel">Edit Campaign Form</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -432,6 +407,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Ended Campaign List</h5>
                             <?php
+                            /* SELECT Query */
                             $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
                             $stmt = $con->prepare($query);
                             $stmt->execute();
@@ -456,7 +432,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        static $index = 1;
+                                        $index = 1;
                                         while ($r = $result->fetch_assoc()) {
                                             $currentDate = date('Y-m-d');
                                             $startDate = date('Y-m-d', strtotime($r['campaign_start']));
@@ -534,7 +510,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <!-- Click Image Modal -->
+                                                <!-- Campaign Banner Modal -->
                                                 <div class="modal fade" id="banner-modal-2-<?php echo $index ?>" tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -553,7 +529,7 @@
                                                 <div class="modal fade" id="edit-campaign-2-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content">
-                                                            <form action="admin_create_campaign_action.php" method="POST" onsubmit="return validateEditCampaignForm()" enctype="multipart/form-data">
+                                                            <form action="admin_create_campaign_action.php" method="POST" enctype="multipart/form-data">
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5 fw-bold" id="editCampaignLabel">New Campaign Form</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -651,8 +627,8 @@
                                                     </div>
                                                 </div>
                                         <?php
+                                                $index++;
                                             }
-                                            $index = 1;
                                         }
                                         ?>
                                     </tbody>
@@ -663,17 +639,6 @@
                 </div>
             </div>
         </section>
-        <script>
-            function validateEditCampaignForm() {
-                let startDate = new Date($('#startDate').val());
-                let endDate = new Date($('#endDate').val());
-
-                if (startDate > endDate) {
-                    alert("Start date must be before end date");
-                    return false;
-                }
-            }
-        </script>
     </main>
     <footer id="footer" class="footer">
         <div class="copyright">
@@ -684,9 +649,8 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Imports -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../js/main.js"></script>
 
     <?php

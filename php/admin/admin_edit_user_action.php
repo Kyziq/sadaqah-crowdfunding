@@ -8,10 +8,9 @@
     <title>Edit User</title>
     <link rel="icon" href="../../images/logo-LZNK.ico">
 
-    <!-- Bootstrap -->
+    <!-- Imports -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <!-- Sweet Alert 2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -22,7 +21,10 @@
     if (isset($_SESSION['user_id']) &&  $_SESSION['user_level'] == 1) {
         /* Check if edit user button clicked */
         if (isset($_POST["edit-user-button"])) {
-            include_once '../dbcon.php'; // Connect to database 
+            /* DB Connect */
+            include_once '../dbcon.php';
+
+            /* Get all the posted items */
             $id = $_POST["edit-user-button"];
             $username = $_POST["username"];
             $name = $_POST["name"];
@@ -31,6 +33,7 @@
             $address = $_POST["address"];
             $level = $_POST["level"];
 
+            /* UPDATE Query */
             $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?"; // SQL with parameters
             $stmt = $con->prepare($query);
             $stmt->bind_param("sssssi", $username, $name, $email, $phone, $address, $id);
@@ -57,7 +60,7 @@
                 })
             </script>
     <?php
-            // Close connection
+            /* Close connection */
             $stmt->close();
             $con->close();
         } else {
