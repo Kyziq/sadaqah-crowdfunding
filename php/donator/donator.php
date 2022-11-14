@@ -387,9 +387,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row justify-content-md-center mb-3 text-muted">
-                                                                                Note: This is computer generated and no signature is required.
-                                                                            </div>
+                                                                            <div class="text-center">Note: This is computer generated and no signature is required.</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -44,5 +44,4 @@ a {
 
 .fix-floating-label .form-floating textarea.form-control {
     padding-top: 32px;
-    /* height of pseudo element */
 }

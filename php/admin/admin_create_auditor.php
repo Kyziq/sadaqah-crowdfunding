@@ -207,7 +207,7 @@
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <label for="address" class="form-label fw-semibold">Address <span class="text-danger">*</span></label>
+                                        <label for="address" class="form-label fw-semibold">Organization Address <span class="text-danger">*</span></label>
                                         <textarea type="text" class="form-control" id="address" name="address" rows="3" required></textarea>
                                     </div>
 

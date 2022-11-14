@@ -405,7 +405,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Ended Campaign List</h5>
+                            <h5 class="card-title">Completed Campaign List</h5>
                             <?php
                             /* SELECT Query */
                             $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
