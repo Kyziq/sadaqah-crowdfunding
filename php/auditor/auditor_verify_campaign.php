@@ -178,11 +178,11 @@
                                                 <option value="1">Approve</option>
                                                 <option value="2">Decline</option>
                                             </select>
-                                            <label for="verificationStatus">Action</label>
+                                            <label for="verificationStatus">Action <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="form-floating mb-3">
                                             <textarea class="form-control" id="verificationComment" name="verificationComment" placeholder="Leave a comment" style="height: 100px" required></textarea>
-                                            <label for="verificationComment">Comment</label>
+                                            <label for="verificationComment">Comment <span class="text-danger">*</span></label>
                                         </div>
 
                                         <div class="d-flex justify-content-end">
