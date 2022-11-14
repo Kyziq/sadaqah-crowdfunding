@@ -161,8 +161,9 @@
                 </div>
                 <div class="cards d-flex justify-content-center pb-4">
                     <?php
-                    $campaign_status = 1; // Accepted campaign
-                    $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id=cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id desc LIMIT 3";
+                    /* SELECT Query */
+                    $campaign_status = 1; // Accepted
+                    $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_end > CURDATE() AND camp.campaign_category_id=cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id desc LIMIT 3";
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("i", $campaign_status);
                     $stmt->execute();

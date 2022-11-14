@@ -262,9 +262,11 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <?php
-                                                    /* SELECT Query (Only display campaign after current date AND ongoing campaign)*/
-                                                    $query = "SELECT * FROM campaign WHERE campaign_start <= CURDATE() AND campaign_end >= CURDATE()";
+                                                    /* SELECT Query (Only display accepted campaign after current date AND ongoing campaign) */
+                                                    $campaign_status = 1; // Accepted
+                                                    $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_start <= CURDATE() AND campaign_end >= CURDATE()";
                                                     $stmt = $con->prepare($query);
+                                                    $stmt->bind_param("i", $campaign_status);
                                                     $stmt->execute();
                                                     $result = $stmt->get_result();
                                                     ?>
@@ -297,9 +299,11 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <?php
-                                                    /* SELECT Query (Only display campaign for ended campaign) */
-                                                    $query = "SELECT * FROM campaign WHERE campaign_end < CURDATE()";
+                                                    /* SELECT Query (Only display accepted campaign for ended campaign) */
+                                                    $campaign_status = 1; // Accepted
+                                                    $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_end < CURDATE()";
                                                     $stmt = $con->prepare($query);
+                                                    $stmt->bind_param("i", $campaign_status);
                                                     $stmt->execute();
                                                     $result = $stmt->get_result();
                                                     ?>
