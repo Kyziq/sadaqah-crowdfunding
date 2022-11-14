@@ -349,6 +349,14 @@ const IO = new IntersectionObserver(callback, {
 const el = document.querySelector(".counter");
 IO.observe(el);
 
+const counters = document.querySelectorAll(".counter");
+for (const el of counters) {
+    counterUp(el, {
+        duration: 1000,
+        delay: 16,
+    });
+}
+
 /**
  * (index.php) Reset input in login and register form when click
  */
