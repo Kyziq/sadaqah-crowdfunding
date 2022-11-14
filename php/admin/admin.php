@@ -256,17 +256,52 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Campaign Information <span> | Graph</span></h5>
+                                    <h5 class="card-title">Ongoing Campaign Information <span> | Graph</span></h5>
                                     <div id="reportsChart">
                                         <form action="admin_check_campaign_action.php" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <?php
-                                                    $query = "SELECT * FROM campaign";
+                                                    /* SELECT Query (Only display campaign after current date AND ongoing campaign)*/
+                                                    $query = "SELECT * FROM campaign WHERE campaign_start <= CURDATE() AND campaign_end >= CURDATE()";
                                                     $stmt = $con->prepare($query);
                                                     $stmt->execute();
                                                     $result = $stmt->get_result();
-
+                                                    ?>
+                                                    <select class="form-select" required>
+                                                        <option value="" disabled selected>Choose Campaign</option>
+                                                        <?php
+                                                        while ($row = $result->fetch_assoc()) {
+                                                        ?>
+                                                            <option value="<?php echo $row['campaign_id']; ?>"><?php echo $row['campaign_name']; ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class="btn btn-primary">Check</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Completed Campaign Information <span> | Graph</span></h5>
+                                    <div id="reportsChart">
+                                        <form action="admin_check_campaign_action.php" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <?php
+                                                    /* SELECT Query (Only display campaign for ended campaign) */
+                                                    $query = "SELECT * FROM campaign WHERE campaign_end < CURDATE()";
+                                                    $stmt = $con->prepare($query);
+                                                    $stmt->execute();
+                                                    $result = $stmt->get_result();
                                                     ?>
                                                     <select class="form-select" required>
                                                         <option value="" disabled selected>Choose Campaign</option>
