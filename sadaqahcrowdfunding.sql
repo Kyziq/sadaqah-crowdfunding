@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2022 at 09:45 PM
+-- Generation Time: Nov 14, 2022 at 04:30 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -173,7 +173,10 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `u
 (7, 'chai', '$2y$10$0JCpGRtbT09bzK4UC4zFKOlcNOKPKa6uViWeH2dNFZHrNbX8W4rBq', 'Chai Key Teh', 'chaikeyteh@gmail.com', '0176932012', '987, Jalan 9, SS87, 47143 Subang Jaya, Selangor', 3),
 (8, 'amran', '$2y$10$oduKRntTG6OCcWKDPHSNn.uqyANMDCH2DKaB9DSMoZL3pYqRB01v6', 'Muhammad Amran bin Ikmal', 'amranikmal@outlook.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 3),
 (9, 'raihan', '$2y$10$ZKBpL/tVjSpqZdZH6Vgw8eANey2iGmVoBXI/iYKvsteL3jy/kUlfy', 'Muhammad Raihan bin Azlan', 'raihanazlan@gmail.com', '0196862931', 'No. 50, Jalan 2/5, Taman Anggerik, 12159 George Town, Penang', 3),
-(10, 'ain', '$2y$10$hD7PrLZsJ5/FjttRbzLwlelbl5jVFy5r3RZDK6nP3g00h.pZy79Xu', 'Ain Amni binti Kamarul', 'ainamni@gmail.com', '0129518232', '312, Lorong 2Y, Bandar Utara, 27454 Karak, Pahang Darul Makmur', 3);
+(10, 'ain', '$2y$10$hD7PrLZsJ5/FjttRbzLwlelbl5jVFy5r3RZDK6nP3g00h.pZy79Xu', 'Ain Amni binti Kamarul', 'ainamni@gmail.com', '0129518232', '312, Lorong 2Y, Bandar Utara, 27454 Karak, Pahang Darul Makmur', 3),
+(11, 'admin', '$2y$10$Hzw8ZoJxLl5xiJxn/9alkOB1BZVWqPsDPQwDrgS8epyaXUoxFjzzC', 'admin', 'admin@gmail.com', '0123456789', 'No. 4, Jalan Kampung Attap 7/8, PJU1, 39045 Bentong, Pahang Darul Makmur', 1),
+(12, 'auditor', '$2y$10$K5dAbs8dvkFjlB/9CQDoUepRTx4jF40LzSk59MNoNAmAfAwAajgRS', 'auditor', 'auditor@gmail.com', '0123456789', 'No. 2, Jalan 1/7B, Pandan Meru, 05988 Alor Setar, Kedah', 2),
+(13, 'user', '$2y$10$m.SlP8dEzt5XLZMuhDjwd.UQd0aDgCuxoZfx6BbHqEYpOFae44gQa', 'user', 'user@gmail.com', '0123456789', '67, Jln Tugu 3V, Laman Keramat, 14379 Permatang Pauh, Penang', 3);
 
 -- --------------------------------------------------------
 
@@ -296,7 +299,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `verification`
