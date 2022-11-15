@@ -17,78 +17,123 @@
 
 <body>
     <?php
-    /* Start session and validate donator login */
+    /* Start session and validate donator */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
-        if (isset($_POST['donate-button'])) {
-            include("../dbcon.php");
+        if (isset($_POST['donatorDonateButton'])) {
+            /* DB Connect and Setting */
+            include_once '../dbcon.php';
             date_default_timezone_set('Asia/Singapore');
 
+            $donate_status = 3; // 3 = Pending
+            $admin_id = 1; // 1 = Default admin (which admin verify later in verification)
+            $date = date('--Y-m-d--H-i-s');
             /* Get all the posted items */
             $campaign_name = $_POST['campaign_name'];
             $user_username = $_POST['user_username'];
-
             $donate_amount = $_POST['donate_amount'];
             $donator_id = $_SESSION["user_id"];
-            $donate_status = 3; // 3 = Pending
-            $admin_id = 1; // 1 = Default admin (which admin verify later in verification)
             $campaign_id = $_POST['campaign_id'];
 
-            /* File Upload */
-            $date = date('--Y-m-d--H-i-s');
-
             /* Upload File */
-            $extension  = strtolower(pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION));
+            $fileExt  = strtolower(pathinfo($_FILES["donate_proof"]["name"], PATHINFO_EXTENSION));
             $target_dir = "../../images/donation-proof/";
-            $file_name = $user_username . "--campaignID" . $campaign_id . $date . "." . $extension; // username--campaignid--date.extension
+            $file_name = $user_username . "--campaignID" . $campaign_id . $date . "." . $fileExt; // username--campaignid--date.ext
             $target_file = $target_dir . $file_name;
-            $source = $_FILES["donate_proof"]["tmp_name"];
 
-            $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // file type to lowercase
 
-            if ($_FILES["donate_proof"]["size"] > 10000000) // Check file size (10000000 = 10MB)
-                $uploadOk = 0;
-            if ($imageFileType != "pdf" && $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg") // Allow certain file formats
-                $uploadOk = 0;
+            $uploadOk = 1;
+            /* Condition */
+            if (file_exists($target_file)) { // Check if file already exists
+                $uploadOk = 1;
+            }
+            if ($_FILES["donate_proof"]["size"] > 10000000) { // Check file size (10000000 = 10MB)
+                $uploadOk = 2;
+            }
+            if ($imageFileType != "pdf" && $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg") { // Allow certain file formats
+                $uploadOk = 3;
+            }
+            /* End Condition */
 
-            if ($uploadOk == 0) { // Check if $uploadOk is set to 0 by an error
-                header("Location: donator_donate.php");
-            } else {
+            // Success Popup (SweetAlert2)
+            function successPopup()
+            {
+    ?>
+                <!-- Success Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<?php echo $GLOBALS['campaign_name']; ?>',
+                        text: 'Your total donation of RM<?php echo $GLOBALS['donate_amount'] ?> has been processed. Please wait for it to be verified.',
+                        footer: '(Auto close in 10 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 10000,
+                        willClose: () => {
+                            window.location.href = 'donator.php';
+                        }
+                    })
+                </script>
+            <?php
+            }
+
+            // Error Popup (SweetAlert2)
+            function errorPopup($uploadOk)
+            {
+                if ($uploadOk == 1) {
+                    $text = "Error. File already exists.";
+                } else if ($uploadOk == 2) {
+                    $text = "Error. Your file is too large.";
+                } else if ($uploadOk == 3) {
+                    $text = "Error. Only PNG, JPG, JPEG and PDF file formats are allowed.";
+                } else {
+                    $text = "Error. There was an error uploading your file.";
+                }
+            ?>
+                <!-- Error Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: '<?php echo $text; ?>',
+                        footer: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'donator_donate.php';
+                        }
+                    })
+                </script>
+    <?php
+            }
+            /* End SweetAlert2 Popup */
+
+            if ($uploadOk == 1) {
                 if (move_uploaded_file($_FILES["donate_proof"]["tmp_name"], $target_file)) {
                     $donate_proof = str_replace("../", "", $target_file); // Remove "../" from the path 
 
-                    /* Construct and run query to insert donation data */
+                    /* INSERT Query (donate) */
                     $query = "INSERT INTO donate(donate_amount, donate_proof, donate_status, donator_id, admin_id, campaign_id) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("dsiiii", $donate_amount, $donate_proof, $donate_status, $donator_id, $admin_id, $campaign_id);
                     $stmt->execute();
-    ?>
-                    <!-- Success Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: '<?php echo $campaign_name; ?>',
-                            text: 'Your donation for  has been processed. Please wait for it to be verified.',
-                            footer: '(Auto close in 10 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 10000,
-                            willClose: () => {
-                                window.location.href = 'donator.php';
-                            }
-                        })
-                    </script>
-    <?php
 
-                    // Close connection
+                    successPopup();
+
+                    /* Close connection */
                     $stmt->close();
                     $con->close();
                 } else {
-                    header("Location: donator_donate.php");
+                    errorPopup(100);
                 }
+            } else {
+                errorPopup($uploadOk);
             }
         }
     } else {

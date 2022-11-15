@@ -211,7 +211,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button type="Submit" class="btn btn-primary" value="Submit" name="edit-action-button">Save Detail</button>
+                                    <button type="Submit" class="btn btn-primary" value="Submit" name="editProfileButton">Save Detail</button>
                                 </div>
                             </form>
                         </div>
@@ -266,7 +266,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button type="Submit" class="btn btn-primary" value="Submit" name="edit-password-button">Save Password</button>
+                                    <button type="Submit" class="btn btn-primary" value="Submit" name="editPasswordButton">Save Password</button>
                                 </div>
                             </form>
                         </div>
@@ -284,15 +284,9 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Imports -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
-
-    <?php
-    // Close connection
-    $stmt->close();
-    $con->close();
-    ?>
 </body>
 
 </html>

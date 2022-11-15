@@ -29,9 +29,7 @@
             $campaignCreatedDate = date('--Y-m-d--H-i-s', strtotime($_POST['campaignCreatedDate']));
             $campaignAdminId = $_SESSION['user_id'];
             /* Get all the posted items */
-            global $campaignId;
             $campaignId = $_POST['campaignId'];
-            global $campaignName;
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
             $campaignBannerDir = $_POST['campaignBannerDir'];
@@ -41,64 +39,68 @@
             $startDate = $_POST['startDate'];
             $endDate  = $_POST['endDate'];
 
-            /* SweetAlert2 Popup */
-            $uploadOk = 1; // Valid Condition
-            function resultPopup($uploadOk, $type)
+            /* SweetAlert2 */
+            // Success Popup
+            function successPopup()
             {
-                if ($type == "success") {
     ?>
-                    <!-- Success Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: '<?php echo $GLOBALS['campaignName']; ?>',
-                            text: 'Campaign ID (<?php echo $GLOBALS['campaignId']; ?>) has been successfully edited.',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_edit_campaign.php';
-                            }
-                        })
-                    </script>
-                <?php
-                } else if ($type == "error") {
-                    if ($uploadOk == 3) {
-                        $text = "Sorry, file already exists.";
-                    } else if ($uploadOk == 4) {
-                        $text = "Sorry, your file is too large.";
-                    } else if ($uploadOk == 5) {
-                        $text = "Sorry, only PNG, JPG, and JPEG files are allowed.";
-                    } else if ($uploadOk == 6) {
-                        $text = "Start date of the campaign cannot be later than the finish date.";
-                    } else {
-                        $text = "Sorry, there was an error uploading your file.";
-                    }
-                ?>
-                    <!-- Error Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: '<?php echo $text; ?>',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_edit_campaign.php';
-                            }
-                        })
-                    </script>
-    <?php
-                }
+                <!-- Success Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<?php echo $GLOBALS['campaignName']; ?>',
+                        text: 'Campaign ID (<?php echo $GLOBALS['campaignId']; ?>) has been successfully edited.',
+                        footer: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'admin_edit_campaign.php';
+                        }
+                    })
+                </script>
+            <?php
             }
-            /* End SweetAlert2 Popup */
+            // Error Popup
+            $uploadOk = 1; // Valid Condition
+            function errorPopup($uploadOk)
+            {
+                if ($uploadOk == 2) {
+                    $text = "Error. Image file is a actual image or fake image.";
+                } else if ($uploadOk == 3) {
+                    $text = "Error. File already exists.";
+                } else if ($uploadOk == 4) {
+                    $text = "Error. Your file is too large.";
+                } else if ($uploadOk == 5) {
+                    $text = "Error. Only PNG, JPG, and JPEG files are allowed.";
+                } else if ($uploadOk == 6) {
+                    $text = "Error. Start date of the campaign cannot be later than the finish date.";
+                } else {
+                    $text = "Error. There was an error uploading your file.";
+                }
+            ?>
+                <!-- Error Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: '<?php echo $text; ?>',
+                        footer: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'admin_edit_campaign.php';
+                        }
+                    })
+                </script>
+    <?php
+            }
+            /* End SweetAlert2 */
 
             // No file inputted (Rename existing file)
             if (($_FILES['campaignFileBanner']['name'] == "")) {
@@ -114,6 +116,8 @@
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
                 $stmt->execute();
+
+                successPopup();
             }
             // File inputted (Delete file and upload new file)
             else {
@@ -152,15 +156,15 @@
                         $stmt = $con->prepare($query);
                         $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBannerDir, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
                         $stmt->execute();
+
+                        successPopup();
                     } else {
-                        resultPopup(2, "error");
+                        errorPopup(100);
                     }
                 } else {
-                    resultPopup($uploadOk, "error");
+                    errorPopup($uploadOk);
                 }
             }
-
-            resultPopup($uploadOk, "success");
 
             /* Close connection */
             $stmt->close();

@@ -24,28 +24,21 @@
         date_default_timezone_set('Asia/Singapore');
         $user_id = $_SESSION['user_id'];
 
-        /* Edit my detail button is clicked */
-        if (isset($_POST['edit-action-button'])) {
-            /* Get all the posted items */
-            $user_username = $_POST['username'];
-            $user_name = $_POST['name'];
-            $user_email = $_POST['email'];
-            $user_phone = $_POST['phone'];
-            $user_address = $_POST['address'];
-
-            /* UPDATE Query */
-            $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?"; // SQL with parameters
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
-            $stmt->execute();
-
+        /* SweetAlert2 */
+        // Success
+        function successPopup($condition)
+        {
+            if ($condition == 'profile') {
+                $text = 'Your new account details has been saved.';
+            } else if ($condition == 'password') {
+                $text = 'Your new password has been saved.';
+            }
     ?>
-            <!-- Success Popup -->
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: '<?php echo $user_name; ?>',
-                    text: 'Your new account details has been saved.',
+                    title: 'Success!',
+                    text: <?php echo $text ?>,
                     footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
@@ -57,113 +50,93 @@
                     }
                 })
             </script>
-            <?php
+        <?php
         }
 
-        /** Edit password button is clicked **/
-        else if (isset($_POST['edit-password-button'])) {
+        // Error
+        $condition = 1; // Valid Condition
+        function errorPopup($condition)
+        {
+            if ($condition == 'pw-same') {
+                $text = "Your new password cannot be the same as your current password.";
+            } else if ($condition == 'pw-not-match') {
+                $text = "Your new password and confirm new password do not match.";
+            } else if ($condition == 'pw-current-incorrect') {
+                $text = "Your current password is incorrect.";
+            }
+        ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '<?php echo $text; ?>',
+                    footer: '(Auto close in 5 seconds)',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Confirm',
+                    backdrop: `#2871f9`,
+                    confirmButtonColor: '#0d6efd',
+                    timer: 5000,
+                    willClose: () => {
+                        window.location.href = 'admin_edit_profile.php';
+                    }
+                })
+            </script>
+    <?php
+        }
+        /* End SweetAlert2 */
+
+        /***** Edit profile detail button is clicked *****/
+        if (isset($_POST['editProfileButton'])) {
+            /* Get all the posted items */
+            $user_username = $_POST['username'];
+            $user_name = $_POST['name'];
+            $user_email = $_POST['email'];
+            $user_phone = $_POST['phone'];
+            $user_address = $_POST['address'];
+
+            /* UPDATE Query */
+            $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
+            $stmt->execute();
+
+            successPopup('profile');
+        }
+
+        /***** Edit password button is clicked *****/
+        else if (isset($_POST['editPasswordButton'])) {
             /* Get all the posted items */
             $currentPassword = $_POST['currentPassword'];
             $newPassword = $_POST['newPassword'];
             $confirmNewPassword = $_POST['confirmNewPassword'];
 
-            include_once '../dbcon.php'; // Connect to database
-            /* Query */
-            $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameters
+            /* SELECT Query */
+            $query = "SELECT * FROM user WHERE user_id=?";
             $stmt = $con->prepare($query);
             $stmt->bind_param("i", $user_id);
             $stmt->execute();
-            $result = $stmt->get_result(); // Get the MySQLI result
-            $r = $result->fetch_assoc(); // Fetch data
+            $result = $stmt->get_result();
+            $r = $result->fetch_assoc();
 
             /* Check current password is correct */
             if (password_verify($currentPassword, $r['user_password'])) {
                 /* Check current password same as new password */
                 if ($currentPassword == $newPassword) {
-            ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Your new password cannot be the same as your current password.',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_edit_profile.php';
-                            }
-                        })
-                    </script>
-                <?php
+                    errorPopup('pw-same');
                 } else if ($newPassword != $confirmNewPassword) {
-                ?>
-                    <!-- Fail Popup (new password and confirm new password do not match)-->
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Your new password and confirm new password do not match.',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_edit_profile.php';
-                            }
-                        })
-                    </script>
-                <?php
+                    errorPopup('pw-not-match');
                 } else {
+                    /* UPDATE Query */
                     $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                    $query = "UPDATE user SET user_password=? WHERE user_id=?"; // SQL with parameters
+                    $query = "UPDATE user SET user_password=? WHERE user_id=?";
                     $stmt = $con->prepare($query);
                     $stmt->bind_param("si", $newPassword, $user_id);
                     $stmt->execute();
-                ?>
-                    <!-- Success Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: 'Your password has been changed.',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_edit_profile.php';
-                            }
-                        })
-                    </script>
-                <?php
+
+                    successPopup("password");
                 }
             } else {
-                ?>
-                <!-- Fail Popup (new password cannot be the same as current password)-->
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Your current password is incorrect.',
-                        footer: '(Auto close in 5 seconds)',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Confirm',
-                        backdrop: `#2871f9`,
-                        confirmButtonColor: '#0d6efd',
-                        timer: 5000,
-                        willClose: () => {
-                            window.location.href = 'admin_edit_profile.php';
-                        }
-                    })
-                </script>
-    <?php
+                errorPopup('pw-current-incorrect');
             }
         }
         /* Close connection */

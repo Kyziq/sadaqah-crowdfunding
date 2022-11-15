@@ -20,12 +20,13 @@
     session_start();
     if (isset($_SESSION['user_id']) &&  $_SESSION['user_level'] == 1) {
         /* Check if edit user button clicked */
-        if (isset($_POST["edit-user-button"])) {
-            /* DB Connect */
+        if (isset($_POST["editUserButton"])) {
+            /* DB Connect and Setting */
             include_once '../dbcon.php';
+            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
-            $id = $_POST["edit-user-button"];
+            $id = $_POST["editUserButton"];
             $username = $_POST["username"];
             $name = $_POST["name"];
             $email = $_POST["email"];
@@ -38,6 +39,7 @@
             $stmt = $con->prepare($query);
             $stmt->bind_param("sssssi", $username, $name, $email, $phone, $address, $id);
             $stmt->execute();
+
     ?>
             <!-- Success Popup -->
             <script>

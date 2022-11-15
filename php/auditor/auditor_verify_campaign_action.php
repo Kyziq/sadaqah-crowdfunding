@@ -17,30 +17,35 @@
 
 <body>
     <?php
+    /* Start session and validate auditor */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
-        /** Check if verify campaign button is clicked **/
+        /* Verify campaign button is clicked */
         if (isset($_POST['verifyCampaignButton'])) {
-            include_once '../dbcon.php'; // Connect to database
+            /* DB Connect and Setting */
+            include_once '../dbcon.php';
+            date_default_timezone_set('Asia/Singapore');
 
-            /* Get all the variables */
+            /* Get all the posted items */
             $campaignName = $_POST['campaignName'];
             $campaignId = $_POST['campaignId'];
             $verificationStatus = $_POST['verificationStatus'];
             $verificationComment = $_POST['verificationComment'];
             $auditorId = $_SESSION['user_id'];
 
+            /* INSERT Query (verification) */
             $query = "INSERT INTO verification(verification_status, verification_comment, campaign_id, auditor_id) VALUES (?, ?, ?, ?)";
             $stmt = $con->prepare($query);
             $stmt->bind_param("isii", $verificationStatus, $verificationComment, $campaignId, $auditorId);
             $stmt->execute();
 
+            /* UPDATE Query (campaign) */
             $query = "UPDATE campaign SET campaign_status=? WHERE campaign_id=?"; // SQL with parameters
             $stmt = $con->prepare($query);
             $stmt->bind_param("ii", $verificationStatus, $campaignId);
             $stmt->execute();
 
-            if ($verificationStatus == 1) {
+            if ($verificationStatus == 1) { // Accepted
     ?>
                 <!-- Success Popup -->
                 <script>
@@ -60,7 +65,7 @@
                     })
                 </script>
             <?php
-            } else if ($verificationStatus == 2) {
+            } else if ($verificationStatus == 2) { // Declined
             ?>
                 <!-- Success Popup -->
                 <script>

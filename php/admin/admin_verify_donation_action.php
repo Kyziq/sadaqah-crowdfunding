@@ -33,15 +33,14 @@
             $adminId = $_SESSION['user_id'];
             $campaignName = $_POST['campaignName'];
 
+            $campaignId = $_POST['campaignId'];
+            $donateAmount = $_POST['donateAmount'];
+
             /* UPDATE Query for donate table */
             $query = "UPDATE donate SET donate_status=?, admin_id=? WHERE donate_id=?";
             $stmt = $con->prepare($query);
             $stmt->bind_param("iii", $donateStatus, $adminId, $donateId);
             $stmt->execute();
-
-            /* Update total campaign raised */
-            $campaignId = $_POST['campaignId'];
-            $donateAmount = $_POST['donateAmount'];
 
             /* UPDATE Query for campaign table */
             $query = "UPDATE campaign SET campaign_raised=campaign_raised+? WHERE campaign_id=?";

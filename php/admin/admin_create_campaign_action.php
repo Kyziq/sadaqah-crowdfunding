@@ -30,7 +30,6 @@
             $campaignStatus = 3; // 3 = Pending
             $campaignAdminId = $_SESSION['user_id'];
             /* Get all the posted items */
-            global $campaignName;
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
             $campaignCategory = $_POST['campaignCategory'];
@@ -68,61 +67,66 @@
             }
             /* End Condition */
 
-            /* SweetAlert2 Popup */
-            function resultPopup($uploadOk, $type)
+            /* SweetAlert2 */
+            // Success
+            function successPopup()
             {
-                if ($type == "success") {
     ?>
-                    <!-- Success Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'success',
-                            title: '<?php echo $GLOBALS['campaignName']; ?>',
-                            text: 'A new campaign has been successfully created.',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin.php';
-                            }
-                        })
-                    </script>
-                <?php
-                } else if ($type == "error") {
-                    if ($uploadOk == 3) {
-                        $text = "Sorry, file already exists.";
-                    } else if ($uploadOk == 4) {
-                        $text = "Sorry, your file is too large.";
-                    } else if ($uploadOk == 5) {
-                        $text = "Sorry, only PNG, JPG, and JPEG files are allowed.";
-                    } else if ($uploadOk == 6) {
-                        $text = "Start date of the campaign cannot be later than the finish date.";
-                    } else {
-                        $text = "Sorry, there was an error uploading your file.";
-                    }
-                ?>
-                    <!-- Error Popup -->
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: '<?php echo $text; ?>',
-                            footer: '(Auto close in 5 seconds)',
-                            showConfirmButton: true,
-                            confirmButtonText: 'Confirm',
-                            backdrop: `#2871f9`,
-                            confirmButtonColor: '#0d6efd',
-                            timer: 5000,
-                            willClose: () => {
-                                window.location.href = 'admin_create_campaign.php';
-                            }
-                        })
-                    </script>
-    <?php
+                <!-- Success Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '<?php echo $GLOBALS['campaignName']; ?>',
+                        text: 'A new campaign has been successfully created.',
+                        footer: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'admin.php';
+                        }
+                    })
+                </script>
+            <?php
+            }
+
+            // Error
+            function errorPopup($uploadOk)
+            {
+                if ($uploadOk == 2) {
+                    $text = "Error. Image file is a actual image or fake image.";
+                } else if ($uploadOk == 3) {
+                    $text = "Error. File already exists.";
+                } else if ($uploadOk == 4) {
+                    $text = "Error. Your file is too large.";
+                } else if ($uploadOk == 5) {
+                    $text = "Error. Only PNG, JPG, and JPEG files are allowed.";
+                } else if ($uploadOk == 6) {
+                    $text = "Error. Start date of the campaign cannot be later than the finish date.";
+                } else {
+                    $text = "Error. There was an error uploading your file.";
                 }
+            ?>
+                <!-- Error Popup -->
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: '<?php echo $text; ?>',
+                        footer: '(Auto close in 5 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 5000,
+                        willClose: () => {
+                            window.location.href = 'admin_create_campaign.php';
+                        }
+                    })
+                </script>
+    <?php
             }
             /* End SweetAlert2 Popup */
 
@@ -137,16 +141,16 @@
                     $stmt->bind_param("sssidssdii", $campaignName, $campaignDesc, $campaignFileBanner, $campaignCategory, $campaignAmount, $startDate, $endDate, $campaignRaised, $campaignAdminId, $campaignStatus);
                     $stmt->execute();
 
-                    resultPopup($uploadOk, "success");
+                    successPopup();
 
                     /* Close connection */
                     $stmt->close();
                     $con->close();
                 } else {
-                    resultPopup(2, "error");
+                    errorPopup(100);
                 }
             } else {
-                resultPopup($uploadOk, "error");
+                errorPopup($uploadOk);
             }
         }
     } else {
