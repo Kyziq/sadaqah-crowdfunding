@@ -225,7 +225,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
+                                        <button type="submit" class="btn btn-primary" name="createCampaignButton">Create</button>
                                     </div>
                                 </div>
                             </form>

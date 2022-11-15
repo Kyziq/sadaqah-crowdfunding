@@ -384,7 +384,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-primary" name="edit-campaign-1-button">Save</button>
+                                                                    <button type="submit" class="btn btn-primary" name="editCampaignOneButton">Save</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -620,7 +620,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-primary" name="create-campaign-button">Create</button>
+                                                                    <button type="submit" class="btn btn-primary" name="createCampaignButton">Create</button>
                                                                 </div>
                                                             </form>
                                                         </div>

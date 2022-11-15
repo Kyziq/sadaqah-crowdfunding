@@ -212,7 +212,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary" name="create-auditor-button">Create</button>
+                                        <button type="submit" class="btn btn-primary" name="createAuditorButton">Create</button>
                                     </div>
                                 </div>
                             </form>
@@ -236,7 +236,7 @@
     <script src="../../js/main.js"></script>
 
     <?php
-    // Close connection
+    /* Close connection */
     $stmt->close();
     $con->close();
     ?>

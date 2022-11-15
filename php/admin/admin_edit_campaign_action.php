@@ -19,15 +19,19 @@
     /* Start session and validate admin */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
-        /** Check if create campaign button is clicked **/
-        if (isset($_POST['edit-campaign-1-button'])) {
+        /* Check if create campaign button is clicked */
+        if (isset($_POST['editCampaignOneButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
             date_default_timezone_set('Asia/Singapore');
 
-            /* Get all the posted items */
+            $target_dir = "../../images/campaign/"; // Target directory
             $campaignCreatedDate = date('--Y-m-d--H-i-s', strtotime($_POST['campaignCreatedDate']));
+            $campaignAdminId = $_SESSION['user_id'];
+            /* Get all the posted items */
+            global $campaignId;
             $campaignId = $_POST['campaignId'];
+            global $campaignName;
             $campaignName = $_POST['campaignName'];
             $campaignDesc = $_POST['campaignDesc'];
             $campaignBannerDir = $_POST['campaignBannerDir'];
@@ -37,122 +41,130 @@
             $startDate = $_POST['startDate'];
             $endDate  = $_POST['endDate'];
 
-            $campaignAdminId = $_SESSION['user_id'];
-
-            /* Start date cannot exceed end date */
-            if ($endDate > $startDate) {
-                /* Query */
-                $query = "UPDATE user SET user_username=?, user_name=?, user_email=?, user_phone=?, user_address=? WHERE user_id=?"; // SQL with parameters
-                $stmt = $con->prepare($query);
-                $stmt->bind_param("sssssi", $user_username, $user_name, $user_email, $user_phone, $user_address, $user_id);
-                $stmt->execute();
-
-                // Check if file is inputted
-                if (($_FILES['campaignFileBanner']['name'] == "")) {
-                    $fileExt = strtolower(pathinfo($campaignBannerDir, PATHINFO_EXTENSION));
-                    $campaignNewBanner = "../../images/campaign/" . $campaignName  . $campaignCreatedDate . "." . $fileExt;
-
-                    /* Rename File */
-                    rename("../../" . $campaignBannerDir, $campaignNewBanner);
-
-                    $campaignNewBanner = str_replace("../", "", $campaignNewBanner); // Remove "../" from the path 
-
-                    /* UPDATE Query */
-                    $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
-                    $stmt = $con->prepare($query);
-                    $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
-                    $stmt->execute();
-                } else {
-                    /* Delete File */
-                    unlink("../../" . $campaignBannerDir);
-
-                    $fileExt  = strtolower(pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION));
-                    $target_dir = "../../images/campaign/"; // Target directory
-                    $campaignNewBanner = $campaignName . $campaignCreatedDate  . "." . $fileExt; // Upload image (where file name is campaignName-date.ext)
-                    $campaignNewBannerDir = $target_dir . $campaignName  . $campaignCreatedDate . "." . $fileExt;
-                    $campaignNewBannerDir = str_replace("../", "", $campaignNewBannerDir); // Remove "../" from the path 
-                    $target_file = $target_dir . $campaignNewBanner;
-                    $source = $_FILES["campaignFileBanner"]["tmp_name"];
-                    $uploadOk = 1;
-                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-                    /* File Conditions */
-                    if (getImageSize($source) !== false) { // Check if image file is a actual image or fake image
-                        $uploadOk = 1;
-                    } else {
-                        $uploadOk = 0;
-                    }
-                    if (file_exists($target_file)) { // Check if file already exists
-                        echo "Sorry, file already exists.";
-                        $uploadOk = 0;
-                    }
-                    if ($_FILES["campaignFileBanner"]["size"] > 10000000) { // Check file size (10000000 = 10MB)
-                        echo "Sorry, your file is too large.";
-                        $uploadOk = 0;
-                    }
-                    if (
-                        $imageFileType != "png" && $imageFileType != "jpg" && $imageFileType != "jpeg"
-                    ) { // Allow certain file formats
-                        echo "Sorry, only PNG, JPG, and JPEG files are allowed.";
-                        $uploadOk = 0;
-                    }
-                    /* End File Conditions */
-
-                    if ($uploadOk == 0) {
-                        header("Location: admin_edit_campaign.php");
-                    } else {
-                        if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $target_file)) {
-                            /* UPDATE Query */
-                            $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
-                            $stmt = $con->prepare($query);
-                            $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBannerDir, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
-                            $stmt->execute();
-                        }
-                    }
-                }
+            /* SweetAlert2 Popup */
+            $uploadOk = 1; // Valid Condition
+            function resultPopup($uploadOk, $type)
+            {
+                if ($type == "success") {
     ?>
-                <!-- Success Popup -->
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: '<?php echo $campaignName; ?>',
-                        text: 'Campaign ID (<?php echo $campaignId; ?>) has been successfully edited.',
-                        footer: '(Auto close in 5 seconds)',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Confirm',
-                        backdrop: `#2871f9`,
-                        confirmButtonColor: '#0d6efd',
-                        timer: 5000,
-                        willClose: () => {
-                            window.location.href = 'admin_edit_campaign.php';
-                        }
-                    })
-                </script>
-            <?php
-                /* Close connection */
-                $stmt->close();
-                $con->close();
-            } else {
-            ?>
-                <!-- Error Popup -->
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Start date of the campaign cannot be later than the finish date.',
-                        footer: '(Auto close in 5 seconds)',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Confirm',
-                        backdrop: `#2871f9`,
-                        confirmButtonColor: '#0d6efd',
-                        timer: 5000,
-                        willClose: () => {
-                            window.location.href = 'admin_edit_campaign.php';
-                        }
-                    })
-                </script>
+                    <!-- Success Popup -->
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: '<?php echo $GLOBALS['campaignName']; ?>',
+                            text: 'Campaign ID (<?php echo $GLOBALS['campaignId']; ?>) has been successfully edited.',
+                            footer: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#2871f9`,
+                            confirmButtonColor: '#0d6efd',
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'admin_edit_campaign.php';
+                            }
+                        })
+                    </script>
+                <?php
+                } else if ($type == "error") {
+                    if ($uploadOk == 3) {
+                        $text = "Sorry, file already exists.";
+                    } else if ($uploadOk == 4) {
+                        $text = "Sorry, your file is too large.";
+                    } else if ($uploadOk == 5) {
+                        $text = "Sorry, only PNG, JPG, and JPEG files are allowed.";
+                    } else if ($uploadOk == 6) {
+                        $text = "Start date of the campaign cannot be later than the finish date.";
+                    } else {
+                        $text = "Sorry, there was an error uploading your file.";
+                    }
+                ?>
+                    <!-- Error Popup -->
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: '<?php echo $text; ?>',
+                            footer: '(Auto close in 5 seconds)',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Confirm',
+                            backdrop: `#2871f9`,
+                            confirmButtonColor: '#0d6efd',
+                            timer: 5000,
+                            willClose: () => {
+                                window.location.href = 'admin_edit_campaign.php';
+                            }
+                        })
+                    </script>
     <?php
+                }
             }
+            /* End SweetAlert2 Popup */
+
+            // No file inputted (Rename existing file)
+            if (($_FILES['campaignFileBanner']['name'] == "")) {
+                $fileExt = strtolower(pathinfo($campaignBannerDir, PATHINFO_EXTENSION));
+                $campaignNewBanner = $target_dir . $campaignName  . $campaignCreatedDate . "." . $fileExt;
+
+                rename("../../" . $campaignBannerDir, $campaignNewBanner); // Rename
+
+                /* UPDATE Query */
+                $campaignNewBanner = str_replace("../", "", $campaignNewBanner); // Remove "../" from the path 
+
+                $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
+                $stmt = $con->prepare($query);
+                $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBanner, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
+                $stmt->execute();
+            }
+            // File inputted (Delete file and upload new file)
+            else {
+                unlink("../../" . $campaignBannerDir); // Delete
+
+                $fileExt  = strtolower(pathinfo($_FILES["campaignFileBanner"]["name"], PATHINFO_EXTENSION));
+                $campaignNewBanner = $target_dir . $campaignName  . $campaignCreatedDate . "." . $fileExt; // Upload image (where file name is campaignName--date.ext)
+                $campaignNewBannerDir = str_replace("../", "", $campaignNewBanner); // Remove "../" from the path 
+
+                /* Condition */
+                $source = $_FILES["campaignFileBanner"]["tmp_name"];
+                if (getImageSize($source) !== false) { // Check if image file is a actual image or fake image
+                    $uploadOk = 1; // Valid condition
+                } else {
+                    $uploadOk = 2;
+                }
+                if (file_exists($campaignNewBanner)) { // Check if file already exists
+                    $uploadOk = 3;
+                }
+                if ($_FILES["campaignFileBanner"]["size"] > 10000000) { // Check file size (10000000 = 10MB)
+                    $uploadOk = 4;
+                }
+                if ($fileExt != "png" && $fileExt != "jpg" && $fileExt != "jpeg") { // Allow certain file formats
+                    $uploadOk = 5;
+                }
+                if ($startDate > $endDate) { // Start date cannot exceed end date
+                    $uploadOk = 6;
+                }
+                /* End Condition */
+
+                /* If valid condition */
+                if ($uploadOk == 1) {
+                    if (move_uploaded_file($_FILES["campaignFileBanner"]["tmp_name"], $campaignNewBanner)) {
+                        /* UPDATE Query */
+                        $query = "UPDATE campaign SET campaign_name=?, campaign_description=?, campaign_banner=?, campaign_category_id=?, campaign_raised=?, campaign_amount=?, campaign_start=?, campaign_end=?, campaign_admin_id=? WHERE campaign_id=?";
+                        $stmt = $con->prepare($query);
+                        $stmt->bind_param("sssiddssii", $campaignName, $campaignDesc, $campaignNewBannerDir, $campaignCategory, $campaignRaised, $campaignAmount, $startDate, $endDate, $campaignAdminId, $campaignId);
+                        $stmt->execute();
+                    } else {
+                        resultPopup(2, "error");
+                    }
+                } else {
+                    resultPopup($uploadOk, "error");
+                }
+            }
+
+            resultPopup($uploadOk, "success");
+
+            /* Close connection */
+            $stmt->close();
+            $con->close();
         }
     } else {
         header("Location: ../user_logout.php");
