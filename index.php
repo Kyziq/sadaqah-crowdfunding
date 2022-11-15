@@ -68,17 +68,17 @@
                 -->
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item my-1">
                         <a class="nav-link" href="#campaign">Campaign</a>
                     </li>
-                    <li class="nav-item me-4">
+                    <li class="nav-item me-5 my-1">
                         <a class="nav-link" href="#categories">Categories</a>
                     </li>
-                    <li class="nav-item me-2">
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <li class="nav-item me-2 my-1">
+                        <button class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                     </li>
-                    <li class="nav-item me-2">
-                        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                    <li class="nav-item me-2 my-1">
+                        <button class="btn btn-outline-success shadow" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
                     </li>
                 </ul>
             </div>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-md-2 offset-md-4">
                         <div class="text-center">
-                            <div class="border rounded-3 bg-success text-white">
+                            <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
                                     $query = "SELECT SUM(campaign_raised) FROM campaign";
@@ -119,7 +119,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="text-center">
-                            <div class="border rounded-3 bg-success text-white">
+                            <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
                                     $query = "SELECT COUNT(user_id) FROM user";
@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="text-center">
-                            <div class="border rounded-3 bg-success text-white">
+                            <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
                                     $query = "SELECT COUNT(campaign_id) FROM campaign";
@@ -251,7 +251,7 @@
         <section id="categories">
             <div class="container text-center">
                 <div class="container pt-5 my-3 d-flex align-items-center justify-content-center">
-                    <div class="box border rounded p-2 text-center bg-success text-white">
+                    <div class="box border rounded p-2 text-center bg-success text-white    shadow">
                         <div class="box-title">
                             <h3 class="fw-bold">Campaign Categories</h3>
                         </div>
@@ -290,7 +290,7 @@
         <!-- Start Mission Vision -->
         <div class="container text-center mb-5">
             <div class="container pt-5 my-3 d-flex align-items-center justify-content-center">
-                <div class="box border rounded p-2 text-center bg-success text-white">
+                <div class="box border rounded p-2 text-center bg-success text-white shadow">
                     <div class="box-title">
                         <h3 class="fw-bold">We are a reliable donation platform</h3>
                     </div>
@@ -333,19 +333,19 @@
                         </div>
                     </div>
                     <div class="row justify-content-center py-5">
-                        <div class="card col-md-3 my-2 me-4" style="width: 18rem;">
+                        <div class="card col-md-3 my-2 me-4 shadow-lg" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">1. Register</h5>
                                 <p class="card-text">Begin by signing up for an account on the platform.</p>
                             </div>
                         </div>
-                        <div class="card col-md-3 my-2 me-4" style="width: 18rem;">
+                        <div class="card col-md-3 my-2 me-4 shadow-lg" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">2. Donate</h5>
                                 <p class="card-text">Submit donation through the dashboard and wait for it to be validated.</p>
                             </div>
                         </div>
-                        <div class="card col-md-3 my-2 me-4" style="width: 18rem;">
+                        <div class="card col-md-3 my-2 me-4 shadow-lg" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">3. Verification</h5>
                                 <p class="card-text">Once verified, your donation will be transferred to the designated campaign!</p>
