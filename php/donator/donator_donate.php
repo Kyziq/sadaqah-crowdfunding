@@ -113,7 +113,9 @@
                 <h5 class="card-title">Available Campaign(s) List</h5>
                 <?php
                 $campaign_status = 1; // Accepted campaign
-                $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id";
+
+                /* SELECT Query */
+                $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? AND camp.campaign_end > CURDATE() ORDER BY camp.campaign_id";
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("i", $campaign_status);
                 $stmt->execute();
