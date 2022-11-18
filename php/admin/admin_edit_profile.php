@@ -177,14 +177,14 @@
                                 <div class="col-lg-6 mb-3">
                                     <div class="form-group">
                                         <label for="username" class="form-label fw-semibold">Username</label>
-                                        <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="Input username" value="<?php echo $r['user_username'] ?>" required>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 mb-3">
                                     <div class="form-group">
                                         <label for="name" class="form-label fw-semibold">Full Name</label>
-                                        <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>">
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Input name" value="<?php echo $r['user_name'] ?>" required>
                                     </div>
                                 </div>
 
@@ -192,13 +192,13 @@
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label for="email" class="form-label fw-semibold">Email</label>
-                                            <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>">
+                                            <input type="email" id="email" name="email" class="form-control" placeholder="Input email" value="<?php echo $r['user_email'] ?>" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label for="phone" class="form-label fw-semibold">Phone Number</label>
-                                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>">
+                                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Input phone" value="<?php echo $r['user_phone'] ?>" required>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                                 <div class="col-lg-12 mb-3">
                                     <div class="form-group">
                                         <label for="address" class="form-label fw-semibold">Address</label>
-                                        <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3"><?php echo $r['user_address'] ?></textarea>
+                                        <textarea id="address" name="address" class="form-control" placeholder="Input address" rows="3" required><?php echo $r['user_address'] ?></textarea>
                                     </div>
                                 </div>
 

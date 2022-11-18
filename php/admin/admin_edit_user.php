@@ -186,10 +186,10 @@
                                     /* Check for type of user to proceed query */
                                     if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
                                         $user_level = 2;
-                                        echo '<h5 class="card-title">Edit Auditor List</h5>';
+                                        echo '<h5 class="card-title">Auditor List</h5>';
                                     } else if (isset($_GET["type"]) && $_GET["type"] == 'Donator') {
                                         $user_level = 3;
-                                        echo '<h5 class="card-title">Edit Donator List</h5>';
+                                        echo '<h5 class="card-title">Donator List</h5>';
                                     }
 
                                     /* Display list of auditors/donators */
@@ -211,38 +211,89 @@
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Address</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php while ($r = $result->fetch_assoc()) { ?>
-                                                <form action="admin_edit_user_action.php" method="POST">
-                                                    <!-- Hidden Input -->
-                                                    <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <?php echo $index; ?>
-                                                        </th>
-                                                        <td>
-                                                            <input type="text" class="form-control" name="username" value="<?php echo $r['user_username']; ?>">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" name="name" value="<?php echo $r['user_name']; ?>">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" name="email" value="<?php echo $r['user_email']; ?>">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" name="phone" value="<?php echo $r['user_phone']; ?>">
-                                                        </td>
-                                                        <td>
-                                                            <textarea type="text" class="form-control" name="address" rows="2" cols="60"><?php echo $r['user_address']; ?></textarea>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-primary" type="submit" name="editUserButton" value="<?php echo $r['user_id']; ?>">Save</button>
-                                                        </td>
-                                                    </tr>
-                                                </form>
+                                                <!-- Hidden Input -->
+                                                <tr>
+                                                    <th scope="row">
+                                                        <?php echo $index; ?>
+                                                    </th>
+                                                    <td>
+                                                        <?php echo $r['user_username']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $r['user_name']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $r['user_email']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $r['user_phone']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $r['user_address']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-user-1-<?php echo $index ?>"><i class="bi bi-pencil-square"></i></button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Edit Campaign Modal -->
+                                                <div class="modal fade" id="edit-user-1-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-user-label" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="admin_edit_user_action.php" method="POST">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5 fw-bold" id="edit-user-label">Edit Form (ID <?php echo $index; ?>)</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <!-- Input -->
+                                                                        <input type="hidden" name="level" value="<?php echo $r['user_level']; ?>">
+
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="username" name="username" value="<?php echo $r['user_username']; ?>" required>
+                                                                        </div>
+
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="name" class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $r['user_name']; ?>" required>
+                                                                        </div>
+
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="phone" class="form-label fw-semibold">Phone Number <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $r['user_phone']; ?>" required>
+                                                                        </div>
+
+                                                                        <div class="form-group mb-2">
+                                                                            <label for="email" class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $r['user_email']; ?>" required>
+                                                                        </div>
+
+                                                                        <div class="form-group mb-2">
+                                                                            <?php
+                                                                            if ($r['user_level'] == 2) { // Auditor
+                                                                                echo '<label for="address" class="form-label fw-semibold">Organization Address <span class="text-danger">*</span></label>';
+                                                                            } else if ($r['user_level'] == 3) { // Donator
+                                                                                echo '<label for="address" class="form-label fw-semibold">Address <span class="text-danger">*</span></label>';
+                                                                            }
+                                                                            ?>
+                                                                            <textarea type="text" class="form-control" id="address" name="address" rows="3" required><?php echo $r['user_address']; ?></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-primary" type="submit" name="editUserButton" value="<?php echo $r['user_id']; ?>">Save</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <?php
                                                 $index++;
                                             }

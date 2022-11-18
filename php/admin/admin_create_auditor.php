@@ -175,7 +175,6 @@
 
                             <form action="admin_create_auditor_action.php" method="POST">
                                 <div class="row g-3">
-                                    <!-- Input -->
                                     <div class="col-lg-6">
                                         <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="username" name="username" required />

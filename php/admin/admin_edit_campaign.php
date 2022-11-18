@@ -171,7 +171,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Edit Campaign List</h5>
+                            <h5 class="card-title">Ongoing Campaign List</h5>
                             <?php
                             /* SELECT Query */
                             $query = "SELECT * FROM campaign camp, status sta WHERE camp.campaign_status = sta.status_id";
@@ -193,7 +193,7 @@
                                             <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -266,7 +266,7 @@
                                                         <?php echo $endDate; ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>">Edit</button>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>"><i class="bi bi-pencil-square"></i></button>
                                                     </td>
                                                 </tr>
 
@@ -303,11 +303,11 @@
 
                                                                         <div class="form-group mb-2">
                                                                             <label for="campaignName" class="form-label fw-semibold">Campaign Name <span class="text-danger">*</span></label>
-                                                                            <input type="text" class="form-control" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>">
+                                                                            <input type="text" class="form-control" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>" required>
                                                                         </div>
                                                                         <div class="form-group mb-2">
                                                                             <label for="campaignDesc" class="form-label fw-semibold">Campaign Description <span class="text-danger">*</span></label>
-                                                                            <textarea class="form-control" id="campaignDesc" name="campaignDesc" rows="4"><?php echo $r['campaign_description']; ?></textarea>
+                                                                            <textarea class="form-control" id="campaignDesc" name="campaignDesc" rows="4" required><?php echo $r['campaign_description']; ?></textarea>
                                                                         </div>
                                                                         <div class="form-group mb-2">
                                                                             <label for="campaignFileBanner" class="form-label fw-semibold">Campaign Banner <span class="text-danger">*</span></label>
@@ -315,7 +315,7 @@
                                                                         </div>
                                                                         <div class="form-group col-md-4 mb-2">
                                                                             <label for="campaignCategory" class="form-label fw-semibold">Campaign Category <span class="text-danger">*</span></label>
-                                                                            <select class="form-select" id="campaignCategory" name="campaignCategory">
+                                                                            <select class="form-select" id="campaignCategory" name="campaignCategory" required>
                                                                                 <?php
                                                                                 if ($r['campaign_category_id'] == 1) {
                                                                                 ?>
@@ -364,22 +364,22 @@
 
                                                                         <div class="form-group col-md-4 mb-2">
                                                                             <label for="campaignRaised" class="form-label fw-semibold">Campaign Raised (RM) <span class="text-danger">*</span></label>
-                                                                            <input type="number" class="form-control" id="campaignRaised" name="campaignRaised" value="<?php echo $r['campaign_raised']; ?>">
+                                                                            <input type="number" class="form-control" id="campaignRaised" name="campaignRaised" value="<?php echo $r['campaign_raised']; ?>" required>
                                                                         </div>
 
                                                                         <div class="form-group col-md-4 mb-2">
                                                                             <label for="campaignAmount" class="form-label fw-semibold">Campaign Amount (RM) <span class="text-danger">*</span></label>
-                                                                            <input type="number" class="form-control" id="campaignAmount" name="campaignAmount" value="<?php echo $r['campaign_amount']; ?>">
+                                                                            <input type="number" class="form-control" id="campaignAmount" name="campaignAmount" value="<?php echo $r['campaign_amount']; ?>" required>
                                                                         </div>
 
                                                                         <div class="form-group mb-2 col-md-6">
                                                                             <label for="startDate" class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
-                                                                            <input type="date" class="form-control" id="startDate" name="startDate" value="<?php echo $startDate; ?>">
+                                                                            <input type="date" class="form-control" id="startDate" name="startDate" value="<?php echo $startDate; ?>" required>
                                                                         </div>
 
                                                                         <div class="form-group mb-2 col-md-6">
                                                                             <label for="endDate" class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
-                                                                            <input type="date" class="form-control" id="endDate" name="endDate" value="<?php echo $endDate; ?>" requi>
+                                                                            <input type="date" class="form-control" id="endDate" name="endDate" value="<?php echo $endDate; ?>" required>
                                                                         </div>
                                                                     </div>
                                                                 </div>
