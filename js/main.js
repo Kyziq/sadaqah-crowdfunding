@@ -6,6 +6,8 @@
 $(document).ready(function () {
 	$('#adminEditUserTable').DataTable({
 		scrollX: true,
+		lengthMenu: [5, 10, 25, 50],
+		displayLength: 5,
 		columnDefs: [{
 			targets: 'no-sort',
 			orderable: false,
@@ -13,6 +15,8 @@ $(document).ready(function () {
 	});
 	$('#adminEditCampaignTable, #adminEditCampaignTable2').DataTable({
 		scrollX: true,
+		lengthMenu: [5, 10, 25, 50],
+		displayLength: 5,
 		columnDefs: [{
 			targets: 'no-sort',
 			orderable: false,
@@ -20,6 +24,8 @@ $(document).ready(function () {
 	});
 	$('#donationHistory, #acceptedDonationHistory').DataTable({
 		scrollX: true,
+		lengthMenu: [5, 10, 25, 50],
+		displayLength: 5,
 		columnDefs: [{
 			targets: 'no-sort',
 			orderable: false,

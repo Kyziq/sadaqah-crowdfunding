@@ -229,51 +229,52 @@
                                     } else { {
                                         ?>
                                             <div class="table-responsive">
-                                                <table class="table table-hover display" style="width:100%" id="donationHistory">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">ID&nbsp;</th>
-                                                            <th scope="col" class="col-lg-5">Campaign</th>
-                                                            <th scope="col">Donate Date</th>
-                                                            <th scope="col">Amount (RM)</th>
-                                                            <th scope="col">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $index = 1;
-                                                        if ($count_rows >= 1) {
-                                                            while ($camp = $result->fetch_assoc()) {
-                                                        ?>
-                                                                <tr>
-                                                                    <th scope="row"><?php echo $index; ?></th>
-                                                                    <td><?php echo $camp['campaign_name'] ?></td>
-                                                                    <td>
-                                                                        <?php
-                                                                        $date = date('d M Y (h:i A)', strtotime($camp['donate_date']));
-                                                                        echo $date;
-                                                                        ?>
-                                                                    </td>
-                                                                    <td><?php echo $camp['donate_amount'] ?></td>
-                                                                    <td>
-                                                                        <?php
-                                                                        if ($camp['donate_status'] == 1) {
-                                                                            echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>' . $camp['status_desc'] . '</span>';
-                                                                        } else if ($camp['donate_status'] == 2) {
-                                                                            echo '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>' . $camp['status_desc'] . '</span>';
-                                                                        } else if ($camp['donate_status'] == 3) {
-                                                                            echo '<span class="badge bg-warning"><i class="bi bi-info-circle me-1"></i>' . $camp['status_desc'] . '</span>';
-                                                                        }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                        <?php
-                                                                $index++;
+                                                <table id="example">
+                                                    <table class="table table-hover display" style="width:100%" id="donationHistory">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">ID&nbsp;</th>
+                                                                <th scope="col" class="col-lg-5">Campaign</th>
+                                                                <th scope="col">Donate Date</th>
+                                                                <th scope="col">Amount (RM)</th>
+                                                                <th scope="col">Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $index = 1;
+                                                            if ($count_rows >= 1) {
+                                                                while ($camp = $result->fetch_assoc()) {
+                                                            ?>
+                                                                    <tr>
+                                                                        <th scope="row"><?php echo $index; ?></th>
+                                                                        <td><?php echo $camp['campaign_name'] ?></td>
+                                                                        <td>
+                                                                            <?php
+                                                                            $date = date('d M Y (h:i A)', strtotime($camp['donate_date']));
+                                                                            echo $date;
+                                                                            ?>
+                                                                        </td>
+                                                                        <td><?php echo $camp['donate_amount'] ?></td>
+                                                                        <td>
+                                                                            <?php
+                                                                            if ($camp['donate_status'] == 1) {
+                                                                                echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                            } else if ($camp['donate_status'] == 2) {
+                                                                                echo '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                            } else if ($camp['donate_status'] == 3) {
+                                                                                echo '<span class="badge bg-warning"><i class="bi bi-info-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                            }
+                                                                            ?>
+                                                                        </td>
+                                                                    </tr>
+                                                            <?php
+                                                                    $index++;
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
                                             </div>
                                     <?php
                                         }
