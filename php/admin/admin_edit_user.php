@@ -212,7 +212,7 @@
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col" class="col-lg-5">Address</th>
-                                                <th scope="col" class="no-sort">Edit</th>
+                                                <th scope="col" class="no-sort">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -238,7 +238,7 @@
                                                         <?php echo $r['user_address']; ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-user-1-<?php echo $index ?>"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-user-1-<?php echo $index ?>"><i class="bi bi-pencil-square" data-placement="bottom" title="Edit User" data-toggle="tooltip"></i></button>
                                                     </td>
                                                 </tr>
 

@@ -194,7 +194,7 @@
                                             <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
-                                            <th scope="col" class="no-sort">Edit</th>
+                                            <th scope="col" class="no-sort">Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -265,7 +265,7 @@
                                                     <td><?php echo $endDate; ?></td>
 
                                                     <td>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>" data-placement="bottom" title="Edit Campaign" data-toggle="tooltip"><i class="bi bi-pencil-square"></i></button>
                                                     </td>
                                                 </tr>
 
@@ -505,7 +505,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-2-<?php echo $index ?>">New</button>
+                                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-2-<?php echo $index ?>" data-placement="bottom" title="New Campaign Version" data-toggle="tooltip"><i class="bi bi-plus-square"></i></button>
                                                     </td>
                                                 </tr>
 
