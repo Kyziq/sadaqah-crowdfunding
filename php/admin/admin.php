@@ -258,7 +258,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Ongoing Campaign Information <span> | Graph</span></h5>
                                     <div id="reportsChart">
-                                        <form action="admin_check_campaign_action.php" method="POST">
+                                        <form action="" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <?php
@@ -295,7 +295,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Completed Campaign Information <span> | Graph</span></h5>
                                     <div id="reportsChart">
-                                        <form action="admin_check_campaign_action.php" method="POST">
+                                        <form action="" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <?php

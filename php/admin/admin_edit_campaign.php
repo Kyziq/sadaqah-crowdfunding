@@ -220,11 +220,11 @@
                                                     <td>
                                                         <?php
                                                         if ($r['status_id'] == 1) {
-                                                            echo '<span class="badge bg-success">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         } else if ($r['status_id'] == 2) {
-                                                            echo '<span class="badge bg-danger">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         } else if ($r['status_id'] == 3) {
-                                                            echo '<span class="badge bg-warning">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-warning"><i class="bi bi-info-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         }
                                                         ?>
                                                     </td>
@@ -454,11 +454,11 @@
                                                     <td>
                                                         <?php
                                                         if ($r['status_id'] == 1) {
-                                                            echo '<span class="badge bg-success">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         } else if ($r['status_id'] == 2) {
-                                                            echo '<span class="badge bg-danger">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         } else if ($r['status_id'] == 3) {
-                                                            echo '<span class="badge bg-warning">' . $r['status_desc'] . '</span>';
+                                                            echo '<span class="badge bg-warning"><i class="bi bi-info-circle me-1"></i>' . $r['status_desc'] . '</span>';
                                                         }
                                                         ?>
                                                     </td>
