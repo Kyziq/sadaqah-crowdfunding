@@ -224,7 +224,9 @@
 
                                     if ($count_rows == 0) {
                                     ?>
-                                        Your donation history is empty as of now. Click <a href="donator_donate.php">here</a> to start donating!
+                                        <div class="alert alert-primary" role="alert">
+                                            Your donation history is empty as of now. Click <a href="donator_donate.php">here</a> to start donating!
+                                        </div>
                                         <?php
                                     } else { {
                                         ?>

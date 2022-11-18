@@ -183,9 +183,9 @@
                 $index = 0;
                 if ($count_rows == 0) {
                 ?>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <div class="card">
-                            <div class="card-body my-3">
+                            <div class="alert alert-primary my-2 mx-2" role="alert">
                                 There are currently no pending donation verification requests.
                             </div>
                         </div>
