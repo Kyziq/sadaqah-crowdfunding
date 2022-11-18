@@ -387,7 +387,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="text-center">Note: This is computer generated and no signature is required.</div>
+                                                                            <div class="text-center fw-light" style="font-size: 15px;">Note: This is computer generated and no signature is required.</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

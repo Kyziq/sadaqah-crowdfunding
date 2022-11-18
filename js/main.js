@@ -371,13 +371,27 @@ registerModal.addEventListener('hidden.bs.modal', event => {
 function printReceipt(receiptDivName) {
 	var printContents = document.getElementById(receiptDivName).innerHTML;
 	var originalContents = document.body.innerHTML;
+
+	// New content
 	document.body.innerHTML = printContents;
-
 	document.title = "Receipt";
-	window.print();
-	document.title = "Donator Dashboard";
 
+	function checkReadyState() {
+		if (document.readyState === 'complete') {
+			window.focus();
+			window.print();
+			window.close();
+		} else {
+			setTimeout(checkReadyState, 1000);
+		}
+	}
+	checkReadyState();
+
+	// Original content
+	document.title = "Donator Dashboard";
 	document.body.innerHTML = originalContents;
+
+	// When close the print window, reload the page
 	setTimeout(function () {
 		location.reload();
 	});
