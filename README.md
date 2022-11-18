@@ -9,7 +9,7 @@
 
 ## Demo
 Below are three users type which can be used for demonstration purpose,<br>
-| Level          | Username      | Password |
+| Type (Level)          | Username      | Password |
 | :-------------: |:-------------:| :--------:|
 | Administrator (1) | admin         | admin    |
 | Admin (2)        | auditor          | auditor     |
