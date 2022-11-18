@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
@@ -180,20 +181,20 @@
                             $result = $stmt->get_result();
                             ?>
                             <div class="table-responsive">
-                                <table class="table table-hover table-sm">
+                                <table class="table table-hover table-sm display" style="width:100%" id="adminEditCampaignTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col" class="col-2">Name</th>
+                                            <th scope="col" class="col-lg-2">Name</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col" class="col-3">Description</th>
-                                            <th scope="col">Banner</th>
-                                            <th scope="col">Category</th>
+                                            <th scope="col" class="no-sort col-lg-3">Description</th>
+                                            <th scope="col" class="no-sort">Banner</th>
+                                            <th scope="col" class="col-lg-1">Category</th>
                                             <th scope="col">Raised</th>
                                             <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
-                                            <th scope="col">Edit</th>
+                                            <th scope="col" class="no-sort">Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -240,6 +241,7 @@
                                                             <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="height: 5rem; width: 5rem;">
                                                         </a>
                                                     </td>
+
                                                     <td>
                                                         <?php
                                                         if ($r['campaign_category_id'] == 1) {
@@ -253,18 +255,15 @@
                                                         }
                                                         ?>
                                                     </td>
-                                                    <td>
-                                                        RM<?php echo $r['campaign_raised']; ?>
-                                                    </td>
-                                                    <td>
-                                                        RM<?php echo $r['campaign_amount']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $startDate; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $endDate; ?>
-                                                    </td>
+
+                                                    <td><?php echo $r['campaign_raised']; ?></td>
+
+                                                    <td><?php echo $r['campaign_amount']; ?></td>
+
+                                                    <td><?php echo $startDate; ?></td>
+
+                                                    <td><?php echo $endDate; ?></td>
+
                                                     <td>
                                                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#edit-campaign-1-<?php echo $index ?>"><i class="bi bi-pencil-square"></i></button>
                                                     </td>
@@ -414,20 +413,20 @@
                             $result = $stmt->get_result();
                             ?>
                             <div class="table-responsive">
-                                <table class="table table-hover table-sm">
+                                <table class="table table-hover table-sm display" style="width:100%" id="adminEditCampaignTable2">
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col" class="col-2">Name</th>
+                                            <th scope="col" class="col-lg-2">Name</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col" class="col-3">Description</th>
-                                            <th scope="col">Banner</th>
-                                            <th scope="col">Category</th>
+                                            <th scope="col" class="no-sort col-lg-3">Description</th>
+                                            <th scope="col" class="no-sort">Banner</th>
+                                            <th scope="col" class="col-lg-1">Category</th>
                                             <th scope="col">Raised</th>
                                             <th scope="col">Amount</th>
                                             <th scope="col">Start</th>
                                             <th scope="col">End</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col" class="no-sort">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -490,11 +489,11 @@
                                                     </td>
 
                                                     <td>
-                                                        RM<?php echo $r['campaign_raised']; ?>
+                                                        <?php echo $r['campaign_raised']; ?>
                                                     </td>
 
                                                     <td>
-                                                        RM<?php echo $r['campaign_amount']; ?>
+                                                        <?php echo $r['campaign_amount']; ?>
                                                     </td>
 
                                                     <td>
@@ -525,7 +524,7 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Edit Campaign Modal -->
+                                                <!-- New Campaign Modal -->
                                                 <div class="modal fade" id="edit-campaign-2-<?php echo $index ?>" tabindex="-1" aria-labelledby="edit-campaign-label" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content">
@@ -651,6 +650,7 @@
     <!-- Imports -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
     <script src="../../js/main.js"></script>
 </body>
 

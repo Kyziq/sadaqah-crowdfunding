@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
 </head>
@@ -181,7 +182,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-sm">
+                                <table class="table table-hover table-sm display" style="width:100%" id="adminEditUserTable">
                                     <?php
                                     /* Check for type of user to proceed query */
                                     if (isset($_GET["type"]) && $_GET["type"] == 'Auditor') {
@@ -205,13 +206,13 @@
                                     ?>
                                         <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
+                                                <th scope="col">ID&nbsp;</th>
                                                 <th scope="col">Username</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone</th>
-                                                <th scope="col">Address</th>
-                                                <th scope="col">Edit</th>
+                                                <th scope="col" class="col-lg-5">Address</th>
+                                                <th scope="col" class="no-sort">Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -303,7 +304,6 @@
                                     }
                                     ?>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -322,7 +322,8 @@
     <!-- Imports -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src=".../../js/main.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 
 </html>
