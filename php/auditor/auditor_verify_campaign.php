@@ -113,7 +113,7 @@
 
         $campaign_status = 3; // 3 = Pending
         $index = 0;
-        $query = "SELECT * FROM campaign camp, category cat WHERE cat.category_id=camp.campaign_category_id AND camp.campaign_status=?"; // SQL
+        $query = "SELECT * FROM campaign camp, category cat WHERE cat.category_id=camp.campaign_category_id AND camp.campaign_status=? ORDER BY camp.campaign_created_date DESC"; // SQL
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $campaign_status);
         $stmt->execute();
@@ -127,7 +127,7 @@
                     $currentDate = date("d M Y");
                     $startDate = date("d M Y", strtotime($r["campaign_start"]));
                     $endDate = date("d M Y", strtotime($r["campaign_end"]));
-                    $createdCampaignDate = date("d M Y", strtotime($r["campaign_created_date"]));
+                    $createdCampaignDate = date("d M Y h:iA", strtotime($r["campaign_created_date"]));
 
                     // Make sure ongoing campaign
                     if (date('Y-m-d', strtotime($r['campaign_end'])) > date('Y-m-d')) {
@@ -139,7 +139,10 @@
                                         <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
                                             <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded" style="height:70px; width:70px;" alt="Campaign Banner">
                                         </a>
-                                        Requested on <?php echo $createdCampaignDate ?>
+                                        <?php
+                                        echo
+                                        $createdCampaignDate
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="card-body">

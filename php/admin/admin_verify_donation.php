@@ -168,7 +168,7 @@
         $donate_status = 3; // 3 = Pending
 
         /* SELECT Query */
-        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id=u.user_id AND c.campaign_id=d.campaign_id AND donate_status=?"; // SQL
+        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id=u.user_id AND c.campaign_id=d.campaign_id AND donate_status=? ORDER BY d.donate_date DESC"; // SQL
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $donate_status);
         $stmt->execute();
@@ -192,13 +192,24 @@
                     <?php
                 } else {
                     while ($r = $result->fetch_assoc()) {
+                        $donateDate = date("d M Y h:iA ", strtotime($r['donate_date']));
                     ?>
                         <div class="col-lg-3">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between">
+
+                                        <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
+                                            <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded" style="height:70px; width:70px;" alt="Campaign Banner">
+                                        </a>
+
+                                        <?php
+                                        echo $donateDate;
+                                        ?>
+
                                     </div>
+                                </div>
+                                <div class="card-body">
                                     <!-- Verify Donation Form -->
                                     <form action="admin_verify_donation_action.php" method="POST">
                                         <input type="hidden" name="donateId" value="<?php echo $r['donate_id']; ?>">
@@ -233,6 +244,20 @@
                                     </form>
                                     <!-- End Of Verify Donation Form -->
 
+                                    <!-- Campaign Banner Modal -->
+                                    <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title fw-bold"><?php echo $r['campaign_name']; ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body" style="display: flex;">
+                                                    <img src=" <?php echo '../../' . $r['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <!-- Modal Proof of Payment -->
                                     <div class="modal fade" id="proof-modal-<?php echo $index ?>" tabindex="-1">
