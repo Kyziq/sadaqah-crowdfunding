@@ -376,16 +376,7 @@ function printReceipt(receiptDivName) {
 	document.body.innerHTML = printContents;
 	document.title = "Receipt";
 
-	function checkReadyState() {
-		if (document.readyState === 'complete') {
-			window.focus();
-			window.print();
-			window.close();
-		} else {
-			setTimeout(checkReadyState, 1000);
-		}
-	}
-	checkReadyState();
+	printWindow();
 
 	// Original content
 	document.title = "Donator Dashboard";
@@ -395,4 +386,14 @@ function printReceipt(receiptDivName) {
 	setTimeout(function () {
 		location.reload();
 	});
+}
+
+function printWindow() {
+	if (document.readyState === 'complete') {
+		window.focus();
+		window.print();
+		window.close();
+	} else {
+		setTimeout(printWindow, 1000);
+	}
 }

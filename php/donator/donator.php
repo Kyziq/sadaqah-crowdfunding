@@ -214,7 +214,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Donation History</h5>
                                     <?php
-                                    $query = "SELECT * FROM campaign c, donate d, status sta WHERE d.donate_status = sta.status_id AND c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY donate_date DESC";
+                                    $query = "SELECT * FROM campaign c, donate d, status sta WHERE d.donate_status = sta.status_id AND c.campaign_id = d.campaign_id AND d.donator_id = ? ORDER BY d.donate_date DESC";
                                     $stmt = $con->prepare($query);
                                     $stmt->bind_param("i", $user_id);
                                     $stmt->execute();
@@ -277,7 +277,7 @@
                         <?php
                         $donate_status = 1; // Accepted donation
 
-                        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id = u.user_id && d.campaign_id = c.campaign_id && d.donate_status = ? && u.user_id=?";
+                        $query = "SELECT * FROM user u, donate d, campaign c WHERE d.donator_id = u.user_id && d.campaign_id = c.campaign_id && d.donate_status = ? && u.user_id=? ORDER BY d.donate_date DESC";
                         $stmt = $con->prepare($query);
                         $stmt->bind_param("ii", $donate_status, $_SESSION['user_id']);
                         $stmt->execute();
@@ -332,8 +332,8 @@
                                                                     <div id="printableArea-<?php echo $index; ?>">
                                                                         <div class="container">
                                                                             <div class="text-center">
-                                                                                <img src="../../images/logo-LZNK-big.png" alt="test" style="height: 70px" class="mb-3">
-                                                                                <h4>Sadaqah Crowdfunding Receipt</h4>
+                                                                                <img src="../../images/logo-LZNK-big.png" alt="Receipt Image" style="height: 70px; " class="mb-3">
+                                                                                <h4 class="fw-bolder">Sadaqah Crowdfunding Receipt</h4>
                                                                                 <p class="fw-light">Invoice No #<?php echo $receipt['donate_id']; ?></p>
                                                                             </div>
 
@@ -342,13 +342,13 @@
                                                                             <div class="border border-dark border-1 p-3 mb-3 rounded-3 border-opacity-25">
                                                                                 <div class="row mb-3 justify-content-between">
                                                                                     <div class="col-4">
-                                                                                        <div class="fw-bold">Billed To:</div>
+                                                                                        <div class="fw-bold">Billed To</div>
                                                                                         <div class="fw-regular">Lembaga Zakat Negeri Kedah.</div>
                                                                                         <div class="fw-regular">Menara Zakat, Jalan Teluk Wanjah, 05200 Alor Setar, Kedah.</div>
                                                                                         <div class="fw-regular">1-800-88-1740.</div>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <div class="fw-bold">Donator Details:</div>
+                                                                                        <div class="fw-bold">Donator Details</div>
                                                                                         <div class="fw-regular"><?php echo $receipt['user_name']; ?>.</div>
                                                                                         <div class="fw-regular"><?php echo $receipt['user_address']; ?>.</div>
                                                                                         <div class="fw-regular">+6<?php echo $receipt['user_phone']; ?>.</div>
@@ -357,11 +357,11 @@
 
                                                                                 <div class="row justify-content-between">
                                                                                     <div class="col-4">
-                                                                                        <div class="fw-bold">Payment Method:</div>
+                                                                                        <div class="fw-bold">Payment Method</div>
                                                                                         <div class="fw-regular">Online</div>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <div class="fw-bold">Donate Date:</div>
+                                                                                        <div class="fw-bold">Donation Date</div>
                                                                                         <div class="fw-regular"><?php echo $donate_date; ?></div>
                                                                                     </div>
                                                                                 </div>
