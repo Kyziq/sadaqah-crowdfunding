@@ -26,47 +26,66 @@
             include_once '../dbcon.php';
             date_default_timezone_set('Asia/Singapore');
 
+            $adminId = $_SESSION['user_id'];
             /* Get all the posted items */
             $donateId = $_POST['donateId'];
             $donatorName = $_POST['donatorName'];
             $donateStatus = $_POST['donateStatus'];
-            $adminId = $_SESSION['user_id'];
             $campaignName = $_POST['campaignName'];
-
             $campaignId = $_POST['campaignId'];
             $donateAmount = $_POST['donateAmount'];
 
-            /* UPDATE Query for donate table */
-            $query = "UPDATE donate SET donate_status=?, admin_id=? WHERE donate_id=?";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("iii", $donateStatus, $adminId, $donateId);
-            $stmt->execute();
-
-            /* UPDATE Query for campaign table */
-            $query = "UPDATE campaign SET campaign_raised=campaign_raised+? WHERE campaign_id=?";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("di", $donateAmount, $campaignId);
-            $stmt->execute();
-
+            function popup($type)
+            {
+                $campaignName = $_POST['campaignName'];
+                $donatorName = $_POST['donatorName'];
+                $donateAmount = $_POST['donateAmount'];
+                if ($type == "accepted") {
+                    $icon = "success";
+                    $title = "Donation from " . $donatorName . " has been accepted!";
+                    $text = "A total amount of RM" . $donateAmount . " has been successfully added to campaign" . $campaignName . ".";
+                } else if ($type == "declined") {
+                    $icon = "error";
+                    $title = "Donation from " . $donatorName . " has been declined!";
+                    $text = "A total amount of RM" . $donateAmount . " will not be added to campaign" . $campaignName . ".";
+                }
     ?>
-            <!-- Success Popup -->
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Donation from <?php echo $donatorName; ?> has been verified!',
-                    text: 'A total amount of RM<?php echo $donateAmount; ?> has been successfully added to campaign <?php echo $campaignName; ?>.',
-                    footer: '(Auto close in 10 seconds)',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Confirm',
-                    backdrop: `#2871f9`,
-                    confirmButtonColor: '#0d6efd',
-                    timer: 10000,
-                    willClose: () => {
-                        window.location.href = 'admin_verify_donation.php';
-                    }
-                })
-            </script>
+                <script>
+                    Swal.fire({
+                        icon: '<?php echo $icon; ?>',
+                        title: '<?php echo $title; ?>',
+                        text: '<?php echo $text; ?>',
+                        footer: '(Auto close in 10 seconds)',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Confirm',
+                        backdrop: `#2871f9`,
+                        confirmButtonColor: '#0d6efd',
+                        timer: 10000,
+                        willClose: () => {
+                            window.location.href = 'admin_verify_donation.php';
+                        }
+                    })
+                </script>
     <?php
+            }
+            /* UPDATE Query for donate table */
+            $donateStatusDate = date("Y-m-d H:i:s");
+            $query = "UPDATE donate SET donate_status=?, donate_status_date=?, admin_id=? WHERE donate_id=?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("isii", $donateStatus, $donateStatusDate, $adminId, $donateId);
+            $stmt->execute();
+
+            if ($donateStatus == 1) { // Accepted
+                /* UPDATE Query for campaign table (increase campaign total raised) */
+                $query = "UPDATE campaign SET campaign_raised=campaign_raised+? WHERE campaign_id=?";
+                $stmt = $con->prepare($query);
+                $stmt->bind_param("di", $donateAmount, $campaignId);
+                $stmt->execute();
+                popup("accepted");
+            } else if ($donateStatus == 2) { // Declined
+                popup("declined");
+            }
+
             /* Close connection */
             $stmt->close();
             $con->close();

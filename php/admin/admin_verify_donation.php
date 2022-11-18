@@ -177,91 +177,106 @@
         <section class="section">
             <div class="row align-items-top">
                 <h5 class="card-title">Pending Donation Verification List</h5>
+
                 <?php
                 $index = 0;
-                while ($r = $result->fetch_assoc()) {
+                if (mysqli_num_rows($result) <= 0) {
                 ?>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
-                                </div>
-                                <!-- Verify Donation Form -->
-                                <form action="admin_verify_donation_action.php" method="POST">
-                                    <input type="hidden" name="donateId" value="<?php echo $r['donate_id']; ?>">
-                                    <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
-                                    <input type="hidden" name="donateAmount" value="<?php echo $r['donate_amount']; ?>">
-
-                                    <!-- Input Values -->
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>" readonly>
-                                        <label for="campaignName" class="form-label">Campaign Name</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="donatorName" name="donatorName" value="<?php echo $r['user_name']; ?>" readonly>
-                                        <label for="donatorName" class="form-label">Donator Name</label>
-                                    </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control-plaintext" id="donateAmount" value="RM<?php echo $r['donate_amount']; ?>" readonly>
-                                        <label for="donateAmount" class="form-label">Donate Amount</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <select class="form-select" id="donateStatus" name="donateStatus" required>
-                                            <option value="" selected disabled>Select Action</option>
-                                            <option value="1">Approve</option>
-                                            <option value="2">Decline</option>
-                                        </select>
-                                        <label for="donateStatus" class="form-label">Action <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="d-flex justify-content-end" style="gap:10px">
-                                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
-                                        <button class="btn btn-primary d-flex flex-row-reverse" type="submit" name="verifyDonationButton">Verify</button>
-                                    </div>
-                                </form>
-                                <!-- End Of Verify Donation Form -->
+                            <div class="card-body my-3">
+                                There are currently no pending donation verification requests.
                             </div>
                         </div>
                     </div>
+                    <?php
+                } else {
+                    while ($r = $result->fetch_assoc()) {
+                    ?>
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <img src="<?php echo '../../' . $r['campaign_banner']; ?>" class="card-img-top mx-2 mt-2 rounded" style="width:95%; height:200px;" alt="Campaign Banner">
+                                    </div>
+                                    <!-- Verify Donation Form -->
+                                    <form action="admin_verify_donation_action.php" method="POST">
+                                        <input type="hidden" name="donateId" value="<?php echo $r['donate_id']; ?>">
+                                        <input type="hidden" name="campaignId" value="<?php echo $r['campaign_id']; ?>">
+                                        <input type="hidden" name="donateAmount" value="<?php echo $r['donate_amount']; ?>">
 
-                    <!-- Modal Proof of Payment -->
-                    <div class="modal fade" id="proof-modal-<?php echo $index ?>" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">
-                                        Proof of Payment
-                                        (<?php echo $r['user_name'] . ' - RM' . $r['donate_amount']; ?>)
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" style="display: flex;">
-                                    <?php
-                                    $allowedImageExt =  array('png', 'jpg', 'jpeg');
-                                    $allowedFileExt =  array('pdf');
-                                    $ext = pathinfo($r['donate_proof'], PATHINFO_EXTENSION);
+                                        <!-- Input Values -->
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control-plaintext" id="campaignName" name="campaignName" value="<?php echo $r['campaign_name']; ?>" readonly>
+                                            <label for="campaignName" class="form-label">Campaign Name</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control-plaintext" id="donatorName" name="donatorName" value="<?php echo $r['user_name']; ?>" readonly>
+                                            <label for="donatorName" class="form-label">Donator Name</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control-plaintext" id="donateAmount" value="RM<?php echo $r['donate_amount']; ?>" readonly>
+                                            <label for="donateAmount" class="form-label">Donate Amount</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" id="donateStatus" name="donateStatus" required>
+                                                <option value="" selected disabled>Select Action</option>
+                                                <option value="1">Approve</option>
+                                                <option value="2">Decline</option>
+                                            </select>
+                                            <label for="donateStatus" class="form-label">Action <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="d-flex justify-content-end" style="gap:10px">
+                                            <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#proof-modal-<?php echo $index ?>">Proof of Payment</button>
+                                            <button class="btn btn-primary d-flex flex-row-reverse" type="submit" name="verifyDonationButton">Verify</button>
+                                        </div>
+                                    </form>
+                                    <!-- End Of Verify Donation Form -->
 
-                                    // Image (Proof of Payment)
-                                    if (in_array($ext, $allowedImageExt)) {
-                                    ?>
-                                        <img src="<?php echo "../../" . $r['donate_proof'] ?>" alt="Proof of Payment" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
-                                    <?php
-                                    }
-                                    // PDF (Proof of Payment)
-                                    else if (in_array($ext, $allowedFileExt)) {
-                                    ?>
-                                        <embed src="<?php echo "../../" . $r['donate_proof'] ?>" frameborder="0" width="100%" height="700px">
-                                    <?php
-                                    }
-                                    ?>
+
+                                    <!-- Modal Proof of Payment -->
+                                    <div class="modal fade" id="proof-modal-<?php echo $index ?>" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">
+                                                        Proof of Payment
+                                                        (<?php echo $r['user_name'] . ' - RM' . $r['donate_amount']; ?>)
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body" style="display: flex;">
+                                                    <?php
+                                                    $allowedImageExt =  array('png', 'jpg', 'jpeg');
+                                                    $allowedFileExt =  array('pdf');
+                                                    $ext = pathinfo($r['donate_proof'], PATHINFO_EXTENSION);
+
+                                                    // Image (Proof of Payment)
+                                                    if (in_array($ext, $allowedImageExt)) {
+                                                    ?>
+                                                        <img src="<?php echo "../../" . $r['donate_proof'] ?>" alt="Proof of Payment" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
+                                                    <?php
+                                                    }
+                                                    // PDF (Proof of Payment)
+                                                    else if (in_array($ext, $allowedFileExt)) {
+                                                    ?>
+                                                        <embed src="<?php echo "../../" . $r['donate_proof'] ?>" frameborder="0" width="100%" height="700px">
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 <?php
-                    $index++;
+                        $index++;
+                    }
                 }
                 ?>
+
             </div>
         </section>
 
