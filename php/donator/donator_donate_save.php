@@ -28,11 +28,13 @@
             $donate_status = 3; // 3 = Pending
             $admin_id = 1; // 1 = Default admin (which admin verify later in verification)
             $date = date('--Y-m-d--H-i-s');
+            $donator_id = $_SESSION["user_id"];
+
+            $donate_date = date("Y-m-d H:i:s");
             /* Get all the posted items */
             $campaign_name = $_POST['campaign_name'];
             $user_username = $_POST['user_username'];
             $donate_amount = $_POST['donate_amount'];
-            $donator_id = $_SESSION["user_id"];
             $campaign_id = $_POST['campaign_id'];
 
             /* Upload File */
@@ -119,9 +121,9 @@
                     $donate_proof = str_replace("../", "", $target_file); // Remove "../" from the path 
 
                     /* INSERT Query (donate) */
-                    $query = "INSERT INTO donate(donate_amount, donate_proof, donate_status, donator_id, admin_id, campaign_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    $query = "INSERT INTO donate(donate_amount, donate_date, donate_proof, donate_status, donator_id, admin_id, campaign_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $con->prepare($query);
-                    $stmt->bind_param("dsiiii", $donate_amount, $donate_proof, $donate_status, $donator_id, $admin_id, $campaign_id);
+                    $stmt->bind_param("dssiiii", $donate_amount, $donate_date, $donate_proof, $donate_status, $donator_id, $admin_id, $campaign_id);
                     $stmt->execute();
 
                     successPopup();

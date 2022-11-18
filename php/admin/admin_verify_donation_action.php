@@ -27,6 +27,7 @@
             date_default_timezone_set('Asia/Singapore');
 
             $adminId = $_SESSION['user_id'];
+            $donateStatusDate = date("Y-m-d H:i:s");
             /* Get all the posted items */
             $donateId = $_POST['donateId'];
             $donatorName = $_POST['donatorName'];
@@ -43,11 +44,11 @@
                 if ($type == "accepted") {
                     $icon = "success";
                     $title = "Donation from " . $donatorName . " has been accepted!";
-                    $text = "A total amount of RM" . $donateAmount . " has been successfully added to campaign" . $campaignName . ".";
+                    $text = "A total amount of RM" . $donateAmount . " has been successfully added to campaign " . $campaignName . ".";
                 } else if ($type == "declined") {
                     $icon = "error";
                     $title = "Donation from " . $donatorName . " has been declined!";
-                    $text = "A total amount of RM" . $donateAmount . " will not be added to campaign" . $campaignName . ".";
+                    $text = "A total amount of RM" . $donateAmount . " will not be added to campaign " . $campaignName . ".";
                 }
     ?>
                 <script>
@@ -69,7 +70,6 @@
     <?php
             }
             /* UPDATE Query for donate table */
-            $donateStatusDate = date("Y-m-d H:i:s");
             $query = "UPDATE donate SET donate_status=?, donate_status_date=?, admin_id=? WHERE donate_id=?";
             $stmt = $con->prepare($query);
             $stmt->bind_param("isii", $donateStatus, $donateStatusDate, $adminId, $donateId);

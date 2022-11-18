@@ -221,52 +221,59 @@
                                     $result = $stmt->get_result(); // Get the MySQLI result
                                     $count_rows = $result->num_rows;
 
-                                    // At least 1 donation
-                                    if ($count_rows >= 1) {
+                                    if ($count_rows == 0) {
                                     ?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Campaign</th>
-                                                    <th scope="col" class="col-3">Date</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $index = 0;
-                                                if ($count_rows >= 1) {
-                                                    while ($camp = $result->fetch_assoc()) {
-                                                ?>
-                                                        <tr>
-                                                            <td><?php echo $camp['campaign_name'] ?></td>
-                                                            <td>
-                                                                <?php
-                                                                $date = date('d M Y (h:m A)', strtotime($camp['donate_date']));
-                                                                echo $date;
-                                                                ?>
-                                                            </td>
-                                                            <td>RM<?php echo $camp['donate_amount'] ?></td>
-                                                            <td>
-                                                                <?php
-                                                                if ($camp['donate_status'] == 1) {
-                                                                    echo '<span class="badge bg-success">' . $camp['status_desc'] . '</span>';
-                                                                } else if ($camp['donate_status'] == 2) {
-                                                                    echo '<span class="badge bg-danger">' . $camp['status_desc'] . '</span>';
-                                                                } else if ($camp['donate_status'] == 3) {
-                                                                    echo '<span class="badge bg-warning">' . $camp['status_desc'] . '</span>';
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                        </tr>
-                                                <?php
+                                        Your donation history is empty as of now. Click <a href="donator_donate.php">here</a> to start donating!
+                                        <?php
+                                    } else { {
+                                        ?>
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">ID</th>
+                                                        <th scope="col">Campaign</th>
+                                                        <th scope="col" class="col-3">Donate Date</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $index = 1;
+                                                    if ($count_rows >= 1) {
+                                                        while ($camp = $result->fetch_assoc()) {
+                                                    ?>
+                                                            <tr>
+                                                                <td><?php echo $index; ?></td>
+                                                                <td><?php echo $camp['campaign_name'] ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    $date = date('d M Y (h:i A)', strtotime($camp['donate_date']));
+                                                                    echo $date;
+                                                                    ?>
+                                                                </td>
+                                                                <td>RM<?php echo $camp['donate_amount'] ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    if ($camp['donate_status'] == 1) {
+                                                                        echo '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                    } else if ($camp['donate_status'] == 2) {
+                                                                        echo '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                    } else if ($camp['donate_status'] == 3) {
+                                                                        echo '<span class="badge bg-warning"><i class="bi bi-info-circle me-1"></i>' . $camp['status_desc'] . '</span>';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                    <?php
+                                                            $index++;
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
+                                                    ?>
+                                                </tbody>
+                                            </table>
                                     <?php
+                                        }
                                     }
                                     ?>
                                 </div>
@@ -292,11 +299,12 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title"> Accepted Donation History</h5>
-                                        <table class="table">
+                                        <table class="table table-sm">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">ID</th>
                                                     <th scope="col">Campaign</th>
-                                                    <th scope="col" class="col-3">Date</th>
+                                                    <th scope="col" class="col-3">Accepted Date</th>
                                                     <th scope="col">Amount</th>
                                                     <th scope="col"></th>
                                                 </tr>
@@ -306,15 +314,16 @@
                                             while ($receipt = $result->fetch_assoc()) {
                                                 $campaign_start = date('d M Y', strtotime($receipt['campaign_start']));
                                                 $campaign_end = date('d M Y', strtotime($receipt['campaign_end']));
-                                                $donate_date = date('d M Y (h:i A)', strtotime($receipt['donate_date']));
+                                                $donate_date = date('d M Y (h:i A)', strtotime($receipt['donate_status_date']));
                                             ?>
                                                 <tbody>
                                                     <tr>
+                                                        <td><?php echo $index; ?></td>
                                                         <td><?php echo $receipt['campaign_name'] ?></td>
                                                         <td><?php echo $donate_date; ?></td>
                                                         <td>RM<?php echo $receipt['donate_amount']; ?></td>
                                                         <td>
-                                                            <button type="button" class="btn btn-primary" onclick="toggleTable();" data-bs-toggle="modal" data-bs-target="#receipt-modal-<?php echo $index ?>">
+                                                            <button type="button" class="btn btn-primary btn-sm" onclick="toggleTable();" data-bs-toggle="modal" data-bs-target="#receipt-modal-<?php echo $index ?>">
                                                                 Receipt
                                                             </button>
                                                         </td>

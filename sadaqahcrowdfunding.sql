@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 06:21 PM
+-- Generation Time: Nov 18, 2022 at 08:52 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,12 +47,12 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`, `campaign_status`) VALUES
-(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 3500, '2022-11-04 00:00:00.000000', '2022-11-30 00:00:00.000000', 500, '2022-10-29 09:20:07', 11, 1),
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 3500, '2022-11-04 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:20:07', 11, 1),
 (2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', 'images/campaign/(Misi Banjir Baling) Baik Pulih Rumah--2022-10-29--17-27-54.png', 4, 13000, '2022-10-22 00:00:00.000000', '2022-11-16 00:00:00.000000', 0, '2022-10-29 09:27:54', 11, 1),
 (3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation. The organisation is a registered society according to the Societies Act 1966 in Malaysia, and the headquarters is in the capital city of Kuala Lumpur.', 'images/campaign/MERCY Mission Malaysia--2022-10-29--17-29-43.jpg', 3, 24000, '2022-10-13 00:00:00.000000', '2022-12-16 00:00:00.000000', 0, '2022-10-29 09:29:43', 11, 3),
-(4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', 'images/campaign/Ringankan Beban Golongan Terjejas--2022-10-29--17-33-40.jpg', 1, 1000, '2022-10-22 00:00:00.000000', '2022-11-14 00:00:00.000000', 630, '2022-10-29 09:33:40', 1, 1),
-(5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', 'images/campaign/Yayasan Institut Jantung Negara--2022-10-29--17-36-06.jpg', 3, 50000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 20000, '2022-10-29 09:36:06', 1, 1),
-(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', 'images/campaign/Bantuan Sekolah-Sekolah Malaysia--2022-10-29--17-40-37.jpg', 2, 8000, '2022-11-02 00:00:00.000000', '2022-12-27 00:00:00.000000', 0, '2022-10-29 09:40:37', 1, 1);
+(4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', 'images/campaign/Ringankan Beban Golongan Terjejas--2022-10-29--17-33-40.jpg', 1, 1000, '2022-10-22 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:33:40', 1, 1),
+(5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', 'images/campaign/Yayasan Institut Jantung Negara--2022-10-29--17-36-06.jpg', 3, 50000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 6700, '2022-10-29 09:36:06', 1, 1),
+(6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', 'images/campaign/Bantuan Sekolah-Sekolah Malaysia--2022-10-29--17-40-37.jpg', 2, 8000, '2022-11-02 00:00:00.000000', '2022-12-27 00:00:00.000000', 3400, '2022-10-29 09:40:37', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -84,9 +84,10 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 CREATE TABLE `donate` (
   `donate_id` int(11) NOT NULL,
   `donate_amount` double NOT NULL,
-  `donate_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `donate_date` timestamp NULL DEFAULT NULL,
   `donate_proof` varchar(200) NOT NULL,
   `donate_status` int(11) NOT NULL,
+  `donate_status_date` timestamp NULL DEFAULT current_timestamp(),
   `donator_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `campaign_id` int(11) NOT NULL
@@ -96,12 +97,12 @@ CREATE TABLE `donate` (
 -- Dumping data for table `donate`
 --
 
-INSERT INTO `donate` (`donate_id`, `donate_amount`, `donate_date`, `donate_proof`, `donate_status`, `donator_id`, `admin_id`, `campaign_id`) VALUES
-(1, 500, '2022-11-12 20:44:12.835978', 'images/donation-proof/nik--campaignID1--2022-11-13--01-34-33.png', 1, 6, 1, 1),
-(2, 20000, '2022-11-12 20:44:12.839078', 'images/donation-proof/amran--campaignID5--2022-11-13--02-07-23.pdf', 1, 8, 1, 5),
-(3, 1000, '2022-11-12 20:44:12.841885', 'images/donation-proof/chai--campaignID6--2022-11-13--04-39-35.jpg', 3, 7, 1, 6),
-(4, 3000, '2022-11-12 20:44:12.844638', 'images/donation-proof/chai--campaignID5--2022-11-13--04-39-51.pdf', 3, 7, 1, 5),
-(5, 630, '2022-11-14 17:18:03.259550', 'images/donation-proof/natasha--campaignID4--2022-11-15--01-17-41.jpg', 1, 4, 11, 4);
+INSERT INTO `donate` (`donate_id`, `donate_amount`, `donate_date`, `donate_proof`, `donate_status`, `donate_status_date`, `donator_id`, `admin_id`, `campaign_id`) VALUES
+(1, 1400, '2022-11-18 07:43:12', 'images/donation-proof/user--campaignID1--2022-11-18--15-43-12.jpg', 3, '2022-11-18 07:43:12', 13, 1, 1),
+(2, 3400, '2022-11-18 07:43:22', 'images/donation-proof/user--campaignID6--2022-11-18--15-43-22.pdf', 1, '2022-11-18 07:50:04', 13, 11, 6),
+(3, 23500, '2022-11-18 07:43:47', 'images/donation-proof/user--campaignID5--2022-11-18--15-43-47.jpg', 2, '2022-11-18 07:44:18', 13, 11, 5),
+(4, 6700, '2022-11-18 07:44:02', 'images/donation-proof/user--campaignID5--2022-11-18--15-44-02.jpeg', 1, '2022-11-18 07:53:29', 13, 11, 5),
+(5, 800, '2022-11-18 07:45:58', 'images/donation-proof/user--campaignID4--2022-11-18--15-45-58.pdf', 3, '2022-11-18 07:45:58', 13, 1, 4);
 
 -- --------------------------------------------------------
 

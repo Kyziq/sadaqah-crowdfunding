@@ -173,6 +173,7 @@
         $stmt->bind_param("i", $donate_status);
         $stmt->execute();
         $result = $stmt->get_result();
+        $count_rows = $result->num_rows;
         ?>
         <section class="section">
             <div class="row align-items-top">
@@ -180,7 +181,7 @@
 
                 <?php
                 $index = 0;
-                if (mysqli_num_rows($result) <= 0) {
+                if ($count_rows == 0) {
                 ?>
                     <div class="col-lg-4">
                         <div class="card">
@@ -192,7 +193,7 @@
                     <?php
                 } else {
                     while ($r = $result->fetch_assoc()) {
-                        $donateDate = date("d M Y h:iA ", strtotime($r['donate_date']));
+                        $donateDate = date("d M Y h:iA", strtotime($r['donate_date']));
                     ?>
                         <div class="col-lg-3">
                             <div class="card">
