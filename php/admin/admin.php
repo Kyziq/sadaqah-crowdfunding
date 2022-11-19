@@ -15,13 +15,7 @@
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
-    <script>
-        Chart.defaults.global.plugins.datalabels.anchor = 'end';
-        Chart.defaults.global.plugins.datalabels.align = 'end';
-    </script>
-
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
 </head>
 
 <body>
@@ -385,7 +379,7 @@
                                             const ctx = document.getElementById('ongoingCampaignChart');
 
                                             new Chart(ctx, {
-                                                plugins: [ChartDataLabels],
+                                                // plugins: [ChartDataLabels],
                                                 data: {
                                                     labels: [
                                                         <?php
