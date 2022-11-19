@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script>
+        Chart.defaults.global.plugins.datalabels.anchor = 'end';
+        Chart.defaults.global.plugins.datalabels.align = 'end';
+    </script>
+
 </head>
 
 <body>
@@ -344,12 +353,135 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    TODO: Chart
                                                 </div>
                                         <?php
                                             }
                                         }
                                         ?>
+                                        <?php if (isset($_GET['ongoingCampaignId']) && $_GET['ongoingCampaignId']) { ?>
+                                            <div class="chart-container">
+                                                <canvas id="ongoingCampaignChart"></canvas>
+                                            </div>
+                                        <?php
+                                            $campaign_status = 1; // Accepted
+                                            $campaignId = $_GET['ongoingCampaignId'];
+
+                                            $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_start <= CURDATE() AND campaign_end >= CURDATE() AND campaign_id=?";
+                                            $stmt = $con->prepare($query);
+                                            $stmt->bind_param("ii", $campaign_status, $campaignId);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $r = $result->fetch_assoc();
+
+                                            $startDate = date("Y-m-d", strtotime($r['campaign_start']));
+                                            $endDate = date("Y-m-d", strtotime($r['campaign_end']));
+
+                                            $remainingDays = date_diff(date_create($endDate), date_create($startDate))->format("%a");
+                                            $remainingMonths = date_diff(date_create($endDate), date_create($startDate))->format("%m");
+                                        }
+
+                                        ?>
+                                        <script>
+                                            const ctx = document.getElementById('ongoingCampaignChart');
+
+                                            new Chart(ctx, {
+                                                plugins: [ChartDataLabels],
+                                                data: {
+                                                    labels: [
+                                                        <?php
+                                                        if ($remainingDays <= 90) {
+                                                            for ($i = 0; $i <= $remainingDays; $i++) {
+                                                                $newDate = date("d/m", strtotime($startDate . " + $i days"));
+                                                                echo '"' . $newDate . '",';
+                                                            }
+                                                        } else {
+                                                            for ($i = 0; $i <= $remainingMonths; $i++) {
+                                                                $newDate = date("M", strtotime($startDate . " + $i months"));
+                                                                echo '"' . $newDate . '",';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    ],
+                                                    datasets: [{
+                                                        label: 'A',
+                                                        yAxisID: 'A',
+                                                        type: 'bar',
+                                                        label: 'Total Donation, RM',
+                                                        data: [1200, 800, 1450, 4073, 600, 2760, 3230, 1800, 900, 4200, 2790],
+                                                        borderWidth: 1
+                                                    }, {
+                                                        label: 'B',
+                                                        yAxisID: 'B',
+                                                        type: 'line',
+                                                        label: 'Completion Percentage, %',
+                                                        data: [5, 8, 14, 23, 38, 41, 44, 65, 74, 82, 84],
+                                                        borderWidth: 1
+                                                    }]
+                                                },
+                                                options: {
+                                                    plugins: {
+                                                        title: {
+                                                            text: '<?php echo $r['campaign_name'] ?> Progress Chart',
+                                                            display: true
+                                                        }
+                                                    },
+                                                    scales: {
+                                                        x: {
+                                                            title: {
+                                                                display: true,
+                                                                text: <?php if ($remainingDays <= 90) {
+                                                                            echo "'Date'";
+                                                                        } else {
+                                                                            echo "'Month'";
+                                                                        } ?>
+                                                            }
+                                                        },
+                                                        A: {
+                                                            type: 'linear',
+                                                            position: 'left',
+                                                            grid: {
+                                                                display: true
+                                                            },
+                                                            title: {
+                                                                display: 'auto',
+                                                                text: 'Total Donation, RM'
+                                                            },
+                                                            ticks: {
+                                                                min: 0
+                                                            }
+                                                        },
+                                                        B: {
+                                                            type: 'linear',
+                                                            position: 'right',
+                                                            grid: {
+                                                                display: false
+                                                            },
+                                                            title: {
+                                                                display: 'auto',
+                                                                text: 'Completion Percentage, %'
+                                                            },
+                                                            ticks: {
+                                                                max: 100,
+                                                                min: 0
+                                                            }
+                                                        }
+
+                                                        // y: {
+                                                        //     beginAtZero: true,
+                                                        //     title: {
+                                                        //         display: true,
+                                                        //         text: 'Total Donation'
+                                                        //     },
+                                                        //     ticks: {
+                                                        //         // stepSize: 5,
+                                                        //         min: 0, // minimum value
+                                                        //         max: 10000 // maximum value
+                                                        //     }
+                                                        // },
+                                                    }
+                                                }
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -664,7 +796,6 @@
     <!-- Imports -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../js/main.js"></script>
 
