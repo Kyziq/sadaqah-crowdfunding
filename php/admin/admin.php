@@ -30,7 +30,7 @@
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
         $result = $stmt->get_result();
-        $r = $result->fetch_assoc();
+        $user = $result->fetch_assoc();
     } else {
         header("Location: ../user_logout.php");
     }
@@ -47,11 +47,11 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle" style="font-size: 36px"></i>
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $r["user_username"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $user["user_username"]; ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?php echo $r["user_username"]; ?></h6>
+                            <h6><?php echo $user["user_username"]; ?></h6>
                             <span>Admin</span>
                         </li>
                         <li>
@@ -256,36 +256,100 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Ongoing Campaign Information <span> | Graph</span></h5>
+                                    <h5 class="card-title">Ongoing Campaign Information <span> | Info + Chart</span></h5>
                                     <div id="reportsChart">
-                                        <form action="" method="POST">
+                                        <form action="admin_campaign_chart.php" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <?php
-                                                    /* SELECT Query (Only display accepted campaign after current date AND ongoing campaign) */
-                                                    $campaign_status = 1; // Accepted
-                                                    $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_start <= CURDATE() AND campaign_end >= CURDATE()";
-                                                    $stmt = $con->prepare($query);
-                                                    $stmt->bind_param("i", $campaign_status);
-                                                    $stmt->execute();
-                                                    $result = $stmt->get_result();
-                                                    ?>
-                                                    <select class="form-select" required>
+                                                    <select class="form-select" name="campaignId" required>
                                                         <option value="" disabled selected>Choose Campaign</option>
                                                         <?php
-                                                        while ($row = $result->fetch_assoc()) {
+                                                        /* SELECT Query (Only display accepted campaign after current date AND ongoing campaign) */
+                                                        $campaign_status = 1; // Accepted
+                                                        $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_start <= CURDATE() AND campaign_end >= CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("i", $campaign_status);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
+                                                        while ($r = $result->fetch_assoc()) {
                                                         ?>
-                                                            <option value="<?php echo $row['campaign_id']; ?>"><?php echo $row['campaign_name']; ?></option>
+                                                            <option value="<?php echo $r['campaign_id']; ?>"><?php echo $r['campaign_name']; ?></option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
                                                 </div>
                                                 <div class="col-4">
-                                                    <button class="btn btn-primary">Check</button>
+                                                    <button class="btn btn-primary" type="submit" name="ongoingCampaignInfoBtn">Check</button>
                                                 </div>
                                             </div>
                                         </form>
+                                        <?php
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+                                        while ($r = $result->fetch_assoc()) {
+                                            if (isset($_GET['ongoingCampaignId']) && $_GET['ongoingCampaignId'] == $r['campaign_id']) {
+                                        ?>
+                                                <div class="my-3">
+                                                    <h5 class="fw-semibold">Campaign Information (ID <?php echo $r['campaign_id'] ?>)</h5>
+                                                    <div class="alert alert-primary" role="alert">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Name </div>
+                                                            :
+                                                            <div class="col"><?php echo $r['campaign_name']; ?> </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Description</div>
+                                                            :
+                                                            <div class="col"><?php echo $r['campaign_description']; ?> </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Date created</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                $dateCreated = date("d M Y", strtotime($r['campaign_created_date']));
+                                                                echo $dateCreated;
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Duration</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                $startDate = date("d M Y", strtotime($r['campaign_start']));
+                                                                $endDate = date("d M Y", strtotime($r['campaign_end']));
+                                                                $daysLeft = date_diff(date_create($r['campaign_end']), date_create(date("Y-m-d")))->format("%a");
+                                                                echo $startDate ?> - <?php echo $endDate . " (" . $daysLeft . " days left)" ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Total needed (RM)</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                echo $r['campaign_raised'];
+                                                                ?>
+                                                                /
+                                                                <?php echo $r['campaign_amount'];
+                                                                if ($r['campaign_raised'] > $r['campaign_amount']) {
+                                                                    echo " (Completed)";
+                                                                } else if ($r['campaign_raised'] == 0) {
+                                                                    echo " (No donation made yet)";
+                                                                } else {
+                                                                    echo " (Not completed)";
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    TODO: Chart
+                                                </div>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -293,36 +357,101 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Completed Campaign Information <span> | Graph</span></h5>
+                                    <h5 class="card-title">Completed Campaign Information <span> | Info + Chart</span></h5>
                                     <div id="reportsChart">
-                                        <form action="" method="POST">
+                                        <form action="admin_campaign_chart.php" method="POST">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <?php
-                                                    /* SELECT Query (Only display accepted campaign for ended campaign) */
-                                                    $campaign_status = 1; // Accepted
-                                                    $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_end < CURDATE()";
-                                                    $stmt = $con->prepare($query);
-                                                    $stmt->bind_param("i", $campaign_status);
-                                                    $stmt->execute();
-                                                    $result = $stmt->get_result();
-                                                    ?>
-                                                    <select class="form-select" required>
+                                                    <select class="form-select" name="campaignId" required>
                                                         <option value="" disabled selected>Choose Campaign</option>
                                                         <?php
-                                                        while ($row = $result->fetch_assoc()) {
+                                                        /* SELECT Query (Only display accepted campaign for ended campaign) */
+                                                        $campaign_status = 1; // Accepted
+                                                        $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_end < CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("i", $campaign_status);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
+                                                        while ($r = $result->fetch_assoc()) {
                                                         ?>
-                                                            <option value="<?php echo $row['campaign_id']; ?>"><?php echo $row['campaign_name']; ?></option>
+                                                            <option value="<?php echo $r['campaign_id']; ?>"><?php echo $r['campaign_name']; ?></option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
                                                 </div>
                                                 <div class="col-4">
-                                                    <button class="btn btn-primary">Check</button>
+                                                    <button class="btn btn-primary" type="submit" name="completedCampaignInfoBtn">Check</button>
                                                 </div>
                                             </div>
                                         </form>
+                                        <?php
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+                                        while ($r = $result->fetch_assoc()) {
+                                            if (isset($_GET['completedCampaignId']) && $_GET['completedCampaignId'] == $r['campaign_id']) {
+                                        ?>
+                                                <div class="my-3">
+                                                    <h5 class="fw-semibold">Campaign Information (ID <?php echo $r['campaign_id'] ?>)</h5>
+                                                    <div class="alert alert-primary" role="alert">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Name </div>
+                                                            :
+                                                            <div class="col"><?php echo $r['campaign_name']; ?> </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Description</div>
+                                                            :
+                                                            <div class="col"><?php echo $r['campaign_description']; ?> </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Date created</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                $dateCreated = date("d M Y", strtotime($r['campaign_created_date']));
+                                                                echo $dateCreated;
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Duration</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                $startDate = date("d M Y", strtotime($r['campaign_start']));
+                                                                $endDate = date("d M Y", strtotime($r['campaign_end']));
+                                                                $daysLeft = date_diff(date_create($r['campaign_end']), date_create(date("Y-m-d")))->format("%a");
+                                                                echo $startDate ?> - <?php echo $endDate . " (" . $daysLeft . " days left)" ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 fw-bold">Total needed (RM)</div>
+                                                            :
+                                                            <div class="col">
+                                                                <?php
+                                                                echo $r['campaign_raised'];
+                                                                ?>
+                                                                /
+                                                                <?php echo $r['campaign_amount'];
+                                                                if ($r['campaign_raised'] > $r['campaign_amount']) {
+                                                                    echo " (Completed)";
+                                                                } else if ($r['campaign_raised'] == 0) {
+                                                                    echo " (No donation made yet)";
+                                                                } else {
+                                                                    echo " (Not completed)";
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    TODO: Chart
+                                                </div>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +493,7 @@
                                         <span class="fw-bold text-dark">
                                             Username
                                         </span>
-                                        <div><?php echo $r['user_username']; ?></div>
+                                        <div><?php echo $user['user_username']; ?></div>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
@@ -372,7 +501,7 @@
                                         <span class="fw-bold text-dark">
                                             Full Name
                                         </span>
-                                        <div><?php echo $r['user_name']; ?></div>
+                                        <div><?php echo $user['user_name']; ?></div>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
@@ -380,7 +509,7 @@
                                         <span class="fw-bold text-dark">
                                             Email
                                         </span>
-                                        <div><?php echo $r['user_email']; ?></div>
+                                        <div><?php echo $user['user_email']; ?></div>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
@@ -388,7 +517,7 @@
                                         <span class="fw-bold text-dark">
                                             Phone Number
                                         </span>
-                                        <div><?php echo $r['user_phone']; ?></div>
+                                        <div><?php echo $user['user_phone']; ?></div>
                                     </div>
                                 </div>
                                 <div class="activity-item d-flex">
@@ -396,7 +525,7 @@
                                         <span class="fw-bold text-dark">
                                             Address
                                         </span>
-                                        <div><?php echo $r['user_address']; ?></div>
+                                        <div><?php echo $user['user_address']; ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -405,12 +534,17 @@
                     <div class="card">
                         <div class="card-body pb-0">
                             <?php
-                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = 1";
-                            $result = mysqli_query($con, $query);
+                            /* SELECT Query */
+                            $campaignStatus = 1; // Accepted
+                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_end > CURDATE()";
+                            $stmt = $con->prepare($query);
+                            $stmt->bind_param("i", $campaignStatus);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
                             $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
                             ?>
                             <h5 class="card-title">
-                                Total Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
+                                Total Ongoing Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
                             </h5>
                             <div id="trafficChart" style="min-height: 400px" class="echart"></div>
                             <script>
@@ -456,8 +590,12 @@
 
                                                     data: [
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=1";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 1; // Cash
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryCash = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryCash ?>,
@@ -465,8 +603,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=2";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 2; // School
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategorySchool = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategorySchool ?>,
@@ -474,8 +616,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=3";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 3; // Faci
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryFaci = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryFaci ?>,
@@ -483,8 +629,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=4";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 4; // Service
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryService = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryService ?>,
@@ -514,7 +664,7 @@
     <!-- Imports -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js" integrity="sha512-LYmkblt36DJsQPmCK+cK5A6Gp6uT7fLXQXAX0bMa763tf+DgiiH3+AwhcuGDAxM1SvlimjwKbkMPL3ZM1qLbag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../js/main.js"></script>
 

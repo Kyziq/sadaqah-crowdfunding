@@ -262,12 +262,17 @@
                     <div class="card">
                         <div class="card-body pb-0">
                             <?php
-                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = 1";
-                            $result = mysqli_query($con, $query);
+                            /* SELECT Query */
+                            $campaignStatus = 1; // Accepted
+                            $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_end > CURDATE()";
+                            $stmt = $con->prepare($query);
+                            $stmt->bind_param("i", $campaignStatus);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
                             $totalCamp = mysqli_fetch_assoc($result)['COUNT(*)'];
                             ?>
                             <h5 class="card-title">
-                                Total Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
+                                Total Ongoing Campaign (<?php echo $totalCamp ?>)<span> | Pie Chart</span>
                             </h5>
                             <div id="trafficChart" style="min-height: 400px" class="echart"></div>
                             <script>
@@ -313,8 +318,12 @@
 
                                                     data: [
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=1";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 1; // Cash
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryCash = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryCash ?>,
@@ -322,8 +331,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=2";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 2; // School
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategorySchool = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategorySchool ?>,
@@ -331,8 +344,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=3";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 3; // Faci
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryFaci = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryFaci ?>,
@@ -340,8 +357,12 @@
                                                         },
 
                                                         <?php
-                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_category_id=4";
-                                                        $result = mysqli_query($con, $query);
+                                                        $campaignCategoryId = 4; // Service
+                                                        $query = "SELECT COUNT(*) FROM campaign WHERE campaign_status = ? AND campaign_category_id = ? AND campaign_end > CURDATE()";
+                                                        $stmt = $con->prepare($query);
+                                                        $stmt->bind_param("ii", $campaignStatus, $campaignCategoryId);
+                                                        $stmt->execute();
+                                                        $result = $stmt->get_result();
                                                         $totalCategoryService = mysqli_fetch_assoc($result)['COUNT(*)'];
                                                         ?> {
                                                             value: <?php echo $totalCategoryService ?>,
