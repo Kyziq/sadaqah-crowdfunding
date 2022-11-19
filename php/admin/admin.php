@@ -259,11 +259,11 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Ongoing Campaign Information <span> | Info + Chart</span></h5>
+                                    <h5 class="card-title">Ongoing Campaign Report <span> | Information + Chart</span></h5>
                                     <div id="reportsChart">
                                         <form action="admin_campaign_chart.php" method="POST">
                                             <div class="row">
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col mb-3">
                                                     <select class="form-select" name="campaignId" required>
                                                         <option value="" disabled selected>Choose Campaign</option>
                                                         <?php
@@ -282,7 +282,7 @@
                                                         ?>
                                                     </select>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col">
                                                     <button class="btn btn-primary" type="submit" name="ongoingCampaignInfoBtn">Check</button>
                                                 </div>
                                             </div>
@@ -298,17 +298,14 @@
                                                     <div class="alert alert-primary" role="alert">
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Name </div>
-                                                            :
                                                             <div class="col"><?php echo $r['campaign_name']; ?> </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Description</div>
-                                                            :
                                                             <div class="col"><?php echo $r['campaign_description']; ?> </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Date created</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 $dateCreated = date("d M Y", strtotime($r['campaign_created_date']));
@@ -318,7 +315,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Duration</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 $startDate = date("d M Y", strtotime($r['campaign_start']));
@@ -329,7 +325,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Total needed (RM)</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 echo $r['campaign_raised'];
@@ -353,9 +348,7 @@
                                         }
                                         ?>
                                         <?php if (isset($_GET['ongoingCampaignId']) && $_GET['ongoingCampaignId']) { ?>
-                                            <div class="chart-container">
-                                                <canvas id="ongoingCampaignChart"></canvas>
-                                            </div>
+                                            <canvas id="ongoingCampaignChart"></canvas>
                                         <?php
                                             $donateStatus = 1; // Accepted
                                             $campaign_status = 1; // Accepted
@@ -388,7 +381,6 @@
                                         <script>
                                             <?php if (isset($_GET['ongoingCampaignId']) && $_GET['ongoingCampaignId']) { ?>
                                                 const ctx = document.getElementById('ongoingCampaignChart');
-
                                                 new Chart(ctx, {
                                                     // plugins: [ChartDataLabels],
                                                     data: {
@@ -583,17 +575,17 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Completed Campaign Information <span> | Info + Chart</span></h5>
+                                    <h5 class="card-title">Completed Campaign Report<span> | Information + Chart</span></h5>
                                     <div id="reportsChart">
                                         <form action="admin_campaign_chart.php" method="POST">
                                             <div class="row">
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col mb-3">
                                                     <select class="form-select" name="campaignId" required>
                                                         <option value="" disabled selected>Choose Campaign</option>
                                                         <?php
                                                         /* SELECT Query (Only display accepted campaign for ended campaign) */
                                                         $campaign_status = 1; // Accepted
-                                                        $query = "SELECT * FROM campaign WHERE campaign_status = ? AND campaign_end < CURDATE()";
+                                                        $query = "SELECT * FROM campaign WHERE campaign_status = ? AND CURDATE() > campaign_end";
                                                         $stmt = $con->prepare($query);
                                                         $stmt->bind_param("i", $campaign_status);
                                                         $stmt->execute();
@@ -606,7 +598,7 @@
                                                         ?>
                                                     </select>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col">
                                                     <button class="btn btn-primary" type="submit" name="completedCampaignInfoBtn">Check</button>
                                                 </div>
                                             </div>
@@ -622,17 +614,14 @@
                                                     <div class="alert alert-primary" role="alert">
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Name </div>
-                                                            :
                                                             <div class="col"><?php echo $r['campaign_name']; ?> </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Description</div>
-                                                            :
                                                             <div class="col"><?php echo $r['campaign_description']; ?> </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Date created</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 $dateCreated = date("d M Y", strtotime($r['campaign_created_date']));
@@ -642,7 +631,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Duration</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 $startDate = date("d M Y", strtotime($r['campaign_start']));
@@ -653,7 +641,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-3 fw-bold">Total needed (RM)</div>
-                                                            :
                                                             <div class="col">
                                                                 <?php
                                                                 echo $r['campaign_raised'];
@@ -671,35 +658,234 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    TODO: Chart
                                                 </div>
-                                        <?php
+                                            <?php
                                             }
                                         }
+                                        if (isset($_GET['completedCampaignId']) && $_GET['completedCampaignId']) { ?>
+                                            <canvas id="completedCampaignChart"></canvas>
+                                        <?php
+                                            $donateStatus = 1; // Accepted
+                                            $campaign_status = 1; // Accepted
+                                            $campaignId = $_GET['completedCampaignId'];
+
+                                            /* SELECT Query */
+                                            $query = "SELECT * FROM campaign WHERE campaign_status = ? AND CURDATE() > campaign_end AND campaign_id=?";
+                                            $stmt = $con->prepare($query);
+                                            $stmt->bind_param("ii", $campaign_status, $campaignId);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $r = $result->fetch_assoc();
+
+                                            $startDate = date("Y-m-d", strtotime($r['campaign_start']));
+                                            $endDate = date("Y-m-d", strtotime($r['campaign_end']));
+
+                                            $DAYS_TO_SHOW = 90;
+                                            $remainingDays = date_diff(date_create($endDate), date_create($startDate))->format("%a");
+                                            $remainingMonths = date_diff(date_create($endDate), date_create($startDate))->format("%m");
+
+                                            $query = "SELECT * FROM donate WHERE campaign_id=?";
+                                            $stmt = $con->prepare($query);
+                                            $stmt->bind_param("i", $campaignId);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $completedRow = $result->fetch_assoc();
+                                        }
+
                                         ?>
+                                        <script>
+                                            <?php if (isset($_GET['completedCampaignId']) && $_GET['completedCampaignId']) { ?>
+                                                const ctx = document.getElementById('completedCampaignChart');
+
+                                                new Chart(ctx, {
+                                                    // plugins: [ChartDataLabels],
+                                                    responsive: true,
+                                                    data: {
+                                                        labels: [
+                                                            <?php
+                                                            if ($remainingDays <= $DAYS_TO_SHOW) {
+                                                                for ($i = 0; $i <= $remainingDays; $i++) {
+                                                                    $newDate = date("d/m", strtotime($startDate . " + $i days"));
+                                                                    echo '"' . $newDate . '",';
+                                                                }
+                                                            } else {
+                                                                for ($i = 0; $i <= $remainingMonths; $i++) {
+                                                                    $newDate = date("M Y", strtotime($startDate . " + $i months"));
+                                                                    echo '"' . $newDate . '",';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        ],
+                                                        datasets: [{
+                                                            label: 'A',
+                                                            yAxisID: 'A',
+                                                            type: 'bar',
+                                                            label: 'Total Donation, RM',
+                                                            data: [
+                                                                <?php
+                                                                $query = "SELECT * FROM donate WHERE campaign_id=?";
+                                                                $stmt = $con->prepare($query);
+                                                                $stmt->bind_param("i", $campaignId);
+                                                                $stmt->execute();
+                                                                $result = $stmt->get_result();
+                                                                $completedRow = $result->fetch_assoc();
+
+                                                                $donateStatus = 1; // Accepted
+                                                                $campaignId = $_GET['completedCampaignId'];
+                                                                $index = 1;
+                                                                if ($remainingDays <= $DAYS_TO_SHOW) {
+                                                                    for ($i = 0; $i <= $remainingDays; $i++) {
+                                                                        $startDateDayReal = date("Y-m-d", strtotime(date("Y-m-d", strtotime($startDate . " - 1 days")) . " + $index days"));
+
+                                                                        $query = "SELECT SUM(donate_amount) FROM donate WHERE campaign_id=? AND donate_status=? AND donate_date LIKE '%$startDateDayReal%'";
+                                                                        $stmt = $con->prepare($query);
+                                                                        $stmt->bind_param("ii", $campaignId, $donateStatus);
+                                                                        $stmt->execute();
+                                                                        $result = $stmt->get_result();
+                                                                        $totalDonation = mysqli_fetch_assoc($result)['SUM(donate_amount)'];
+                                                                        echo "$totalDonation" . ",";
+                                                                        $index++;
+                                                                    }
+                                                                } else {
+                                                                    $index = 1;
+                                                                    for ($i = 0; $i <= $remainingMonths; $i++) {
+                                                                        $startDateMonthReal = date("Y-m", strtotime(date("Y-m", strtotime($startDate . " - 1 months")) . " + $index months"));
+
+                                                                        $query = "SELECT SUM(donate_amount) FROM donate WHERE campaign_id=? AND donate_status=? AND donate_date LIKE '%$startDateMonthReal%'";
+                                                                        $stmt = $con->prepare($query);
+                                                                        $stmt->bind_param("ii", $campaignId, $donateStatus);
+                                                                        $stmt->execute();
+                                                                        $result = $stmt->get_result();
+                                                                        $totalDonation = mysqli_fetch_assoc($result)['SUM(donate_amount)'];
+                                                                        echo $totalDonation . ",";
+                                                                        $index++;
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            ],
+                                                            borderWidth: 1
+                                                        }, {
+                                                            label: 'B',
+                                                            yAxisID: 'B',
+                                                            type: 'line',
+                                                            label: 'Campaign Completion, %',
+                                                            data: [
+                                                                <?php
+                                                                $campaignId = $_GET['completedCampaignId'];
+                                                                $index = 1;
+                                                                $donateStatus = 1; // Accepted
+                                                                if ($remainingDays <= $DAYS_TO_SHOW) {
+                                                                    for ($i = 0; $i <= $remainingDays; $i++) {
+                                                                        $startDateDayReal = date("Y-m-d", strtotime(date("Y-m-d", strtotime($startDate . " - 1 days")) . " + $index days"));
+
+                                                                        $query = "SELECT SUM(donate_amount) FROM donate WHERE campaign_id=? AND donate_status=? AND donate_date <= '$startDateDayReal'";
+                                                                        $stmt = $con->prepare($query);
+                                                                        $stmt->bind_param("ii", $campaignId, $donateStatus);
+                                                                        $stmt->execute();
+                                                                        $result = $stmt->get_result();
+
+                                                                        $lineChartSum = mysqli_fetch_assoc($result)['SUM(donate_amount)'];
+                                                                        if ($lineChartSum != 0) {
+                                                                            $lineChartSumPercentage = ($lineChartSum / $r['campaign_amount']) * 100;
+                                                                            echo $lineChartSumPercentage . ",";
+                                                                        } else {
+                                                                            echo "0,";
+                                                                        }
+                                                                        $index++;
+                                                                    }
+                                                                } else {
+                                                                    for ($i = 0; $i <= $remainingMonths; $i++) {
+                                                                        $startDateMonthReal = date("Y-m", strtotime(date("Y-m", strtotime($startDate . " - 1 months")) . " + $index months"));
+
+                                                                        $query = "SELECT SUM(donate_amount) FROM donate WHERE campaign_id=? AND donate_status=? AND donate_date <= '$startDateMonthReal-31 23:59:59'";
+                                                                        $stmt = $con->prepare($query);
+                                                                        $stmt->bind_param("ii", $campaignId, $donateStatus);
+                                                                        $stmt->execute();
+                                                                        $result = $stmt->get_result();
+
+                                                                        $lineChartSum = mysqli_fetch_assoc($result)['SUM(donate_amount)'];
+                                                                        if ($lineChartSum != 0) {
+                                                                            $lineChartSumPercentage = ($lineChartSum / $r['campaign_amount']) * 100;
+                                                                            echo $lineChartSumPercentage . ",";
+                                                                        } else {
+                                                                            echo "0,";
+                                                                        }
+                                                                        $index++;
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            ],
+                                                            borderWidth: 1
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        plugins: {
+                                                            title: {
+                                                                text: '<?php echo $r['campaign_name'] ?> Progress Chart',
+                                                                display: true
+                                                            }
+                                                        },
+                                                        scales: {
+                                                            x: {
+                                                                title: {
+                                                                    display: true,
+                                                                    text: <?php if ($remainingDays <= $DAYS_TO_SHOW) {
+                                                                                echo "'Date'";
+                                                                            } else {
+                                                                                echo "'Month'";
+                                                                            } ?>
+                                                                }
+                                                            },
+                                                            A: {
+                                                                type: 'linear',
+                                                                position: 'left',
+                                                                beginAtZero: true,
+                                                                grid: {
+                                                                    display: true
+                                                                },
+                                                                title: {
+                                                                    display: 'auto',
+                                                                    text: 'Total Donation, RM'
+                                                                },
+                                                                ticks: {
+                                                                    min: 0,
+                                                                }
+                                                            },
+                                                            B: {
+                                                                type: 'linear',
+                                                                position: 'right',
+                                                                beginAtZero: true,
+                                                                grid: {
+                                                                    display: false
+                                                                },
+                                                                title: {
+                                                                    display: 'auto',
+                                                                    text: 'Campaign Completion, %'
+                                                                },
+                                                                ticks: {
+                                                                    max: 100,
+                                                                    min: 0
+                                                                }
+                                                            }
+
+                                                            // y: {
+                                                            //     beginAtZero: true,
+                                                            //     title: {
+                                                            //         display: true,
+                                                            //         text: 'Total Donation'
+                                                            //     },
+                                                            //     ticks: {
+                                                            //         // stepSize: 5,
+                                                            //         min: 0, // minimum value
+                                                            //         max: 10000 // maximum value
+                                                            //     }
+                                                            // },
+                                                        }
+                                                    }
+                                                });
+                                            <?php } ?>
+                                        </script>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card top-selling overflow-auto">
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Today</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">This Month</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">This Year</a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
