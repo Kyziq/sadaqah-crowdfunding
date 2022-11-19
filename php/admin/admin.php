@@ -421,8 +421,8 @@
                                                                 <?php
                                                                 $startDate = date("d M Y", strtotime($r['campaign_start']));
                                                                 $endDate = date("d M Y", strtotime($r['campaign_end']));
-                                                                $daysLeft = date_diff(date_create($r['campaign_end']), date_create(date("Y-m-d")))->format("%a");
-                                                                echo $startDate ?> - <?php echo $endDate . " (" . $daysLeft . " days left)" ?>
+                                                                $daysAgo = date_diff(date_create($r['campaign_end']), date_create(date("Y-m-d")))->format("%a");
+                                                                echo $startDate ?> - <?php echo $endDate . " (" . $daysAgo . " days ago)" ?>
                                                             </div>
                                                         </div>
                                                         <div class="row">
