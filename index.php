@@ -108,7 +108,9 @@
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
                                     $query = "SELECT SUM(campaign_raised) FROM campaign";
-                                    $result = mysqli_query($con, $query);
+                                    $stmt = $con->prepare($query);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
                                     $count = mysqli_fetch_assoc($result)['SUM(campaign_raised)'];
                                     echo "RM" . number_format($count, 2);
                                     ?>
@@ -122,8 +124,12 @@
                             <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
-                                    $query = "SELECT COUNT(user_id) FROM user";
-                                    $result = mysqli_query($con, $query);
+                                    $userLevel = 3; // Donator
+                                    $query = "SELECT COUNT(user_id) FROM user WHERE user_level = ?";
+                                    $stmt = $con->prepare($query);
+                                    $stmt->bind_param("i", $userLevel);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
                                     $count = mysqli_fetch_assoc($result)['COUNT(user_id)'];
                                     echo $count;
                                     ?>
@@ -137,8 +143,12 @@
                             <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
                                     <?php
-                                    $query = "SELECT COUNT(campaign_id) FROM campaign";
-                                    $result = mysqli_query($con, $query);
+                                    $campaignStatus = 1; // Accepted
+                                    $query = "SELECT COUNT(campaign_id) FROM campaign WHERE campaign_status = ? AND campaign_end >= CURDATE()";
+                                    $stmt = $con->prepare($query);
+                                    $stmt->bind_param("i", $campaignStatus);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
                                     $count = mysqli_fetch_assoc($result)['COUNT(campaign_id)'];
                                     echo $count;
                                     ?>

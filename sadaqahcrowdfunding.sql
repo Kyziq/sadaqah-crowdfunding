@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2022 at 08:52 AM
+-- Generation Time: Nov 19, 2022 at 10:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,11 +47,11 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`, `campaign_status`) VALUES
-(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 3500, '2022-11-04 00:00:00.000000', '2022-11-30 00:00:00.000000', 0, '2022-10-29 09:20:07', 11, 1),
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 5000, '2022-11-04 00:00:00.000000', '2022-11-30 00:00:00.000000', 3610, '2022-10-29 09:20:07', 11, 1),
 (2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', 'images/campaign/(Misi Banjir Baling) Baik Pulih Rumah--2022-10-29--17-27-54.png', 4, 13000, '2022-10-22 00:00:00.000000', '2022-11-16 00:00:00.000000', 0, '2022-10-29 09:27:54', 11, 1),
 (3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation. The organisation is a registered society according to the Societies Act 1966 in Malaysia, and the headquarters is in the capital city of Kuala Lumpur.', 'images/campaign/MERCY Mission Malaysia--2022-10-29--17-29-43.jpg', 3, 24000, '2022-10-13 00:00:00.000000', '2022-12-16 00:00:00.000000', 0, '2022-10-29 09:29:43', 11, 3),
 (4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', 'images/campaign/Ringankan Beban Golongan Terjejas--2022-10-29--17-33-40.jpg', 1, 1000, '2022-10-22 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:33:40', 1, 1),
-(5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', 'images/campaign/Yayasan Institut Jantung Negara--2022-10-29--17-36-06.jpg', 3, 50000, '2022-11-01 00:00:00.000000', '2022-12-31 00:00:00.000000', 6700, '2022-10-29 09:36:06', 1, 1),
+(5, 'Yayasan Institut Jantung Negara', 'Memberikan bantuan kepada pesakit jantung di Yayasan Institut Jantung Negara. Jantung adalah organ yang paling penting dalam badan manusia. Ia memainkan peranan yang besar untuk memastikan fungsi badan manusia terus berjalan dengan baik. Jika berlakunya kerosakan pada organ ini akan menjejaskan banyak bahagian di dalam badan manusia.', 'images/campaign/Yayasan Institut Jantung Negara--2022-10-29--17-36-06.jpg', 3, 50000, '2022-08-01 00:00:00.000000', '2023-07-31 00:00:00.000000', 6700, '2022-10-29 09:36:06', 11, 1),
 (6, 'Bantuan Sekolah-Sekolah Malaysia', 'Pelajar adalah masa depan negara kita. Marilah meringankan beban perbelanjaan persekolahan pelajar-pelajar sekolah dari segi peralatan, buku dan keperluan asas yang diperlukan. ', 'images/campaign/Bantuan Sekolah-Sekolah Malaysia--2022-10-29--17-40-37.jpg', 2, 8000, '2022-11-02 00:00:00.000000', '2022-12-27 00:00:00.000000', 3400, '2022-10-29 09:40:37', 1, 1);
 
 -- --------------------------------------------------------
@@ -98,11 +98,20 @@ CREATE TABLE `donate` (
 --
 
 INSERT INTO `donate` (`donate_id`, `donate_amount`, `donate_date`, `donate_proof`, `donate_status`, `donate_status_date`, `donator_id`, `admin_id`, `campaign_id`) VALUES
-(1, 1400, '2022-11-18 07:43:12', 'images/donation-proof/user--campaignID1--2022-11-18--15-43-12.jpg', 3, '2022-11-18 07:43:12', 13, 1, 1),
+(1, 1400, '2022-11-11 07:43:12', 'images/donation-proof/user--campaignID1--2022-11-11--15-43-12.jpg', 3, '2022-11-11 07:43:12', 13, 1, 1),
 (2, 3400, '2022-11-18 07:43:22', 'images/donation-proof/user--campaignID6--2022-11-18--15-43-22.pdf', 1, '2022-11-18 07:50:04', 13, 11, 6),
 (3, 23500, '2022-11-18 07:43:47', 'images/donation-proof/user--campaignID5--2022-11-18--15-43-47.jpg', 2, '2022-11-18 07:44:18', 13, 11, 5),
 (4, 6700, '2022-11-18 07:44:02', 'images/donation-proof/user--campaignID5--2022-11-18--15-44-02.jpeg', 1, '2022-11-18 07:53:29', 13, 11, 5),
-(5, 800, '2022-11-18 07:45:58', 'images/donation-proof/user--campaignID4--2022-11-18--15-45-58.pdf', 3, '2022-11-18 07:45:58', 13, 1, 4);
+(5, 800, '2022-11-18 07:45:58', 'images/donation-proof/user--campaignID4--2022-11-18--15-45-58.pdf', 3, '2022-11-18 07:45:58', 13, 1, 4),
+(6, 200, '2022-11-19 18:48:06', 'images/donation-proof/ain--campaignID1--2022-11-20--02-48-06.jpg', 1, '2022-11-19 18:56:14', 10, 11, 1),
+(7, 90, '2022-11-03 18:48:26', 'images/donation-proof/raihan--campaignID1--2022-11-04--02-48-26.jpg', 1, '2022-11-03 18:56:11', 9, 11, 1),
+(8, 300, '2022-11-13 18:48:44', 'images/donation-proof/amran--campaignID1--2022-11-14--02-48-44.jpeg', 1, '2022-11-13 18:56:08', 8, 11, 1),
+(9, 120, '2022-11-19 18:48:57', 'images/donation-proof/chai--campaignID1--2022-11-20--02-48-57.pdf', 1, '2022-11-19 18:56:05', 7, 11, 1),
+(10, 250, '2022-11-05 18:49:13', 'images/donation-proof/shazwan--campaignID1--2022-11-06--02-49-13.png', 1, '2022-11-05 18:56:02', 3, 11, 1),
+(11, 800, '2022-11-06 18:57:44', 'images/donation-proof/nazrin--campaignID1--2022-11-07--02-57-44.jpg', 1, '2022-11-06 18:58:51', 14, 11, 1),
+(12, 650, '2022-11-03 18:58:38', 'images/donation-proof/razif--campaignID1--2022-11-04--02-58-38.jpg', 1, '2022-11-03 18:59:48', 15, 11, 1),
+(13, 700, '2022-11-18 18:59:56', 'images/donation-proof/umairah--campaignID1--2022-11-19--02-59-56.jpg', 1, '2022-11-18 19:00:22', 16, 11, 1),
+(14, 500, '2022-11-10 19:43:42', 'images/donation-proof/wan--campaignID1--2022-11-11--03-43-42.pdf', 1, '2022-11-10 19:43:50', 17, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -178,7 +187,11 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `u
 (10, 'ain', '$2y$10$hD7PrLZsJ5/FjttRbzLwlelbl5jVFy5r3RZDK6nP3g00h.pZy79Xu', 'Ain Amni binti Kamarul', 'ainamni@gmail.com', '0129518232', '312, Lorong 2Y, Bandar Utara, 27454 Karak, Pahang Darul Makmur', 3),
 (11, 'admin', '$2y$10$Hzw8ZoJxLl5xiJxn/9alkOB1BZVWqPsDPQwDrgS8epyaXUoxFjzzC', 'admin', 'admin@gmail.com', '0123456789', 'No. 4, Jalan Kampung Attap 7/8, PJU1, 39045 Bentong, Pahang Darul Makmur', 1),
 (12, 'auditor', '$2y$10$K5dAbs8dvkFjlB/9CQDoUepRTx4jF40LzSk59MNoNAmAfAwAajgRS', 'auditor', 'auditor@gmail.com', '0123456789', 'Shell Malaysia Trading Sdn. Bhd. (6087-M), No. 1084, Kampung Kelibang, 07000, Kuah, Kedah', 2),
-(13, 'user', '$2y$10$m.SlP8dEzt5XLZMuhDjwd.UQd0aDgCuxoZfx6BbHqEYpOFae44gQa', 'user', 'user@gmail.com', '0123456789', '67, Jln Tugu 3V, Laman Keramat, 14379 Permatang Pauh, Penang', 3);
+(13, 'user', '$2y$10$m.SlP8dEzt5XLZMuhDjwd.UQd0aDgCuxoZfx6BbHqEYpOFae44gQa', 'user', 'user@gmail.com', '0123456789', '67, Jln Tugu 3V, Laman Keramat, 14379 Permatang Pauh, Penang', 3),
+(14, 'nazrin', '$2y$10$Bev.mOHXKFRUecbXy70jwuwz7N5DEdAt2z8ztliCwLJe.y1omFnTG', 'Nazrin bin Suhaimi', 'nazrin@gmail.com', '0170773992', 'Lot 1, Jalan 2/7, Batu Sungai Besi, 15915 Wakaf Che Yeh, Kelantan', 3),
+(15, 'razif', '$2y$10$jvqWZ/qxIThefPy5o4mBSeVXJ/ehuYq70AcN/bPP//O8gEoGj/QB2', 'Razif bin Muhammad Fadhil', 'raziffadhil@gmail.com', '0151893065', '4, Jln Sungai Besi 23U, Damansara Rahmat, 17846 Bunut Payong, Kelantan', 3),
+(16, 'umairah', '$2y$10$0AnCJoDrxrQTw5p91zJ6KeV9qqtXcySveiDdhW6CaR3ZgWRhYBLY.', 'Umairah binti Wan Wafi', 'umairahwafi@gmail.com', '0151763170', '6-3, Jalan Ledang 2/5, SS28P, 71538 Tiroi, Negeri Sembilan', 3),
+(17, 'wan', '$2y$10$ZsoWMtYpdaPs7fQcJsjzkOFfr75pP52EsFJwLEuqFBFUvdkuZF/ay', 'Wan Azri bin Jeffry', 'wanazri@gmail.com', '0154586230', '45, Jln 7/4, Ara Kiara, 16336 Dabong, Kelantan Darul Naim', 3);
 
 -- --------------------------------------------------------
 
@@ -283,7 +296,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `donate`
 --
 ALTER TABLE `donate`
-  MODIFY `donate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `donate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -301,7 +314,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `verification`
