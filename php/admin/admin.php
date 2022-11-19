@@ -334,11 +334,11 @@
                                                                 /
                                                                 <?php echo $r['campaign_amount'];
                                                                 if ($r['campaign_raised'] > $r['campaign_amount']) {
-                                                                    echo " (Completed)";
+                                                                    echo " (Met the target)";
                                                                 } else if ($r['campaign_raised'] == 0) {
                                                                     echo " (No donation made yet)";
                                                                 } else {
-                                                                    echo " (Not completed)";
+                                                                    echo " (Not completed yet)";
                                                                 }
                                                                 ?>
                                                             </div>
@@ -435,9 +435,9 @@
                                                                 /
                                                                 <?php echo $r['campaign_amount'];
                                                                 if ($r['campaign_raised'] > $r['campaign_amount']) {
-                                                                    echo " (Completed)";
+                                                                    echo " (Met the target)";
                                                                 } else if ($r['campaign_raised'] == 0) {
-                                                                    echo " (No donation made yet)";
+                                                                    echo " (No donation has been made)";
                                                                 } else {
                                                                     echo " (Not completed)";
                                                                 }
