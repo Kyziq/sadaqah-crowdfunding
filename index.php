@@ -188,7 +188,7 @@
                                         <div class="card-body text-start">
                                             <h5 class="card-title mb-3 overflow-auto fw-bold" style="height: 6vh;"><?php echo $camp['campaign_name']; ?></h5>
                                             <h6 class="card-subtitle mb-2 overflow-auto" style="height: 4vh;"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
-                                            <h6 class="card-subtitle mb-1" style="height: 2vh;"><b>Description:</b> </h6>
+                                            <h6 class="card-subtitle mb-2" style="height: 2vh;"><b>Description:</b> </h6>
                                             <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><?php echo $camp['campaign_description']; ?></h6>
                                             <h6 class="card-subtitle mb-3 text-muted">
                                                 <div>

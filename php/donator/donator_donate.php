@@ -154,29 +154,31 @@
                         if ($currentDate >= $startDate) {
                     ?>
                             <!-- Donation Card -->
-                            <div class="col-lg-3 d-flex align-items-stretch">
+                            <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
                                 <div class="card">
                                     <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
                                         <img src="<?php echo '../../' . $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="card-title h-20 mb-3" style="min-height: 5rem;"><?php echo $camp['campaign_name']; ?></h5>
-                                        <h6 class="card-subtitle mb-2"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
-                                        <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><b>Description: </b><br><?php echo $camp['campaign_description']; ?></h6>
-                                        <h6 class="card-subtitle mb-3 text-muted">
-                                            <div>
-                                                <?php
-                                                $startDate = date("d M Y", strtotime($camp['campaign_start']));
-                                                $endDate = date("d M Y", strtotime($camp['campaign_end']));
-                                                ?>
-                                                Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
-                                            </div>
-                                            <div>
-                                                <?php
+                                        <h5 class="card-title mb-3 overflow-auto" style="height: 10vh;"><?php echo $camp['campaign_name']; ?></h5>
+                                        <h6 class="card-subtitle mb-2 overflow-auto" style="height: 4vh;"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
+                                        <h6 class="card-subtitle mb-2" style="height: 2vh;"><b>Description:</b> </h6>
+                                        <h6 class="card-subtitle mb-3 overflow-auto" style="height:13vh;"><?php echo $camp['campaign_description']; ?></h6>
 
-                                                ?>
-                                                Days Left: <b><?php echo $daysLeft; ?></b>
-                                            </div>
+
+                                        <div>
+                                            <?php
+                                            $startDate = date("d M Y", strtotime($camp['campaign_start']));
+                                            $endDate = date("d M Y", strtotime($camp['campaign_end']));
+                                            ?>
+                                            Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
+                                        </div>
+                                        <div>
+                                            <?php
+
+                                            ?>
+                                            Days Left: <b><?php echo $daysLeft; ?></b>
+                                        </div>
                                         </h6>
                                         <div class="camp-progress">
                                             <div class="d-flex justify-content-between">
