@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.4/swiper-bundle.min.css" integrity="sha512-pJrGHWDVOeiy4UkMtHu0fpD8oLLssFcaW0fsVXUkA1/jDLopa554Z1AZo5SKtekHnnmyat0ipiP0snKDrt0GNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/custom-css.css">
 </head>
@@ -68,16 +68,16 @@
                 -->
 
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item my-1">
+                    <li class="nav-item">
                         <a class="nav-link" href="#campaign">Campaign</a>
                     </li>
-                    <li class="nav-item me-5 my-1">
+                    <li class="nav-item me-5">
                         <a class="nav-link" href="#categories">Categories</a>
                     </li>
-                    <li class="nav-item me-2 my-1">
+                    <li class="nav-item me-2 mb-2">
                         <button class="btn btn-success shadow" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                     </li>
-                    <li class="nav-item me-2 my-1">
+                    <li class="nav-item me-2">
                         <button class="btn btn-outline-success shadow" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
                     </li>
                 </ul>
@@ -87,9 +87,7 @@
     <!-- End Navbar -->
 
     <!-- Banner -->
-    <div class="jumbotron jumbo1">
-        <img class="jumbo1" src="images/homepage-banner.png" alt="Banner">
-    </div>
+    <img class="jumbo1" src="images/homepage-banner.png" alt="Banner">
     <!-- End Banner -->
 
     <!-- Start Main -->
@@ -98,11 +96,11 @@
         <div class="p-3">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <h2 class="fw-bolder">You have the ability to make a difference.</h2>
                         <p class="fw-regular">"Alone we can do so little; together we can do so much." - Helen Keller</p>
                     </div>
-                    <div class="col-md-2 offset-md-4">
+                    <div class="col-sm-6 col-lg-3 offset-lg-3">
                         <div class="text-center">
                             <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
@@ -119,7 +117,7 @@
                             <h5 class="fw-light">has been raised</h5>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-sm-6 col-lg-1">
                         <div class="text-center">
                             <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
@@ -138,7 +136,7 @@
                             <h5 class="fw-light">total donators</h5>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-sm-6 col-lg-1">
                         <div class="text-center">
                             <div class="shadow-lg border border-3 rounded-3 bg-success text-white">
                                 <h3 class="counter my-2 fw-bold">
@@ -161,100 +159,88 @@
             </div>
         </div>
         <!-- End Counter -->
-
-        <!-- Start Campaign -->
-        <section id="campaign">
-            <div class="bg-success">
-                <div class="container pt-5 py-5 text-center">
-                    <h3 class="fw-bold text-white">Campaign</h3>
-                    <h5 class="text-white">The following are the most recent campaigns that are currently accepting donations. Login to see more!</h5>
+        <section id="campaign" class="bg-success">
+            <div class="container pt-5 py-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-white">Campaign</h2>
+                    <h5 class="text-white">The campaigns listed below are currently accepting donations. Log in to begin donating!</h5>
                 </div>
                 <div class="cards d-flex justify-content-center pb-4">
-                    <?php
-                    /* SELECT Query */
-                    $campaign_status = 1; // Accepted
-                    $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_end > CURDATE() AND camp.campaign_category_id=cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id desc LIMIT 3";
-                    $stmt = $con->prepare($query);
-                    $stmt->bind_param("i", $campaign_status);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <?php
+                            /* SELECT Query */
+                            $campaign_status = 1; // Accepted
+                            $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_end > CURDATE() AND camp.campaign_category_id=cat.category_id AND camp.campaign_status=? ORDER BY camp.campaign_id desc";
+                            $stmt = $con->prepare($query);
+                            $stmt->bind_param("i", $campaign_status);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
 
-                    ?>
-                    <?php
-                    $index = 0;
-                    while ($camp = $result->fetch_assoc()) {
-                        $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
-                        $percentageBar = round($percentageBar);
-                    ?>
-                        <!-- Donation Card -->
-                        <div class="col-md-3 d-flex align-items-stretch mb-4">
-                            <div class="card mx-2">
-                                <a href="" type="" class="" data-bs-toggle="modal" data-bs-target="#banner-modal-<?php echo $index ?>">
-                                    <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title h-20 mb-3 fw-bold" style="min-height: 2rem;"><?php echo $camp['campaign_name']; ?></h5>
-                                    <h6 class="card-subtitle mb-2"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
-                                    <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><b>Description: </b><br><?php echo $camp['campaign_description']; ?></h6>
-                                    <h6 class="card-subtitle mb-3 text-muted">
-                                        <div>
-                                            <?php
-                                            $startDate = date("d M Y", strtotime($camp['campaign_start']));
-                                            $endDate = date("d M Y", strtotime($camp['campaign_end']));
-                                            ?>
-                                            Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
-                                        </div>
-                                        <div>
-                                            <?php
-                                            $date1 = new DateTime(date("Y-m-d"));
-                                            $date2 = new DateTime($camp['campaign_end']);
-                                            $diff = $date2->diff($date1)->format("%a");  // Find difference
-                                            $daysLeft = intval($diff);   // Rounding days
-                                            ?>
-                                            Days Left: <b><?php echo $daysLeft; ?></b>
-                                        </div>
-                                    </h6>
-                                    <div class="camp-progress">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="fw-light">
-                                                <?php echo 'RM' . $camp['campaign_raised']; ?>
+                            $index = 0;
+                            while ($camp = $result->fetch_assoc()) {
+                                $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
+                                $percentageBar = round($percentageBar);
+                            ?>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top rounded" style="height:20vh;" alt="Campaign Banner">
+                                        <div class="card-body text-start">
+                                            <h5 class="card-title mb-3 overflow-auto fw-bold" style="height: 6vh;"><?php echo $camp['campaign_name']; ?></h5>
+                                            <h6 class="card-subtitle mb-2 overflow-auto" style="height: 4vh;"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
+                                            <h6 class="card-subtitle mb-1" style="height: 2vh;"><b>Description:</b> </h6>
+                                            <h6 class="card-subtitle mb-3 overflow-auto" style="height:10rem;"><?php echo $camp['campaign_description']; ?></h6>
+                                            <h6 class="card-subtitle mb-3 text-muted">
+                                                <div>
+                                                    <?php
+                                                    $startDate = date("d M Y", strtotime($camp['campaign_start']));
+                                                    $endDate = date("d M Y", strtotime($camp['campaign_end']));
+                                                    ?>
+                                                    Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
+                                                </div>
+                                                <div>
+                                                    <?php
+                                                    $date1 = new DateTime(date("Y-m-d"));
+                                                    $date2 = new DateTime($camp['campaign_end']);
+                                                    $diff = $date2->diff($date1)->format("%a");  // Find difference
+                                                    $daysLeft = intval($diff);   // Rounding days
+                                                    ?>
+                                                    Days Left: <b><?php echo $daysLeft; ?></b>
+                                                </div>
+                                            </h6>
+                                            <div class="camp-progress">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="fw-light">
+                                                        <?php echo 'RM' . $camp['campaign_raised']; ?>
+                                                    </div>
+                                                    <div class="fw-bold">
+                                                        of RM<?php echo $camp['campaign_amount']; ?>
+                                                    </div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
+                                                </div>
                                             </div>
-                                            <div class="fw-bold">
-                                                of RM<?php echo $camp['campaign_amount']; ?>
+                                            <div class="d-flex mt-4 justify-content-end">
+                                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Donate</button>
                                             </div>
                                         </div>
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex mt-4 justify-content-end">
-                                        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Login to Donate</button>
                                     </div>
                                 </div>
-                            </div>
+                            <?php
+                                $index++;
+                            }
+
+                            ?>
                         </div>
 
-                        <!-- Campaign Banner Modal -->
-                        <div class="modal fade" id="banner-modal-<?php echo $index ?>" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title fw-bold"><?php echo $camp['campaign_name']; ?></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body" style="display: flex;">
-                                        <img src=" <?php echo $camp['campaign_banner'] ?>" alt="Campaign Banner" class="img-fluid img-thumbnail" style="margin-left: auto; margin-right: auto; max-height: 700px; object-fit: contain; ">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                        $index++;
-                    }
-                    ?>
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- Start Campaign -->
+
         <!-- End Campaign -->
 
         <!-- Categories -->
@@ -342,7 +328,7 @@
                             <h3 class="fw-bold text-white">Get started to donate with three simple steps!</h3>
                         </div>
                     </div>
-                    <div class="row justify-content-center py-5">
+                    <div class="row justify-content-center py-4">
                         <div class="card col-md-3 my-2 me-4 shadow-lg" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">1. Register</h5>
@@ -446,9 +432,9 @@
                             <?php
                             /* Check for wrong password */
                             if (isset($_GET["error"]) && $_GET["error"] == 'username') {
-                                echo '<div class="alert alert-danger" role="alert">Username does not exist</div>';
+                                echo '<div class="alert alert-danger" role="alert">This username do not exist in our records.</div>';
                             } else if (isset($_GET["error"]) && $_GET["error"] == 'password') {
-                                echo '<div class="alert alert-danger" role="alert">Wrong password</div>';
+                                echo '<div class="alert alert-danger" role="alert">This password do not match our records.</div>';
                             }
                             ?>
                         </div>
@@ -566,7 +552,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.4/swiper-bundle.min.js" integrity="sha512-k2o1KZdvUi59PUXirfThShW9Gdwtk+jVYum6t7RmyCNAVyF9ozijFpvLEWmpgqkHuqSWpflsLf5+PEW6Lxy/wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     <script src="js/main.js"></script>
 </body>
 

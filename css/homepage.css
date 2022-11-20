@@ -46,11 +46,13 @@ h6 {
 .logo {
     line-height: 1;
 }
+
 @media (min-width: 1200px) {
     .logo {
         width: 220px;
     }
 }
+
 .logo span {
     font-size: 26px;
     font-weight: 700;
@@ -61,7 +63,7 @@ h6 {
 .jumbo1 {
     background-size: cover !important;
     filter: brightness(70%);
-    height: 710px;
+    height: auto;
     width: 100%;
 }
 
@@ -69,6 +71,7 @@ h6 {
 .btn-close {
     background-size: 40%;
 }
+
 .btn-close:focus {
     outline: 0;
     box-shadow: none;
