@@ -39,7 +39,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
-                    text: <?php echo $text ?>,
+                    text: '<?php echo $text ?>',
                     footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',
@@ -55,7 +55,6 @@
         }
 
         // Error
-        $condition = 1; // Valid Condition
         function errorPopup($condition)
         {
             if ($condition == 'pw-same') {
