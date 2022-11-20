@@ -53,6 +53,7 @@
                     backdrop: `#2871f9`,
                     confirmButtonColor: '#0d6efd',
                     timer: 5000,
+                    timerProgressBar: true,
                     willClose: () => {
                         <?php
                         $type = $level == 2 ? 'Auditor' : ($level == 3 ? 'Donator' : '');

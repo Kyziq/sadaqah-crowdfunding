@@ -62,6 +62,7 @@
                         backdrop: `#2871f9`,
                         confirmButtonColor: '#0d6efd',
                         timer: 10000,
+                        timerProgressBar: true,
                         willClose: () => {
                             window.location.href = 'admin_verify_donation.php';
                         }

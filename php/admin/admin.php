@@ -426,7 +426,7 @@
                                                                         $stmt->execute();
                                                                         $result = $stmt->get_result();
                                                                         $totalDonation = mysqli_fetch_assoc($result)['SUM(donate_amount)'];
-                                                                        echo "$totalDonation" . ",";
+                                                                        echo $totalDonation . ",";
                                                                         $index++;
                                                                     }
                                                                 } else {
