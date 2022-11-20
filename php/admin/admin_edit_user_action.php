@@ -45,8 +45,8 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: '<?php echo $name . " (ID " . $id . ")"; ?>',
-                    text: 'New account details has been saved successfully.',
+                    title: 'Success!',
+                    text: 'New account details for <?php echo $name; ?> has been saved successfully.',
                     footer: '(Auto close in 5 seconds)',
                     showConfirmButton: true,
                     confirmButtonText: 'Confirm',

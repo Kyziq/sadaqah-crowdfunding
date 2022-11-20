@@ -109,13 +109,15 @@
             </nav>
         </div>
         <section class="section">
+            <h5 class="card-title">Available Campaign(s) List</h5>
             <div class="row align-items-top">
-                <h5 class="card-title">Available Campaign(s) List</h5>
                 <?php
                 $campaign_status = 1; // Accepted campaign
 
                 /* SELECT Query */
-                $query = "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? AND camp.campaign_end > CURDATE() ORDER BY camp.campaign_id";
+                $query =
+                    "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? AND camp.campaign_end > CURDATE() ORDER BY camp.campaign_end ASC";
+
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("i", $campaign_status);
                 $stmt->execute();
@@ -141,15 +143,11 @@
                         $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
                         $percentageBar = round($percentageBar);
 
+                        if ($percentageBar > 100) {
+                            $percentageBar = 100;
+                        }
                         /* Date */
-                        // Days Left
-                        $date1 = new DateTime(date("Y-m-d"));
-                        $date2 = new DateTime($camp['campaign_end']);
-                        $diff = $date2->diff($date1)->format("%a");  // Find difference
-                        $daysLeft = intval($diff);   // Rounding days
-
-                        // Current date must more than campaign start date
-                        $currentDate = date("Y-m-d");
+                        $currentDate = date("d M Y");
                         $startDate = date("Y-m-d", strtotime($camp['campaign_start']));
                         if ($currentDate >= $startDate) {
                     ?>
@@ -160,27 +158,30 @@
                                         <img src="<?php echo '../../' . $camp['campaign_banner']; ?>" class="card-img-top img-thumbnail rounded mx-auto d-block mt-3" style="height:120px; width:200px;" alt="Campaign Banner">
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="card-title mb-3 overflow-auto" style="height: 10vh;"><?php echo $camp['campaign_name']; ?></h5>
+                                        <h6 class="card-title mb-3 overflow-auto" style="height:9vh;"><?php echo $camp['campaign_name']; ?></h6>
                                         <h6 class="card-subtitle mb-2 overflow-auto" style="height: 4vh;"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
                                         <h6 class="card-subtitle mb-2" style="height: 2vh;"><b>Description:</b> </h6>
                                         <h6 class="card-subtitle mb-3 overflow-auto" style="height:13vh;"><?php echo $camp['campaign_description']; ?></h6>
-
-
-                                        <div>
-                                            <?php
-                                            $startDate = date("d M Y", strtotime($camp['campaign_start']));
-                                            $endDate = date("d M Y", strtotime($camp['campaign_end']));
-                                            ?>
-                                            Duration: <b><?php echo $startDate . " - " . $endDate; ?></b>
-                                        </div>
-                                        <div>
-                                            <?php
-
-                                            ?>
-                                            Days Left: <b><?php echo $daysLeft; ?></b>
-                                        </div>
+                                        <h6 class="card-subtitle mb-3">
+                                            <div>
+                                                <?php
+                                                $startDate = date("d M Y", strtotime($camp['campaign_start']));
+                                                $endDate = date("d M Y", strtotime($camp['campaign_end']));
+                                                ?>
+                                                <span class="fw-bold">Duration: </span><?php echo $startDate . " - " . $endDate; ?>
+                                            </div>
+                                            <div>
+                                                <?php
+                                                // Days Left
+                                                $date1 = new DateTime(date("Y-m-d"));
+                                                $date2 = new DateTime($camp['campaign_end']);
+                                                $diff = $date2->diff($date1)->format("%a");  // Find difference
+                                                $daysLeft = intval($diff);   // Rounding days
+                                                ?>
+                                                <b>Days Left: </b><?php echo $daysLeft; ?>
+                                            </div>
                                         </h6>
-                                        <div class="camp-progress">
+                                        <div class=" camp-progress">
                                             <div class="d-flex justify-content-between">
                                                 <div class="fw-light">
                                                     <?php echo 'RM' . $camp['campaign_raised']; ?>

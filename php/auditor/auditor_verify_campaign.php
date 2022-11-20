@@ -121,8 +121,8 @@
         $count_rows = $result->num_rows;
         ?>
         <section class="section">
+            <h5 class="card-title">Pending Campaign Verification List</h5>
             <div class="row align-items-top">
-                <h5 class="card-title">Pending Campaign Verification List</h5>
                 <?php
                 if ($count_rows == 0) {
                 ?>
