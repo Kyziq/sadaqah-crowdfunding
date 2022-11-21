@@ -23,7 +23,6 @@
         if (isset($_POST['donatorDonateButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             $donate_status = 3; // 3 = Pending
             $admin_id = 1; // 1 = Default admin (which admin verify later in verification)

@@ -21,15 +21,19 @@
     /* Start session and validate donator login */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
-        include_once '../dbcon.php'; // Connect to database 
-        date_default_timezone_set('Asia/Singapore');
+        /* DB Connect and Setting */
+        include_once '../dbcon.php';
 
+        /* SELECT Query */
         $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
         $result = $stmt->get_result(); // Get the MySQLi result
         $r = $result->fetch_assoc(); // Fetch data  
+
+        /* Session Timeout */
+        include '../con_timeout.php';
     } else {
         header("Location: ../user_logout.php");
     }

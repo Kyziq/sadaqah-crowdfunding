@@ -23,7 +23,6 @@
         if (isset($_POST['createAuditorButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             $level = 2; // Auditor level
             /* Get all the posted items */

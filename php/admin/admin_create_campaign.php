@@ -24,7 +24,6 @@
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         /* DB Connect */
         include_once '../dbcon.php';
-        date_default_timezone_set('Asia/Singapore');
 
         /* SELECT Query */
         $query = "SELECT * FROM user WHERE user_id=?";
@@ -33,6 +32,9 @@
         $stmt->execute();
         $result = $stmt->get_result();
         $r = $result->fetch_assoc();
+
+        /* Session Timeout */
+        include '../con_timeout.php';
     } else {
         header("Location: ../user_logout.php");
     }

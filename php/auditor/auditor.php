@@ -23,16 +23,19 @@
     /* Start session and validate auditor login */
     session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 2) {
-        include_once '../dbcon.php'; // Connect to database 
-        date_default_timezone_set('Asia/Singapore');
+        /* DB Connect and Setting */
+        include_once '../dbcon.php';
 
-        // Query
-        $query = "SELECT * FROM user WHERE user_id=?"; // SQL with parameter for user ID
+        /* SELECT Query */
+        $query = "SELECT * FROM user WHERE user_id=?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $_SESSION['user_id']);
         $stmt->execute();
-        $result = $stmt->get_result(); // Get the MySQLi result
-        $user = $result->fetch_assoc(); // Fetch data  
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        /* Session Timeout */
+        include '../con_timeout.php';
     } else {
         header("Location: ../user_logout.php");
     }

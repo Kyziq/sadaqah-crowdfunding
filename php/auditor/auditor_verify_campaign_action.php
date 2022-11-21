@@ -24,7 +24,6 @@
         if (isset($_POST['verifyCampaignButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
             $campaignName = $_POST['campaignName'];

@@ -24,7 +24,6 @@
         if (isset($_POST['verifyDonationButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             $adminId = $_SESSION['user_id'];
             $donateStatusDate = date("Y-m-d H:i:s");

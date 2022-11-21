@@ -23,7 +23,6 @@
         if (isset($_POST['editCampaignOneButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             $target_dir = "../../images/campaign/"; // Target directory
             $campaignCreatedDate = date('--Y-m-d--H-i-s', strtotime($_POST['campaignCreatedDate']));

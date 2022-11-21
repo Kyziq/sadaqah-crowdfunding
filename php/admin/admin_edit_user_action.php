@@ -23,7 +23,6 @@
         if (isset($_POST["editUserButton"])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
 
             /* Get all the posted items */
             $id = $_POST["editUserButton"];

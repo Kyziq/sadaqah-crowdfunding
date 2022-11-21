@@ -23,9 +23,8 @@
         if (isset($_POST['createCampaignButton'])) {
             /* DB Connect and Setting */
             include_once '../dbcon.php';
-            date_default_timezone_set('Asia/Singapore');
-            $date = date('--Y-m-d--H-i-s');
 
+            $date = date('--Y-m-d--H-i-s');
             $campaignRaised = 0; // Default value
             $campaignStatus = 3; // 3 = Pending
             $campaignAdminId = $_SESSION['user_id'];

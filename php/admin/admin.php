@@ -14,6 +14,7 @@
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
 </head>
@@ -25,7 +26,6 @@
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 1) {
         /* DB Connect and Setting */
         include_once '../dbcon.php';
-        date_default_timezone_set('Asia/Singapore');
 
         /* SELECT Query */
         $query = "SELECT * FROM user WHERE user_id=?";
@@ -34,6 +34,9 @@
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
+
+        /* Session Timeout */
+        include '../con_timeout.php';
     } else {
         header("Location: ../user_logout.php");
     }

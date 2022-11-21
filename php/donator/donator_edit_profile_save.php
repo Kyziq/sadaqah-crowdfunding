@@ -21,9 +21,8 @@
     if (isset($_SESSION['user_id']) && $_SESSION['user_level'] == 3) {
         /* DB Connect and Setting */
         include_once '../dbcon.php';
-        date_default_timezone_set('Asia/Singapore');
-        $user_id = $_SESSION['user_id'];
 
+        $user_id = $_SESSION['user_id'];
         /* SweetAlert2 */
         // Success
         function successPopup($condition)
