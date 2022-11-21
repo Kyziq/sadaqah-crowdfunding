@@ -19,7 +19,6 @@
 <body>
     <?php
     include_once(__DIR__ . '/php/dbcon.php');
-    date_default_timezone_set('Asia/Singapore');
 
     // Relaunch login modal if no username entered and wrong password
     if ((isset($_GET["error"]) && $_GET["error"] == 'username') || (isset($_GET["error"]) && $_GET["error"] == 'password')) {
