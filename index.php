@@ -302,14 +302,14 @@
                 </div>
                 <div class="col-md-4">
                     <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                    <lord-icon src="https://cdn.lordicon.com/hbwqfgcf.json" trigger="loop" delay="2000" style="width:250px;height:250px">
+                    <lord-icon src="https://cdn.lordicon.com/hbwqfgcf.json" trigger="loop" delay="1800" style="width:250px;height:250px">
                     </lord-icon>
                     <h4 class="fw-bold">We show you the progression</h4>
                     <p>Every ringgit counts, and we show you how, collectively, your contributions have kept causes, communities, and individuals going forward.</p>
                 </div>
                 <div class="col-md-4">
                     <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-                    <lord-icon src="https://cdn.lordicon.com/nrzqxhfu.json" trigger="loop" delay="2000" style="width:250px;height:250px">
+                    <lord-icon src="https://cdn.lordicon.com/nrzqxhfu.json" trigger="loop" delay="1500" style="width:250px;height:250px">
                     </lord-icon>
                     <h4 class="fw-bold">0% platform fee, 100% to the cause</h4>
                     <p>We ensure that all donations made through the platform are directed to the intended cause.</p>
