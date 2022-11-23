@@ -1,6 +1,6 @@
 <script>
     var countdown = new Counter({
-        seconds: 3, // Seconds
+        seconds: 30 * 60, // 30 minutes
 
         onCounterStart: function() {
             // show pop up with a message 
