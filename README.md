@@ -7,9 +7,30 @@
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
 ## Sadaqah Crowdfunding
+There would be three types of users, with a dashboard for each.
+1. `Donator/User`
+* Register
+* Login
+* Edit Profile, Change Password
+* Donate Campaign
+* Donation History with Print Receipt Option
+
+2. `Auditor`
+* Login
+* View Campaign Information with Chart
+* Edit Profile, Change Password
+* Verify Campaign
+
+3. `Administrator`
+* Login 
+* View Campaign Information with Chart
+* Edit Profile, Change Password
+* Create Auditor, Manage Auditor and Donator Details
+* Create Campaign, Edit Campaign
+* Verify Donation
 
 ## Demo
-Below are three users type which can be used for demonstration purpose,<br>
+Below are three accounts of different user type which can be used for demonstration purpose,<br>
 | Type (Level)          | Username      | Password |
 | :-------------: |:-------------:| :--------:|
 | Administrator (1) | admin         | admin    |
