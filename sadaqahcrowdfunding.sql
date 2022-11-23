@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2022 at 10:09 PM
+-- Generation Time: Nov 23, 2022 at 06:12 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,7 +47,7 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `campaign_name`, `campaign_description`, `campaign_banner`, `campaign_category_id`, `campaign_amount`, `campaign_start`, `campaign_end`, `campaign_raised`, `campaign_created_date`, `campaign_admin_id`, `campaign_status`) VALUES
-(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 5000, '2022-11-04 00:00:00.000000', '2022-11-30 00:00:00.000000', 3610, '2022-10-29 09:20:07', 11, 1),
+(1, 'Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah', 'Dialisis adalah rawatan yang mengambil alih tugas-tugas yang dilakukan oleh buah pinggang. Pusat Haemodialisis Zakat Kedah memberikan rawatan ini secara bulanan kepada peserta-peserta yang datang ke pusat ini.', 'images/campaign/Rawatan Bulanan Peserta Dialisis Pusat Haemodialisis Zakat Kedah--2022-10-29--17-20-07.jpg', 1, 5000, '2022-11-01 00:00:00.000000', '2022-12-15 00:00:00.000000', 3610, '2022-10-29 09:20:07', 11, 1),
 (2, '(Misi Banjir Baling) Baik Pulih Rumah', 'Jumlah mangsa banjir yang dipindahkan ke pusat pemindahan sementara (PPS) di Kedah meningkat kepada 267 orang daripada 87 keluarga setakat 8 pagi ini berbanding 87 orang daripada 27 keluarga semalam. ', 'images/campaign/(Misi Banjir Baling) Baik Pulih Rumah--2022-10-29--17-27-54.png', 4, 13000, '2022-10-22 00:00:00.000000', '2022-11-16 00:00:00.000000', 0, '2022-10-29 09:27:54', 11, 1),
 (3, 'MERCY Mission Malaysia', 'MERCY Malaysia is an international non-profit organisation focusing on providing medical relief, sustainable health-related development and risk reduction activities for vulnerable communities, in both crisis and non-crisis situation. The organisation is a registered society according to the Societies Act 1966 in Malaysia, and the headquarters is in the capital city of Kuala Lumpur.', 'images/campaign/MERCY Mission Malaysia--2022-10-29--17-29-43.jpg', 3, 24000, '2022-10-13 00:00:00.000000', '2022-12-16 00:00:00.000000', 0, '2022-10-29 09:29:43', 11, 3),
 (4, 'Ringankan Beban Golongan Terjejas', 'Keperluan asas harian akan diutamakan kepada golongan-golongan yang terjejas.', 'images/campaign/Ringankan Beban Golongan Terjejas--2022-10-29--17-33-40.jpg', 1, 1000, '2022-10-22 00:00:00.000000', '2022-12-31 00:00:00.000000', 0, '2022-10-29 09:33:40', 1, 1),
@@ -185,7 +185,7 @@ INSERT INTO `user` (`user_id`, `user_username`, `user_password`, `user_name`, `u
 (8, 'amran', '$2y$10$oduKRntTG6OCcWKDPHSNn.uqyANMDCH2DKaB9DSMoZL3pYqRB01v6', 'Muhammad Amran bin Ikmal', 'amranikmal@outlook.com', '0198662322', 'Z-00-23, Jalan Wan Kadir 2/5, Pandan Manggis, 34854 Tanjung Rambutan, Perak', 3),
 (9, 'raihan', '$2y$10$ZKBpL/tVjSpqZdZH6Vgw8eANey2iGmVoBXI/iYKvsteL3jy/kUlfy', 'Muhammad Raihan bin Azlan', 'raihanazlan@gmail.com', '0196862931', 'No. 50, Jalan 2/5, Taman Anggerik, 12159 George Town, Penang', 3),
 (10, 'ain', '$2y$10$hD7PrLZsJ5/FjttRbzLwlelbl5jVFy5r3RZDK6nP3g00h.pZy79Xu', 'Ain Amni binti Kamarul', 'ainamni@gmail.com', '0129518232', '312, Lorong 2Y, Bandar Utara, 27454 Karak, Pahang Darul Makmur', 3),
-(11, 'admin', '$2y$10$Hzw8ZoJxLl5xiJxn/9alkOB1BZVWqPsDPQwDrgS8epyaXUoxFjzzC', 'admin', 'admin@gmail.com', '0123456789', 'No. 4, Jalan Kampung Attap 7/8, PJU1, 39045 Bentong, Pahang Darul Makmur', 1),
+(11, 'admin', '$2y$10$Xy8Lw.y12GrwD9yIF7UgAOqBzxTzHz2rhdlqk2Iry3OyZ0w9NYuXa', 'admin', 'admin@gmail.com', '0123456789', 'No. 4, Jalan Kampung Attap 7/8, PJU1, 39045 Bentong, Pahang Darul Makmur', 1),
 (12, 'auditor', '$2y$10$K5dAbs8dvkFjlB/9CQDoUepRTx4jF40LzSk59MNoNAmAfAwAajgRS', 'auditor', 'auditor@gmail.com', '0123456789', 'Shell Malaysia Trading Sdn. Bhd. (6087-M), No. 1084, Kampung Kelibang, 07000, Kuah, Kedah', 2),
 (13, 'user', '$2y$10$m.SlP8dEzt5XLZMuhDjwd.UQd0aDgCuxoZfx6BbHqEYpOFae44gQa', 'user', 'user@gmail.com', '0123456789', '67, Jln Tugu 3V, Laman Keramat, 14379 Permatang Pauh, Penang', 3),
 (14, 'nazrin', '$2y$10$Bev.mOHXKFRUecbXy70jwuwz7N5DEdAt2z8ztliCwLJe.y1omFnTG', 'Nazrin bin Suhaimi', 'nazrin@gmail.com', '0170773992', 'Lot 1, Jalan 2/7, Batu Sungai Besi, 15915 Wakaf Che Yeh, Kelantan', 3),
