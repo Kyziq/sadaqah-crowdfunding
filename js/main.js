@@ -345,12 +345,18 @@ function printWindow() {
  * Swiper
  */
 var swiper = new Swiper(".mySwiper", {
-	slidesPerView: 1,
-	spaceBetween: 20,
+	speed: 2000,
+	autoplay: {
+		delay: 5000,
+		reverseDirection: true,
+	},
 	pagination: {
 		el: ".swiper-pagination",
+		type: 'bullets',
 		clickable: true,
 	},
+	slidesPerView: 1,
+	spaceBetween: 20,
 	breakpoints: {
 		320: {
 			slidesPerView: 1,

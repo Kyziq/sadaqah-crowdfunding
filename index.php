@@ -164,7 +164,7 @@
             <div class="container pt-5 py-5">
                 <div class="text-center mb-5">
                     <h2 class="fw-bold text-white">Campaign</h2>
-                    <h5 class="text-white">The campaigns listed below are currently accepting donations. Log in to begin donating!</h5>
+                    <h5 class="text-white">The campaigns listed below are currently accepting donations. Login now to begin donating!</h5>
                 </div>
                 <div class="cards d-flex justify-content-center pb-4">
                     <div class="swiper mySwiper">
@@ -186,7 +186,7 @@
                                 <div class="swiper-slide">
                                     <div class="card">
                                         <img src="<?php echo $camp['campaign_banner']; ?>" class="card-img-top rounded" style="height:20vh;" alt="Campaign Banner">
-                                        <div class="card-body text-start">
+                                        <div class="card-body text-start mb-5">
                                             <h5 class="card-title mb-3 overflow-auto fw-bold" style="height: 8vh;"><?php echo $camp['campaign_name']; ?></h5>
                                             <h6 class="card-subtitle mb-2 overflow-auto" style="height: 3vh;"><b>Category: </b><?php echo $camp['category_name']; ?></h6>
                                             <h6 class="card-subtitle mb-2" style="height: 2vh;"><b>Description:</b> </h6>
@@ -221,9 +221,6 @@
                                                 <div class="progress">
                                                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?php echo $percentageBar; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $percentageBar; ?>%"><?php echo $percentageBar; ?>%</div>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex mt-4 justify-content-end">
-                                                <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#loginModal">Donate</button>
                                             </div>
                                         </div>
                                     </div>
