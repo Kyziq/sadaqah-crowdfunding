@@ -15,6 +15,7 @@
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
 </head>
 

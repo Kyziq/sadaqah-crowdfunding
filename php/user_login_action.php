@@ -20,9 +20,8 @@ if (isset($_POST['login-button'])) {
     if ($r) {
         /* Check if password is correct with hashed password (DB) */
         if (password_verify($user_password, $r['user_password'])) {
-            $_SESSION['last_logged_in'] = date('d M Y H:i:s', time());
-            setcookie('expire_time', 'time', time() + 30 * 60); // 30 minutes timeout
 
+            $_SESSION['last_logged_in'] = date('d M Y H:i:s', time());
             $_SESSION['user_id'] = $r['user_id'];
             $_SESSION['user_level'] = $r['user_level'];
 

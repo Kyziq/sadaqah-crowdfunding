@@ -15,6 +15,7 @@
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

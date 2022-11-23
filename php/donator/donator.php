@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.css" />
     <link href="../../css/style.css" rel="stylesheet" />
     <link href="../../css/custom-css.css" rel="stylesheet" />
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
