@@ -119,16 +119,17 @@
             <div class="row align-items-top">
                 <?php
                 $campaign_status = 1; // Accepted campaign
-
                 /* SELECT Query */
-                $query =
-                    "SELECT * FROM campaign camp, category cat WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? AND camp.campaign_end > CURDATE() ORDER BY camp.campaign_end ASC";
-
+                $query =    "SELECT * FROM campaign camp, category cat 
+                            WHERE camp.campaign_category_id = cat.category_id AND camp.campaign_status=? AND camp.campaign_end > CURDATE() 
+                            ORDER BY camp.campaign_end ASC";
                 $stmt = $con->prepare($query);
                 $stmt->bind_param("i", $campaign_status);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $count_rows = $result->num_rows;
+
+                // Check if there are any available campaign(s)
                 if ($count_rows == 0) {
                 ?>
                     <div class="col-4">
@@ -148,14 +149,15 @@
                         /* Percentage Bar */
                         $percentageBar = 100 - ((($camp['campaign_amount'] - $camp['campaign_raised']) / $camp['campaign_amount']) * 100);
                         $percentageBar = round($percentageBar);
-
                         if ($percentageBar > 100) {
                             $percentageBar = 100;
                         }
-                        /* Date */
-                        $currentDate = date("d M Y");
+
+                        /* Date - Display when campaign started until campaign ends (current >= start AND (current <= end) */
+                        $currentDate = date("Y-m-d");
                         $startDate = date("Y-m-d", strtotime($camp['campaign_start']));
-                        if ($currentDate >= $startDate) {
+                        $endDate = date("Y-m-d", strtotime($camp['campaign_end']));
+                        if ($currentDate >= $startDate && $currentDate <= $endDate) {
                     ?>
                             <!-- Donation Card -->
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
@@ -178,11 +180,10 @@
                                             </div>
                                             <div>
                                                 <?php
-                                                // Days Left
                                                 $date1 = new DateTime(date("Y-m-d"));
                                                 $date2 = new DateTime($camp['campaign_end']);
-                                                $diff = $date2->diff($date1)->format("%a");  // Find difference
-                                                $daysLeft = intval($diff);   // Rounding days
+                                                $diff = $date2->diff($date1)->format("%a"); // Find difference
+                                                $daysLeft = intval($diff); // Rounding days left
                                                 ?>
                                                 <b>Days Left: </b><?php echo $daysLeft; ?>
                                             </div>
@@ -233,10 +234,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- Input -->
+                                                <!-- Hidden Input -->
                                                 <input type="hidden" class="form-control" id="user_username" name="user_username" value="<?php echo $user['user_username']; ?>">
                                                 <input type="hidden" class="form-control" id="campaignId" name="campaign_id" value="<?php echo $camp['campaign_id']; ?>">
 
+                                                <!-- Input -->
                                                 <div class="form-group mb-3">
                                                     <label for="campaign_name" class="form-label fw-semibold">Campaign Name</label>
                                                     <input type="text" class="form-control-plaintext" id="campaign_name" name="campaign_name" value="<?php echo $camp['campaign_name']; ?>" readonly>
